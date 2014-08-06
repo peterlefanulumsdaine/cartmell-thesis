@@ -1,0 +1,92 @@
+\documentclass[11pt,a4]{amsbook}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage[unicode]{hyperref}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{lipsum}
+
+\include{cartmell-style}
+\include{cartmell-macros}
+
+%%
+%% PDF metadata
+%% Can add /CreationDate, /Creator, /Subject, /Keywords
+%%
+\ifpdf
+\pdfinfo{
+  /Author (J. W. Cartmell) 
+  /Title (Generalised Algebraic Theories and Contextual Categories (PhD Thesis))
+}
+\fi
+
+
+\begin{document}
+
+
+\frontmatter
+
+%% TITLE INFORMATION
+
+\title{Generalised Algebraic Theories and Contextual Categories}
+
+\author{J. W. Cartmell}
+
+\thispagestyle{empty}
+
+\begin{center}
+  ~ \\
+  \vspace{3cm}
+  {\Large\textsc{Generalised Algebraic Theories  \\ and \\ Contextual Categories}}\\
+  \vspace{3cm}
+  {\large\textbf{by \\ J. W. Cartmell}}\\
+  \vspace{7cm}
+  Submitted for the degree of D.Phil.\\ Oxford University \\ 1978 \\
+\end{center}
+ 
+\newpage
+
+\thispagestyle{empty}
+\begin{center}
+\textbf{Acknowledgement} \\
+I am indebted to Professor Dana Scott \\ for supervision, criticism and direction.
+\vspace{15cm}
+\LaTeX version in preparation by the HoTT Group \\ 2014
+\end{center}
+
+\clearpage
+
+\tableofcontents
+
+\chapter*{Preface}
+\label{ch:preface}
+\input{0-preface}
+
+\mainmatter
+
+% Main Matter
+
+\chapter{Generalised algebraic theories}
+\label{ch:gats}
+\input{1-gats}
+
+\chapter{Contextual categories}
+\label{ch:cxl-cats}
+\input{2-cxl-cats}
+
+\chapter{The algebraic semantics of Martin-Löf type theory}
+\label{ch:mltt}
+\input{3-mltt}
+
+\backmatter
+
+%% Bibliography Info
+
+\bibliographystyle{amsalphaurl}
+\bibliography{cartmell-bib}
+
+
+
+\end{document}
+

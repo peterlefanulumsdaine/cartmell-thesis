@@ -1,0 +1,31 @@
+
+\section{Introduction}
+
+The notion of generalised algebraic theory is a generalisation of the notion of many sorted algebraic theory in just the following manner.
+%
+Whereas the sorts of a many sorted algebraic theory are constant types in the sense that they are to be interpreted as sets the sorts of a generalised algebraic theory need not all be constant types some of them may be nominated to be variable types in which case they are to be interpreted as families of sets.
+%
+The type or types on which the variation of a variable type depends must always be specified.
+
+Thus a generalised algebraic theory consists of (i) a set of sorts, each with a specified role either as a constant type or else as a variable type varying in some way, (ii) a set of operator symbols, each with its argument types and its value type specified (the value type may vary as the argument varies), (iii) a set of axioms.
+%
+\comment{Formatting of this inline numbered list?}
+%
+Each axiom must be an identity beteen similar well formed expressions, either between terms of the same possibly varying type or else between type expressions.
+
+The theory of categories is a good example.
+%
+The sort symbols we shall call $\synOb$ and $\synHom$, the operator symbols $\synid$ and $\syno$.
+
+$\synOb$ is a constant type.  $\synHom$ is a symbol for a variable type depending twice on $\synOb$.
+%
+That is to say that if $t_1$ and $t_2$ are both terms of type $\synOb$ then $\synHom(t_1,t_2)$ is a type.
+%
+In particular if $x$ and $y$ are both variables of type $\synOb$ then $\synHom(x,y)$ is a type.
+
+The operator symbol $\synid$ has one argument type, namely $\synOb$.
+%
+The value type of $\synid$ varies as the argument varies, for if $x$ is a variable of type $\synOb$ then $\synid(x)$ is of type $\synHom(x,x)$.
+
+Not all the argument types of $\syno$ are constant.
+%
