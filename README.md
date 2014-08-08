@@ -40,6 +40,10 @@ A (proposed) HoTT group project to TeXify Cartmell's PhD thesis “Generalised A
 
 - Labels/references: not fully decided yet, template `\ref{sec:source-1-8}` seems robust in this situation, and means one can input them from the link text without having to break flow and flip ahead to the linked section.  Possibly change later to more semantic text though?
 
+- Cartmell often uses un-bulleted but line-broken lists (e.g. bottom of source p 1.4).  For now, do as `itemize`?
+
+- Cartmell often uses inline numbered lists (e.g. first para of source p 1.1).  How to do these??
+
 ## Macros
 
 - ALWAYS use semantic macros!  (How far to take this, though?)
