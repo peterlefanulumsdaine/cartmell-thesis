@@ -44,6 +44,129 @@ The value type of $\synid$ varies as the argument varies, for if $x$ is a variab
 
 Not all the argument types of $\syno$ are constant.
 %
+If $x$, $y$ and $x$ are variables of type $\synOb$, if $f$ is a variable of type $\synHom(x,y)$ and if $g$ is a variable of type $\synHom(y,z)$, then $\syno(f,g)$ is a term of type $\synHom(x,z)$.
+
+One way of setting up the syntax to deal with variables would be to assume that for every type $\Delta$ we had a supply $\varsV_\Delta$ of variables of type $\Delta$.
+%
+However this method would lead to complications.
+%
+Instead we assume just one set $\varsV$ of variables and then repeatedly assign types to variables as required.
+%
+In a particular context the assertion or assumption that the variable $x$ is of type $\Delta$ is written shorthand as $x \in \Delta$.
+%
+More generally, the assertion that an expression $t$ is a term of type $\Delta$ will be written as $t \in \Delta$.
+%
+If the term $t$ has variables $x_1,\ldots x_n$ occurring within it then it will only make sense to assert $t \in \Delta$ under an assumption that $x_1,\ldots x_n$ are variables of particular types.
+%
+The complete assertion will be of the form: if $x_1$ is a variable of type $\Delta_1$, \ldots\ and if $x_n$ is a variable of type $\Delta_n$ then $t$ is a term of type $\Delta$.
+%
+This complete assertion we write shorthand as
+%
+$ \inferrule
+  { x_1 \in \Delta_1, x_2 \in \Delta_2, \ldots\ x_n \in \Delta_n }
+  { t \in \Delta } $
+%
+or else as $x_1 \in \Delta_1, x_2 \in \Delta_2, \ldots\ x_n \in \Delta_n : t \in \Delta$.
+%
+% source p1.4
+%
+Similarly 
+%
+$ \inferrule
+  { x_1 \in \Delta_1, x_2 \in \Delta_2, \ldots\ x_n \in \Delta_n }
+  { \Delta \isatype } $
+%
+is used to assert that if $x_1$ is a variable of type $\Delta_1$, \ldots\ if $x_n$ is a variable of type $\Delta_n$, then $\Delta$ is a type.
+
+These shorthands of the forms 
+%
+$\inferrule
+  { x_1 \in \Delta_1, x_2 \in \Delta_2, \ldots\ x_n \in \Delta_n }
+  { t \in \Delta } $
+%
+and 
+%
+$\inferrule
+  { x_1 \in \Delta_1, x_2 \in \Delta_2, \ldots\ x_n \in \Delta_n }
+  { \Delta \isatype } $
+%
+we call \defemph{rules}.
+%
+They serve to express which expressions of a given language are well formed as terms or as types.
+%
+We work with these rules as units rather than with the basic expressions.
+%
+For example, in the formal definition instead of defining the notions of well formed term and well formed type we define inductively a set of rules, to be called the derivable rules, which express the well formed types, the well formed terms their types.
+
+The axioms of a theory are also written as rules.
+%
+Instead of the more usual $\forall x_1 \in \Delta_1, \forall x_2 \in \Delta_2, \ldots \forall x_n \in \Delta_n, t_1 = t_2$ we write
+%
+$\inferrule
+  { x_1 \in \Delta_1, x_2 \in \Delta_2, \ldots\ x_n \in \Delta_n }
+  { t_1 = t_2 } $
+%
+There again, we might just write $t_1 = t_2$, whenever $x_1 \in \Delta_1, \ldots x_n \in \Delta_n$.
+
+For example, the theory of categories has as axioms the following:
+%
+\begin{itemize}
+\item $\syno(\synid(x),f) = f$, whenever $x,y \in \synOb$ and $f \in \synHom(x,y)$.
+\item $\syno(f,\synid(y)) = f$, whenever $x,y \in \synOb$ and $f \in \synHom(x,y)$.
+\item $\syno(\syno(f,g),h) = \syno(f,\syno(g,h))$, whenever $w,x,y,z \in \synOb$, $f \in \synHom(w,x)$, $g \in \synHom(x,y)$ and $h \in \synHom(y,z)$.
+\end{itemize}
+
+% source p1.5
+
+A theory is presented by specifying the language and by listing the axioms.
+%
+The language is specified by listing the symbols and by specifying the role that each symbol plays within the language either as a sort symbol of some kind or as a particularly typed operator symbol.
+%
+The role that a symbol plays can always be specified by way of the assertion of a single rule.
+%
+In the case of a sort symbol $A$ there is a rule of the form
+%
+$\inferrule
+  { x_1 \in \Delta_1, x_2 \in \Delta_2, \ldots\ x_n \in \Delta_n }
+  { A(x_1,\ldots x_n) \isatype } $
+%
+that will correctly specify over what types $A$ is dependent.
+%
+In the case of an operator symbol $f$ a rule of the form
+%
+$\inferrule
+  { x_1 \in \Delta_1, x_2 \in \Delta_2, \ldots\ x_n \in \Delta_n }
+  { f(x_1,\ldots x_n) \in \Delta } $
+%
+suffices to specify of what types its arguments are to be and of what type its value will be.
+%
+In either case we call the symbol the \defemph{introductory rule} associated with the symbol.
+
+For example the sort $\synHom$ of the theory of categories has introductory rule $x \in \synOb,\, y \in \synOb: \synHom(x,y) \isatype$.  The symbol $\synid$ has introductory rule $x \in \synOb : \synid(x) \in \synHom(x,x)$.
+
+Finally, then, every theory is presented as a set of symbols each with associated introductory rule and a set of axioms.
+%
+And of course everything must be well formed, but we leave all that until we give the formal definition in \textsection \ref{sec:source-1-6}.
+
+The theory of categories now looks like this:
+
+\comment{TODO: fix formatting!}
+%
+\begin{tabular}{ll}
+ Symbol. & Introductory Rule. \\
+  $\synOb$ & $\synOb \isatype$. \\
+  $\synHom$ & $x \in \synOb,\, y \in \synOb: \synHom(x,y) \isatype$. \\
+  $\syno$ & $x,y,z \in \synOb,\, f \in \synHom(x,y),\, g \in \synHom(y,z) : \syno(f,g) \in \synHom(x,z)$. \\
+  $\synid$ & $x \in \synOb : \synid(x) \in \synHom(x,x)$ \\
+  \multicolumn{2}{l}{Axioms.} \\
+  \multicolumn{2}{l}{$\syno(\synid(x),f) = f$, whenever $x,y \in \synOb$ and $f \in \synHom(x,y)$.} \\
+  \multicolumn{2}{l}{$\syno(f,\synid(y)) = f$, whenever $x,y \in \synOb$ and $f \in \synHom(x,y)$.} \\
+  \multicolumn{2}{l}{$\syno(\syno(f,g),h) = \syno(f,\syno(g,h))$, whenever $w,x,y,z \in \synOb$, $f \in \synHom(w,x)$, $g \in \synHom(x,y)$ and $h \in \synHom(y,z)$.}
+\end{tabular}
+
+Whenever we speak of a model of a theory $\thU$, without qualification, then we shall mean a model in the usual sense, that is where type symbols are interpreted as sets, symbols for families of types are interpreted as families of sets, operator symbols are interpreted as operators and so on.
+%
+Later we shall be interpreting theories in algebraic structures, in which case type symbols will be interpreted as objects within a structure rather than as sets.
 
 %%% Local Variables:
 %%% mode: latex

@@ -4,6 +4,11 @@
 % - Category names
 % - Single letters
 
+%%%%
+% Semantic markers for text
+%%%%
+
+\newcommand{\defemph}{\emph} % (possibly) emphasise a definiendum
 
 %%%%
 % Binary relations, operators
@@ -12,6 +17,9 @@
 %%%% 
 % Single styled characters (or almost single) and character-like symbols
 %%%%
+
+\newcommand{\varsV}{\mathcal{V}}
+\newcommand{\thU}{\mathcal{U}}
 
 
 %%%%
@@ -22,6 +30,12 @@
 % Styled words: type theory syntax
 %%%%
 
+% Parts of judgements
+\newcommand{\isatype}{\text{ is a type}}
+
+% Variables and metavariables: just use normal math font.
+
+% Constants of specific theories
 \newcommand{\synOb}{\mathrm{Ob}}
 \newcommand{\synHom}{\mathrm{Hom}}
 \newcommand{\synid}{\mathrm{id}}
