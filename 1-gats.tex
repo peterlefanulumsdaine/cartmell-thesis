@@ -248,6 +248,51 @@ We use this method and another in presenting the next theory---the theory of tre
 
 % source p1.10
 
+The theory of \defemph{trees} has countably many sort symbols, no operator symbols and no axioms.
+%
+However, we choose to write the theory informally with just two sort symbols, one of these symbols doing the work that in a formal presentation would be shared among countably many distinct symbols.
+
+\begin{theoryspec}
+  $S_1$ & $S_1$ is a type \\
+  $S$ & For $x_1 \in S_1$ : $S(x_1)$ is a type \\
+  $S$ & For $x_1 \in S_1$, for $x_2 \in S(x_1)$ : $S(x_2)$ is a type \\
+  \vdots & \hspace{2em} \vdots \\
+  $S$ & For $x_1 \in S_1$, for $x_2 \in S(x_1)$, \ldots\ for $x_n \in S(x_{n-1})$ : $S(x_n)$ is a type \\
+  \vdots & \hspace{2em} \vdots \\
+  \noaxioms
+\end{theoryspec} 
+
+$S_1$, then, is a symbol denoting the set of nodes at the base of the tree.
+%
+If $x$ is any node of the tree then $S(x)$ is the set of nodes immediately above $x$ in the tree, that is to say the set of successor nodes to $x$.
+%
+In a formal presentation of this theory there would be symbols $S_1$, $S_2$, $S_3$, \ldots\ and the symbol $S_{n+1}$ would be introduced by the rule
+\[ \inferrule
+  {x_1 \in S_1, \\ x_2 \in S_2(x_1), \\ \ldots \\ x_n \in S_n(x_1,\ldots x_{n-1}) }
+  {S_{n+1}(x_1,\ldots x_n) \isatype}
+\]
+
+We use the same methods in presenting the theory of \defemph{functors} informally.
+%
+The theory of functors consists of the theory of categories in the language $\tuple{\synOb,\synHom,\synid,\syno}$ + the theory of categories in the language $\tuple{\synOb,\synHom,\synid,\syno}$ (and at this point we have used the same three symbols $\synHom$, $\synid$ and $\syno$ in new roles) + \\
+\begin{theoryspec}
+  $\synF$ & For $x \in \synOb$ : $\synF(x) \in \synOb'$ \\
+  $\synF$ & For $x,y \in \synOb$, for $f \in \synHom(x,y)$ : $\synF(f) \in \synHom(\synF(x),\synF(y))$ \\
+  \axioms
+  \axiom{$\synF(\synid(x)) = \synid(\synF(x))$, whenever $x \in \synOb$.}
+  \axiom{$\synF(\syno(f,g)) = \syno(\synF(f),\synF(g))$, whenever $x,y,z \in \synOb$, $f \in \synHom(x,y)$ and $g \in \synHom(y,z)$.}
+\end{theoryspec}
+
+A model of this theory is just a functor.
+%
+The category of models is the category $\catCat^{\catTwo}$, which is to say that if $F : \catC \to \catC'$ is a functor and if $G : \catD \to \catD'$ is a functor then a homomorphism from $F$ to $G$ consists of a pair of functors $\tuple{H,H'}$ such that $H : \catC \to \catD$ and $H' : \catC' \to \catD'$ and such that
+\[ \placeholder{\text{TODO: diagram!}}\]
+commutes.
+
+% source p.1.12
+The final example is to indicate one way of axiomatising the disjoint union of a family of types.
+
+\placeholder{Source page 1.12 remaining.}
 
 % source p1.13
 \section{Predicates as types} \label{sec:source-1-3}

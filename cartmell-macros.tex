@@ -18,6 +18,10 @@
 % Single styled characters (or almost single) and character-like symbols
 %%%%
 
+\newcommand{\catTwo}{\mathbf{2}} % used for the arrow category
+
+\newcommand{\catC}{\catletter{C}}
+\newcommand{\catD}{\catletter{D}}
 \newcommand{\modM}{\mathcal{M}}
 \newcommand{\varsV}{\mathcal{V}}
 \newcommand{\thU}{\mathcal{U}}
@@ -28,9 +32,10 @@
 %%%%
 
 % Categories
-\newcommand{\catletter}[1]{\mathcal{#1}} % single-letter categories
+\newcommand{\catletter}[1]{\mathbf{#1}} % single-letter categories
 \newcommand{\catword}[1]{\mathbf{#1}} % long-named categories
 
+\newcommand{\catCat}{\catword{Cat}}
 \newcommand{\catGAT}{\catword{GAT}}
 
 %%%%
@@ -52,10 +57,13 @@
 % Variables and metavariables: just use normal math font.
 
 % Constants of specific theories
+
+%Categories and functors
 \newcommand{\synOb}{\mathrm{Ob}}
 \newcommand{\synHom}{\mathrm{Hom}}
 \newcommand{\synid}{\mathrm{id}}
 \newcommand{\syno}{\mathrm{o}}
+\newcommand{\synF}{\mathrm{F}}
 
 %%%%
 % Other operators
