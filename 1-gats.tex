@@ -171,7 +171,83 @@ Later we shall be interpreting theories in algebraic structures, in which case t
 % source p1.7
 \section{Examples of theories} \label{sec:source-1-2}
 
-\lipsum[1]
+The first example is a theory which can be called the theory of families of elements of families of sets:
+
+\begin{theoryspec}
+  $A$ & $A$ is a type \\
+  $B$ & For $x \in A$ : $B(x)$ is a type \\
+  $b$ & For $x \in A$ : $b(x) \in B(x)$ \\
+  \noaxioms
+\end{theoryspec}
+
+A model of this theory will consist of a set, a family indexed by this set and a distinguished element of each set in this family; which is to say that a model will consist of a set indexed family of elements of a family of sets.
+%
+We are not sure of the notation we should be using but if we denote the interpretation of a symbol in a model $\modM$ by that symbol superscripted by $\modM$ then a model $\modM$ consists of \comment{inline list!}(i.) a set $A^\modM$, (ii.) an $A^\modM$-indexed family of elements $b^\modM$ of the family of sets $B^\modM$.
+
+\begin{figure}
+\placeholder{TODO: Diagram!}
+\caption{For every element $a$ of the set $A^\modM$ we have (i.) a set $B^\modM(a)$ and (ii.) an element $b^\modM(a)$ of the set $B^\modM(a)$.}
+\end{figure}
+
+% source p1.8
+
+If both $\modM$ and $\modM'$ are models of this theory then a homomorphism $f : \modM \to \modM'$ consists of a function $f_A : A^\modM \to A^{\modM'}$ and an $A^\modM$-indexed family of functions $f_B$ such that for every $a \in A^\modM$, $f_B(a) : B^\modM(a) \to B^{\modM'}(f_A(a))$ and such that for every $a \in A^\modM$, $f_B(a)(b^\modM(a)) = b^{\modM'}(f_A(a))$.
+
+Alternatively we can say that a homomorphism consists of a function $f_A : A^\modM \to A^{\modM'}$ and an operator $f_B$ such that for every $a \in A^\modM$, for every $b \in B^\modM(a)$, $f_B(a,b) \in B^{\modM'}(f_A(a))$ and satisfying $f_B(a,b^\modM(a)) = b^{\modM'}(f_A(a))$, whenever $a \in A^\modM$.
+%
+Now this means that there is a generalised algebraic theory whose models are just homomorphisms between the models of the given theory (in fact this is quite generally the case).
+%
+This theory of homomorphisms can be presented as follows:
+
+The theory of families of elements of families of sets in the langauge $\tuple{A,B,b}$ + the same theory in the language $\tuple{A',B',b'}$ + \\
+\begin{theoryspec}
+  $f_A$ & For $x \in A$ : $f_A(x) \in A'$. \\
+  $f_B$ & For $x \in A$, for $y \in B(x)$ : $f_B(x,y) \in B'(f_A(x))$. \\
+  \oneaxiom
+  \axiom{$f_B(x,b(x)) = b'(f_A(x))$, whenever $x \in A$.}
+\end{theoryspec}
+
+An example similar to the first example we call the theory of families of families of elements of families of families of sets:
+
+\begin{theoryspec}
+  $A$ & $A$ is a type \\
+  $B$ & For $x \in A$ : $B(x)$ is a type \\
+  $C$ & For $x \in A$, for $y \in B(x)$ : $C(x,y)$ is a type \\
+  $c$ & For $x \in A$ : $c(x,y) \in C(x,y)$. \\
+  % source p1.9
+  \noaxioms
+\end{theoryspec}
+
+Suppose that $\modM$ is a model of this theory.
+%
+Then $A^\modM$ is a set.
+%
+For every element $a$ of the set $A^\modM$ we have a set $B^\modM(a)$ and for every element $b$ of the set $B^\modM(a)$ we have a set $C^\modM(a,b)$ and an element $c^\modM(a,b)$ of the set $C^\modM(a,b)$.
+
+\begin{figure}
+\placeholder{TODO: diagram}
+\end{figure}
+
+Now for every element $a$ of $A^\modM$, $\lambda b.C^\modM(a,b)$ is a $B^\modM$-indexed family of sets.
+%
+Thus $\lambda a. \lambda b. C^\modM(a,b)$, i.e.\ $c^\modM$, is an $A^\modM$-indexed family of families of sets.
+%
+Similarly $c^\modM$ is an $A^\modM$-indexed family of families of elements.
+
+Note that in the presentation of this theory no harm is done if we replace the introductory rule for $C$ by the \comment{Punctuation!?} rule:--- for $x \in A$, for $y \in B(x)$ : $C(y)$ is a type, this rule having the same meaning as the given rule.
+%
+The expression $C(x,y)$ in the given rule depends explicitly on $x$ and $y$.
+%
+We say that the expression $C(y)$ in the alternative rule depends \defemph{implicitly} in $x$ by virtue of its explicit dependence on $y$ and by virtue of the dependence of $y$ on $x$.
+%
+In the alternative version of the theory we say that a variable has been omitted.
+%
+This is one way in which a theory may be informally presented.
+%
+We use this method and another in presenting the next theory---the theory of trees.
+
+% source p1.10
+
 
 % source p1.13
 \section{Predicates as types} \label{sec:source-1-3}
