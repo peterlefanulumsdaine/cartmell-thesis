@@ -36,6 +36,13 @@
 % Styled words: type theory syntax
 %%%%
 
+% Standard environment for specifying a theory
+\newenvironment{theoryspec}
+  {\begin{tabular}{ll}  Symbol. & Introductory Rule. \\}
+  {\end{tabular}}
+\newcommand{\axioms}{ \multicolumn{2}{l}{Axioms.} \\ }
+\newcommand{\axiom}[1]{\multicolumn{2}{l}{#1} \\}
+
 % Parts of judgements
 \newcommand{\isatype}{\text{ is a type}}
 
