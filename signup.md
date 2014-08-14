@@ -21,7 +21,7 @@ Suggestion: to start with, leave space for people to work in contiguous blocks. 
 - 1.1 ROUGH [pll]
 - 1.2 ROUGH [pll]
 - 1.3 DONE [pll]
-- 1.4
+- 1.4 BOOKED [pll]
 - 1.5
 - 1.6
 - 1.7
