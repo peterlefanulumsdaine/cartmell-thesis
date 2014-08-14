@@ -19,7 +19,7 @@ Suggestion: to start with, leave space for people to work in contiguous blocks. 
 - Preface: DONE [pll]
 - 1.0 DONE [pll]
 - 1.1 ROUGH [pll]
-- 1.2 IN PROGRESS [pll]
+- 1.2 ROUGH [pll]
 - 1.3
 - 1.4
 - 1.5

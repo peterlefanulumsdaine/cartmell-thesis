@@ -292,7 +292,22 @@ commutes.
 % source p.1.12
 The final example is to indicate one way of axiomatising the disjoint union of a family of types.
 
-\placeholder{Source page 1.12 remaining.}
+If $\thU$ is a theory which includes a type symbol $A$ and a symbol $B$ for an $A$-indexed family of types then $\thU$ can be extended by three operator symbols, three axioms and one type symbol. $\synSum_A B$ in such a way that \comment{inline list!}i.\ every model of $\modM$ of $\thU$ uniquely extends to a model of the extended theory and ii.\ every model $\modM$ of the extended theory interprets the symbol $\synSum_A B$ by the set $\{ \tuple{a,b} \suchthat a \in A^\modM\ \text{and}\ b \in B^\modM(a) \}$, that is to say as the disjoint union of the family of sets interpreting $B$.
+%
+The extended theory is taken to be $\thU$ +
+
+\begin{theoryspec}
+  $\synSum_A B$ & $\synSum_A B$ is a type \\
+  $P_1$ & For $z \in \synSum_A B$ : $P_1(z) \in A$ \\
+  $P_2$ & For $z \in \synSum_A B$ : $P_2(z) \in B(P_1(z))$ \\
+  $\synPr$ & For $x \in A$, for $y \in B(x)$ : $\synPr(x,y) \in \synSum_A B$ \\
+  \axioms
+  \axiom{$\synPr(P_1(z),P_2(z)) = z$, whenever $z \in \synSum_A B$.}
+  \axiom{$P_1(\synPr(x,y)) = x$, whenever $x \in A$ and $y \in B(x)$.}
+  \axiom{$P_2(\synPr(x,y)) = y$, whenever $x \in A$ and $y \in B(x)$.}
+\end{theoryspec}
+
+In future we might refer to an extension of a theory by symbols for disjoint unions.
 
 % source p1.13
 \section{Predicates as types} \label{sec:source-1-3}

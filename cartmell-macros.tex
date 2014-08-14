@@ -26,7 +26,6 @@
 \newcommand{\varsV}{\mathcal{V}}
 \newcommand{\thU}{\mathcal{U}}
 
-
 %%%%
 % Styled words: general
 %%%%
@@ -41,6 +40,8 @@
 %%%%
 % Styled words: type theory syntax
 %%%%
+
+\newcommand{\syn}[1]{\mathsf{#1}}
 
 % Standard environment for specifying a theory
 \newenvironment{theoryspec}
@@ -58,12 +59,16 @@
 
 % Constants of specific theories
 
-%Categories and functors
-\newcommand{\synOb}{\mathrm{Ob}}
-\newcommand{\synHom}{\mathrm{Hom}}
-\newcommand{\synid}{\mathrm{id}}
-\newcommand{\syno}{\mathrm{o}}
-\newcommand{\synF}{\mathrm{F}}
+% Extensions by disjoint unions
+\newcommand{\synSum}{\mathop{\Sigma}\displaylimits} % TODO: sans serif sigma?
+\newcommand{\synPr}{\syn{Pr}}
+
+% Categories and functors
+\newcommand{\synOb}{\syn{Ob}}
+\newcommand{\synHom}{\syn{Hom}}
+\newcommand{\synid}{\syn{id}}
+\newcommand{\syno}{\syn{o}}
+\newcommand{\synF}{\syn{F}}
 
 %%%%
 % Other operators
@@ -71,6 +76,7 @@
 
 \newcommand{\tuple}[1]{\langle #1 \rangle}
 
+\newcommand{\suchthat}{\ |\ } % for use in set comprehensions: \{ x \suchthat P(x) \} 
 %%%%
 % Other symbols
 %%%%
