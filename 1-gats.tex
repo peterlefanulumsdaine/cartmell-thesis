@@ -312,7 +312,72 @@ In future we might refer to an extension of a theory by symbols for disjoint uni
 % source p1.13
 \section{Predicates as types} \label{sec:source-1-3}
 
-\lipsum[2]
+It is possible to introduce sort symbols into a generalised algebraic theory and then axiomatise them in such a way as they are effectively predicate symbols.
+%
+In this way any theory of predicate calculus all of whose axioms are of the form $\forall \vec x (\varphi_1 \land \varphi_2 \ldots \land \varphi_n \imp \psi)$ where $\varphi_1, \ldots \varphi_n$ and $\psi$ are all atomic, can be expressed as generalised algebraic.
+%
+Let us call such an axiom a \defemph{universal condition}.
+
+We do not work with relations directly but rather with their characteristic families.
+%
+If $R$ is an $n$-ary relation on a set $A$ then its characteristic family is the family $\lambda a_1. \lambda a_2 \ldots \lambda a_n . P(a_1, \ldots a_n)$, where $P(a_1,\ldots a_n) = \{ \empty \}$ if $R(a_1,\ldots a_n)$ and $P(a_1,\ldots a_n) = \empty$ otherwise.
+
+The following theory indicates how an $n$-ary predicate symbol may be introduced into a theory.
+%
+The given theory has as models just characteristic families of $n$-ary relations on a set.
+
+\begin{theoryspec}
+  $A$ & $A$ is a type \\
+  $P$ & For $x_1, \ldots x_n \in A$ : $P(x_1,\ldots x_n)$ is a type \\
+  \oneaxiom
+  \axiom{$y_1 = y_2$, whenever $x_1,\ldots x_n \in A$ and $y_1,y_2 \in P(x_1,\ldots x_n)$.}
+\end{theoryspec}
+
+It remains to show how universal conditions may be expressed as generalised algebraic.
+%
+We distinguish three forms that such a condition might take.
+%
+The first case is when each of $\varphi_1, \ldots \varphi_n$ and $\psi$ are instances of a predicate other than the equality predicate.
+%
+In this case $\forall \vec x.(\varphi_1 \land \ldots \varphi_n \imp \psi)$ cannot be expressed as an axiom but it can be expressed merely by the introduction of a new operator symbol.
+%
+For example the transitivity of a binary predicate $P$ is expressed by the introduction of a new operator symbol $t$ by the rule :--- \comment{punct!?} for $x_1,x_2,x_2 \in A$, for $y_1 \in P(x_1,x_2)$ and for $y_2 \in P(x_2,x_2)$ : $t(y_1,y_2) \in P(x_1,x_3)$.
+%
+The point is that once $P$ is interpreted then $t$ is interpretable in at most one way and then only in case the predicate is transitive.
+
+The second case to consider is the case where each of $\varphi_1, \ldots \varphi_n$ are instances of a predicate other than the equality predicate and $\psi$ is an instance of the equality predicate.
+%
+In this case $\forall \vec x (\varphi_1 \land \ldots \land \varphi_n \imp \psi)$ can be expressed as an axiom of the theory.
+%
+For example the anti-symmetry of a binary predicate $P$ can be expressed by the axiom :--- $x_1 = x_2$, whenever $x_1, x_2 \in A$ and $y_1 \in P(x_1,x_2)$, $y_2 \in P(x_2,x_1)$.
+
+Lastly we must consider the case when one of the $\varphi_i$'s is an instance of the equality predicate.
+%
+In this case a new binary predicate must be added to the language and axiomatised to be the equality predicate.
+%
+The axiom $\forall \vec x (\varphi_1 \land \ldots \varphi_n \imp \psi)$ can then be dealt with by one of the first two cases.
+%
+The following theory indicates the way in which the binary predicate $\synEq$ can be added to a theory and axiomatised to be the equality predicate.
+
+\begin{theoryspec}
+  $A$ & $A$ is a type \\
+  $\synEq$ & For $x_1,x_2 \in A$ : $\synEq(x_1,x_2)$ is a type \\
+  $\synr$ & For $x \in A$ : $\synr(x) \in \synEq(x,x)$ \\
+  \axioms
+  \axiom{$y_1 = y_2$, whenever $x_1,x_2 \in A$ and $y_1, y_2 \in \synEq(x_1,x_2)$}
+  \axiom{$x_1 = x_2$, whenever $x_1,x_2 \in A$ and $y \in \synEq(x_1,x_2)$}
+\end{theoryspec}
+
+One final example.
+%
+The theory of a 1-1 function is the theory of equality in the language $\tuple{B,\synEq,\synr}$ +
+
+\begin{theoryspec}
+  $A$ & $A$ is a type \\
+  $f$ & For $x \in A$ : $f(x) \in B$. \\
+  \axioms
+  \axiom{$x_1 = x_2$, whenever $x_1,x_2 \in A$ and $y \in \synEq(f(x_1),f(x_2))$.}
+\end{theoryspec}
 
 % source p1.16
 \section{Essentially algebraic theories and categories with finite limits} \label{sec:source-1-4}
