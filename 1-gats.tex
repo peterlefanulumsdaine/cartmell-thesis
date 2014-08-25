@@ -382,7 +382,15 @@ The theory of a 1-1 function is the theory of equality in the language $\tuple{B
 % source p1.16
 \section{Essentially algebraic theories and categories with finite limits} \label{sec:source-1-4}
 
-\lipsum[3]
+The essentially algebraic theories of Freyd \cite{freyd:5} can be seen to have the same descriptive power as generalised algebraic theories, at least as far as the usual set valued models are concerned.
+%
+In this section we look at the relationship between essentially algebraic theories and categories with all finite limits.
+%
+In the next section we point out the way in which generalised algebraic is a more general notion than essentially algebraic.
+
+Essentially algebraic theories are introduced and very briefly discussed in Freyd \cite{freyd:5}; they are many sorted partial algebraic theories such that the domain of every partial operation is specified as the extension of some conjunction of identities between terms compounded from previously introduced operators.
+
+Thus the theory of categories as an essentially algebraic theory has two sorts, $\synOb$ and $\synMorph$, \comment{capitalisation of $\synMorph$ inconsistent in source} three total operations, $\syndom : \synMorph \to \synOb$, $\syncod : \synMorph \to \synOb$ and $\synid : \synOb \to \synMorph$, and one binary partial operation $\syncomp$ from $\synMorph \times \synMorph$ to $\synMorph$ whose domain is specified by asserting that $\syncomp(x,y)$ is defined iff $\syncod(x) = \syndom(y)$.
 
 % source p1.19
 \section{The extra generality of the algebraic semantics} \label{sec:source-1-5}

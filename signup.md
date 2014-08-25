@@ -10,7 +10,7 @@ Specifically: expected statuses are (in intended order of progression)
 - *ROUGH [name(s)]* (content all present, but formatting or similar needs fixed)
 - *DONE [name(s)]* (entirely done)
 
-Of course this is all flexible if unforeseen situations arise… 
+Of course this is all flexible — anything self-explanatory is fine, really. 
 
 Once a section is *DONE* or *POLISHED*, anyone who has carefully read it can add *PROOFED [nameX]*, so we can ensure that (if possible) each section gets proofread by at least one additional person.
 
@@ -21,7 +21,7 @@ Suggestion: to start with, leave space for people to work in contiguous blocks. 
 - 1.1 ROUGH [pll]
 - 1.2 ROUGH [pll]
 - 1.3 DONE [pll]
-- 1.4 BOOKED [pll]
+- 1.4 IN PROGRESS [pll]
 - 1.5
 - 1.6
 - 1.7
