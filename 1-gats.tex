@@ -2,11 +2,9 @@
 
 The purpose of this chapter is to describe and to formally define the notion of generalised algebraic theory.
 %
-It is hoped that it will be clear from the description that (i) the notion is a natural one formalising actual mathematical language and that (ii) the notion is a simple generalisation of the notion of a many sorted algebraic theory.
+It is hoped that it will be clear from the description that \begin{enumerate*}[(i)] \item the notion is a natural one formalising actual mathematical language and that \item \label{item:notion-simple} the notion is a simple generalisation of the notion of a many sorted algebraic theory. \end{enumerate*}
 %
-\comment{TODO: format inline list!}
-%
-Though (ii) tends to be obscured by the form of the chosen syntax no doubt the choice is correce.
+Though \ref{item:notion-simple}\ tends to be obscured by the form of the chosen syntax no doubt the choice is correct.
 
 The formal definition is given in \textsection \ref{sec:source-1-6}.
 %
@@ -21,9 +19,7 @@ Whereas the sorts of a many sorted algebraic theory are constant types in the se
 %
 The type or types on which the variation of a variable type depends must always be specified.
 
-Thus a generalised algebraic theory consists of (i) a set of sorts, each with a specified role either as a constant type or else as a variable type varying in some way, (ii) a set of operator symbols, each with its argument types and its value type specified (the value type may vary as the argument varies), (iii) a set of axioms.
-%
-\comment{TODO: format inline list?}
+Thus a generalised algebraic theory consists of \begin{enumerate*}[(i)] \item a set of sorts, each with a specified role either as a constant type or else as a variable type varying in some way, \item a set of operator symbols, each with its argument types and its value type specified (the value type may vary as the argument varies), \item a set of axioms. \end{enumerate*}
 %
 Each axiom must be an identity beteen similar well formed expressions, either between terms of the same possibly varying type or else between type expressions.
 
@@ -182,13 +178,14 @@ The first example is a theory which can be called the theory of families of elem
 
 A model of this theory will consist of a set, a family indexed by this set and a distinguished element of each set in this family; which is to say that a model will consist of a set indexed family of elements of a family of sets.
 %
-We are not sure of the notation we should be using but if we denote the interpretation of a symbol in a model $\modM$ by that symbol superscripted by $\modM$ then a model $\modM$ consists of \comment{inline list!}(i.) a set $A^\modM$, (ii.) an $A^\modM$-indexed family of elements $b^\modM$ of the family of sets $B^\modM$.
+We are not sure of the notation we should be using but if we denote the interpretation of a symbol in a model $\modM$ by that symbol superscripted by $\modM$ then a model $\modM$ consists of \comment{inconsistent numbering style with other inline lists!}\begin{enumerate*}[(i.)] \item a set $A^\modM$, \item an $A^\modM$-indexed family of elements $b^\modM$ of the family of sets $B^\modM$. \end{enumerate*}
 
 \begin{figure}
 \placeholder{TODO: Diagram!}
 \caption{For every element $a$ of the set $A^\modM$ we have (i.) a set $B^\modM(a)$ and (ii.) an element $b^\modM(a)$ of the set $B^\modM(a)$.}
 \end{figure}
 
+\comment{Proper inline list in caption?}
 % source p1.8
 
 If both $\modM$ and $\modM'$ are models of this theory then a homomorphism $f : \modM \to \modM'$ consists of a function $f_A : A^\modM \to A^{\modM'}$ and an $A^\modM$-indexed family of functions $f_B$ such that for every $a \in A^\modM$, $f_B(a) : B^\modM(a) \to B^{\modM'}(f_A(a))$ and such that for every $a \in A^\modM$, $f_B(a)(b^\modM(a)) = b^{\modM'}(f_A(a))$.
@@ -292,7 +289,7 @@ commutes.
 % source p.1.12
 The final example is to indicate one way of axiomatising the disjoint union of a family of types.
 
-If $\thU$ is a theory which includes a type symbol $A$ and a symbol $B$ for an $A$-indexed family of types then $\thU$ can be extended by three operator symbols, three axioms and one type symbol. $\synSum_A B$ in such a way that \comment{inline list!}i.\ every model of $\modM$ of $\thU$ uniquely extends to a model of the extended theory and ii.\ every model $\modM$ of the extended theory interprets the symbol $\synSum_A B$ by the set $\{ \tuple{a,b} \suchthat a \in A^\modM\ \text{and}\ b \in B^\modM(a) \}$, that is to say as the disjoint union of the family of sets interpreting $B$.
+If $\thU$ is a theory which includes a type symbol $A$ and a symbol $B$ for an $A$-indexed family of types then $\thU$ can be extended by three operator symbols, three axioms and one type symbol. $\synSum_A B$ in such a way that \begin{enumerate*}[i.] \item every model of $\modM$ of $\thU$ uniquely extends to a model of the extended theory and \item every model $\modM$ of the extended theory interprets the symbol $\synSum_A B$ by the set $\{ \tuple{a,b} \suchthat a \in A^\modM\ \text{and}\ b \in B^\modM(a) \}$, that is to say as the disjoint union of the family of sets interpreting $B$. \end{enumerate*}
 %
 The extended theory is taken to be $\thU$ +
 
@@ -406,14 +403,14 @@ The converse is also the case, at least in so far as that to every generalised a
 %
 This is the case because of the equivalence between $A$-indexed families of sets and morphisms in the category $\catSet$ with codomain $A$.
 %
-This equivalence holds for any sey $A$ and is given by the following
+This equivalence holds for any set $A$ and is given by the following
 
 \begin{enumerate}[1.]
- 	\item If $\{ B(a) \suchthat a \in A \}$ is an $A$-indexed family of sets then $\proj : \disjointunion B(a) \to A$ is a morphism of $\catSet$ with codomain $A$ (remember that $\disjointunion B(a) = \{\tuple{a,b} \suchthat a \in A,\, b \in B(a) \})$.
-	\item If $f : A' \to A$ is a map of $\catSet$ with codomain $A$ then $\{ f^{-1}(a) \suchthat a \in A \}$ is an $A$-indexed family of sets.
+ 	\item \label{item:setequiv-1} If $\{ B(a) \suchthat a \in A \}$ is an $A$-indexed family of sets then $\proj : \disjointunion B(a) \to A$ is a morphism of $\catSet$ with codomain $A$ (remember that $\disjointunion B(a) = \{\tuple{a,b} \suchthat a \in A,\, b \in B(a) \})$.
+	\item \label{item:setequiv-2} If $f : A' \to A$ is a map of $\catSet$ with codomain $A$ then $\{ f^{-1}(a) \suchthat a \in A \}$ is an $A$-indexed family of sets.
 \end{enumerate}	
 
-1.\ and 2.\ establish an isomorphism between the class of $A$-indexed families of sets and the class of functions with codomain $A$.
+\ref{item:setequiv-1}~and \ref{item:setequiv-2}~establish an isomorphism between the class of $A$-indexed families of sets and the class of functions with codomain $A$.
 %
 \comment{Error, surely!? Not an isomorphism, just an equivalence of cats.}
 %
