@@ -3,11 +3,12 @@ cartmell-thesis signup sheet
 
 Sign up in this document to contribute to the project.
 
-Specifically: expected statuses are (in intended order of progression) 
+Specifically: some expected statuses are
 - *none*
-- *OCR*
-- *BOOKED [name]*
-- *ROUGH [name(s)]* (content all present, but formatting or similar needs fixed)
+- *OCR* (automatically populated from OCR, not yet human-edited)
+- *BOOKED [name]* (*name* is intending to work on section)
+- *IN PRODRESS [name]* (*name* has started working on sectoin)
+- *ROUGH [name(s)]* (content all present, but formatting or similar still needs fixed)
 - *DONE [name(s)]* (entirely done)
 
 Of course this is all flexible — anything self-explanatory is fine, really. 
@@ -21,7 +22,7 @@ Suggestion: to start with, leave space for people to work in contiguous blocks. 
 - 1.1 ROUGH [pll]
 - 1.2 ROUGH [pll]
 - 1.3 DONE [pll]
-- 1.4 IN PROGRESS [pll]
+- 1.4 DONE [pll]
 - 1.5
 - 1.6
 - 1.7

@@ -390,7 +390,46 @@ In the next section we point out the way in which generalised algebraic is a mor
 
 Essentially algebraic theories are introduced and very briefly discussed in Freyd \cite{freyd:5}; they are many sorted partial algebraic theories such that the domain of every partial operation is specified as the extension of some conjunction of identities between terms compounded from previously introduced operators.
 
-Thus the theory of categories as an essentially algebraic theory has two sorts, $\synOb$ and $\synMorph$, \comment{capitalisation of $\synMorph$ inconsistent in source} three total operations, $\syndom : \synMorph \to \synOb$, $\syncod : \synMorph \to \synOb$ and $\synid : \synOb \to \synMorph$, and one binary partial operation $\syncomp$ from $\synMorph \times \synMorph$ to $\synMorph$ whose domain is specified by asserting that $\syncomp(x,y)$ is defined iff $\syncod(x) = \syndom(y)$.
+Thus the theory of categories as an essentially algebraic theory has two sorts, $\synOb$ and $\synMorph$, \comment{capitalisation of $\synMorph$ inconsistent in source} three total operations, $\syndom : \synMorph \to \synOb$, $\syncod : \synMorph \to \synOb$ and $\synid : \synOb \to \synMorph$, and one binary partial operation $\syno$ from $\synMorph \times \synMorph$ to $\synMorph$ whose domain is specified by asserting that $\syno(x,y)$ is defined iff $\syncod(x) = \syndom(y)$.
+
+In order to write an essentially algebraic theory as generalised algebraic, all the equality predicates used in defining domains of partial operations must be introduced.
+%
+For example if $f$ is to be a partial $C$-valued function defined on $\{ x \in A \suchthat t_1 = t_2 \}$, where for $ \in A : t_1 \in B$ and for $x \in A : t_2 \in B$, then the equality predicate on $B$ must be introduced and axiomatised.
+%
+Then $f$ can be introduced by the rule for $x \in A$, for $y \in \synEq(t_1,t_2) : f(x,y) \in C$.
+
+% source p.1.17
+
+In this way every essentially algebraic theory can be rewritten as generalised algebraic.
+%
+The converse is also the case, at least in so far as that to every generalised algebraic theory there corresponds an essentially algebraic theory with the same category of models.
+%
+This is the case because of the equivalence between $A$-indexed families of sets and morphisms in the category $\catSet$ with codomain $A$.
+%
+This equivalence holds for any sey $A$ and is given by the following
+
+\begin{enumerate}[1.]
+ 	\item If $\{ B(a) \suchthat a \in A \}$ is an $A$-indexed family of sets then $\proj : \disjointunion B(a) \to A$ is a morphism of $\catSet$ with codomain $A$ (remember that $\disjointunion B(a) = \{\tuple{a,b} \suchthat a \in A,\, b \in B(a) \})$.
+	\item If $f : A' \to A$ is a map of $\catSet$ with codomain $A$ then $\{ f^{-1}(a) \suchthat a \in A \}$ is an $A$-indexed family of sets.
+\end{enumerate}	
+
+1.\ and 2.\ establish an isomorphism between the class of $A$-indexed families of sets and the class of functions with codomain $A$.
+%
+\comment{Error, surely!? Not an isomorphism, just an equivalence of cats.}
+%
+Thus, if in a generalised algebraic theory there is a sort symbol $B$ introduced as an $A$-indexed family of types then in the corresponding essentially algebraic theory there is introduced a new sort symbol $A'$ and a map $p : A' \to A$.
+
+The notion of an essentially algebraic theory can be seen as a notion of type theory in which the only type forming principles are for the formation of product types and for the formation of types of the form $\{ x \in \Delta \suchthat t_1 = t_2 \}$, where $\Delta$ is a type and $t_1$ and $t_2$ are terms of the same type.
+%
+Now if we think of the objects of an arbitrary category as types then to have these two type forming principles is just to have finite products and equalisers of pairs.
+%
+% source p.1.18
+%
+Since a category with finite products and equalisers of pairs is precisely a category with finite limits, the notions of essentially algebraic theory and category with finite limits are closely connected.
+
+In fact for every essentially algebraic theory $U$ there is a category with finite limits $\catC(U)$ such that the category of models of $U$ is equivalent to the category $\catLEX(\catC(U),\catSet)$ of all finite limit preserving functors from $\catC(U)$ to $\catSet$, with all natural transformations between them as morphisms.
+
+This is the content of a remark made by Lawvere, pages 8--9 of Lawvere \cite{lawvere:17}, though the remark does not actually use the term essentially algebraic.
 
 % source p1.19
 \section{The extra generality of the algebraic semantics} \label{sec:source-1-5}
