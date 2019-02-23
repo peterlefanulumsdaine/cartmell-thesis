@@ -1,5 +1,5 @@
 cartmell-thesis signup sheet
-==== 
+====
 
 Sign up in this document to contribute to the project.
 
@@ -11,7 +11,7 @@ Specifically: some expected statuses are
 - *ROUGH [name(s)]* (content all present, but formatting or similar still needs fixed)
 - *DONE [name(s)]* (entirely done)
 
-Of course this is all flexible — anything self-explanatory is fine, really. 
+Of course this is all flexible — anything self-explanatory is fine, really.
 
 Once a section is *DONE* or *POLISHED*, anyone who has carefully read it can add *PROOFED [nameX]*, so we can ensure that (if possible) each section gets proofread by at least one additional person.
 
@@ -23,13 +23,13 @@ Suggestion: to start with, leave space for people to work in contiguous blocks. 
 - 1.2 ROUGH [pll]
 - 1.3 DONE [pll]
 - 1.4 DONE [pll]
-- 1.5
-- 1.6
-- 1.7
-- 1.8
-- 1.9
-- 1.10
-- 1.11
+- 1.5 ROUGH [nathan guermond]
+- 1.6 ROUGH [nathan]
+- 1.7 ROUGH [nathan]
+- 1.8 IN PROGRESS [nathan]
+- 1.9 BOOKED [nathan]
+- 1.10 BOOKED [nathan]
+- 1.11 BOOKED [nathan]
 - 1.12
 - 1.13
 - 1.14
@@ -44,4 +44,3 @@ Suggestion: to start with, leave space for people to work in contiguous blocks. 
 - 3.3
 - 3.4
 - 3.5
-
