@@ -408,7 +408,7 @@ This equivalence holds for any set $A$ and is given by the following
 \begin{enumerate}[1.]
  	\item \label{item:setequiv-1} If $\{ B(a) \suchthat a \in A \}$ is an $A$-indexed family of sets then $\proj : \disjointunion B(a) \to A$ is a morphism of $\catSet$ with codomain $A$ (remember that $\disjointunion B(a) = \{\tuple{a,b} \suchthat a \in A,\, b \in B(a) \})$.
 	\item \label{item:setequiv-2} If $f : A' \to A$ is a map of $\catSet$ with codomain $A$ then $\{ f^{-1}(a) \suchthat a \in A \}$ is an $A$-indexed family of sets.
-\end{enumerate}	
+\end{enumerate}
 
 \ref{item:setequiv-1}~and \ref{item:setequiv-2}~establish an isomorphism between the class of $A$-indexed families of sets and the class of functions with codomain $A$.
 %
@@ -430,38 +430,927 @@ This is the content of a remark made by Lawvere, pages 8--9 of Lawvere \cite{law
 
 % source p1.19
 \section{The extra generality of the algebraic semantics} \label{sec:source-1-5}
+One fo the advantages of generalised algebraic over essentially algebraic is to be found in the syntax particularly with regard to the presentation of theories.
+%
+In presenting theories as essentially algebraic there is a coding process in that, in general, families of sets indexed by a set are represented by functions with codomain that set.
+%
+On the other hand in presenting a theory as generalised algebraic there need be no such coding.
+%
+This distinction whereby families in a generalised algebraic theory can have a life of their own goes through into the algebraic semantics.
+%
+The algebraic semantics of generalised algebraic theories is more general than any possible such semantics for essentially algebraic theories.
+%
+There are perfectly coherent interpretations of generalised algebraic theories into structures in which the elements of the structure that are there to interpret type-indexed families of types are distinct from the elements that are there to interpret functions with codomain.
+%
+This can never be the case with essentially algebraic theories because already in the syntax families of types are coded as functions with codomain.
 
-\lipsum[4]
+
+The notion of type is adequately captured by the notion of object of category.
+%
+However having decided to think of the objects of a particular category $\catB$ as types and in particular having decided to think of an actual object $A$ of $\catB$ as a type then it is incorrect then to suppose that the notion of $A$-indexed family of types should be taken to be the notion morphism of $\catB$ with codomain $A$.
+%
+This is just one possibility. In general, there will be other possibilities some of which may be more attractive.
+%
+The example that we have in mind is when $\catC$ is taken to be the category $\catCat$ of all (small) categories.
+%
+Now the question is what shall we choose to mean by category indexed family of categories? In particular if $\catA$ is a category then what shall we mean by an $\catA$-indexed family of categories?
+%
+Well, what we would like to mean by that is any functor $B:\catA\to\catCat$. This is not the same as taking it to mean a morphism of $\catCat$ with codomain $\catA$.
+%
+The idea that a family of categories indexed by the category $\catA$ should be a functor $B:\catA\to\catCat$ arises because there is a category of all (small) categories just as the fact that there is a class $U$ of all sets (= small classes) leads to the definition of a family of sets indexed by a set $A$ as a function $B:A\to U$.
+
+
+A functor $B:\catA\to\catCat$ can be thought of as a structure of the general kind (for example take sort symbols $\synOb\catA$, $\synHom\catA$, $\synOb\catB$, and $\synHom\catB$ introduced by rules $\synOb\catA\isatype$; for $x,y\in \synOb\catA$: $\synHom\catA(x,y)\isatype$; for $x\in \synOb\catA$: $\synOb\catB(x)\isatype$; for $x\in\synOb\catA$, for $y,z\in\synOb\catB(x)$: $\synHom\catB(x,y,z)\isatype$).
+%
+It follows tha there is a category of category indexed familyes of categories and structure preserving homomorphisms (it turns out that a homomorphism from $B:\catA\to\catCat$ to $B':\catA'\to\catCat$ is describable just as a pair $F,N$ where $F:\catA\to\catA'$ is a functor and $N:B\to F\circ B'$ \footnote{Note that Cartmell denotes $f$ composed with $g$ by the diagrammatic notation $g\circ f$.} is a natural transformation).
+%
+But now there follows the notion of a category indexed family of category indexed families of categories.
+%
+This procedure can be iterated.
+%
+We get a huge structure of categories, category indexed families of categories, category indexed families of category indexed families of categories and so on.
+%
+It is a structure into which generalised algebraic theories can be interpreted -- by interpreting types as categories, type indexed families of types as category indexed families of categories and so on.
+
+
+A model of the theory of families of elements of families of sets in this structure will consist of a category $\catA$, a functor $B:\catA\to\catCat$, for each $a\in |\catA|$, an object $b(a)$ of $B(a)$ and for each $f:a\to a'$ in $\catA$, a morphism $b(f): B(f)(b(a))\to b(a')$ in $B(a')$.
+%
+Such that $b(id(a)) = id(b(a))$, for all objects $a$ of $\catA$ and such that $B(f')(b(f))\circ b(f') = b(f\circ f')$, whenever $\cdot\xrightarrow{f}\cdot\xrightarrow{f'}\cdot$ in $\catA$.
+
 
 % source p1.22
 \section{The formal definition} \label{sec:source-1-6}
+We must insist that the introductory rule for the symbol into a language be well formed.
+%
+In order that we may say what it is for a rule to be well formed we require a notion of derivability.
+%
+Since the notion of derivability depends upon the introductory rules there is a difficulty in giving the formal definition.
 
-\lipsum[5]
+
+The difficulty is that we need knowledge of the derived rules of a theory when we are still in the process of defining the possible languages in which the theory may be written.
+%
+We choose to overcome the difficulty by leaving aside the question of wellformedness until we have available the complete set of derived rules of the theory.
+%
+For this reason the theories that are admitted by the definition below may not be well formed; we call them pretheories and accept that they might make little sense.
+%
+Later we shall define a theory to be a well formed pretheory.
+
+We assume throughout that we have a set $V$ of variables which has countably many distinct members.
+%
+We begin by giving a definition of a rule, more precisely a definition of a rule of the alphabet $W$.
+%
+The definition is crude in that the most of the permitted rules are meaningless in all circumstances; it does suffice, though, for the purpose of turning rules into objects. Suppose then that $W$ is a set.
+%
+We consider the set $W$ to be an alphabet and its elements to be symbols.
+%
+The following definition is relative to $W$ (and, of course, it is relative to the set of variables $V$, but $V$ will remain fixed throughout).
+
+
+The set of \emph{expressions} is defined inductively in such a way that every expression is a finite sequence of elements of $W\cup V\cup \{(\}\cup\{)\}\cup\{,\}$ by the clauses:
+%
+\begin{enumerate}
+\item If $x\in V$ then $x$ is an expression.
+\item If $L\in W$ then $L$ is an expression.
+\item If $L\in W$ and $e_1,\ldots,e_n$ are expressions then $L(e_1,\ldots,e_n)$ is an expression.
+\end{enumerate}
+
+
+A \emph{premise} is defined to be any finite sequence of elements of $V,$ \comment{``V,'' was Originally $Vx$. Typo??} the set of expressions. The empty sequence is included as a premise, called funnily enough, the empty premise.
+%
+The premise determined by $((x_1,\Delta_1),\ldots,(x_n,\Delta_n))$ is written as `$x_1\in\Delta_1,\ldots,x_n\in\Delta_n$`.
+
+
+A \emph{$T$-conclusion} is determined by a single expression $\Delta$ and is written as `$\Delta$ is a type`.
+
+
+An \emph{$\epsilon$-conclusion} \comment{$\epsilon$ or E?} is determined by a pair of expressions $(t,\Delta)$ and is written as `$t\in\Delta$`.
+
+
+A \emph{$T=$-conclusion} is determined by a pair of expressions $(\Delta,\Delta')$ and is written as `$\Delta=\Delta'$`.
+
+
+An \emph{$\epsilon=$-conclusion} is determined by a triple of expressions $(t,t',\Delta)$ and is written as `$t=t'\in\Delta$`.
+
+
+A \emph{rule} is determined by a premise $P$ and a conclusion $C$ and is written as $\frac{P}{C}$. A rule is said to be a $T$-rule, and $\epsilon$-rule, a $T=$rule or an $\epsilon=$rule according as to the form of its conclusion.
+
+
+If $\Delta,t_1,\ldots,t_n$ are expressions and if $x_1,\ldots,x_n$ are distinct variables then the expression $\Delta[t_1|x_1,\ldots,t_n|x_n]$ is that expression which results from simultaneously replacing every occurence of the variables $x_1,\ldots,x_n$ in the expression $\Delta$ by $t_1,\ldots,t_n$.
+%
+Please note that $\Delta[t_1|x_1,\ldots,t_n|x_n]$ and $\Delta[t_1|x_1]\ldots[t_n|x_n]$ are not usually the same, indeed $\Delta[t_1|x_1,t_2|x_2]$ and $\Delta[t_1|x_1][t_2|x_2]$ are distinct whenever $x_1$ appears in $\Delta$, $x_2$ appears in $t_1$ and $t_2$ is distinct from $x_2$.
+%
+We can now give the main definitions.
+
+
+\begin{definition}[1]
+A \emph{pretheory} consists of 
+\begin{enumerate}
+\item a set $S$, called the set of sort symbols.%
+\item A set $Z$ called the set of operator symbols.
+\item To each sort symbol $A$, an associated rule of the alphabet $S\cup Z$, called the introductory rule for $A$ and of the form $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{A(x_1,\ldots,x_n) \isatype}$ for some $n\geq 0$.
+\item To each operator symbol $F$, an associated rule of the alphabet $S\cup Z$ called the introductory rule for $F$ and of the form $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{F(x_1,\ldots,x_n)\in\Delta}$, for some $n\geq 0$.
+\item A set of axioms.
+\end{enumerate}
+
+Each axiom is either a $T=$rule or an $\epsilon=$rule of the alphabet.
+\end{definition}
+
+Taken together, definiiton 2(a) and 2(b) define the derived rules of a pretheory.
+%
+The definition is of an inductive nature.
+
+\begin{definition}[2(a)]
+If $U$ is a pretheory \comment{Not sure whether to use $U$ or $\thU$ to denote theories} then 
+\begin{enumerate}[(i)]
+\item  a \emph{context} is a premise $x_1\in\Delta_1,\ldots,x_n\in\Delta_n$ such that the rule $\inferrule{x_1\in\Delta_1,\ldots,x_{n-1}\in\Delta_{n-1}}{\Delta_n\isatype}$ is a derived rule of $U$.
+%
+\item
+\begin{enumerate}[(a)]
+\item The rule $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{\Delta\isatype}$ is \emph{wellformed} iff $x_1\in\Delta_1,\ldots,x_n\in\Delta_n$ is a context.
+\item The rule $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{t\in\Delta}$ is \emph{wellformed} iff $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{\Delta\isatype}$ is a derived rule of $U$.
+\item \comment{(d) in text?} The rule $\inferrule{x_1\in\Delta_1\ldots x_n\in\Delta_n}{t=t'\in\Delta}$ is \emph{wellformed} iff $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{t\in\Delta}$ and $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{t'\in\Delta}$ are both derived rules of $U$.
+\end{enumerate}
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[2(b)]
+The set of \emph{derived rules} of $U$ is the set of rules derivable by the following \emph{principles of derivation}.
+\begin{enumerate}
+\item[LI1.] From $\inferrule{P}{\Delta\isatype}$ derive $\inferrule{P}{\Delta=\Delta}$.
+\item[LI2.] From $\inferrule{P}{t\in\Delta}$ derive $\inferrule{P}{t=t\in\Delta}$.
+\item[LI3.] From $\inferrule{P}{\Delta_1=\Delta_2}$ derive $\inferrule{P}{\Delta_2=\Delta_1}$.
+\item[LI4.] From $\inferrule{P}{t_1=t_2\in\Delta}$ derive $\inferrule{P}{t_2=t_1\in\Delta}$.
+\item[LI5.] From $\inferrule{P}{\Delta_1=\Delta_2}$ and $\inferrule{P}{\Delta_2=\Delta_3}$ derive $\inferrule{P}{\Delta_1=\Delta_3}$.
+\item[LI6.] From $\inferrule{P}{t_1=t_2\in\Delta}$ and $\inferrule{P}{t_2=t_3\in\Delta}$ derive $\inferrule{P}{t_1=t_3\in\Delta}$.
+\item[LI7.] From $\inferrule{P}{t_1=t_2\in\Delta_1}$ and $\inferrule{P}{\Delta_1=\Delta_2}$ derive $\inferrule{P}{t_1=t_2\in\Delta_2}$.
+\item[T1.] From $\inferrule{P}{\Delta_1=\Delta_2}$ and $\inferrule{P}{t\in\Delta_1}$ derive $\inferrule{P}{t\in\Delta_2}$.
+\item[CF1.] For $n\geq 0$, $1\leq i\leq n+1$.
+  From $\inferrule{x_1\in\Delta_1\ldots,x_n\in\Delta_n}{\Delta_{n+1}\isatype}$ derive $\inferrule{x_1\in\Delta_1\ldots x_{n+1}\in\Delta_{n+1}}{x_i\in\Delta_i}$, providing that $x_{n+1}$ is a variable distinct from all of $x_1,\ldots,x_n$.
+\item[CF2(a).] For every sort symbol $A$ with wellformed introductory rule $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{A(x_1,\ldots,x_n)\isatype}$, for every context $P$, from $\inferrule{P}{t_1\in\Delta_1}$,$\inferrule{P}{t_2\in\Delta_2[t_1|x_2]},\ldots,\inferrule{P}{t_n\in\Delta_n[t_1|x_1,\ldots,t_{n-1}|x_{n-1}]}$ derive $\inferrule{P}{A(t_1,\ldots,t_n)\isatype}$.
+\item [CF2(b).] For every operator symbol $F$ with wellformed introductory rule $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{F(x_1,\ldots,x_n)\in\Delta}$, for every context $P$, from $\inferrule{P}{t_1\in\Delta_1}$, $\inferrule{P}{t_2\in\Delta_2[t_1|x_1]},\ldots,$ and $\inferrule{P}{t_n\in\Delta_n[t_1|x_1,\ldots,t_{n-1}|x_{n-1}]}$ derive $\inferrule{P}{F(t_1,\ldots,t_n)\in\Delta[t_1|x_1,\ldots,t_n|x_n]}$.
+\item [SI1.] If $Q$ is a context then from $\inferrule{y_1\in\Omega_1,\ldots,y_m\in\Omega_m}{\Omega=\Omega'}$ and $\inferrule{Q}{s_1=s_1'\in\Omega_1}$, $\inferrule{Q}{s_1=s_2'\in\Omega_2[s_1|y_1]},\ldots,\inferrule{Q}{s_m=s_m'\in\Omega_m[s_1|y_1,\ldots,s_{m-1}|y_{m-1}]}$ derive $\inferrule{Q}{\Omega[s_1|y_1,\ldots,s_m|y_m]=\Omega'[s_1|y_1,\ldots,s_m|y_m]}$.
+\item [SI2.] If $Q$ is a context then from $\inferrule{y_1\in\Omega_1,\ldots,y_m\in\Omega_m}{s=s'\in\Omega}$ and $\inferrule{Q}{s_1=s_1'\in\Omega}$, $\inferrule{Q}{s_1=s_2'\in\Omega_2[s_1|y_1]},\ldots,\inferrule{Q}{s_m=s_m'\in\Omega_m[s_1|y_1,\ldots,s_{m-1}|y_{m-1}]}$ derive $\inferrule{Q}{s[s_1|y_1,\ldots,s_m|y_m]=s'[s_1|y_1,\ldots,s_m|y_m]}$.
+\item [A1.] If $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{\Delta=\Delta'}$ is an axiom then from $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{\Delta\isatype}$ and $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{\Delta'\isatype}$ derive $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{\Delta=\Delta'}$.
+\item [A2.] If $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{t=t'\in\Delta}$ is an axiom then from $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{t\in\Delta}$ and $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{t'\in\Delta}$ derive $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{t=t'\in\Delta}$.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[3]
+A pretheory is \emph{wellformed} iff all of its introductory rules and axioms are wellformed.
+%
+A \emph{generalised algebraic theory} is a wellformed pretheory.
+\end{definition}
+
 
 % source p1.28
 \section{The substitution lemma and other lemmas} \label{sec:source-1-7}
 
-\lipsum[6]
+Each lemma in this section is needed at some later stage.
+%
+For example the substitution lemma which asserts that the set of derived rules of a theory is closed under the operation of the substitution of correctly typed terms for variables, is needed in the definition of the category of generalised algebraic theories.
+
+
+Substitution could have been taken as one of the principles of derivation; however to have done this would have hindered the definitions by induction which surround the semantics.
+%
+Compare with Lambek \cite{??}, though of course the problem is Gentzen's.
+
+It is assumed throughout that $U$ is some generalised algebraic theory.
+%
+Let us say that a derived rule of $U$ is of the form $\inferrule{y_1\in\Omega_1,\ldots,y_m\in\Omega_m}{\text{Conclusion}}$ (has?) \comment{word missing} the \emph{substitution property} iff for every context $Q$ of $U$, whenever $S_1,S_2,\ldots,S_m$ are expressions such that $\inferrule{Q}{s_1\in\Omega_1},\inferrule{Q}{s_2\in\Omega_2[s_1|y_1]},\ldots,$ and $\inferrule{Q}{s_m\in\Omega_m[s_1|y_1,\ldots,s_{m-1}|y_{m-1}]}$ are all derived rules of $U$ then the rule $\inferrule{Q}{\text{Conclusion}[s_1|y_1,\ldots,s_m|y_m]}$ is also a derived rule of $U$. We aim to show that all derived rules of $U$ have the substitution property. We need two preliminary lemmas.
+
+
+\begin{lemma}[1] If $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{\text{Conclusion}}$ is a derived rule of $U$ then any variables appearing in the conclusion occur among $\{x_1,\ldots, x_n\}$.
+\end{lemma}
+\begin{proof}
+  By induction on the derivation of rules in $U$.
+  %
+  Look at each principle of derivation in turn and see that it is impossible to use the principle to derive a rule whithout this property from rules which do have the property.
+  %
+  This is very easy to see.
+\end{proof}
+
+\begin{lemma}[2]
+\begin{enumerate}[(i)]
+\item The premise of a derived rule is a context.
+\item If $x_1\in\Delta_1,\ldots,x_n\in\Delta_n$ is a context then for all $i$, $1\leq i\leq n$, the rule $\inferrule{x_1\in\Delta_1,\ldots,x_{i-1}\in\Delta_{i-1}}{\Delta_i\isatype}$ is a derived rule.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+  (i) is proved by induction on derivations.
+  %
+  If each principle of derivation is checked it will be seen that the premise of the derived rule is either a context by hypothesis (CF2, SI1 and SI2), or is a premise of a previously derived rule (LI1,\ldots,LI7, T1,R1 and A2), or else satisfies the conditions necessary to be a context (CF1).
+
+  (ii) follows from an iteration of (i).
+  %
+  If $x_1\in\Delta_1,\ldots,x_n\in\Delta_n$ is a context then $\inferrule{x_1\in\Delta_1,\ldots,x_{n-1}\in\Delta_{n-1}}{\Delta_n\isatype}$ is a derived rule. Hence by (i), $x_1\in\Delta_1,\ldots,x_{n-1}\in\Delta_{n-1}$ is a context.
+  %
+  Continue until you get to $x_1\in\Delta_1,\ldots,x_i\in\Delta_i$ is a context and $\inferrule{x_1\in\Delta_1,\ldots,x_{i-1}\in\Delta_{i-1}}{\Delta_i\isatype}$ is a derived rule.
+\end{proof}
+
+\begin{lemma}[The substitution lemma]
+Every derived rule of the theory $U$ has the substitution property.
+\end{lemma}
+\begin{proof}
+  The derived $T=$rules and $\epsilon=$rules of $U$ have the substitution property because there are principles of derivation SI1 and SI2 which have just that effect.
+
+  The proof that $T$ and $\epsilon$-rules of $U$ have the substitution property is by induction on derivations in $U$.
+  %
+  It suffices to show that no principle of derivation by which such rules are derived can be used to derive a rule without the property from rules with the property.
+  %
+  Thus we just have to check the principles T1, CF1 and CF2.
+
+  \begin{enumerate}
+  \item[T1.]
+  Suppose that both $\inferrule{y_1\in\Omega_1,\ldots,y_m\in\Omega_m}{\Delta_1=\Delta_2}$ and $\inferrule{y_1\in\Omega_1,\ldots,y_m\in\Omega_m}{t\in\Delta_1}$ are derived rules of $U$ which have the substitution property.
+  %
+  We must show that $\inferrule{y_1\in\Omega_1,\ldots,y_m\in\Omega_m}{t\in\Delta_2}$ has the substitution property.
+  %
+  So suppose that for each $j, 1\leq j\leq m$, $\inferrule{Q}{s_j\in\Omega_j[s_1|y_1,\ldots,s_{j-1}|y_{j-1}]}$ is a derived rule of $U$.
+  %
+  By our first assumption both 
+  \[\inferrule{Q}{\Delta_1[s_1|y_1,\ldots,s_m|y_m]=\Delta_2[s_1|y_1,\ldots,s_m|y_m]}\] and $\inferrule{Q}{t[s_1|y_1,\ldots,s_m|y_m]\in\Delta_1[s_1|y_1,\ldots,s_m|y_m]}$ are derived rules of $U$.
+  %
+  Thus, by an application of T1, so is 
+  \[\inferrule{Q}{t[s_1|y_1,\ldots,s_m|y_m]\in\Delta_2[s_1|y_1,\ldots,s_m|y_m]}\] a derived rule of $U$.
+  %
+  Hence $\inferrule{y_1\in\Omega_1,\ldots,y_m\in\Omega_m}{t\in\Delta_2}$ has the substitution property.
+
+  \item[CF1.]
+  %
+  Suppose that $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{\Delta_{n+1}\isatype}$ is a derived rule of $U$ having the substitution property.
+  %
+  We muse show that $\inferrule{x_1\in\Delta_1,\ldots,x_{n+1}\in\Delta_{n+1}}{x_i\in\Delta_i}$ has the substitution property.
+  %
+  So suppose that for each $j$, $1\leq j\leq n+1$, $\inferrule{Q}{s_j\in\Delta_j[s_1|x_1,\ldots,s_{j-1}|x_{j-1}]}$ is a derived rule of $U$.
+  %
+  By lemmas 1 and 2, $x_{j+1},\ldots,x_{n+1}$ do not occur in $\Delta_j$.
+  %
+  Hence 
+  \[\Delta_j[s_1|x_1,\ldots,s_{j-1}|x_{j-1}]=\Delta_j[s_1|x_1,\ldots,s_{n+1}|x_{n+1}].\]
+  %
+  Thus $\inferrule{Q}{s_i\in\Delta_i[s_1|x_1,\ldots,s_{n+1}|x_{n+1}]}$ is a derived rule of $U$.
+  %
+  Which is to say $\inferrule{Q}{(x_i\in\Delta_i)[s_1|x_1,\ldots,s_{n+1}|x_{n+1}]}$ is a derived rule of $U$.
+  %
+  Thus $\inferrule{x_1\in\Delta_1,\ldots,x_{n+1}\in\Delta_{n+1}}{x_i\in\Delta_i}$ has the substitution property.
+
+  \item[CF2 (a).] (CF2 (b) is very similar and we shall not bother checking it).
+  %
+  Suppose that $A$ is a sort symbol of $U$ introduced by the rule $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{A(x_1,\ldots,x_n)\isatype}$.
+  %
+  Suppose that for each $i$, $1\leq i\leq n$, $\inferrule{y_1\in\Omega_1,\ldots,y_m\in\Omega_m}{t_i\in\Delta_i[t_1|x_1,\ldots,t_{i-1}|x_{i-1}]}$ is a derived rule of $U$ and has the substitution property.
+  %
+  We must show that $\inferrule{y_1\in\Omega_1,\ldots,y_m\in\Omega_m}{A(t_1,\ldots,t_n)\isatype}$ has the substitution property.
+  %
+  So suppose that for each $j, i\leq j\leq m$, the rule $\inferrule{Q}{s_j\in\Omega_j[s_1|y_1,\ldots,s_{j-1}|y_{j-1}]}$ is a derived rule of $U$.
+  %
+  Then because for each $i$, $1\leq i\leq n$, $\inferrule{y_1\in\Omega_1,\ldots,y_m\in\Omega_m}{t_i\in\Delta_i[t_1|x_1,\ldots,t_{i-1}|x_{i-1}]}$ has the substitution property and because it follows from lemma 1 that
+  \begin{align*}
+    &\Delta_i[t_1|x_1,\ldots,t_{i-1}|x_{i-1}][s_1|y_1,\ldots,s_m|y_m]\\
+    &=\Delta_i[t_1[s_1|y_1,\ldots,s_m|y_m]|x_1,\ldots,t_{i-1}[s_1|y_1,\ldots,s_m|y_m]|x_{i-1}],
+  \end{align*}
+ so it is the case that for each $i$, $1\leq i\leq n$,
+
+  \[ \inferrule{Q}{t_i[s_1|y_1,\ldots,s_m|y_m]\in\Delta_i[t_1[s_1|y_1,\ldots,s_m|y_m]|x_1,\ldots,t_{i-1}[s_1|y_1,\ldots,s_m|y_m]|x_{i-1}]}\]
+
+  is a derived rule of $U$.
+  %
+  Thus, by an application of CF2(a), the rule
+
+  \[ \inferrule{Q}{A(t_1[s_1|y_1,\ldots,s_m|y_m],\ldots,t_n[s_1|y_1,\ldots,s_m|y_m])\isatype}\]
+  is a derived rule of $U$. Which is to say that the rule 
+  \[\inferrule{Q}{A(t_1,\ldots,t_n)[s_1|y_1,\ldots,s_m|y_m]\isatype}\] is a derived rule of $U$.
+  %
+  Thus $\inferrule{y_1\in\Omega_1,\ldots, y_m\in\Omega_m}{A(t_1,\ldots,t_n)\isatype}$ has the substitution property.
+\end{enumerate}
+\end{proof}
+
+\begin{corollary}[Change of Variables] 
+If $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{Conclusion}$ is a derived rule of $U$ and if $y_1,\ldots,y_n$ is a sequence of distinct variables then
+\[ \inferrule{y_1\in\Delta_1,y_2\in\Delta_2[y_1|x_1],\ldots,y_n\in\Delta_n[y_1|x_1,\ldots,y_{n-1}|x_{n-1}]}{\text{Conclusion}[y_1|x_1,\ldots,y_n|x_n]}
+\]
+is a derived rule of $U$.
+\end{corollary}
+\begin{proof}
+  The proof is by induction on $n$.
+  %
+  If $n=0$ then there is nothing to prove.
+  %
+  If the result holds for $n$ then it holds for $n+1$ as follows.
+  %
+  Suppose $\inferrule{x_1\in\Delta_1,\ldots,x_{n+1}\in\Delta_{n+1}}{Conclusion}$ is a derived rule of $U$ and suppose that $y_1,\ldots,y_{n+1}$ is a sequence of distinct variables.
+  %
+  Then by lemma 2 the rule $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{\Delta_{n+1}\isatype}$ is a derived rule of $U$.
+  %
+  Hence by the inductive hypothesis so too is the rule
+  \[\inferrule{y_1\in\Delta_1,\ldots,y_n\in\Delta_n[y_1|x_1,\ldots,y_{n-1}|x_{n-1}]}{\Delta_{n+1}[y_1|x_1,\ldots,y_n|x_n]\isatype}
+  \]
+
+  By applying CF1, the rule $\inferrule{y_1\in\Delta_1,\ldots,y_{n+1}\in\Delta_{n+1}[y_1|x_1,\ldots,y_n|x_n]}{y_i\in\Delta_i[y_1|x_1,\ldots,y_{i-1}|x_{i-1}]}$ is a derived rule of $U$, for each $i$, $1\leq i\leq n+1$.
+  %
+  Therefore by the substitution lemma and since $\inferrule{x_1\in\Delta_1,\ldots,x_{n+1}\in\Delta_{n+1}}{Conclusion}$ is a derived rule of $U$ we can conlude that $\inferrule{y_1\in\Delta_1,\ldots,y_{n+1}\in\Delta_{n+1}[y_1|x_1,\ldots,y_n|x_n]}{Conclusion[y_1|x_1,\ldots,y_{n+1}|x_{n+1}]}$ is a derived rule of $U$.
+  %
+  The result holds for $n+1$.
+  %
+  Hence the result holds for all $n\geq 0$.
+\end{proof}
+
+\begin{lemma} 
+Every derived rule of a theory is wellformed.
+\end{lemma}
+\begin{proof}
+  By induction on derivation in the theory $U$.
+  %
+  We check each principle in turn, showing that all rules derived from wellformed rules are wellformed.
+  %
+  LI1-Li7 and T1 are very easy to check.
+
+  \begin{enumerate}
+  \item[CF1.] We must show that if $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{\Delta_{n+1}\isatype}$ is a wellformed derived rule of $U$ and if $x_{n+1}$ is a variable distinct from $x_1,\ldots,x_n$ then for each $i$, $1\leq i\leq n$ the rule $\inferrule{x_1\in\Delta_1,\ldots,x_{n+1}\in\Delta_{n+1}}{x_i\in\Delta_i}$ is wellformed.
+  %
+  That is we must show that $\inferrule{x_1\in\Delta_1,\ldots,x_{n+1}\in\Delta_{n+1}}{\Delta_i\isatype}$ is a derived rule of $U$.
+
+  This is the case because, as above, for each $j$, $1\leq j\leq i$, the rule $\inferrule{x_1\in\Delta_1,\ldots,x_{n+1}\in\Delta_{n+1}}{x_j\in\Delta_j}$ is derivable and because by lemma2.(ii) the rule $\inferrule{x_1\in\Delta_1,\ldots,x_{i-1}\in\Delta_{i-1}}{\Delta_i\isatype}$ is a derived rule. Using the substitution lemma, the rule $\inferrule{x_1\in\Delta_1,\ldots,x_{n+1}\in\Delta_{n+1}}{\Delta_i\isatype}$ is a derived rule.
+
+  \item[CF2(a).] Follows immediately from lemma 2.
+
+  \item[CF2(b), SI1 and SI2.] Follow immediately from the substitution lemma.
+
+  \item[A1 and A2.] These state that an axion is a derived rule only if it is wellformed.
+  \end{enumerate}
+\end{proof}
+
+\begin{lemma}[The Derivation Lemma]
+
+\begin{enumerate}[(a)]
+\item Every derived $T$-rule of the theory $U$ is of the form $\inferrule{y_1\in\Omega_1,\ldots,y_m\in\Omega_m}{A(t_1,\ldots,t_n)\isatype}$ for some sort symbol $A$ of $U$ with introductory rule of the form $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{A(x_1,\ldots,x_n)\isatype}$ and for some expressions $t_1,\ldots,t_n$ such that for each $i$, $1\leq i\leq n$, the rule $\inferrule{y_1\in\Omega_1,\ldots,y_m\in\Omega_m}{t_i\in\Delta_i[t_1|x_1,\ldots,t_{i-1}|x_{i-1}]}$ is a derived rule of $U$.
+\item Every derived $\epsilon$-rule of $U$ is either of the form $\inferrule{y_1\in\Omega_1,\ldots,y_m\in\Omega_m}{y_j\in\Omega}$ for some $j$, $1\leq j\leq m$, and for some $\Lambda$ such that $\inferrule{y_1\in\Omega_1,\ldots,y_m\in\Omega_m}{\Omega_j=\Lambda}$ is a derived rule of $U$, or else is of the form $\inferrule{y_1\in\Omega_1,\ldots,y_m\in\Omega_m}{f(t_1,\ldots,t_n)\in\Omega}$ for some operator symbol $f$ of $U$ with introductory rule of the form $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{f(x_1,\ldots,x_n)\in\Delta}$ and for some expressions $t_1,\ldots,t_n$, such that for each $i$, $1\leq i\leq n$, $\inferrule{y_1\in\Omega_1,\ldots,y_m\in\Omega_m}{t_i\in\Omega_i[t_1|x_1,\ldots,t_{i-1}|x_{i-1}]}$ is a derived rule of $U$ and such that $\inferrule{y_1\in\Omega_1,\ldots,y_m\in\Omega_m}{\Delta[t_1|x_1,\ldots,t_n|x_n]=\Omega}$ is a derived rule of $U$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+  (a) Simply because the only principle of derivation that enables us to derive $T$-rules is principle CF2(a).
+  %
+  (b) The principles which allow us to derive $\epsilon$-rules are principles T1, CF1 and CF2(b).
+  %
+  If an $\epsilon$-rule is derived by CF1 then it is immediately of the first of the two forms stated above, if it is derived by CF2(b) then it is immediately of the second form.
+  %
+  It remains to consider the case of an $\epsilon$-rule derived by T1.
+
+
+  First suppose that a rule $\inferrule{P}{t\in\Omega}$ is derived by T1 from $\inferrule{P}{t\in\Omega'}$ and $\inferrule{P}{\Omega=\Omega'}$ and also suppose that the rule $\inferrule{P}{t\in\Omega'}$ is derived by T1 from some $\inferrule{P}{t\in\Omega''}$ and $\inferrule{P}{\Omega'=\Omega''}$.
+  %
+  In this situation the rule $\inferrule{P}{t\in\Omega}$ could have been derived directly by T1 from $\inferrule{P}{t\in\Omega''}$ and $\inferrule{P}{\Omega=\Omega''}$, thus missing out a double application of T1.
+  %
+  It follows that if a rule $\inferrule{P}{t\in\Omega}$ is derivable by an application of T1 then it is derivable by an application of T1 to some rules $\inferrule{P}{t\in\Omega'}$ and $\inferrule{P}{\Omega=\Omega'}$ such that the rule $\inferrule{P}{t\in\Omega'}$ is derivable by CF1 or CF2(a).
+  %
+  It then follows that $\inferrule{P}{t\in\Omega}$ is of one of the two forms stated above.
+\end{proof}
+
+\begin{corollary} 
+If $\inferrule{P}{t\in\Omega}$ and $\inferrule{P}{t\in\Omega'}$ are both derived rules of $U$ then so to is $\inferrule{P}{\Omega=\Omega'}$.
+\end{corollary}
+
+The next lemma might indicate an alternative inductive definition of the notion of generalised algebraic theory.
+
+If we say that $U'$ is a theory extending $U$ then it is meant that all the introductory rules and axioms of $U$ are included among the introductory rules and axioms of $U'$.
+%
+In particular every symbol of $U$ is a symbol of $U'$.
+
+An extension $U'$ of $U$ is said to be a \emph{simple extension} of $U$ iff all of the introductory rules and axioms of $U'$ are wellformed wrt $U$.
+%
+For example, the rule $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{\Delta\isatype}$ of $U'$ is wellformed wrt $U$ iff $x_1\in\Delta_1,\ldots,x_n\in\Delta_n$ is a context of $U$.
+
+\begin{lemma}[3]
+If $U'$ is a theory extending the theory $U$ then there exists a sequence of theories $U_0, U_1, U_2,\ldots\ldots$ such that for each $i\geq 0$, $U_{i+1}$ is a simple extension of $U_i$ and such that $U_0=U$ and $\bigcup_{i\geq 0} U_i= U'$.
+\end{lemma}
+
+\begin{proof}
+  $U_0$ is defined to be $U$.
+  %
+  $U_{i+1}$ is defined to be the simple extension of $U_i$ given by all these symbols of $U'$ whose introductory rules are wellformed wrt $U_i$ and all of those axioms of $u'$ which are wellformed wrt $U_i$.
+  %
+  The only problem is to show that every symbol and axiom of $U'$ is eventually in $U_i$ for some $i$.
+  %
+  We just have to show that every introductory rule and axiom of $U'$ is wellformed wrt $U_i$ for some $i$.
+
+  Suppose then that $R$ is an introductory rule or an axiom of $U'$.
+  %
+  Because $R$ is wellformed wrt $U'$ it must be wellformed wrt some finite number $k$ of introductory rules and axioms of $U'$.
+  %
+  We show by induction on $k$ that $R$ is wellformed wrt $U_k$.
+
+
+  If $k=0$ then $R$ is wellformed wrt $U=U_0$.
+
+
+  If $k>0$ suppose $S$ is one of those $k$ introductory rules and axioms from which $R$ can be shown to be wellformed.
+  %
+  In any derivation we only use an axiom or an introductory rule after it has been shown to be well formed; in particular since $S$ is used in showing that $R$ is wellformed there must be rules capable of showing that $S$ is wellformed among the $k$ rules that can be used to show $R$ is wellformed.
+  %
+  Thus it can be shown that $S$ is wellformed from some number $p$ of rules and axioms of $U'$ where $p$ is strictly smaller than $k$. By the inductive hypothesis $S$ is wellformed wrt $U_p$.
+  %
+  Thus $S$ is an introductory rule or an axiom of $U_k$.
+  %
+  This is the case for any of those $k$ introductory rules and axioms of $U'$ which can be used to show that $R$ is wellformed.
+  %
+  Thus $R$ is wellformed wrt $U_k$.
+\end{proof}
+
+
+\begin{lemma}[4]
+If $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{\Delta\isatype}$ and 
+\[\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n,y_1\in\Omega_1,\ldots,y_m\in\Omega_m}{\text{Conclusion}}\] are both derived rules of $U$, if $z$ is a variable distinct from $x_1,\ldots,x_n,y_1,\ldots,y_m$ then 
+\[\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n,z\in\Delta,y_1\in\Omega_1,\ldots,y_m\in\Omega_m}{\text{Conclusion}}\] is a derived rule of $U$.
+\end{lemma}
+\begin{proof}
+  By induction on $m$.
+  %
+  If $m=0$ then from $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{\Delta\isatype}$ we can derive $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n,z\in\Delta}{x_i\in\Delta_i}$ for each $i$, $1\leq i\leq n$.
+  %
+  Since $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{\text{Conclusion}}$ is a derived rule by the substitution lemma so too is $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n,z\in\Delta}{\text{Conclusion}}$.
+
+
+  If $m>0$.
+  %
+  Then since $x_1\in\Delta_1,\ldots,x_n\in\Delta_n, y_1\in\Omega_1,\ldots,y_m\in\Omega_m$ is a context, $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n,y_1\in\Omega_1,\ldots,y_{m-1}\in\Omega_{m-1}}{\Omega_m\isatype}$ is a derived rule.
+
+
+  Thus by the induction hypothesis 
+  \[\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n,z\in\Delta,y_1\in\Omega_1,\ldots,y_{m-1}\in\Omega_{m-1}}{\Omega_m\isatype}\] is a derived rule.
+%
+  Thus $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n,z\in\Delta,y_1\in\Omega_1,\ldots,y_m\in\Omega_m}{x_i\in\Delta_i}$, $1\leq i\leq n$, and $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n,z\in\Delta,y_1\in\Omega_1,\ldots,y_m\in\Omega_m}{y_j\in\Omega_j}$, $1\leq j\leq m$ are derived rules.
+  %
+  By the substitution lemma 
+  \[\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n,z\in\Delta,y_1\in\Omega_1,\ldots,y_m\in\Omega_m}{Conclusion}\] is a derived rule.
+\end{proof}
+
+
+
 
 % source p1.39
 \section{Informal syntax} \label{sec:source-1-8}
 
-\lipsum[7]
+There is a discrepancy between the syntax adopted in the formal definition of \S 1.6 and the syntax used in informally presenting theories in other sections. We say that we have a formal syntaxs and an informal syntax.
+%
+The informal syntax is the syntax that is used in practice. In a particular case it provides an adequate and umambiguous language for the description of the structure involved.
+%
+Since the informal syntax varies non uniformly from one particular theory to another it is impossible to give a direct description of the informal syntax. in this section we classify the discrepancies that occur between formal and informal.
+%
+We also state a general problem and provide a partial solution.
+%
+In this section we have in mind a very practical approach to mathematical syntax.
+
+In the first place, the actual forms of the rules are of no consequence.
+%
+Thus the form that is used in the formal syntax, that is $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{\text{Conclusion}}$, has the advantage of alienation and is not significantly different from any of the other forms which have to some extent the advantage of naturality, forms such as
+\[x_1\in\Delta_1,\ldots,x_n\in\Delta_n: \text{Conclusion},\]
+\[\text{for }x_1\in\Delta_1,\text{for }x_2\in\Delta_2,\ldots \text{ and for }x_n\in\Delta_n: \text{Conclusion},\]
+and such that, wherever possible, repetitions of expressions in the premis are avoided by writing $x_k,x_{k+1},\ldots,x_{k+c}\in\Delta$ instead of $x_k\in\Delta,\ldots, x_{k+c}\in\Delta$.
+
+
+There are two significant differences between the formal and the informal.
+%
+The first of these is the omission of some of the variables which would formally have to appear in the term that introduces a symbol into a theory, and the subsequent omission of terms from the argument places of the symbol as it appears in the derived rules of the theory.
+%
+Thus in the theory of categories the term $\syno(f,g)$ occurs in the introductory rule for $\syno$ instead of the term $\syno(x,y,z,f,g)$; the axioms differ accordingly.
+
+The second difference between formal and informal is that informally one symbol can be made to do the work that several symbols would have to do formally.
+%
+As examples of symbols that have to do the work of several we have the symbol $S$ of the theory of trees and the symbols $\synid,\syno,\synHom$ and $\synF$ of the theory of functors (with reference to the presentations of these theories in \S 1.2).
+
+If we arbitrarily rewrite a formal theory by these two methods, that is if we omit certain variables from certain introductory rules, altering the derived rules accordingly, and if we replace certain collection of symbols by single symbols, then ambiguities may or may not arise.
+%
+There is ambiguity just when two formally distinct derived rules are rewritten as identical, for this would mean that there was an informal rule which had two meanings, was ambiguous.
+%
+So the problem is-- in what ways can we rewrite a given formal theory without ambiguities arising?
+%
+The answer is that it depends on the theory in question.
+%
+The best general answer that we can give consists of a condition that the omission of variables must respect if ambiguities are not to arise. This condition objectifies the dropping of variables $x,y,z$ from the term $\syno(x,y,z,f,g)$ in the introductory rule for $\syno$ and the wrongheadedness of dropping $f$ or $g$ or both from this same term.
+%
+Intuitively, $\syno(f,g)$ depends explicitly on $f$ and $g$, $f$ depends explicitly on $x$ and on $y$ because $f\in\synHom(x,y)$, $g$ depends explicitly on $y$ and on $z$ because $g\in\synHom(y,z)$, thus $\syno(f,g)$ depends implicitly on all of the variables $x,y,z,f$ and $g$ that occur in the premise of the introductory rule, so that although the variables $x,y$ and $z$ no longer appear explicitly in $\syno(f,g)$ there is still an implicit dependence of $\syno(f,g)$ on each of $x,y,$ and $z$.
+%
+The condition of an introductory rule which is necessary if ambiguities are not to arise is that all variables occuring in the premise must occur implicitly in the conclusion.
+%
+This condition we can call the condition of implicit occurence.
+%
+It is necessary but not sufficient, as we shall show.
+
+
+The definition of implicit occurence must be given inductively.
+%
+Suppose that $P$ is the premise $x_1\in\Delta_1,\ldots,x_n\in\Delta_n$, suppose $C$ is a conclusion and that $1\leq i\leq n$, then we say that the variable $x_i$ \emph{occurs implicitly in the conclusion $C$ wrt the premise $P$} iff either $x_i$ actually occurs in $C$ (in which case we also say $x_i$ occurs explicitly) or if for some $j>i$, $x_i$ appears in $\Delta_j$ and $x_j$ occurs implicitly in $C$ wrt $F$.
+
+
+\begin{lemma} 
+If ambiguity is not to occur in an informal theory then whenever $L$ is a symbol introduced by the rule $x_1\in\Delta_1,\ldots,x_n\in\Delta_n:C$ then each of $x_1,\ldots,x_n$ must occur implicitly in $C$ (the condition of implicit occurence).
+\end{lemma}
+\begin{proof}
+  Assume that we have a theory and an informal presentation of that theory in which there is a symbol $L$ introduced by a rule that does not satisfy the condition of implicit occurence.
+  %
+  We shall suppose that $L$ is introduced by a rule that does not satisfy the condition of implicit occurence.
+  %
+  We shall suppose that $L$ is an operator symbol for if otherwise and $L$ is a sort symbol then the argument is the same.
+  %
+  Suppose that $n\geq 1$ and that $1\leq j_1\leq j_2\ldots\leq j_4$ suppose that $L$ is introduced by the rule $x_1\in\Delta_1,\ldots,x_n\in\Delta_n:L(x_{j_1},\ldots,x_{j_r})\in\Delta$.
+  %
+  We are assuming that not all of $x_1,\ldots,x_n$ occur implicitly in $L(x_{j_1},\ldots,x_{j_r})\in\Delta$ wrt the premise $x_1\in\Delta_1,\ldots,x_n\in\Delta_n$.
+  %
+  We show that there are two derived rules which are distinct in the more formal syntax, that is when $L$ is introduced by $x_1\in\Delta_1,\ldots,x_n\in\Delta_n:L(x_1,\ldots,x_n)\in\Delta$, but which are indistinct in the informal syntax.
+
+  Let $x_1',\ldots,x_n'$ be a sequence of variables each one of which is distinct from each one of $x_1,\ldots,x_n$.
+  % 
+  Let 
+  \[J=\{j|1\leq j\leq n \text{ and $x_j$ does not occur implicitly in $L(x_{j_1},\ldots,x_{j_r})\in\Delta$}\}.\]
+% 
+Let $y_1,\ldots, y_n$ be the sequence of variables given by $y_j=x_j$ if $j\in J$, $y_j=x_j'$ if $j\not\in J$.
+
+  Suppose that $j\not\in J$ and $j'\in J$, then $x_j$ occurs implicitly in $L(x_{j_1},\ldots,x_{j_r})\in\Delta$ whereas $x_{j'}$ does not, hence $x_{j'}$ does not occur in $\Delta_j$.
+%
+ Thus if $j\not\in J$ then $\Delta_j[y_1|x_1,\ldots,y_{j-1}|x_{j-1}]$ is $\Delta_j$.
+%
+ Also note that $\Delta[y_1|x_1,\ldots,y_n|x_n]$ is $\Delta$, since if $j\in J$ then $x_j$ does not occur in $\Delta$.
+
+  By the change of variables lemma the rule 
+\[y_1\in\Delta_1,\ldots,y_n\in\Delta_n[y_1|x_1,\ldots,y_{n-1}|x_{n-1}] : L(y_1,\ldots,y_n) \in\Delta[y_1|x_1,\ldots, y_n|x_n]\] is a derived rule.
+%
+ By the preceeding paragraph this rule is just the rule $a_1,\ldots,a_n:L(y_1,\ldots,y_n)\in\Delta$, where $a_j$ is $x_j\in\Delta_j$ where $j\not\in J$ and $a_j$ is $x_j\in\Delta_j[y_1|x_1,\ldots,y_{j-1}|x_{j-1}]$ when $j\in J$.
+%
+ By lemma 4 of \S 1.7 if we extend the premis of this rule by inserting the clause $x_j\in\Delta_j$ after the clause $a_j$ whenever $j\in J$ then the new rule is still derivable.
+%
+ If we call this extended premise $Q$ then the rule $Q:L(y_1,\ldots,y_n)\in\Delta$ is a derived rule.
+
+  Since $Q$ is a context extending the context $x_1\in\Delta_1,\ldots,x_n\in\Delta_n$ and using lemma 4 of \S 1.7 we deduce that $Q: L(x_1,\ldots,x_n)\in\Delta$ is a derived rule.
+
+  Now $Q:L(y_1,\ldots,y_n)\in\Delta$ and $Q:L(x_1,\ldots,x_n)\in\Delta$ are distinct since we have assumed $J$ to be non empty.
+%
+ In the informal syntax both these rules become $Q:L(x_{j_1},\ldots,x_{j_r})\in\Delta$.
+%
+ Hence informally the rule $Q:L(x_{j_1},\ldots,x_{j_r})\in\Delta$ is ambiguous.
+\end{proof}
+
+Finally we show that the condition of implicit occurence is not sufficient to assure that ambiguities do not arise when variables are omitted.
+
+Consider the following theory:
+
+\begin{theoryspec}
+  $A$ & $A\isatype$. \\
+  $B$ & For $x\in A:B(x)\isatype$. \\
+  $C$ & For $x\in A$, for $y\in B(x):C(x,y)\isatype$.\\
+  $D$ & For $y\in B(a_1)$, for $z\in C(a_1,y):D(y,z)\isatype$.\\
+  $a_1$ & $a_1\in A$.\\
+  $a_2$ & $a_2\in A$.\\
+  \oneaxiom
+  \axiom{$B(a_1) = B(a_2)$.}
+\end{theoryspec}
+
+See that in this theory the rules $y\in B(a_1):C(a_1,y)\isatype$ and $y\in B(a_1):C(a_2,y)\isatype$ are both derivable.
+
+The theory might be rewritten informally by introducing the symbol $C$ by the rule for $x\in A$, for $y\in B(x):C(y)\isatype$, clearly the condition of implicit occurence is respected.
+%
+ However the two rules $y\in B(a_1):C(a_1,y)\isatype$ and $y\in B(a_1):C(a_2,y)\isatype$ are rewritten as the rule $y\in B(a_1):C(y)\isatype$ in this informal syntax.
+
+Thus though the condition of implicit occurence is respected ambiguity still arises.
+
+We have included the symbol $D$ in the theory to illustrate that an ambiguous rule in a theory easily leads to an ambiguous theory.
+%
+ Informally the symbol $D$ is now introduced by the rule for $y\in B(a_1)$, for $z\in C(y):D(y,z)\isatype$; the formal theory can no longer be recovered from its informal presentation since this presentation could equally, well be the informal presentation of the theory that differs from the given theory in that the symbol $D$ is introduced by the rule for $y\in B(a_1)$, for $z\in C(a_2,y):D(y,z)\isatype$.
 
 % source p1.45
 \section{Models and homomorphisms} \label{sec:source-1-9}
 
-\lipsum[8]
+We neglect the formal definition of model and homomorphism.
+%
+ It should be quite clear what we mean by model.
+%
+ We have a few words to say about homomorphisms but first we wish to develop some notations which relate to the matter but are actually of more importance in the next chapter.
+
+We begin rather distantly with trees.
+%
+ The theory of trees was given in \S 1.2 but from now on we want all our trees to be trees with a unique least element.
+%
+ If we come across a tree which does not have a unique least element then we quickly adjoin a new element $1$ \comment{Lowercase $L$ or $1$?} beneath all the other elements.
+%
+ If $\theta$ is a tree and if $A$ is a node of the tree then we say that $A\in\theta$, so confusing the tree with its set of nodes.
+%
+ If we wish to assert that $B$ is a node of the tree $\theta$ and that $B$ succeeds $A$ then we just say that $A\triangleleft B$ in $\theta$.
+%
+ The least node of $\theta$ is always denoted $1$.
+%
+ Thus if $A$ is any node of the tree $\theta$ distinct from $1$ then there exists a unique $n\geq 0$, there exists uniquely $A_1,\ldots,A_n$ such that $1\triangleleft A_1\triangleleft A_2,\ldots,A_n\triangleleft A$ in $\theta$.
+
+We are interested in trees because for any theory $\thU$, the set of contexts of $\thU$ is structured as a tree.
+%
+ The least element of the tree is the empty context $\langle\rangle$.
+%
+ For any $n\geq 1$ the predecessor of the node $\langle x_1\in\Delta_1,\ldots,x_n\in\Delta_n\rangle$ is the node $\langle x_1\in\Delta_1,\ldots,x_{n-1}\in\Delta_{n-1}\rangle$.
+
+We wish to identify a large tree of sets, families of sets, families of families of sets and so on.
+%
+ It looks as if we should call it the family tree.
+%
+ But we won't.
+%
+ Anyway it is first necessary to consider the notation that we use for families.
+
+If $A$ is a set and if for every element $a\in A$, $B(a)$ is a set, then the corresponding $A$-indexed family of sets is denoted $\lambda a\in A.B(a)$ or just as $\lambda a . B(a)$.
+%
+ Now suppose that in this situation we also have a set $C(a,b)$ for every $a\in A$ and for every $b\in B(a)$.
+%
+ Now if $a$ is an element of $A$ then $\lambda b\in B(a).C(a,b)$ is a $B(a)$ indexed family of sets.
+%
+ Thus $\lambda a\in A.\lambda b\in B(a). C(a,b)$ is an $A$-indexed family of families of sets.
+%
+ We can continue in this way.
+%
+ The whole collection of sets, families of sets, families of families of sets and so on is structured as a (large) tree.
+%
+ We call it the tree of families.
+%
+ The next thing to do is to turn the notation about.
+%
+ If $A_1$ is a set and if $A_2$ is an $A_1$-indexed family of sets then we write $A_2(a_1)$ for the value of the family at an element $a_1\in A_1$.
+%
+ We do the same for families of families and so on.
+%
+ In general if $1\triangleleft A_1\triangleleft A_1\ldots\triangleleft A_n\triangleleft A$ in the tree of families then for any $a_1\in A_1,\ldots$ for any $a_n\in A_n(a_1,\ldots,a_{n-1})$, $A(a_1,\ldots,a_n)$ is a set.
+
+Lastly we wish to be precise about the term operator.
+%
+ If $1\triangleleft A_1,\ldots\triangleleft A_n\triangleleft A$ in the tree of families and if for any $a_1\in A_1,\ldots$ for any $a_n\in A_n(a_1,\ldots,a_{n-1})$, $f(a_1,\ldots,a_n)\in A(a_1,\ldots,a_n)$ then we say that $\lambda a_1\in A_1\ldots\lambda a_n\in A_n.f(a_1,\ldots,a_n)$ is an operator at $A$.
+%
+ Thus for any node $A$ of the tree of families there is a set of operators at $A$.
+%
+ If we turn the notation about then we always write $g(a_1,\ldots,a_n)$ for the value of the operator $g$ at arguments $a_1,\ldots,a_n$. If $l\triangleleft A_1\ldots A_n\triangleleft A$ in the tree of families, if $g$ is an operator at $A$ then the \emph{status} of the operator $g$ is given by the rule for every $a_1\in A_1,\ldots$ for every $a_n\in A_n(a_1,\ldots,a_{n-1}), g(a_1,\ldots, a_n)\in A(a_1,\ldots,a_n)$.
+%
+ For example if $\catC$ is a real live category then $\synid$ is an operator whose status is given by for every $a\in |\catC|$, $\synid(a)\in\synHom_{\catC}(a,a)$.
+%
+ Alternatively $\synid$ is an operator at $\lambda a\in |\catC|.\synHom_{\catC}(a,a)$.
+
+Now we return to the question of models of a theory.
+%
+ In the first place it is the derived rules of a theory that are interpreted in a model, not the expressions.
+%
+ If $\thU$ is a theory with model $\modM$ and if $R$ is a derived $T$-rule of the theory, say $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{\Delta\isatype}$, if we let $R_i$ be the rule $\inferrule{x_1\in\Delta_1,\ldots,x_{i-1}\in\Delta_{i-1}}{\Delta_i\isatype}$, whenever $1\leq i\leq n$, if the interpretation of a rule within the model $\modM$ is written as that rule superscripted by $m$.
+%
+ Then $R_1^m$ is a set, $R_2^m$ is an $R_1^m$-indexed family of sets and in general $1\triangleleft R_1^m\triangleleft R_2^m\ldots\triangleleft R_n^m\triangleleft R^m$ in the tree of families.
+
+Further if $R_t$ is a derived rule of $\thU$ of the form $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{t\in\Delta}$ then the interpretation $R_t^m$ of the rule $R_t$ by the model $\modM$ is an operator at $R^m$.
+
+We note that if $\modM$ and $\modM'$ are both models of $\thU$ and if $f:\modM\to\modM'$ is a homomorphism then for every derived rule $R$ of $\thU$ of the form $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{\Delta\isatype}$ there is an operator $f_R$ whose status is given by for $a_1\in R_1^m,\ldots$ for $a_n\in R_n^m(a_1,\ldots,a_{n-1})$, for $a\in R^m(a_1,\ldots,a_n)$, $f_R(a_1,\ldots,a_n,a)\in R^{m'}(f_{R_1}(a),\ldots,f_{R_n}(a_1m,\ldots,a_n),f_R(a_1,\ldots,a_n,a))$.
+%
+It is required that for all derived rules $R_t$ of the form $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{t\in\Delta}$ it is the case that for all $a_1\in R_1^m,\ldots$ for all $a_n\in R_n^m(a_1,\ldots,a_{n-1})$, $f_R(a_1,\ldots,a_n,R_t^m(a_1,\ldots,a_n)) = R_t^{m'}(f_{R_1}(a_1),\ldots,f_{R_n}(a_1,\ldots,a_n)).$
+%
+In fact if this condition holds for all $F(x_1,\ldots,x_n),$ $F$ an operator symbol, then it will hold for all $t$.
+%
+The only requirement of a homomorphism that might appear unusual is the requirement that whenever $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{\Delta=\Delta'}$ is a derived rule of $\thU$ then $f_R=f_{R'}$ where $R$ is the rule $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{\Delta\isatype}$ and where, $R'$ is the rule $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{\Delta'\isatype}$.
+
+In the definition of homomorphism we just ask for a family $\lambda L\in\{\text{sort symbols of }\thU\}.f_L$ of operators of the correct status and then define the $f_R$ by induction (in this notation $f_{\text{introductory rule of $L$}} = f_L$).
+%
+ And we require just that the two conditions mentioned above are satisfied by the $f_R$.
+
+With homomorphism so defined the notion reduces to the usual model theoretic notion in the special case of the universal conditional theories expressed as generalised algebraic as in \S 1.3.
 
 % source p1.49
-\section{A list of theories} \label{sec:source-1-10}
+\section{A Short list of theories} \label{sec:source-1-10}
 
-\lipsum[9]
+We list some generalised algebraic theories and pay particular attention to the sort structures.
+
+Firstly, extending the theory of categories by operator symbols and axioms alone (thus there are no additional sort symbols) are the theories of categories with finite products, cartesian closed categories, categories with finite coproducts, monoidal categories, closed categories, additive categories, $\thU$-categories for a given algebraic theory $\thU$, groupoids, preorders, partial orders, lattices and monads.
+%
+ Extending the theory of categories by just the equality predicate for morphisms, new operator symbols and new axioms are the theories of categories with equalisers of pairs, categories with finite limits, abelian categories and topoi.
+
+Extending the theory of functors by just operator symbols and axioms are the theories of natural transformations, adjoint pairs and equivalences.
+%
+ In more diverse sort structures we have the theories of $n$-categories for fixed $n$, multicategories, category valued presheaves on an arbitrary category, category valued presheaves on a given cateogry.
+%
+ The theory of hyperdoctrines extends the theory of category valued presheaves by operator symbols and axioms alone.
+%
+ Later we shall come across the theory of contextual categories, a theory which extends the theory of trees.
 
 % source p1.50
 \section{Interpretations} \label{sec:source-1-11}
 
-\lipsum[10]
+The notion of an interpretation of one generalised algebraic theory in another is defined in such a way that there is a category of generalised algebraic theories and interpretations.
+%
+ It is worth noting of the definition that the induction that occurs is on the expressions of a language rather than on the derived rules and that as such the construction is very simple.
+
+The alphabet in which a theory $\thU$ is written we denote $A_\thU$.
+
+We assume throughout some fixed enumeration $v_1,v_2,v_3,\ldots$ of the set $V$ of variables.
+%
+ We do this because symbols $L\in A_{\thU}$ are going to be interpreted by expressions $I(L)$ of a theory $\thU'$.
+%
+ We will wish to know which free variables in the expression $I(L)$ correspond to which argument places associated with $L$.
+%
+ The simplest way this can be done is to assume the enumeration of $V$ and then chose $I(L)$ such that $v_1$ corresponds to the first argument place of $L$, $v_2$ to the second and so on.
+
+We first define the notion of a preinterpretation and then go on to eventually define an interpretation to be a well formed preinterpretation.
+
+\begin{definition}
+A \emph{Preinterpretation} $I$ of the theory $\thU$ in the theory $\thU'$ consists just of a function $I:A_{\thU}\to\text{expressions of }\thU'$.
+
+If $I$ is a preinterpreation of $\thU$ in $\thU'$ then define the function $\dot I : \text{expressions of }\thU\to\text{expressions of }\thU'$ by induction (see the inductive definition of expression in \S 1.6) with the following clauses:
+\begin{enumerate}
+\item If $x\in V$ the $\dot I(x) = x$.
+\item If $L\in A_\thU$ then $\dot I(L) = I(L)$.
+\item If $L\in A_\thU$ and $e_1,\ldots,e_n$ are expressions then $\dot I(L(e_1,\ldots,e_n))=I(L)[\dot I(e_1) | v_1,\ldots,\dot I(e_n)|v_n]$.
+\end{enumerate}
+
+If $I$ is a preinterpretaion of $\thU$ in $\thU'$ then define a function $\hat I: \text{rules of }\thU\to\text{rules of }\thU'$ by
+
+\begin{enumerate}
+\item $\hat I\left(\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{\Delta\isatype}\right) = \inferrule{x_1\in\dot I(\Delta_1),\ldots,x_n\in\dot I(\Delta_n)}{\dot I(\Delta)\isatype}$.
+
+\item $\hat I\left(\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{t\in\Delta}\right) = \inferrule{x_1\in\dot I(\Delta_1),\ldots,x_n\in\dot I(\Delta_n)}{\dot I(t)\in\dot I(\Delta)}$.
+
+\item $\hat I\left(\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{\Delta=\Delta'}\right) = \inferrule{x_1\in\dot I(\Delta_1),\ldots,x_n\in\dot I(\Delta_n)}{I(\Delta)=I(\Delta')}$ \comment{Should this be $\dot I(\Delta)=\dot I(\Delta')$?}.
+
+\item $\hat I\left(\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{t=t'\in\Delta}\right) = \inferrule{x_1\in\dot I(\Delta_1),\ldots,x_n\in\dot I(\Delta_n)}{\dot I(t) = \dot I(t')\in\dot I(\Delta)}$.
+\end{enumerate}
+
+An \emph{interpretation} $I$ of $\thU$ in $\thU'$ is a preinterpretation $I$ of $\thU$ in $\thU'$ such that for all introductory rules and axioms $r$ of $U$, $I(r)$ is a derived rule of $U'$.
+
+\end{definition}
+
+If $I$ is an interpretation of $\thU$ in $\thU'$ then for any derived rule $r$ of $\thU$, $I(r)$ \comment{Should this by $\hat I(r)$?} is a derived rule of $\thU'$.
+%
+ We prove this after proving a preliminary lemma.
+
+\begin{lemma}[1]
+ If $I$ is a preinterpretation of $\thU$ in $\thU'$ and if $e$ and $d_1,\ldots,d_m$ are expressions of $A_\thU$ then
+\[
+\dot I(e[d_1|y_1,\ldots,d_m|y_m]) = \dot I(e)[\dot I(d_1)|y_1,\ldots,\dot I(d_m)|y_m].
+\]
+\end{lemma}
+\begin{proof} By induction on the length of the expression $e$.
+
+  \begin{enumerate}
+  \item If $e=x\in V$ then, if $x = y_i$ for some $i$, $1\leq i\leq m$, then $\lhs = \dot I(e_i) = \rhs$, otherwise $\lhs = x = \rhs$.
+
+  \item If $e = L\in A_\thU$ then $\lhs = I(L) = \rhs$.
+
+  \item If $e = L(e_1,\ldots,e_n)$ for some $L\in A_\thU$ and for some expressions $e_1,\ldots,e_n$ of $A_\thU$ then
+    \begin{align*}
+      \dot I(e[d_1|y_1,\ldots,d_m|y_m])
+      &= \dot I(L(e_1[d_1|y_1,\ldots,d_m|y_m],\ldots,e_n[d_1|y_1,\ldots,d_m|y_m])) \\
+      &= I(L)[\dot I(e_1[d_1|y_1,\ldots,d_m|y_m],\ldots,e_n[d_1|y_1,\ldots,d_m|y_m]].
+    \end{align*}
+
+    By the inductive hypothesis 
+\[\dot I(e_i[d_1|y_1,\ldots,d_m|y_m]) = \dot I(e_i)[\dot I(d_1)|y_1,\ldots,\dot I(d_m)|y_m].\]
+ Hence
+    \begin{align*}
+      \dot I(e[d_1|y_1,\ldots,d_m|y_m])
+      &= I(L)[\dot I(e_1)[\dot I(d_1)|y_1,\ldots,\dot I(d_m)|y_m]|v_1,\ldots,\\
+      &\qquad\quad\dot I(e_n)[\dot I(d_1)|y_1,\ldots,\dot I(d_m)|y_m]|v_n]\\
+      &= I(L)[\dot I(e_1)|v_1,\ldots,\dot I(e_n)|v_n][\dot I(d_1)|y_1,\ldots,\dot I(d_m)|y_m]\\
+      &= \dot I(L(e_1,\ldots,e_n))[\dot I(d_1)|y_1,\ldots,\dot I(d_m)|y_m]\\
+      &= \dot I(e)[\dot I(d_1)|y_1,\ldots,\dot I(d_m)|y_m].
+    \end{align*}
+    As required.
+  \end{enumerate}
+\end{proof}
+
+
+\begin{lemma}[2]
+ If $I$ is an interpretation of $\thU$ in $\thU'$ then for every derived rule $r$ of $\thU$, $\hat I(r)$ is a derived rule of $\thU'$.
+\end{lemma}
+\begin{proof}
+  We wish to show that all derived rules $r$ of $\thU$ have the property that $\hat I(r)$ is derivable.
+%
+ We are given that the axioms have this property so it suffices to show that the principles of derivation transmit the property.
+%
+ That is we should check that each principle of derivation when applied to rules with the property yields a rule with the property.
+%
+ Principles LI1-7, T1 and CF1 are incredibly easy to check.
+%
+ The principle CF2(b) is similar to the principle CF2(a) and also principle SI1 is similar to principle SI2.
+%
+ In view of this we just check CF2(a) and SI2.
+
+\begin{enumerate}
+  \item[CF2(a)] Suppose that $A$ is a sort symbol of $\thU$ introduced by the rule $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{A(x_1,\ldots,x_n)\isatype}$, and that for each $i$, $1\leq i\leq n$, $\inferrule{y_1\in\Omega_1,\ldots,y_m\in\Omega_m}{t_i\in\Delta_i[t_1|x_1,\ldots,t_{i-1}|x_{i-1}]}$ is a derived rule of $\thU$.
+%
+ Also suppose that $\hat I\left(\inferrule{y_1\in\Omega_1,\ldots,y_m\in\Omega_m}{t_i\in\Delta_i[t_1|x_1,\ldots,t_{i-1}|x_{i-1}]}\right)$ is a derived rule of $\thU'$.
+%
+ We wish to show that $\hat I\left(\inferrule{y_1\in\Omega_1,\ldots,y_m\in\Omega_m}{A(t_1,\ldots,t_n)\isatype}\right)$ is a derived rule of $\thU'$.
+
+  Since $I$ is an interpretation, $\hat I$ (introductory rule for $A$) is a derived rule of $\thU'$.
+%
+ That is $\inferrule{x_1\in\dot I(\Delta_1),\ldots,x_n\in\dot I(\Delta_n)}{\dot I(A(x_1,\ldots,x_n))\isatype}$ is a derived rule of $\thU'$.
+
+  By Lemma 1, 
+\[\hat I\left(\inferrule{y_1\in\Omega_1,\ldots,y_m\in\Omega_m}{t_i\in\Delta_i[t_1|x_1,\ldots,t_{i-1}|x_{i-1}]}\right) = \inferrule{y_1\in\dot I(\Delta_1),\ldots,y_m\in\dot I(\Delta_m)}{\dot I(t_i)\in\dot I(\Delta_i)[\dot I(t_1)|x_1,\ldots,\dot I(t_n)|x_n]}.\]
+
+  This rule is a derived rule for each $i$, $1\leq i\leq n$.
+%
+ Hence by the substitution lemma the rule $\inferrule{y_1\in\dot I(\Omega_1),\ldots,y_m\in\dot (\Omega_m)}{\dot I(A(x_1,\ldots,x_n))[\dot I(t_1)|x_1,\ldots,\dot I(t_n)|x_n]}$ is a derived rule of $\thU$.
+
+  But $\dot I(A(x_1,\ldots,x_n))=I(A)[x_1|v_1,\ldots,x_n|v_n]$, hence 
+\[\dot I(A(x_1,\ldots,x_n))[\dot I(t_1)|x_1,\ldots,\dot I(t_n)] = I(A)[\dot I(t_1)|v_1,\ldots,\dot I(t_n)|v_n] = \dot I(A(t_1,\ldots,t_n)).\]
+%
+ So we have shown that $\hat I\left(\inferrule{y_1\in\Omega_1,\ldots,y_m\in\Omega_m}{A(t_1,\ldots,t_n)\isatype}\right)$ is a derived rule of $\thU'$, as $\hat I\left(\inferrule{y_1\in\Omega_1,\ldots,y_m\in\Omega_m}{A(t_1,\ldots,t_n)\isatype}\right)$ is by definition $\inferrule{y_1\in\dot I(\Omega_m),\ldots,y_m\in\dot I(\Omega_m)}{\dot I(A(t_1,\ldots,t_n))\isatype}$.
+
+  \item[SI2.] Suppose that $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{t=t'\in\Delta}$ is a derived rule of $\thU$ and that each $i,1\leq i\leq n,$ $\inferrule{y_1\in\Omega_1,\ldots,y_m\in\Omega_m}{t_i=t_i'\in\Delta_i[t_i'|x_1,\ldots,t_{i-1}'|x_{i-1}]}$ is a derived rule of $\thU$.
+%
+ Suppose that $\hat I$ applied to each of the rules yields a derivable rule of $\thU'$.
+
+By definition $\hat I\left(\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{t=t'\in\Delta}\right) = \inferrule{x_1\in\dot I(\Delta_1),\ldots,x_n\in\dot I(\Delta_n)}{\dot I(t)=\dot I(t')\in\dot I(\Delta)},$ this latter rule then is a derived rule of $\thU'$.
+
+By definition and Lemma 1, 
+\[\hat I\left (\inferrule{y_1\in\Omega_1,\ldots,y_m\in\Omega_m}{t_i=t_i'\in\Delta_i[t_i'|x_1,\ldots,t_{i-1}'|x_{i-1}]}\right)
+=\inferrule{y_1\in\dot I(\Omega_1),\ldots,y_m\in\dot I(\Omega_m)}{\dot I(t_i) = \dot I(t_i')\in\dot I(\Delta_i)[I(t_1')|x_1,\ldots I(t_{i-1}')|x_{i-1}]}.\]
+\comment{$(t_1')$ is written instead of $I(t_1')$. Typo?}
+\comment{Should these be $\dot I(t_1'),\ldots,\dot I(t_{i-1}')$?}
+%
+ This latter rule is derivable for each $i,1\leq i\leq n$.
+
+Hence using principle SI2 (wrt. $\thU'$), the rule
+\[\inferrule{y_1\in\dot I(\Omega_1),\ldots,y_m\in\dot I(\Omega_m)}{\dot I(t)[\dot I(t_1)|x_1,\ldots,\dot I(t_n)|x_n] = \dot I(t')[\dot I(t_1')|x_1,\ldots,\dot I(t_n')|x_n]\in\dot I(\Delta)[I(t_1')|x_1,\ldots,I(t_n')|x_n]}\]
+\comment{Same here?}
+is a derived rule of $\thU'$.
+%
+By definition and lemma 1 this last rule is just
+\[\hat I\left(\inferrule{y_1\in\Omega_1,\ldots,y_m\in\Omega_m}{t[t_1|x_1,\ldots,t_n|x_n]=t'[t_1'|x_1,\ldots,t_n'|x_n]\in\Delta[t_1'|x_1,\ldots,t_n'|x_n]}\right).\]
+As required, this rule we have shown to be derivable in $\thU'$.
+\end{enumerate}
+\end{proof}
+
+If $\thU,\thU'$ and $\thU''$ are theories and $I$ is a preinterpretation of $\thU$ in $\thU'$ and $I'$ is a preinterpretation of $\thU'$ in $\thU''$ then define $I'\circ I$ to be the preinterpretation of $\thU$ in $\thU''$ given by $(I'\circ I)(L) = \dot I'(I(L))$, for all $L\in A_\thU$.
+%
+On the way to showing that there is a category of generalised algebraic theories and interpretations we need the following lemma and corollaries.
+
+\begin{lemma}[3]
+If $I$ and $I'$ are as above then for any expression $e$ of $A_\thU$, $\dot{(I'\circ I)}(e) = \dot I'(\dot I(e)).$
+\end{lemma}
+\begin{proof}
+By induction on the length of $e$.
+\begin{enumerate}
+\item If $e = x\in V$ then $\dot{(I'\circ I)}(e)= x = \dot I'(\dot I(e)).$
+\item If $e=L\in A_\thU$ then $\dot{(I'\circ I)}(L) = (I'\circ I)(L) = \dot I'(I(L)) = \dot I'(\dot I(L)).$
+\item If $e = L(e_1,\ldots,e_n)$ then 
+\begin{align*}
+\dot{(I'\circ I)}(e) &= (I'\circ I)(L)[\dot{(I'\circ I)}(e_1)|v_1,\ldots\dot{(I'\circ I)}(e_n)|v_n] \\
+                     &= \dot I'(I(L))[\dot I'(\dot I(e_1))|v_1,\ldots I'(I(e_n))|v_n] \text{ by the inductive hypothesis}\\
+                     &=\dot I'(I(L)[\dot I(e_1)|v_1,\ldots,\dot I(e_n)|v_n]) \text{ by lemma 1}\\
+                     &=\dot I'(\dot I(L(e_1,\ldots,e_n)))\\
+                     &=\dot I'(\dot I(e)),
+\end{align*}
+ as required.
+\end{enumerate}
+\end{proof}
+
+\begin{corollary}[4]
+If $I$ and $I'$ are as above then for any derived rule $r$ of ($\thU$?) \comment{hidden by hole} $\widehat{(I'\circ I)}(r) = \hat I'(\hat I(r)).$
+\end{corollary}
+
+\begin{corollary}[5]
+If $I$ is an interpretation of $\thU$ in $\thU'$ and $I'$ in an interpretation $\thU'$ in $\thU''$ then $I\circ I'$ is an interpretation of $\thU$ in $\thU''$.
+\end{corollary}
+
+We need some identity morphisms.
+%
+If $\thU$ is a theory define a preinterpretation $\synid_\thU$ of $\thU$ in $\thU$ by:
+\begin{enumerate}
+\item If $A$ is a sort symbol of $\thU$ introduced by $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{A(x_1,\ldots,x_n)\isatype}$, then define $\synid_\thU(A)=A(v_1,\ldots,v_n)$.
+\item If $f$ is an operator symbol of $\thU$ introduced by $\inferrule{x_1\in\Delta_1,\ldots,x_n\in\Delta_n}{f(x_1,\ldots,x_n)\in\Delta}$ then define $\synid_\thU(f)=f(v_1,\ldots,v_n)$.
+\end{enumerate}
+
+$\synid_\thU$ is a preinterpretation of $\thU$ in $\thU$ which is quickly seen to have the property that for all expressions $e$ of $A_\thU$ $\dot \synid_\thU(e)=e.$
+%
+Thus it has the property that for all rules $r$ of $\thU$, $\hat\synid_\thU(r)=r$.
+%
+Hence $\synid_\thU$ is an interpretation.
+
+It is now clear that there is a category of generalised algebraic theories and interpretations.
+
+Any interpretation $I:\thU\to\thU'$ induces a functor between the categories of algebras, denoted $I:\synalg: \catalg{\thU'}\to\catalg{\thU}$\comment{this notation might be confusing}.
+%
+Any functor equivalent to $\catalg{I}$, for some $I$, is said to be generalised algebraic.
+
+\begin{examples}
+
+\begin{enumerate}
+\item If the theory $\thU$ is included in the theory $\thU'$, that is if every introductory rule and axiom of $\thU$ is a derived rule of the theory $\thU$ then there is a canonical interpretation of $\thU$ in $\thU'$.
+%
+The corresponding algebraic functor for $\catalg{\thU'}$ to $\catalg{\thU}$ is usually called a forgetful functor.
+
+\item If $\catC$ and $\catD$ are categories and $F:\catC\to\catD$ is a functor then there is an interpretation $I_F$ of the theory of category valued presheaves on $\catC$ into the theory of category valued presheaves on $\catD$. The induced generalised algebraic functor is the functor $\catCat^F:\catCat^{\catD^\synop}\to\catCat^{\catC^\synop}$.
+
+\item The functor which takes an adjoint pair to the monad induced by that adjoint pair is generalised algebraic.
+%
+It is induced by an interpretation of the theory of monads in the theory of adjoint pairs.
+
+\item The functor which takes a category valued presheaf on an arbitrary category to the total category of its fibration is generalised algebraic.
+%
+ However it is not induced by an interpretation of the theory of categories into the theory of category valued presheaves, as such.
+%
+ Rather it is induced by an interpretation into the theory of category valued presheaves extended by symbols for disjoint unions (one for objects, one for morphisms).
+%
+The extension of the theory by symbols for disjoint unions is discussed in \S 1.2.
+\end{enumerate}
+\end{examples}
 
 % source p1.58
 \section{Contexts and realisations} \label{sec:source-1-12}
@@ -481,4 +1370,4 @@ This is the content of a remark made by Lawvere, pages 8--9 of Lawvere \cite{law
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "cartmell-thesis"
-%%% End: 
+%%% End:
