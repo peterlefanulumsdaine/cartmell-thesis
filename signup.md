@@ -26,10 +26,10 @@ Suggestion: to start with, leave space for people to work in contiguous blocks. 
 - 1.5 ROUGH [nathan guermond]
 - 1.6 ROUGH [nathan]
 - 1.7 ROUGH [nathan]
-- 1.8 IN PROGRESS [nathan]
-- 1.9 BOOKED [nathan]
-- 1.10 BOOKED [nathan]
-- 1.11 BOOKED [nathan]
+- 1.8 ROUGH [nathan]
+- 1.9 ROUGH [nathan]
+- 1.10 ROUGH [nathan]
+- 1.11 ROUGH [nathan]
 - 1.12
 - 1.13
 - 1.14
