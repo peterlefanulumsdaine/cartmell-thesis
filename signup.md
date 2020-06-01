@@ -33,8 +33,8 @@ Suggestion: to start with, leave space for people to work in contiguous blocks. 
 - 1.12
 - 1.13
 - 1.14
-- 2.1
-- 2.2
+- 2.1 ROUGH [J Leslie]
+- 2.2 BOOKED [J Leslie]
 - 2.3
 - 2.4
 - 2.5
