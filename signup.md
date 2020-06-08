@@ -7,7 +7,7 @@ Specifically: some expected statuses are
 - *none*
 - *OCR* (automatically populated from OCR, not yet human-edited)
 - *BOOKED [name]* (*name* is intending to work on section)
-- *IN PRODRESS [name]* (*name* has started working on sectoin)
+- *IN PRODRESS [name]* (*name* has started working on section)
 - *ROUGH [name(s)]* (content all present, but formatting or similar still needs fixed)
 - *DONE [name(s)]* (entirely done)
 
@@ -33,8 +33,8 @@ Suggestion: to start with, leave space for people to work in contiguous blocks. 
 - 1.12
 - 1.13
 - 1.14
-- 2.1 ROUGH [J Leslie]
-- 2.2 BOOKED [J Leslie]
+- 2.1 ROUGH [JL]
+- 2.2 IN PROGRESS[JL]
 - 2.3
 - 2.4
 - 2.5

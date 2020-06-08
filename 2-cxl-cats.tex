@@ -1,16 +1,11 @@
-
+\newcommand{\id}{\operatorname{id}}
 % source p2.1
 \section{Algebraic semantics} \label{sec:source-2-1}
-In this chapter we show that there is a generalised algebraic theory (the theory
-of contextual categories) whose models (the category of contextual categories)
-is equivalent to the category \underline{GAT} of generalised algebraic theories
-and equivalences classos of interpretations.
+In this chapter we show that there is a generalised algebraic theory (the theory of contextual categories) whose models (the category of contextual categories) is equivalent to the category \underline{GAT} of generalised algebraic theories and equivalences classos of interpretations.
 %
 How do we interpret this result?
 %
-Well, there are many other examples of this very strong kind of relationship
-holding between an algebraic notion of structure and a syntactic notion of
-theory.
+Well, there are many other examples of this very strong kind of relationship holding between an algebraic notion of structure and a syntactic notion of theory.
 %
 The following list is by no means exhaustive:
 \begin{table}
@@ -18,20 +13,20 @@ The following list is by no means exhaustive:
  \begin{tabular}{lll}
   \underline{Syntactic Notion} & \underline{Algebraic Notion} & \underline{Reference}\\
    & &\\
-  Proposition Theory\\
-   of classical logic. & Boolean Algebra & \\
+  Proposition Theory & Boolean Algebra\\
+   of classical logic. \\
    & & \\
-  Propositional Theory\\
-   of Intuitionistic Logic. & Heyting Algebra. & \\
+  Propositional Theory & Heyting Algebra\\
+   of Intuitionistic Logic. \\
    & & \\
-  Single Sorted Algebraic\\
-   or Equational Theory. & Lawvere's Notion of an Algebraic Theory. & \cite[II]{Lawvere} \\
+  Single Sorted Algebraic & Lawvere's Notion of\\
+   or Equational Theory. & an Algebraic Theory. & \cite[II]{Lawvere} \\
    & & \\
-  Equational Theory in the language\\
-   of the typed $\lambda$-calculus. & Cartesian Closed Category. & \cite[26]{Myeres}\\
+  Equational Theory in the language & Cartesian Closed\\
+   of the typed \(\lambda\)-calculus. & Category. & \cite[26]{Myeres}\\
    & & \\
-  Theory of higher order\\
-   Intuitionistic Logic. & Topos. &\cite{Fourman} \\
+  Theory of higher order & Topos.\\
+   Intuitionistic Logic. &  &\cite{Fourman} \\
    & & \\
   Coherent Theory. & Grothendieck Site. & \cite[28]{Reyes}
 \end{tabular}
@@ -42,39 +37,25 @@ The following list is by no means exhaustive:
 % source p2.2
 %
 
-In all these cases there is definable the notion of a model of a given theory in
-a given structure.
+In all these cases there is definable the notion of a model of a given theory in a given structure.
 %
-In each case the category of syntactic theories and equivalence classes of
-interpretations is equivalent to the category of algebraic structures.
+In each case the category of syntactic theories and equivalence classes of interpretations is equivalent to the category of algebraic structures.
 %
 This last property is the important characterising property.
 %
-It can lead to the view that the theories in syntactic form should be dispensed
-with entirely and the structures be given the title of theories.
+It can lead to the view that the theories in syntactic form should be dispensed with entirely and the structures be given the title of theories.
 %
 This seems wasteful.
 %
-It is to be preferred that we think of the structures as providing a semantics
-for the theories, in fact, the most general possible semantics.
+It is to be preferred that we think of the structures as providing a semantics for the theories, in fact, the most general possible semantics.
 %
 We shall call it the algebraic semantics.
 %
-Thus contextual categories are to provide us with the algebraic semantics of
-generalised algebraic theories.
+Thus contextual categories are to provide us with the algebraic semantics of generalised algebraic theories.
 
-In case it should be argued that what we have called the algebraic semantics is
-really none other than the interpretations of one theory if considered as a
-notion of semantics; well we more or less agree, though perhaps it is only when
-such are considered as interpretations into algebraic structures that they can
-be properly said to constitute a notion of semantics.
+In case it should be argued that what we have called the algebraic semantics is really none other than the interpretations of one theory if considered as a notion of semantics; well we more or less agree, though perhaps it is only when such are considered as interpretations into algebraic structures that they can be properly said to constitute a notion of semantics.
 %
-The important point here, though, is that structures do frequently appear quite
-independently of theories; thus the notion of model is certainly enriched by the
-isomorphism between theories and structures because theories which arise first as
-structures (being defined by something like ``the theory that corresponds to
-this here structure'') are usually theories which would not otherwise have
-occurred.
+The important point here, though, is that structures do frequently appear quite independently of theories; thus the notion of model is certainly enriched by the isomorphism between theories and structures because theories which arise first as structures (being defined by something like ``the theory that corresponds to this here structure'') are usually theories which would not otherwise have occurred.
 \comment{ending of second line of second paragraph - ``i''?}
 %
 % source p2.3
@@ -82,9 +63,87 @@ occurred.
 
 \section{Definition and examples} \label{sec:source-2-2}
 
+\begin{definition}
+  A \defemph{contextual category} consists of
+  \begin{enumerate}
+  \item A category \(\underline{C}\) with a terminal object 1.
+  \item A tree structure on the objects of \(\underline{C}\) such that the terminal object 1 is the unique least element of the tree. 
+  \item For all \(A, B \in | \underline{C} |\) such that \(A \triangleleft B\) a morphism \(p(B) : B \rightarrow A\) in \(\underline{C}\). This morphism will also be written just as \(B \rightarrowtriangle A\).
+  \item For all \(A, A' \in |\underline C |\), for all \(f:A \rightarrow A'\) in \(\underline{C}\), for all \(B \in |\underline C |\) such that \(A' \triangleleft B\), an object \(f^*B\) of \(\underline C\) and morphism \(q(f,B) : f^*B \rightarrow B\) such that \(A \triangleleft f^*B\) and such that the diagram
+    \begin{center}
+      \begin{tikzcd}
+        f^*B \arrow[r, "{q(f,B)}"] \arrow[d] & B \arrow[d,] \\
+        A \arrow[r, "f"']                    & A'         
+      \end{tikzcd}
+    \end{center}
 
+    is a pullback diagram in \(\underline C\).
+  \end{enumerate}
 
+  Such that
+  \begin{enumerate}[(i)]
+    \item For all \(A, B \in | \underline C|\) such that \(A \triangleleft B\), \(\id_A^*B = B\) and \(q(\id_A,B) = \id_B\).
+    \item Whenever
+      \begin{center}
+        \begin{tikzcd}
+          &                     & B \arrow[d] \\
+          A \arrow[r, "f"'] & A' \arrow[r, "f'"'] & A''        
+        \end{tikzcd}
+      \end{center}
+      in \(\underline C\) then \((ff')^*B = f^*(f'^*B)\) and \(q(ff',B) \circ q(f',B)\).
+  \end{enumerate}
+\end{definition}
+\comment{Need to add triangle heads to arrows in diagrams.}
+%
+% source p2.4
+We shall see that the objects of a contextual category should be though of as contexts.
+%
+Recall that a context is a sequence \( \langle x_1 \in \Delta_1, \ldots, x_n \in \Delta_n \rangle\) such that the rule \(x_1 \in \Delta_1, \ldots, x_{n-1} \in \Delta_{n-1} : \Delta_n\) is a type    is a derived rule and such that \(x_n\) is a variable distinct from each \(x_1, \ldots, x_{n-1}\).
+% added a comma after the \ldots. Unsure how to go about making spacing work for'' `is a type'.
+The tree structure on the set of contexts of a theory is easily seen.
+%
+For \(n \geq 1\), the predecessor of a context \(\langle x_1 \in \Delta_1, \ldots, x_n \in \Delta_n \rangle\) is the context \(\langle x_1 \in \Delta_1, \ldots, x_{n-1} \in \Delta_{n-1} \rangle\).
+%
+The empty context \(\langle  \rangle\) is the unique least element of the tree.
 
+The morphisms of a contextual category should be thought of as realisations. Recall that a realisation of a context \(\langle y_1 \in \Omega_1, \ldots, y_m \in \Omega_m \rangle\) with respect to the context $\langle  x_1 \in \Delta_1, \ldots, x_n \in \Delta_n \rangle$ is just an \(m\) tuple \(t_1, \ldots, t_m\) such that for each \(j\), \(1 \leq j \leq m\), the rule \(x_1 \in \Delta_1, \ldots, x_n \in \Delta_n : t_j \in \Omega_j [t_1|y_1, \ldots, t_{j-1}|y_{j-1}]\) is a derived rule.
+%
+Think of the morphisms \(f:A \rightarrow A'\) in a contextual category as being a realisation of the context \(A'\) wtr the context A.
+
+In \ref{Section:1.12} we defined the category \(\underline{R(U)}\) of contexts and realisations of a theory \(U\), \comment{Capital ``W'' in ``we''?} we could go on and show that for any theory \(U\), the category \(\underline{R(U)}\) with pullback structure defined in \ref{Section:1.12} (actually we defined more structure than was necessary) is a contextual category.\comment{no full stop here, but seems like end of sentence}
+%
+But we do not need this construction.
+%
+Rather we need the construction of a contextual category \(\mathbb C (U)\) associated with a theory \(U\) as part of the equivalence between contextual categories and generalised algebraic theories.
+%
+This category \(\mathbb C (U)\) is a category of equivalence classes of contexts and equivalence classes of realisations of \(U\).
+%
+We shall describe in some detail.
+
+Recall that in \ref{Section:1.13} we defined an equivalence relation \(\equiv\) on derived \(T\) and \(\in\)-rules of a theory \(U\).
+%
+% source p2.5
+%
+This equivalence relation we call the equivalence relation of intended identity of denotation.
+%
+We used this equivalence relation in definin an equivalence relation \(\equiv\) on contexts and realisations: \(\langle x_1 \in \Delta)1, \ldots, x_n \in \Delta_n\rangle \cong \langle y_1 \in \Omega_1, \ldots, y_m \in \Omega_m \rangle\) iff \(\inferrule{x_1 \in \Delta_a, \ldots, x_{n-1} \in \Delta_{n-1}} {\Delta \text{ is a type}} \equiv \inferrule{y_1 \in \Omega_1, \ldots, y_{m-1} \in \Omega_{m-1}}{\Omega_m \text{ is a type}}\).\comment{maybe put on one or two lines?}
+%
+And if \(\langle t_1, \ldots, t_m \rangle\) is a realisation of \(\langle y_1 \in \Omega_1, \ldots, y_m \in \Omega_m \rangle\) wrt \(\langle x_1 \in \Delta_1, \ldots, x_n \in \Delta_n \rangle\) and if \(\langle t'_1, \ldots, t'_m \rangle\) is a realisation of \(\langle y'_1 \in \Omega'_1, \ldots, y'_m \in \Omega'_m \rangle\) wrt \(\langle x'_1 \in \Delta'_1, \ldots, x'_n \in \Delta'_n \rangle\) then \(\langle t_1, \ldots, t_m \rangle \equiv \langle t'_1, \ldots, t'_m \rangle\) iff for each \(j\), \(1 \leq j \leq m\),
+%
+\[\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{t_j \in \Omega_j[t_1 | y_1, \ldots t_{j-1}|y_{j-1}]} \equiv \inferrule{x'_1 \in \Delta'_1, \ldots, x'_n \in \Delta'_n}{t'_j \in \Omega'_j[t'_1 | y'_1, \ldots t'_{j-1}|y'_{j-1}]}\]
+%
+The category \(\mathbb C (U)\) is defined to have as objects the equivalence classes of contexts of \(U\) and to have as morphisms the equivalence classes of realisations of \(U\).
+%
+More precisely if \(\langle x_1 \in \Delta_1, \ldots, x_n \in \Delta_n \rangle\) and \(\langle y_1 \in \Omega_1, \ldots, y_m \in \Omega_m \rangle\) are contexts of \(U\) then define \(\text{Hom}\mathbb C  (U)(\langle x_1 \in \Delta_1, \ldots, x_n \in \Delta_n \rangle, \langle y_1 \in \Omega_1, \ldots, y_m \in \Omega_m \rangle) = \{[\langle  t_a, \ldots, t_m \rangle \mid \langle t_1, \ldots, t_m  \rangle] \text{ is a relisation of } \langle y_a \in \Omega_a, \ldots, y_m \in \Omega_m \rangle \text{ wtr } \langle x_1 \in \Delta_1, \ldots, x_n \in \Delta_n \rangle\}\). Hom is well defined just by Lemma \ref{4(i)} of \ref{Section:1.13}.
+%
+Whenever \(\langle t_1, \ldots, t_m \rangle\) is a realisation of \(\langle y_a \in \Omega_1, \ldots, y_m \in \Omega_m \rangle\) and whenever \(\langle s_1, \ldots, s_l \rangle\) \comment{Unsure on final s subscript for this part.} is a realisation wrt \(\langle y_1 \in \Omega_1, \ldots, y_m \in \Omega_m \rangle\) then the composition in \(\mathbb{C (U)}\) of \([\langle t_1, \ldots, t_m \rangle]\) with \([\langle s_1, \ldots, s_l \rangle]\) is defined by \([\langle t_1, \ldots, t_m \rangle] \circ [\langle s_1, \ldots, s_l \rangle] = [\langle s_1[t_1|y_1, \ldots, t_m|y_m], \ldots, s_l[t_1|y_1, \ldots t_m|y_m] \rangle]\).
+%
+Composition is well defined, this follows from Lemma \ref{lem:3(ii)} of \ref{section:1.13}. The identity morphisms in \(\mathbb C (U)\) are given by $\id_{[\langle x_1 \in \Delta_1, \ldots, x_n \in \Delta_n \rangle]} = [\langle x_1, \ldots, x_n \rangle]$.
+%
+Well definedness is trivial.
+%
+% source p2.6
+% 
 
 \lipsum[15]
 
