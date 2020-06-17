@@ -175,6 +175,79 @@ in \(\mathbb C (U)\), say \(A = [\langle x_1 \in \Delta_1, \ldots, x_n \in \Delt
 
 \begin{proof}
   Firstly we must show that whenever
+    \begin{center}
+      \begin{tikzcd}
+        & B \arrow[d]\\
+        A \arrow[r] & A'
+      \end{tikzcd}\comment{Fix vertical arrow head}
+    \end{center}
+
+    in \(\mathbb C(U)\) then the diagram
+    \begin{center}
+      \begin{tikzcd}
+        f^*B \arrow[d] \arrow[r, "{q(f,B)}"] & B \ar[d] \\
+        A \ar[r, "f"'] & A'
+      \end{tikzcd}
+    \end{center}\comment{Fix vertical arrow head}
+
+    is a pullback diagram in \(\mathbb C(U)\).
+
+    So suppose that \(A = [\langle x_1 \in \Delta_1, \ldots, x_n \in \Delta_n \rangle]\), \(B = [\langle y_1 \in \Omega_1, \ldots, y_m \in \Omega_m, y \in \Omega \rangle]\) and \(f = [\langle t_1, \ldots t_m \rangle]\). Suppose also that \(C\) is an object of \(\mathbb C(U)\) and that \(g:C \rightarrow A\) and \(g':C \rightarrow B\) in \(\mathcal C(U)\) such that the diagram
+
+    \begin{center}
+      \begin{tikzcd}
+        C \arrow[d, "g"'] \arrow[r, "g"'] & B \ar[d] \\
+        A \ar[r, "f"] & A'
+      \end{tikzcd}
+    \end{center}
+    commutes. Call this diagram (I). We can suppose that \(C = [\langle z_1 \in \Lambda_1, \ldots, z_p \in \Lambda_p \rangle]\), \(g = [\langle r_1, \ldots, r_n \rangle]\), \(g' = [\langle s_1, \ldots, s_m, s \rangle]\), where \(\langle r_1, \ldots, r_n \rangle\) is some realisation of \(\langle x_1 \in \Delta_1, \ldots, x_n \in \Delta_n \rangle\) wrt \(\langle z_1 \in \Lambda_1, \ldots, z_p \in Lambda_p \rangle\) and \(s_1, \ldots, s_m, s\) is a realisation of \(\langle y_1 \in \Omega_1, \ldots, y_m \in \Omega, y \in \Omega \rangle\) wrt \(\langle z_1 \in \Lambda_!, \ldots, z_p \in \Lambda_p \rangle\).
+    We must show that there exists a unique \(h:C \rightarrow f^*B\) in \(\mathbb C(U)\) such that diagrams \ref{diag:2.7-II} and \ref{diag:2.7-III} both commute.
+
+    \begin{figure}
+    \centering
+    \begin{subfigure}{.5\textwidth}
+      \centering
+      \begin{tikzcd}
+          C \arrow[rd, "h"] \arrow[rdd, "g"'] &                \\
+          & f^*B \arrow[d] \\
+          & A             
+        \end{tikzcd}
+      \caption{II}
+      \label{diag:2.7-II}
+    \end{subfigure}%
+    \begin{subfigure}{.5\textwidth}
+      \centering
+      \begin{tikzcd}
+        C \arrow[rd, "h"'] \arrow[rrd, "g'"] &                             &   \\
+        & f^*B \arrow[r, "{q(f,b)}"'] & B
+      \end{tikzcd}
+      \caption{III}
+      \label{diag:2.7-II}
+    \end{subfigure}
+    \caption{A figure with two subfigures}
+    \label{fig:test}
+  \end{figure}\comment{Float position needs to be fixed}
+
+  I claim that \([\langle r_1, \ldots, r_m s \rangle]\) is such an \(h\).
+  %
+  Since Diagram (I)\comment{What diagram is this?} commutes, \([\langle t_![r_1|x_1, \ldots, r_n|x_n], \ldots, t_m[r_1|x_1, \ldots, r_n|x_n] \rangle] = [\langle s_1,\ldots, s_m \rangle]\).
+  %
+  Hence for all \(j\), \(1 \leq j \leq m\),
+
+  \[
+    \inferrule{z_1 \in \Lambda_1, \ldots, z_p \in \Lambda_p}{t_1[r_1|x_1, \ldots, r_n|x_n], \ldots, t_m[r_1|x_1, \ldots, r_n|x_n]}
+  \]\comment{conclusion is missing from document - I assume this is what it says.}
+
+  is a derived rule of \(U\).
+  %
+  % Source p2.8
+  %
+  Thus as \(\langle  s_!, \ldots, s_m, s \rangle\) is a realisation of \(\langle y_1 \in \Omega_1, \ldots, y_m \in \Omega_m, y \in \Omega \rangle\), the rule 
+  \[
+    \inferrule{z_1 \in \Lambda_1, \ldots, z_p \in \Lambda_p}{s \in \Omega [t_1[r_1|x_1, \ldots, r_n|x_n]|y_1, \ldots, t_m[r_1|x_1, \ldots, r_n|x_n]|y_m}
+  \]
+  is a derived rule of \(U)\).
+  %
 \end{proof}
 
 
