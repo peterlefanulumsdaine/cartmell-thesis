@@ -248,8 +248,56 @@ in \(\mathbb C (U)\), say \(A = [\langle x_1 \in \Delta_1, \ldots, x_n \in \Delt
   \]
   is a derived rule of \(U)\).
   %
+  Hence \(\langle r_1,\ldots,r_n, s \rangle\) is a realisation of \(\langle x_1 \in \Delta_1, \ldots, x_n \in \Delta_n, y \in \Omega[t_1|y_1, \ldots, t_m|y_m] \rangle\) wrt \(\langle z_1 \in \Lambda_1, \ldots, z_p \in \Lambda_p \rangle\) and thus \([\langle r_1, \ldots, r_n,s \rangle] : C \rightarrow f^*B\) in \(\mathbb C (U)\).
+  %
+  Setting \(h = [\langle  r_1, \ldots, r_n, s \rangle]\) then \ref{diag:2.7-II} commutes because \([\langle r_1, \ldots, r_m, s \rangle] \circ [\langle t_1, \ldots, t_m,y \rangle] = [\langle t_1[r_1|x_1, \ldots, r_n|x_n], \ldots, t_m[r_1|x_1, \ldots, r_n|x_n],s \rangle] = [\langle s_1, \ldots, s_m,s \rangle]\).
+  %
+  So \([\langle r_1, \ldots, r_m, s \rangle]\) is certainly such an \(h\).
+  %
+  To show that it is the unique such \(h\) suppose now that \(h\) is an arbitrary morphism \(h:C \rightarrow f^*B\) in \(\mathbb C(U)\) such that the diagrams \ref{diag:2.7-II} and \ref{diag:2.7-II} commute say \(h = [\langle r_1', \ldots, r_n', s' \rangle]\).
+  %
+  Since \ref{diag:2.7-II} commutes, for each \(i\), \(1 \leq i \leq n\), the rule \(\inferrule{z_1 \in \Lambda_1, \ldots, z_p \in \Lambda_p}{r_i = r_i' \in \Delta_i[r_1|x_1, \ldots, r_{i-1}|x_{i-1}]}\) is a derived rule of \(U\).
+  %
+  Since \ref{diag:2.7-III} commutes, the rule \(\inferrule{z_1 \in \Lambda_1, \ldots, z_p \in \Lambda_p}{s=s' \in \Omega[s_1|y_1, \ldots,s_m|y_m]}\) is a derived rule of \(U\).
+  %
+  Hence \(h = [\langle r_1', \ldots, r_n', s' \rangle] = [\langle r_1, \ldots, r_n, s \rangle]\).
+  %
+  Which completes the proof that
+  \begin{center}
+    \begin{tikzcd}
+      f^*B \arrow[r, "{q(f,B)}"] \arrow[d] & B \arrow[d] \\
+      A \arrow[r, "f"] & A'
+    \end{tikzcd}\comment{fix vertical arrow heads}
+  \end{center}
+  is a pullback diagram in \(\mathbb C(U)\).
+
+  It remains to show that the axioms (I) and (II)\comment{fix reference} of the definition of a contextual category hold of the structure \(\mathbb C(U)\).
+  %
+  % Source p2.9
+  %
+  Well, it is easy to show that (I)\comment{fix reference} must hold because if \(B=[\langle  x_1 \in \Delta_1, \ldots, x_n \in \Delta_n, x \in \Delta \rangle]\) then \(\Delta[x_1|x_1, \ldots, x_n|x_n] = \Delta\).
+  %
+  Similarly (III) \comment{fix reference} holds because \(\Lambda[s_1 | z_1, \ldots, s_p|z_P] [ t_1|y_1, \ldots, t_m|y_m] = \Lambda[s_1[t_1|y_1, \ldots, t_m|y_m]    s_p[t_1|y_1, \ldots, t_m|y_m][z_p]]\)\comment{part of equation off page - unsure on brackets}, whenever \(\langle z_1 \in \Lambda_1, \ldots, z_p \in \Lambda_p, z \in \Lambda \rangle\) is a context and \(\langle  s_1, \ldots, s_p \rangle\) is a realisation of \(\langle z_1 \in \Lambda_1, \ldots, z_p \in \Lambda_P \rangle\) wrt \(\langle y_1 \in \Omega_1, \ldots, y_m \in \Omega_m \rangle\) and \(\langle t_1, \ldots, t_m \rangle\) is a realisation of \(\langle y_1 \in \Omega_1, \ldots, y_m \in \Omega_m \rangle\).
 \end{proof}
 
+We now turn to the definition of a (large) contextual category, \(\catFam\), which plays the same role among contextual categories as does the category \(\catSet\) among categories.
+%
+Whereas \(\catSet\) is the structured collection of functions so it is that \(\catFam\) is the structured collection of operators. .
+%
+We must refer back to \ref{section:1.9}\comment{fix ref} to the discussion of operators and sets, families of sets, families of families of sets and so on.
+
+The tree object of \(\catFam\) is the tree of families introduced in \ref{section:1.9}.
+%
+Thus it is the tree of sets, families of sets, families of families of sets and so on with a formally adjoined least element 1.
+
+For \(n, m \geq 0\), if \(1 \triangleleft A_1 \triangleleft \ldots \triangleleft A_n\) and \(1 \triangleleft B_1 \ldots \triangleleft B_m\) in \(\catFam\) then \(\Hom_\catFam(A_n, B_M) \underset{def}{=} \{\langle f_1, \ldots, f_m \rangle \mid f_1, \ldots, f_m \text{ are operators such that the status of the operator } f_j \text{ is given by for } a_1 \in A_1, \text{ for } a_2 \in A_2(a_1), \ldots, \text{ for } a_n \in A_n(a_1, \ldots, a_{n-1}):f_j(a_1, \ldots, a_n) \in B_j(f_1(a_1, \ldots, a_n), \ldots, f_{j-1}(a_1, \ldots, a_n))\}\).
+
+In particular if \(n=0\) then we get \(\Hom(1, B_m) = \{\langle b_1, \ldots, b_m \rangle \mid b_1 \in B_1, b_2 \in B_2(b_1), \ldots, \text{ and } b_m \in B_M(b_1, \ldots, b_{m-1})\}\).
+%
+On the other hand \(1\) is the terminal object of \(\catFam\) because \(\Hom(A_n, 1) = \{\langle  \rangle\}\).
+%
+% Source p2.10
+%
 
 
 
