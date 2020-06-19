@@ -34,8 +34,8 @@ Suggestion: to start with, leave space for people to work in contiguous blocks. 
 - 1.13
 - 1.14
 - 2.1 ROUGH [JL]
-- 2.2 IN PROGRESS[JL]
-- 2.3
+- 2.2 ROUGH [JL]
+- 2.3 IN PROGRESS [JL]
 - 2.4
 - 2.5
 - 3.0
