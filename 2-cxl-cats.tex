@@ -298,17 +298,41 @@ On the other hand \(1\) is the terminal object of \(\catFam\) because \(\Hom(A_n
 %
 % Source p2.10
 %
+Composition in \(\catFam\) is defined as follows. If \(1 \triangleleft A_1, \ldots, A_n\), \(1 \triangleleft B_1, \ldots, B_m\) and \(1 \langle C_1, \ldots, C_l \rangle\) in \(\catFam\) and if \(\langle f_1, \ldots, f_m \rangle : A_n \rightarrow B_m\), \(\langle g_1, \ldots, g_l \rangle : B_m \rightarrow C_l\) then the composition is given by \(\langle f_1, \ldots, f_m \rangle \circ \langle g_1, \ldots, g_l \rangle = \langle h_1, \ldots, h_l \rangle\), where for each \(k\), \(1 \leq k \leq l\), \(h_k\) is defined by \(h_k(a_1, \ldots, a_n) = g_k(f_1(a_1, \ldots, a_n), \ldots, f_m(a_1, \ldots, a_n))\), whenever \(a_1 \in A_1, \ldots, a_n \in A_n(a_1, \ldots, a_{n-1})\).
+
+
+If \(1 \triangleleft A_1 \ldots \triangleleft A_n \triangleleft A\) in \(\catFam\) then \(p(A):A \rightarrow A_n\) in \(\catFam\) is given by \(p(A) = \langle h_1, \ldots, h_n \rangle\), where fore each \(i\), \(1 \leq i \leq n\), \(h_i\) is defined by \(h_i(a_1, \ldots, a_n, a) = a_i\), whenever \(a_1 \in A_1, \ldots, a_n \in A_n(a_1, \ldots, a_{n-1})\) and \(a \in A(a_1, \ldots, a_n)\).
+
+If \(1 \triangleleft A_1, \ldots, A_n\) and \(1 \triangleleft B_1, \ldots, b_m \triangleleft B\) in \(\catFam\) and if \(\langle f_1, \ldots, f_m \rangle:A_n \rightarrow B_m\) then \(\langle f_1, \ldots, f_m \rangle^*B\) is defined to be the family \(\lambda a_1 \in A_1. \lambda a_2 \in A_2(a_1) \ldots \lambda a_n \in A_n(1_a, \ldots, a_{n-1}). B(f_1(a_1, \ldots, a_n), \ldots, f_m(a_1, \ldots, a_n))\).
+%
+In this situation \(q(\langle f_1, \ldots, f_m \rangle, B) = \langle f_1, \ldots, f_m, \gamma \rangle\), where \(\gamma\) is the operator defined by \(\lambda(a_1, \ldots, a_n, b) = b\), whenever \(a_1 \in A_1, \ldots, a_n \in A_n(a_1, \ldots, a_{n-1})\) and \(b \in B(f_1(a_1, \ldots, a_n), \ldots, f_m(a_1, \ldots, a_n))\).
+
+The proof that \(\catFam\), so defined, is a contextual category is rather simple.
+%
+Because the statements asserting the status of the operators and families are so similar to the formal rules the proof is similar to the proof that \(\mathbb C(U)\) is always a contextual category, only easier.
+
+The homomorphisms between contextual categories are called contextual functors. Thus:
+
+\begin{definition}
+  If \(\mathbb C\) and \(\mathbb C'\) are contextual categories then a contextual functor \(F:\mathbb C \rightarrow \mathbb C'\) is a functor \(F:\mathbb C \rightarrow \mathbb C'\) such that:
+  %
+  % Source p2.11
+  %
+  \begin{enumerate}
+  \item \(F(1) = 1\) and if \(A \triangleleft B\) in \(\mathbb C\) then \(F(A) \triangleleft F(B)\) in \(\mathbb C'\).
+   
+  \item For all objects \(A\) of \(\mathbb C\), \(F(p(A)) = p(F(A))\).
+   
+  \item For all \(f\) and \(B\) such that \(f^*B\) is defined in \(\mathbb C\), \(F(f^*B) = F(f) * F(B)\) and \(F(q(f,B)) = q(F(f), F(B))\).
+  \end{enumerate}
+\end{definition}
+
+The category of contextual categories and contextual functors is denoted \(\catCon\).
 
 
 
 
 
-
-
-
-
-
-\lipsum[15]
 
 % source p2.12
 \section{Notation and basic lemmas} \label{sec:source-2-3}
