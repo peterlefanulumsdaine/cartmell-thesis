@@ -1,13 +1,338 @@
-
+\newcommand{\id}{\operatorname{id}}
 % source p2.1
 \section{Algebraic semantics} \label{sec:source-2-1}
+In this chapter we show that there is a generalised algebraic theory (the theory of contextual categories) whose models (the category of contextual categories) is equivalent to the category \underline{GAT} of generalised algebraic theories and equivalences classos of interpretations.
+%
+How do we interpret this result?
+%
+Well, there are many other examples of this very strong kind of relationship holding between an algebraic notion of structure and a syntactic notion of theory.
+%
+The following list is by no means exhaustive:
+\begin{table}
+  \centering
+ \begin{tabular}{lll}
+  \underline{Syntactic Notion} & \underline{Algebraic Notion} & \underline{Reference}\\
+   & &\\
+  Proposition Theory & Boolean Algebra\\
+   of classical logic. \\
+   & & \\
+  Propositional Theory & Heyting Algebra\\
+   of Intuitionistic Logic. \\
+   & & \\
+  Single Sorted Algebraic & Lawvere's Notion of\\
+   or Equational Theory. & an Algebraic Theory. & \cite[II]{Lawvere} \\
+   & & \\
+  Equational Theory in the language & Cartesian Closed\\
+   of the typed \(\lambda\)-calculus. & Category. & \cite[26]{Myeres}\\
+   & & \\
+  Theory of higher order & Topos.\\
+   Intuitionistic Logic. &  &\cite{Fourman} \\
+   & & \\
+  Coherent Theory. & Grothendieck Site. & \cite[28]{Reyes}
+\end{tabular}
+\end{table}
+\comment{citations needed in table - Can't read Fourman citation.}
 
-\lipsum[14]
+%
+% source p2.2
+%
 
+In all these cases there is definable the notion of a model of a given theory in a given structure.
+%
+In each case the category of syntactic theories and equivalence classes of interpretations is equivalent to the category of algebraic structures.
+%
+This last property is the important characterising property.
+%
+It can lead to the view that the theories in syntactic form should be dispensed with entirely and the structures be given the title of theories.
+%
+This seems wasteful.
+%
+It is to be preferred that we think of the structures as providing a semantics for the theories, in fact, the most general possible semantics.
+%
+We shall call it the algebraic semantics.
+%
+Thus contextual categories are to provide us with the algebraic semantics of generalised algebraic theories.
+
+In case it should be argued that what we have called the algebraic semantics is really none other than the interpretations of one theory if considered as a notion of semantics; well we more or less agree, though perhaps it is only when such are considered as interpretations into algebraic structures that they can be properly said to constitute a notion of semantics.
+%
+The important point here, though, is that structures do frequently appear quite independently of theories; thus the notion of model is certainly enriched by the isomorphism between theories and structures because theories which arise first as structures (being defined by something like ``the theory that corresponds to this here structure'') are usually theories which would not otherwise have occurred.
+\comment{ending of second line of second paragraph - ``i''?}
+%
 % source p2.3
+%
+
 \section{Definition and examples} \label{sec:source-2-2}
 
-\lipsum[15]
+\begin{definition}
+  A \defemph{contextual category} consists of
+  \begin{enumerate}
+  \item A category \(\underline{C}\) with a terminal object 1.
+  \item A tree structure on the objects of \(\underline{C}\) such that the terminal object 1 is the unique least element of the tree. 
+  \item For all \(A, B \in | \underline{C} |\) such that \(A \triangleleft B\) a morphism \(p(B) : B \rightarrow A\) in \(\underline{C}\). This morphism will also be written just as \(B \rightarrowtriangle A\).
+  \item For all \(A, A' \in |\underline C |\), for all \(f:A \rightarrow A'\) in \(\underline{C}\), for all \(B \in |\underline C |\) such that \(A' \triangleleft B\), an object \(f^*B\) of \(\underline C\) and morphism \(q(f,B) : f^*B \rightarrow B\) such that \(A \triangleleft f^*B\) and such that the diagram
+    \begin{center}
+      \begin{tikzcd}
+        f^*B \arrow[r, "{q(f,B)}"] \arrow[d] & B \arrow[d,] \\
+        A \arrow[r, "f"']                    & A'         
+      \end{tikzcd}
+    \end{center}
+
+    is a pullback diagram in \(\underline C\).
+  \end{enumerate}
+
+  Such that
+  \begin{enumerate}[(i)]
+    \item For all \(A, B \in | \underline C|\) such that \(A \triangleleft B\), \(\id_A^*B = B\) and \(q(\id_A,B) = \id_B\).
+    \item Whenever
+      \begin{center}
+        \begin{tikzcd}
+          &                     & B \arrow[d] \\
+          A \arrow[r, "f"'] & A' \arrow[r, "f'"'] & A''        
+        \end{tikzcd}
+      \end{center}
+      in \(\underline C\) then \((ff')^*B = f^*(f'^*B)\) and \(q(ff',B) \circ q(f',B)\).
+  \end{enumerate}
+\end{definition}
+\comment{Need to add triangle heads to arrows in diagrams.}
+%
+% source p2.4
+We shall see that the objects of a contextual category should be though of as contexts.
+%
+Recall that a context is a sequence \( \langle x_1 \in \Delta_1, \ldots, x_n \in \Delta_n \rangle\) such that the rule \(x_1 \in \Delta_1, \ldots, x_{n-1} \in \Delta_{n-1} : \Delta_n\) is a type    is a derived rule and such that \(x_n\) is a variable distinct from each \(x_1, \ldots, x_{n-1}\).
+% added a comma after the \ldots. Unsure how to go about making spacing work for'' `is a type'.
+The tree structure on the set of contexts of a theory is easily seen.
+%
+For \(n \geq 1\), the predecessor of a context \(\langle x_1 \in \Delta_1, \ldots, x_n \in \Delta_n \rangle\) is the context \(\langle x_1 \in \Delta_1, \ldots, x_{n-1} \in \Delta_{n-1} \rangle\).
+%
+The empty context \(\langle  \rangle\) is the unique least element of the tree.
+
+The morphisms of a contextual category should be thought of as realisations. Recall that a realisation of a context \(\langle y_1 \in \Omega_1, \ldots, y_m \in \Omega_m \rangle\) with respect to the context $\langle  x_1 \in \Delta_1, \ldots, x_n \in \Delta_n \rangle$ is just an \(m\) tuple \(t_1, \ldots, t_m\) such that for each \(j\), \(1 \leq j \leq m\), the rule \(x_1 \in \Delta_1, \ldots, x_n \in \Delta_n : t_j \in \Omega_j [t_1|y_1, \ldots, t_{j-1}|y_{j-1}]\) is a derived rule.
+%
+Think of the morphisms \(f:A \rightarrow A'\) in a contextual category as being a realisation of the context \(A'\) wtr the context A.
+
+In \ref{Section:1.12} we defined the category \(\underline{R(U)}\) of contexts and realisations of a theory \(U\), \comment{Capital ``W'' in ``we''?} we could go on and show that for any theory \(U\), the category \(\underline{R(U)}\) with pullback structure defined in \ref{Section:1.12} (actually we defined more structure than was necessary) is a contextual category.\comment{no full stop here, but seems like end of sentence}
+%
+But we do not need this construction.
+%
+Rather we need the construction of a contextual category \(\mathbb C (U)\) associated with a theory \(U\) as part of the equivalence between contextual categories and generalised algebraic theories.
+%
+This category \(\mathbb C (U)\) is a category of equivalence classes of contexts and equivalence classes of realisations of \(U\).
+%
+We shall describe in some detail.
+
+Recall that in \ref{Section:1.13} we defined an equivalence relation \(\equiv\) on derived \(T\) and \(\in\)-rules of a theory \(U\).
+%
+% source p2.5
+%
+This equivalence relation we call the equivalence relation of intended identity of denotation.
+%
+We used this equivalence relation in definin an equivalence relation \(\equiv\) on contexts and realisations: \(\langle x_1 \in \Delta)1, \ldots, x_n \in \Delta_n\rangle \cong \langle y_1 \in \Omega_1, \ldots, y_m \in \Omega_m \rangle\) iff \(\inferrule{x_1 \in \Delta_a, \ldots, x_{n-1} \in \Delta_{n-1}} {\Delta \text{ is a type}} \equiv \inferrule{y_1 \in \Omega_1, \ldots, y_{m-1} \in \Omega_{m-1}}{\Omega_m \text{ is a type}}\).\comment{maybe put on one or two lines?}
+%
+And if \(\langle t_1, \ldots, t_m \rangle\) is a realisation of \(\langle y_1 \in \Omega_1, \ldots, y_m \in \Omega_m \rangle\) wrt \(\langle x_1 \in \Delta_1, \ldots, x_n \in \Delta_n \rangle\) and if \(\langle t'_1, \ldots, t'_m \rangle\) is a realisation of \(\langle y'_1 \in \Omega'_1, \ldots, y'_m \in \Omega'_m \rangle\) wrt \(\langle x'_1 \in \Delta'_1, \ldots, x'_n \in \Delta'_n \rangle\) then \(\langle t_1, \ldots, t_m \rangle \equiv \langle t'_1, \ldots, t'_m \rangle\) iff for each \(j\), \(1 \leq j \leq m\),
+%
+\[\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{t_j \in \Omega_j[t_1 | y_1, \ldots t_{j-1}|y_{j-1}]} \equiv \inferrule{x'_1 \in \Delta'_1, \ldots, x'_n \in \Delta'_n}{t'_j \in \Omega'_j[t'_1 | y'_1, \ldots t'_{j-1}|y'_{j-1}]}\]
+%
+The category \(\mathbb C (U)\) is defined to have as objects the equivalence classes of contexts of \(U\) and to have as morphisms the equivalence classes of realisations of \(U\).
+%
+More precisely if \(\langle x_1 \in \Delta_1, \ldots, x_n \in \Delta_n \rangle\) and \(\langle y_1 \in \Omega_1, \ldots, y_m \in \Omega_m \rangle\) are contexts of \(U\) then define \(\text{Hom}\mathbb C  (U)(\langle x_1 \in \Delta_1, \ldots, x_n \in \Delta_n \rangle, \langle y_1 \in \Omega_1, \ldots, y_m \in \Omega_m \rangle) = \{[\langle  t_a, \ldots, t_m \rangle \mid \langle t_1, \ldots, t_m  \rangle] \text{ is a relisation of } \langle y_a \in \Omega_a, \ldots, y_m \in \Omega_m \rangle \text{ wtr } \langle x_1 \in \Delta_1, \ldots, x_n \in \Delta_n \rangle\}\). Hom is well defined just by Lemma \ref{4(i)} of \ref{Section:1.13}.
+%
+Whenever \(\langle t_1, \ldots, t_m \rangle\) is a realisation of \(\langle y_a \in \Omega_1, \ldots, y_m \in \Omega_m \rangle\) and whenever \(\langle s_1, \ldots, s_l \rangle\) \comment{Unsure on final s subscript for this part.} is a realisation wrt \(\langle y_1 \in \Omega_1, \ldots, y_m \in \Omega_m \rangle\) then the composition in \(\mathbb{C (U)}\) of \([\langle t_1, \ldots, t_m \rangle]\) with \([\langle s_1, \ldots, s_l \rangle]\) is defined by \([\langle t_1, \ldots, t_m \rangle] \circ [\langle s_1, \ldots, s_l \rangle] = [\langle s_1[t_1|y_1, \ldots, t_m|y_m], \ldots, s_l[t_1|y_1, \ldots t_m|y_m] \rangle]\).
+%
+Composition is well defined, this follows from Lemma \ref{lem:3(ii)} of \ref{section:1.13}. The identity morphisms in \(\mathbb C (U)\) are given by $\id_{[\langle x_1 \in \Delta_1, \ldots, x_n \in \Delta_n \rangle]} = [\langle x_1, \ldots, x_n \rangle]$.
+%
+Well definedness is trivial.
+%
+% source p2.6
+% 
+The objects of \(\mathbb C (U)\) are structured as a tree by taking the predecessor of \([\langle x_1 \in \Delta_1, \ldots x_n \in \Delta_n \rangle]\) to be \([\langle x_1 \in \Delta_1, \ldots x_{n-1} \in \Delta_{n-1} \rangle]\).
+%
+The tree structure is well defined because by definition if \(\langle x_1 \in \Delta_1, \ldots x_n \in \Delta_n \rangle \equiv \langle x_1' \in \Delta_1', \ldots x_n' \in \Delta_n' \rangle\) then \(\langle x_1 \in \Delta_1, \ldots x_{n-1} \in \Delta_{n-1} \rangle \equiv \langle x_1' \in \Delta_1', \ldots x_{n-1}' \in \Delta_{n-1}' \rangle\).
+%
+\([\langle  \rangle]\) is the least element of the tree.
+%
+\([\langle  \rangle]\) is a terminal object of \(\mathbb C(U)\) because by definition of \(\text{Hom}\mathbb C (U)\), \(\text{Hom}\mathbb C (U) ([\langle x_1 \in \Delta_1, \ldots, x_n \in \Delta_n \rangle], [\langle  \rangle]) = \{[\langle  \rangle] \mid \langle  \rangle \text{ is a relisation of } \langle  \rangle \text{ wrt } \langle x_1 \in \Delta_1, \ldots, x_n \in \Delta_n \rangle\}\) and because by definition of realisation, \(\langle \rangle\) is the realisation of the context \(\langle \rangle\) wrt the context \( \langle x_1 \in \Delta_1, \ldots, x_n \in \Delta_n \langle \).
+
+If \(A \triangleleft B\) in \(\mathbb C (U)\), say \(A = [\langle x_1 \in \Delta_1, \ldots x_n \in \Delta_n \rangle]\) and \(B = [\langle x_1 \in \Delta_1, \ldots x_n \in \Delta_n, x \in \Delta \rangle]\), then define \(p(B):B \rightarrow A\) by \(p(B) = [\langle x_1, \ldots, x_n \rangle]\).
+
+If
+\begin{center}
+  \begin{tikzcd}
+    & B \arrow[d]\\
+    A \arrow[r, "f"] & A'
+  \end{tikzcd}\comment{Fix vertical arrow head}
+\end{center}
+
+in \(\mathbb C (U)\), say \(A = [\langle x_1 \in \Delta_1, \ldots, x_n \in \Delta_n \rangle]\), \(A' = [\langle y_1 \in \Omega_1, \ldots, y_m \in \Omega_m \rangle]\), \(B = [\langle y_1 \in \Omega_1, \ldots, y_m \in \Omega_m, y \in \Omega \rangle]\) and \(f = [\langle t_1, \ldots, t_m \rangle]\), then define \(f^*B=[\langle x_1 \in \Delta)1, \ldots, x_n \in \Delta_n, y \in \Omega[t_1|y_1, \ldots t_m|y_m] \rangle]\) and \(q(f,B) = [\langle t_1, \ldots, t_m, y \rangle]\).
+%
+\(f^*B\) is well defined, by Lemma \ref{3i, section 1.13}. 
+
+\begin{lemma}
+  \(\mathbb C (U)\) is a contextual category.
+\end{lemma}
+%
+% source p2.7
+%
+
+\begin{proof}
+  Firstly we must show that whenever
+    \begin{center}
+      \begin{tikzcd}
+        & B \arrow[d]\\
+        A \arrow[r] & A'
+      \end{tikzcd}\comment{Fix vertical arrow head}
+    \end{center}
+
+    in \(\mathbb C(U)\) then the diagram
+    \begin{center}
+      \begin{tikzcd}
+        f^*B \arrow[d] \arrow[r, "{q(f,B)}"] & B \ar[d] \\
+        A \ar[r, "f"'] & A'
+      \end{tikzcd}
+    \end{center}\comment{Fix vertical arrow head}
+
+    is a pullback diagram in \(\mathbb C(U)\).
+
+    So suppose that \(A = [\langle x_1 \in \Delta_1, \ldots, x_n \in \Delta_n \rangle]\), \(B = [\langle y_1 \in \Omega_1, \ldots, y_m \in \Omega_m, y \in \Omega \rangle]\) and \(f = [\langle t_1, \ldots t_m \rangle]\). Suppose also that \(C\) is an object of \(\mathbb C(U)\) and that \(g:C \rightarrow A\) and \(g':C \rightarrow B\) in \(\mathcal C(U)\) such that the diagram
+
+    \begin{center}
+      \begin{tikzcd}
+        C \arrow[d, "g"'] \arrow[r, "g"'] & B \ar[d] \\
+        A \ar[r, "f"] & A'
+      \end{tikzcd}
+    \end{center}
+    commutes. Call this diagram (I). We can suppose that \(C = [\langle z_1 \in \Lambda_1, \ldots, z_p \in \Lambda_p \rangle]\), \(g = [\langle r_1, \ldots, r_n \rangle]\), \(g' = [\langle s_1, \ldots, s_m, s \rangle]\), where \(\langle r_1, \ldots, r_n \rangle\) is some realisation of \(\langle x_1 \in \Delta_1, \ldots, x_n \in \Delta_n \rangle\) wrt \(\langle z_1 \in \Lambda_1, \ldots, z_p \in Lambda_p \rangle\) and \(s_1, \ldots, s_m, s\) is a realisation of \(\langle y_1 \in \Omega_1, \ldots, y_m \in \Omega, y \in \Omega \rangle\) wrt \(\langle z_1 \in \Lambda_!, \ldots, z_p \in \Lambda_p \rangle\).
+    We must show that there exists a unique \(h:C \rightarrow f^*B\) in \(\mathbb C(U)\) such that diagrams \ref{diag:2.7-II} and \ref{diag:2.7-III} both commute.
+
+    \begin{figure}
+    \centering
+    \begin{subfigure}{.5\textwidth}
+      \centering
+      \begin{tikzcd}
+          C \arrow[rd, "h"] \arrow[rdd, "g"'] &                \\
+          & f^*B \arrow[d] \\
+          & A             
+        \end{tikzcd}
+      \caption{II}
+      \label{diag:2.7-II}
+    \end{subfigure}%
+    \begin{subfigure}{.5\textwidth}
+      \centering
+      \begin{tikzcd}
+        C \arrow[rd, "h"'] \arrow[rrd, "g'"] &                             &   \\
+        & f^*B \arrow[r, "{q(f,b)}"'] & B
+      \end{tikzcd}
+      \caption{III}
+      \label{diag:2.7-II}
+    \end{subfigure}
+    \caption{A figure with two subfigures}
+    \label{fig:test}
+  \end{figure}\comment{Float position needs to be fixed}
+
+  I claim that \([\langle r_1, \ldots, r_m s \rangle]\) is such an \(h\).
+  %
+  Since Diagram (I)\comment{What diagram is this?} commutes, \([\langle t_![r_1|x_1, \ldots, r_n|x_n], \ldots, t_m[r_1|x_1, \ldots, r_n|x_n] \rangle] = [\langle s_1,\ldots, s_m \rangle]\).
+  %
+  Hence for all \(j\), \(1 \leq j \leq m\),
+
+  \[
+    \inferrule{z_1 \in \Lambda_1, \ldots, z_p \in \Lambda_p}{t_1[r_1|x_1, \ldots, r_n|x_n], \ldots, t_m[r_1|x_1, \ldots, r_n|x_n]}
+  \]\comment{conclusion is missing from document - I assume this is what it says.}
+
+  is a derived rule of \(U\).
+  %
+  % Source p2.8
+  %
+  Thus as \(\langle  s_!, \ldots, s_m, s \rangle\) is a realisation of \(\langle y_1 \in \Omega_1, \ldots, y_m \in \Omega_m, y \in \Omega \rangle\), the rule 
+  \[
+    \inferrule{z_1 \in \Lambda_1, \ldots, z_p \in \Lambda_p}{s \in \Omega [t_1[r_1|x_1, \ldots, r_n|x_n]|y_1, \ldots, t_m[r_1|x_1, \ldots, r_n|x_n]|y_m}
+  \]
+  is a derived rule of \(U)\).
+  %
+  Hence \(\langle r_1,\ldots,r_n, s \rangle\) is a realisation of \(\langle x_1 \in \Delta_1, \ldots, x_n \in \Delta_n, y \in \Omega[t_1|y_1, \ldots, t_m|y_m] \rangle\) wrt \(\langle z_1 \in \Lambda_1, \ldots, z_p \in \Lambda_p \rangle\) and thus \([\langle r_1, \ldots, r_n,s \rangle] : C \rightarrow f^*B\) in \(\mathbb C (U)\).
+  %
+  Setting \(h = [\langle  r_1, \ldots, r_n, s \rangle]\) then \ref{diag:2.7-II} commutes because \([\langle r_1, \ldots, r_m, s \rangle] \circ [\langle t_1, \ldots, t_m,y \rangle] = [\langle t_1[r_1|x_1, \ldots, r_n|x_n], \ldots, t_m[r_1|x_1, \ldots, r_n|x_n],s \rangle] = [\langle s_1, \ldots, s_m,s \rangle]\).
+  %
+  So \([\langle r_1, \ldots, r_m, s \rangle]\) is certainly such an \(h\).
+  %
+  To show that it is the unique such \(h\) suppose now that \(h\) is an arbitrary morphism \(h:C \rightarrow f^*B\) in \(\mathbb C(U)\) such that the diagrams \ref{diag:2.7-II} and \ref{diag:2.7-II} commute say \(h = [\langle r_1', \ldots, r_n', s' \rangle]\).
+  %
+  Since \ref{diag:2.7-II} commutes, for each \(i\), \(1 \leq i \leq n\), the rule \(\inferrule{z_1 \in \Lambda_1, \ldots, z_p \in \Lambda_p}{r_i = r_i' \in \Delta_i[r_1|x_1, \ldots, r_{i-1}|x_{i-1}]}\) is a derived rule of \(U\).
+  %
+  Since \ref{diag:2.7-III} commutes, the rule \(\inferrule{z_1 \in \Lambda_1, \ldots, z_p \in \Lambda_p}{s=s' \in \Omega[s_1|y_1, \ldots,s_m|y_m]}\) is a derived rule of \(U\).
+  %
+  Hence \(h = [\langle r_1', \ldots, r_n', s' \rangle] = [\langle r_1, \ldots, r_n, s \rangle]\).
+  %
+  Which completes the proof that
+  \begin{center}
+    \begin{tikzcd}
+      f^*B \arrow[r, "{q(f,B)}"] \arrow[d] & B \arrow[d] \\
+      A \arrow[r, "f"] & A'
+    \end{tikzcd}\comment{fix vertical arrow heads}
+  \end{center}
+  is a pullback diagram in \(\mathbb C(U)\).
+
+  It remains to show that the axioms (I) and (II)\comment{fix reference} of the definition of a contextual category hold of the structure \(\mathbb C(U)\).
+  %
+  % Source p2.9
+  %
+  Well, it is easy to show that (I)\comment{fix reference} must hold because if \(B=[\langle  x_1 \in \Delta_1, \ldots, x_n \in \Delta_n, x \in \Delta \rangle]\) then \(\Delta[x_1|x_1, \ldots, x_n|x_n] = \Delta\).
+  %
+  Similarly (III) \comment{fix reference} holds because \(\Lambda[s_1 | z_1, \ldots, s_p|z_P] [ t_1|y_1, \ldots, t_m|y_m] = \Lambda[s_1[t_1|y_1, \ldots, t_m|y_m]    s_p[t_1|y_1, \ldots, t_m|y_m][z_p]]\)\comment{part of equation off page - unsure on brackets}, whenever \(\langle z_1 \in \Lambda_1, \ldots, z_p \in \Lambda_p, z \in \Lambda \rangle\) is a context and \(\langle  s_1, \ldots, s_p \rangle\) is a realisation of \(\langle z_1 \in \Lambda_1, \ldots, z_p \in \Lambda_P \rangle\) wrt \(\langle y_1 \in \Omega_1, \ldots, y_m \in \Omega_m \rangle\) and \(\langle t_1, \ldots, t_m \rangle\) is a realisation of \(\langle y_1 \in \Omega_1, \ldots, y_m \in \Omega_m \rangle\).
+\end{proof}
+
+We now turn to the definition of a (large) contextual category, \(\catFam\), which plays the same role among contextual categories as does the category \(\catSet\) among categories.
+%
+Whereas \(\catSet\) is the structured collection of functions so it is that \(\catFam\) is the structured collection of operators. .
+%
+We must refer back to \ref{section:1.9}\comment{fix ref} to the discussion of operators and sets, families of sets, families of families of sets and so on.
+
+The tree object of \(\catFam\) is the tree of families introduced in \ref{section:1.9}.
+%
+Thus it is the tree of sets, families of sets, families of families of sets and so on with a formally adjoined least element 1.
+
+For \(n, m \geq 0\), if \(1 \triangleleft A_1 \triangleleft \ldots \triangleleft A_n\) and \(1 \triangleleft B_1 \ldots \triangleleft B_m\) in \(\catFam\) then \(\Hom_\catFam(A_n, B_M) \underset{def}{=} \{\langle f_1, \ldots, f_m \rangle \mid f_1, \ldots, f_m \text{ are operators such that the status of the operator } f_j \text{ is given by for } a_1 \in A_1, \text{ for } a_2 \in A_2(a_1), \ldots, \text{ for } a_n \in A_n(a_1, \ldots, a_{n-1}):f_j(a_1, \ldots, a_n) \in B_j(f_1(a_1, \ldots, a_n), \ldots, f_{j-1}(a_1, \ldots, a_n))\}\).
+
+In particular if \(n=0\) then we get \(\Hom(1, B_m) = \{\langle b_1, \ldots, b_m \rangle \mid b_1 \in B_1, b_2 \in B_2(b_1), \ldots, \text{ and } b_m \in B_M(b_1, \ldots, b_{m-1})\}\).
+%
+On the other hand \(1\) is the terminal object of \(\catFam\) because \(\Hom(A_n, 1) = \{\langle  \rangle\}\).
+%
+% Source p2.10
+%
+Composition in \(\catFam\) is defined as follows. If \(1 \triangleleft A_1, \ldots, A_n\), \(1 \triangleleft B_1, \ldots, B_m\) and \(1 \langle C_1, \ldots, C_l \rangle\) in \(\catFam\) and if \(\langle f_1, \ldots, f_m \rangle : A_n \rightarrow B_m\), \(\langle g_1, \ldots, g_l \rangle : B_m \rightarrow C_l\) then the composition is given by \(\langle f_1, \ldots, f_m \rangle \circ \langle g_1, \ldots, g_l \rangle = \langle h_1, \ldots, h_l \rangle\), where for each \(k\), \(1 \leq k \leq l\), \(h_k\) is defined by \(h_k(a_1, \ldots, a_n) = g_k(f_1(a_1, \ldots, a_n), \ldots, f_m(a_1, \ldots, a_n))\), whenever \(a_1 \in A_1, \ldots, a_n \in A_n(a_1, \ldots, a_{n-1})\).
+
+
+If \(1 \triangleleft A_1 \ldots \triangleleft A_n \triangleleft A\) in \(\catFam\) then \(p(A):A \rightarrow A_n\) in \(\catFam\) is given by \(p(A) = \langle h_1, \ldots, h_n \rangle\), where fore each \(i\), \(1 \leq i \leq n\), \(h_i\) is defined by \(h_i(a_1, \ldots, a_n, a) = a_i\), whenever \(a_1 \in A_1, \ldots, a_n \in A_n(a_1, \ldots, a_{n-1})\) and \(a \in A(a_1, \ldots, a_n)\).
+
+If \(1 \triangleleft A_1, \ldots, A_n\) and \(1 \triangleleft B_1, \ldots, b_m \triangleleft B\) in \(\catFam\) and if \(\langle f_1, \ldots, f_m \rangle:A_n \rightarrow B_m\) then \(\langle f_1, \ldots, f_m \rangle^*B\) is defined to be the family \(\lambda a_1 \in A_1. \lambda a_2 \in A_2(a_1) \ldots \lambda a_n \in A_n(1_a, \ldots, a_{n-1}). B(f_1(a_1, \ldots, a_n), \ldots, f_m(a_1, \ldots, a_n))\).
+%
+In this situation \(q(\langle f_1, \ldots, f_m \rangle, B) = \langle f_1, \ldots, f_m, \gamma \rangle\), where \(\gamma\) is the operator defined by \(\lambda(a_1, \ldots, a_n, b) = b\), whenever \(a_1 \in A_1, \ldots, a_n \in A_n(a_1, \ldots, a_{n-1})\) and \(b \in B(f_1(a_1, \ldots, a_n), \ldots, f_m(a_1, \ldots, a_n))\).
+
+The proof that \(\catFam\), so defined, is a contextual category is rather simple.
+%
+Because the statements asserting the status of the operators and families are so similar to the formal rules the proof is similar to the proof that \(\mathbb C(U)\) is always a contextual category, only easier.
+
+The homomorphisms between contextual categories are called contextual functors. Thus:
+
+\begin{definition}
+  If \(\mathbb C\) and \(\mathbb C'\) are contextual categories then a contextual functor \(F:\mathbb C \rightarrow \mathbb C'\) is a functor \(F:\mathbb C \rightarrow \mathbb C'\) such that:
+  %
+  % Source p2.11
+  %
+  \begin{enumerate}
+  \item \(F(1) = 1\) and if \(A \triangleleft B\) in \(\mathbb C\) then \(F(A) \triangleleft F(B)\) in \(\mathbb C'\).
+   
+  \item For all objects \(A\) of \(\mathbb C\), \(F(p(A)) = p(F(A))\).
+   
+  \item For all \(f\) and \(B\) such that \(f^*B\) is defined in \(\mathbb C\), \(F(f^*B) = F(f) * F(B)\) and \(F(q(f,B)) = q(F(f), F(B))\).
+  \end{enumerate}
+\end{definition}
+
+The category of contextual categories and contextual functors is denoted \(\catCon\).
+
+
+
+
+
 
 % source p2.12
 \section{Notation and basic lemmas} \label{sec:source-2-3}
