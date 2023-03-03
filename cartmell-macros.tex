@@ -20,6 +20,8 @@
 
 \newcommand{\catTwo}{\mathbf{2}} % used for the arrow category
 
+\newcommand{\catA}{\catletter{A}}
+\newcommand{\catB}{\catletter{B}}
 \newcommand{\catC}{\catletter{C}}
 \newcommand{\catD}{\catletter{D}}
 \newcommand{\modM}{\mathcal{M}}
@@ -35,9 +37,13 @@
 \newcommand{\catword}[1]{\mathbf{#1}} % long-named categories
 
 \newcommand{\catCat}{\catword{Cat}}
+\newcommand{\catFam}{\catword{Fam}}
 \newcommand{\catGAT}{\catword{GAT}}
 \newcommand{\catSet}{\catword{Set}}
 \newcommand{\catLEX}{\catword{LEX}}
+\newcommand{\catCon}{\catword{Con}}
+
+\newcommand{\catalg}[1]{#1\text{-}\synalg}
 
 \DeclareMathOperator{\proj}{proj}
 %%%%
@@ -79,13 +85,22 @@
 \newcommand{\synMorph}{\syn{Morph}}
 \newcommand{\syncod}{\syn{cod}}
 \newcommand{\syndom}{\syn{dom}}
+%opposite category
+\newcommand{\synop}{\syn{op}}
 
 %%%%
 % Other operators
 %%%%
 
+\newcommand{\lhs}{\text{LHS}}
+\newcommand{\rhs}{\text{RHS}}
+
+%% for algebras
+\newcommand{\synalg}{\syn{alg}}
+
 \newcommand{\tuple}[1]{\langle #1 \rangle}
 \newcommand{\disjointunion}{\mathop{\dot{\bigcup}}}
+\newcommand{\Hom}{\operatorname{Hom}}
 
 %%%%
 % Other symbols
