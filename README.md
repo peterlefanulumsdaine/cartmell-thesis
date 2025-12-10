@@ -41,7 +41,7 @@ A (proposed) HoTT group project to TeXify Cartmell's PhD thesis “Generalised A
 
 - Cartmell often uses un-bulleted but line-broken lists (e.g. bottom of source p 1.4).  For now, do as `itemize`?
 
-- Cartmell often uses inline numbered lists (e.g. first para of source p 1.1).  How to do these??
+- Cartmell often uses inline numbered lists: do these with environment `enumerate*`
 
 ## Macros
 
