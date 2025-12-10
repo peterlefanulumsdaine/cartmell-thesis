@@ -10,7 +10,7 @@ The scanned original is available from http://peterlefanulumsdaine.com/files/car
 ## Contributing 
 
 - Please read and adhere to the conventions agreed on below! But feel free to make judgment calls as needed.
-- Use the [status file](signup.md) to monitor + record progress, and reserve sections you’re currently working on.
+- Use the [status file](status.md) to monitor + record progress, and reserve sections you’re currently working on.
 - New contributors: please fork and issue pull requests to contribute.
 
 # Conventions
