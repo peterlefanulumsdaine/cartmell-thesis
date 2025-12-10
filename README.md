@@ -1,7 +1,9 @@
 cartmell-thesis
 ===============
 
-A (proposed) HoTT group project to TeXify Cartmell's PhD thesis “Generalised Algebraic Theories and Contextual Categories” — an important paper that’s currently not very accessible.
+A collaborative project to TeXify Cartmell's PhD thesis “Generalised Algebraic Theories and Contextual Categories” — an important paper that’s currently not very accessible.
+
+The scanned original is available from http://peterlefanulumsdaine.com/files/cartmell-1978-phd-thesis.pdf.
 
 # General project notes
 
@@ -19,7 +21,7 @@ A (proposed) HoTT group project to TeXify Cartmell's PhD thesis “Generalised A
 - Typos: correct unambiguous typos; if in doubt, leave unchanged but add comment for proofreaders.
 - Punctuation etc: stick closely to Cartmell's (sometimes idiosyncratic), except when inconsistent to the extent of being a typo.
 - Accents: add where missing. (Notably `Martin-L\"o{}f`).
-- Bibliography: probably modernise bibliography style; for now keep citation style unchanged (i.e. numeric), possibly change to a more reader-friendly style (e.g. alphabetical)
+- Bibliography: probably modernise bibliography style; for now keep citation style unchanged (i.e. numeric), possibly change to a more reader-friendly style (e.g. alphabetical).
 
 ## General LaTeX style
 
