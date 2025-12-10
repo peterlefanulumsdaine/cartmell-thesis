@@ -7,20 +7,19 @@ A (proposed) HoTT group project to TeXify Cartmell's PhD thesis “Generalised A
 
 ## Contributing 
 
-- Please read adhere to the conventions agreed on below!
-- To decide: fork/pull, or direct push?
-- Signup sheet for sections?
+- Please read and adhere to the conventions agreed on below! But feel free to make judgment calls as needed.
+- Use the [status file](signup.md) to monitor + record progress, and reserve sections you’re currently working on.
+- New contributors: please fork and issue pull requests to contribute.
 
 # Conventions
 
 ## Faithfulness to original
 
-- General layout, formatting: to be discussed.
-- Punctuation etc: stick closely to Cartmell's (sometimes idiosyncratic), except when inconsistent, in which case go with his most frequent usage.
-- Typos: correct unambiguous typos.  Add flag for proofreaders?
+- General layout + formatting: stick roughly to original, but no need to bend over bakcwards.
+- Typos: correct unambiguous typos; if in doubt, leave unchanged but add comment for proofreaders.
+- Punctuation etc: stick closely to Cartmell's (sometimes idiosyncratic), except when inconsistent to the extent of being a typo.
 - Accents: add where missing. (Notably `Martin-L\"o{}f`).
-- Italics/emphasis not used in original.  Add anywhere, e.g. for definienda?
-- 
+- Bibliography: probably modernise bibliography style; for now keep citation style unchanged (i.e. numeric), possibly change to a more reader-friendly style (e.g. alphabetical)
 
 ## General LaTeX style
 

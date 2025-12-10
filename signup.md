@@ -5,11 +5,11 @@ Sign up in this document to contribute to the project.
 
 Specifically: some expected statuses are
 - *none*
-- *OCR* (automatically populated from OCR, not yet human-edited)
+- *OCR* (first draft automatically populated from OCR, not yet human-edited)
 - *BOOKED [name]* (*name* is intending to work on section)
-- *IN PRODRESS [name]* (*name* has started working on section)
-- *ROUGH [name(s)]* (content all present, but formatting or similar still needs fixed)
-- *DONE [name(s)]* (entirely done)
+- *IN PROGRESS [name]* (*name* has started working on section)
+- *ROUGH [name(s)]* (rough human-edited draft complete, but significant formatting or other issues still outstanding)
+- *DONE [name(s)]* (good draft done, modulo final proofreading + consistency checks)
 
 Of course this is all flexible — anything self-explanatory is fine, really.
 
