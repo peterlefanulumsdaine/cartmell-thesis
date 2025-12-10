@@ -54,6 +54,8 @@ Suggestion: to start with, leave space for people to work in contiguous blocks. 
 - improve/rationalise layout on title/dedication pages, and consider moving transcription statement to main title page
 - fix theorem numbering to follow C’s practice: most un-numbered, numbered items following e.g. “Lemma 1, Lemma 2, Corollary 3” within each chapter
 - add zref-clever for better internal links, and set up to match C’s style
+- set up alignment/spacing of enumerate/itemize globally (to look decent and roughly match C’s style)
+- consider setting up chapter/section headings to better match C’s style
 
 ## Content tasks
 
