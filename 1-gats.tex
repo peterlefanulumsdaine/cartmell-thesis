@@ -406,8 +406,8 @@ This is the case because of the equivalence between $A$-indexed families of sets
 This equivalence holds for any set $A$ and is given by the following
 
 \begin{enumerate}[1.]
- 	\item \label{item:setequiv-1} If $\{ B(a) \suchthat a \in A \}$ is an $A$-indexed family of sets then $\proj : \disjointunion B(a) \to A$ is a morphism of $\catSet$ with codomain $A$ (remember that $\disjointunion B(a) = \{\tuple{a,b} \suchthat a \in A,\, b \in B(a) \})$.
-	\item \label{item:setequiv-2} If $f : A' \to A$ is a map of $\catSet$ with codomain $A$ then $\{ f^{-1}(a) \suchthat a \in A \}$ is an $A$-indexed family of sets.
+    \item \label{item:setequiv-1} If $\{ B(a) \suchthat a \in A \}$ is an $A$-indexed family of sets then $\proj : \disjointunion B(a) \to A$ is a morphism of $\catSet$ with codomain $A$ (remember that $\disjointunion B(a) = \{\tuple{a,b} \suchthat a \in A,\, b \in B(a) \})$.
+    \item \label{item:setequiv-2} If $f : A' \to A$ is a map of $\catSet$ with codomain $A$ then $\{ f^{-1}(a) \suchthat a \in A \}$ is an $A$-indexed family of sets.
 \end{enumerate}
 
 \ref{item:setequiv-1}~and \ref{item:setequiv-2}~establish an isomorphism between the class of $A$-indexed families of sets and the class of functions with codomain $A$.
@@ -1355,17 +1355,567 @@ The extension of the theory by symbols for disjoint unions is discussed in \S 1.
 % source p1.58
 \section{Contexts and realisations} \label{sec:source-1-12}
 
-\lipsum[11]
+% source p
+\begin{definition}
+If $\tuple{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}$ and $\tuple{y_1 \in \Omega_1, \dots, y_m \in \Omega_m}$ are contexts of a theory $\thU$ then a \defemph{realisation} of $\tuple{y_1 \in \Omega_1, \dots, y_m \in \Omega_m}$ wrt $\tuple{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}$ is an $m$-tuple $\tuple{t_1, \dots, t_m}$ such that for each $j, 1 \le j \le m$,
+%
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{t_j \in \Omega_j[t_1|y_1, \dots, t_{j-1}|y_{j-1}]}
+\end{mathpar}
+%
+is a derived rule of $\thU$.
+\end{definition}
+
+% source p
+If $\thU$ is a generalised algebraic theory then there is a category $\mathbb{R}(\thU)$ of contexts and realisations of $\thU$.
+%
+In $\mathbb{R}(\thU)$, $\tuple{t_1, \dots, t_m} : \tuple{x_1 \in \Delta_1, \dots, x_n \in \Delta_n} \to \tuple{y_1 \in \Omega_1, \dots, y_m \in \Omega_m}$ iff $\tuple{t_1, \dots, t_m}$ is a realisation of $\tuple{y_1 \in \Omega_1, \dots, y_m \in \Omega_m}$ wrt $\tuple{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}$.
+%
+The identity morphism on an object $\tuple{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}$ of $\mathbb{R}(\thU)$ is the realisation $\tuple{x_1, \dots, x_n}$ of $\tuple{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}$ wrt $\tuple{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}$.
+%
+Composition in $\mathbb{R}(\thU)$ is defined by $\tuple{t_1, \dots, t_m} \circ \tuple{s_1, \dots, s_p} = \tuple{s_1[t_1|y_1, \dots, t_m|y_m], \dots, s_p[t_1|y_1, \dots, t_m|y_m]}$, whenever $\tuple{t_1, \dots, t_m} : \tuple{x_1 \in \Delta_1, \dots, x_n \in \Delta_n} \to \tuple{y_1 \in \Omega_1, \dots, y_m \in \Omega_m}$ and $\tuple{s_1, \dots, s_p} : \tuple{y_1 \in \Omega_1, \dots, y_m \in \Omega_m} \to \tuple{z_1 \in \Lambda_1, \dots, z_p \in \Lambda_p}$ in $\mathbb{R}(\thU)$.
+
+% source p
+The set of objects of $\mathbb{R}(\thU)$, i.e.\ the set of contexts of $\thU$, is structured as a tree with least element $\tuple{}$ (the empty context) and with $\tuple{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}$, $n > 0$, preceded by $\tuple{x_1 \in \Delta_1, \dots, x_{n-1} \in \Delta_{n-1}}$.
+%
+For any $n,m \ge 0$ and for any context $\tuple{x_1 \in \Delta_1, \dots, x_n \in \Delta_n, x_{n+1} \in \Delta_{n+1}, \dots, x_{n+m} \in \Delta_{n+m}}$ of $\thU$, $\tuple{x_1, \dots, x_n}$ is a realisation of $\tuple{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}$ wrt $\tuple{x_1 \in \Delta_1, \dots, x_{n+m} \in \Delta_{n+m}}$.
+%
+This map, $\tuple{x_1, \dots, x_n} : \tuple{x_1 \in \Delta_1, \dots, x_{n+m} \in \Delta_{n+m}} \to \tuple{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}$ in $\mathbb{R}(\thU)$, is denoted $\synp(\tuple{x_1 \in \Delta_1, \dots, x_{n+m} \in \Delta_{n+m}}, \tuple{x_1 \in \Delta_1, \dots, x_n \in \Delta_n})$.
+%
+Thus for any $A, B \in \mathbb{R}(\thU)$ such that $A \triangleleft B$, the morphism $\synp(B,A)$ is defined and $\synp(B,A) : B \to A$ in $\mathbb{R}(\thU)$.
+
+% source p
+If $A = \tuple{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}$, $A' = \tuple{y_1 \in \Omega_1, \dots, y_m \in \Omega_m}$, if $B = \tuple{y_1 \in \Omega_1, \dots, y_{m+q} \in \Omega_{m+q}}$ and if $f = \tuple{t_1, \dots, t_m}$ is a realisation of $\tuple{y_1 \in \Omega_1, \dots, y_m \in \Omega_m}$ wrt $\tuple{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}$, (in which case
+%
+\begin{center}
+\begin{tikzcd}
+B \arrow[d, "{\synp(B{,}A')}"] \\
+A'
+\end{tikzcd}
+\qquad
+\begin{tikzcd}
+A \arrow[r, "f"] & A'
+\end{tikzcd}
+\end{center}
+%
+in $\mathbb{R}(\thU)$) then
+%
+\begin{center}
+\begin{tikzcd}
+f^*B \arrow[r, "{\synq(f{,}B)}"] \arrow[d, "{\synp(f^*B{,}A)}"] & B \arrow[d, "{\synp(B{,}A')}"] \\
+A \arrow[r, "f"] & A'
+\end{tikzcd}
+\end{center}
+%
+is a pullback diagram in $\mathbb{R}(\thU)$.
+
+Where $f^*B = \tuple{x_1 \in \Delta_1, \dots, x_n \in \Delta_n, y_{m+1} \in \Omega_{m+1}[t_1|y_1, \dots, t_m|y_m], \dots, y_{m+q} \in \Omega_{m+q}[t_1|y_1, \dots, t_m|y_m]}$ and $\synq(f,B) = \tuple{t_1, \dots, t_m, y_{m+1}, \dots, y_{m+q}}$.
 
 % source p1.60
 \section{Intended identity of denotations} \label{sec:source-1-13}
 
-\lipsum[12]
+% source p
+We define an equivalence relation on the derived T and $\in$-rules of a theory $\thU$ which we call the equivalence relation of \defemph{intended identity of denotation}.
+%
+The idea is that if $r \equiv r'$ by this relation then any kind of model of $\thU$ should interpret $r$ and $r'$ as identical objects.
+%
+Semantically, we should not distinguish between the rule
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{\Delta \isatype}
+\end{mathpar}
+and the rule
+\begin{mathpar}
+\inferrule{x'_1 \in \Delta_1, \dots, x'_n \in \Delta_n[x'_1|x_1, \dots, x'_{n-1}|x_{n-1}]}{\Delta[x'_1|x_1, \dots, x'_n|x_n] \isatype}
+\end{mathpar}
+because the two rules only differ by the choice of variables.
+%
+Neither should we distinguish between
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{\Delta \isatype}
+\and
+\inferrule{x_1 \in \Delta'_1, \dots, x_n \in \Delta'_n}{\Delta' \isatype}
+\end{mathpar}
+if for each $i, 1 \le i \le n$,
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_{i-1} \in \Delta_{i-1}}{\Delta_i = \Delta'_i}
+\end{mathpar}
+is a derived rule and
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{\Delta = \Delta'}
+\end{mathpar}
+is a derived rule.
+
+% source p
+The relation $\equiv$, of intended identity of denotation, is defined between T-rules of a theory $\thU$ by
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{\Delta_{n+1} \isatype}
+\equiv
+\inferrule{y_1 \in \Omega_1, \dots, y_m \in \Omega_m}{\Omega_{m+1} \isatype}
+\end{mathpar}
+iff $n=m$ and for each $i, 1 \le i \le n+1$,
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_{i-1} \in \Delta_{i-1}}{\Delta_i = \Omega_i[x_1|y_1, \dots, x_{i-1}|y_{i-1}]}
+\end{mathpar}
+is a derived rule of $\thU$.
+
+\begin{lemma}
+$\equiv$ is an equivalence relation.
+\end{lemma}
+
+\begin{proof}
+1.\ Reflexiveness follows from the principle of derivation LI1.
+
+2.\ Symmetry. Suppose that
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{\Delta_{n+1} \isatype}
+\equiv
+\inferrule{y_1 \in \Omega_1, \dots, y_n \in \Omega_n}{\Omega_{n+1} \isatype}
+\end{mathpar}
+we prove by induction on $i$ that for all $i, 1 \le i \le n+1$,
+\begin{mathpar}
+\inferrule{y_1 \in \Omega_1, \dots, y_{i-1} \in \Omega_{i-1}}{\Omega_i = \Delta_i[y_1|x_1, \dots, y_{i-1}|x_{i-1}]}
+\end{mathpar}
+is derivable.
+
+If $i=1$ then certainly $\Omega_1 = \Delta_1$ is derivable since $\Delta_1 = \Omega_1$ is.
+%
+Now if $i>1$ and if for all $j, 1 \le j < i$,
+\begin{mathpar}
+\inferrule{y_1 \in \Omega_1, \dots, y_{j-1} \in \Omega_{j-1}}{\Omega_j = \Delta_j[y_1|x_1, \dots, y_{j-1}|x_{j-1}]}
+\end{mathpar}
+is derivable; then for all such $j$,
+\begin{mathpar}
+\inferrule{y_1 \in \Omega_1, \dots, y_{j-1} \in \Omega_{j-1}, y_j \in \Omega_j}{y_j \in \Delta_j[y_1|x_1, \dots, y_{j-1}|x_{j-1}]}
+\end{mathpar}
+is derivable.
+%
+Hence for all such $j$,
+\begin{mathpar}
+\inferrule{y_1 \in \Omega_1, \dots, y_{i-1} \in \Omega_{i-1}}{y_j \in \Delta_j[y_1|x_1, \dots, y_{j-1}|x_{j-1}]}
+\end{mathpar}
+is derivable.
+%
+Since
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_{i-1} \in \Delta_{i-1}}{\Delta_i = \Omega_i[x_1|y_1, \dots, x_{i-1}|y_{i-1}]}
+\end{mathpar}
+is derivable, by the substitution lemma so is
+\begin{mathpar}
+\inferrule{y_1 \in \Omega_1, \dots, y_{i-1} \in \Omega_{i-1}}{\Delta_i[y_1|x_1, \dots, y_{i-1}|x_{i-1}] = \Omega_i}
+\end{mathpar}
+(because $\Omega_i[x_1|y_1, \dots, x_{i-1}|y_{i-1}][y_1|x_1, \dots, y_{i-1}|x_{i-1}] = \Omega_i$).
+%
+Hence
+\begin{mathpar}
+\inferrule{y_1 \in \Omega_1, \dots, y_{i-1} \in \Omega_{i-1}}{\Omega_i = \Delta_i[y_1|x_1, \dots, y_{i-1}|x_{i-1}]}
+\end{mathpar}
+is derivable as required.
+%
+It follows by induction that
+\begin{mathpar}
+\inferrule{y_1 \in \Omega_1, \dots, y_n \in \Omega_n}{\Omega_{n+1} \isatype}
+\equiv
+\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{\Delta_{n+1} \isatype}
+\end{mathpar}
+
+3.\ Transitivity. Assume that
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{\Delta_{n+1} \isatype}
+\equiv
+\inferrule{y_1 \in \Omega_1, \dots, y_m \in \Omega_m}{\Omega_{m+1} \isatype}
+\end{mathpar}
+and that
+\begin{mathpar}
+\inferrule{y_1 \in \Omega_1, \dots, y_m \in \Omega_m}{\Omega_{m+1} \isatype}
+\equiv
+\inferrule{z_1 \in \Lambda_1, \dots, z_q \in \Lambda_q}{\Lambda_{q+1} \isatype}
+\end{mathpar}
+%
+Suppose $1 \le i \le n+1$.
+%
+We have seen above that for each $j, 1 \le j < i$,
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_{i-1} \in \Delta_{i-1}}{x_j \in \Omega_j[x_1|y_1, \dots, x_{j-1}|y_{j-1}]}
+\end{mathpar}
+is a derived rule of $\thU$.
+%
+From the substitution lemma and
+\begin{mathpar}
+\inferrule{y_1 \in \Omega_1, \dots, y_{i-1} \in \Omega_{i-1}}{\Omega_i = \Lambda_i[y_1|z_1, \dots, y_{i-1}|z_{i-1}]}
+\end{mathpar}
+it follows that
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_{i-1} \in \Delta_{i-1}}{\Omega_i[x_1|y_1, \dots, x_{i-1}|y_{i-1}] = \Lambda_i[y_1|z_1, \dots, y_{i-1}|z_{i-1}][x_1|y_1, \dots, x_{i-1}|y_{i-1}]}
+\end{mathpar}
+is a derived rule.
+%
+That is
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_{i-1} \in \Delta_{i-1}}{\Omega_i[x_1|y_1, \dots, x_{i-1}|y_{i-1}] = \Lambda_i[x_1|z_1, \dots, x_{i-1}|z_{i-1}]}
+\end{mathpar}
+is a derived rule.
+%
+Since
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_{i-1} \in \Delta_{i-1}}{\Delta_i = \Omega_i[x_1|y_1, \dots, x_{i-1}|y_{i-1}]}
+\end{mathpar}
+is a derived rule it follows that
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_{i-1} \in \Delta_{i-1}}{\Delta_i = \Lambda_i[x_1|z_1, \dots, x_{i-1}|z_{i-1}]}
+\end{mathpar}
+is a derived rule.
+%
+Since this is the case for each $i, 1 \le i \le n+1$, it follows that
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{\Delta_{n+1} \isatype}
+\equiv
+\inferrule{z_1 \in \Lambda_1, \dots, z_q \in \Lambda_q}{\Lambda_{q+1} \isatype}
+\end{mathpar}
+Which completes the proof that $\equiv$ is an equivalence relation.
+\end{proof}
+
+% source p
+The equivalence relation $\equiv$ on T-rules can be used to define an equivalence relation on contexts simply by $\tuple{x_1 \in \Delta_1, \dots, x_n \in \Delta_n} \equiv \tuple{y_1 \in \Omega_1, \dots, y_m \in \Omega_m}$ iff
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_{n-1} \in \Delta_{n-1}}{\Delta_n \isatype}
+\equiv
+\inferrule{y_1 \in \Omega_1, \dots, y_{m-1} \in \Omega_{m-1}}{\Omega_m \isatype}
+\end{mathpar}
+%
+We define the equivalence relation $\equiv$ of intended identity of denotation on $\in$-rules of a theory $\thU$ by
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{t \in \Delta}
+\equiv
+\inferrule{y_1 \in \Omega_1, \dots, y_m \in \Omega_m}{s \in \Omega}
+\end{mathpar}
+iff
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{\Delta \isatype}
+\equiv
+\inferrule{y_1 \in \Omega_1, \dots, y_m \in \Omega_m}{\Omega \isatype}
+\end{mathpar}
+and
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{t = s[x_1|y_1, \dots, x_n|y_n]}
+\end{mathpar}
+is a derived rule of $\thU$.
+%
+That $\equiv$ is an equivalence relation on $\in$-rules of $\thU$ is a consequence of the following:
+
+\begin{lemma}
+If $\tuple{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}$ and $\tuple{y_1 \in \Omega_1, \dots, y_m \in \Omega_m}$ are contexts of $\thU$ and $\tuple{x_1 \in \Delta_1, \dots, x_n \in \Delta_n} \equiv \tuple{y_1 \in \Omega_1, \dots, y_m \in \Omega_m}$ then for all derived rules of $\thU$ of the form
+\begin{mathpar}
+\inferrule{y_1 \in \Omega_1, \dots, y_m \in \Omega_m}{\text{Conclusion}}
+\end{mathpar}
+the rule
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{\text{Conclusion}[x_1|y_1, \dots, x_n|y_n]}
+\end{mathpar}
+is a derived rule of $\thU$.
+\end{lemma}
+
+\begin{proof}
+For each $i, 1 \le i \le n$,
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_{i-1} \in \Delta_{i-1}}{\Delta_i = \Omega_i[x_1|y_1, \dots, x_{i-1}|y_{i-1}]}
+\end{mathpar}
+is a derived rule of $\thU$ thus, by the substitution lemma, so is
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{\Delta_i = \Omega_i[x_1|y_1, \dots, x_{i-1}|y_{i-1}]}
+\end{mathpar}
+%
+Since for each $i, 1 \le i \le n$,
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{x_i \in \Delta_i}
+\end{mathpar}
+is a derived rule of $\thU$ then so is
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{x_i \in \Omega_i[x_1|y_1, \dots, x_{i-1}|y_{i-1}]}
+\end{mathpar}
+%
+Now by the substitution lemma, since
+\begin{mathpar}
+\inferrule{y_1 \in \Omega_1, \dots, y_m \in \Omega_m}{\text{Conclusion}}
+\end{mathpar}
+is a derived rule then so is
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{\text{Conclusion}[x_1|y_1, \dots, x_n|y_n]}
+\end{mathpar}
+\end{proof}
+
+\begin{corollary}
+$\equiv$ is an equivalence relation on the derived $\in$-rules of $\thU$.
+\end{corollary}
+
+\begin{proof}
+1.\ Reflexiveness follows from principle of derivation LI2.
+
+2.\ Symmetry. Suppose that
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{t \in \Delta}
+\equiv
+\inferrule{y_1 \in \Omega_1, \dots, y_n \in \Omega_n}{s \in \Omega}
+\end{mathpar}
+%
+Then $\tuple{x_1 \in \Delta_1, \dots, x_n \in \Delta_n} \equiv \tuple{y_1 \in \Omega_1, \dots, y_n \in \Omega_n}$ so by the previous lemma,
+\begin{mathpar}
+\inferrule{y_1 \in \Omega_1, \dots, y_n \in \Omega_n}{t[y_1|x_1, \dots, y_n|x_n] = s \in \Delta[y_1|x_1, \dots, y_n|x_n]}
+\end{mathpar}
+is a derived rule of $\thU$.
+%
+By wellformedness, since
+\begin{mathpar}
+\inferrule{y_1 \in \Omega_1, \dots, y_n \in \Omega_n}{s \in \Omega}
+\and
+\inferrule{y_1 \in \Omega_1, \dots, y_n \in \Omega_n}{s \in \Delta[y_1|x_1, \dots, y_n|x_n]}
+\end{mathpar}
+are derived rules of $\thU$ so is
+\begin{mathpar}
+\inferrule{y_1 \in \Omega_1, \dots, y_n \in \Omega_n}{\Omega = \Delta[y_1|x_1, \dots, y_n|x_n]}
+\end{mathpar}
+%
+Thus
+\begin{mathpar}
+\inferrule{y_1 \in \Omega_1, \dots, y_n \in \Omega_n}{s = t[y_1|x_1, \dots, y_n|x_n] \in \Omega}
+\end{mathpar}
+is a derived rule of $\thU$ and
+\begin{mathpar}
+\inferrule{y_1 \in \Omega_1, \dots, y_n \in \Omega_n}{s \in \Omega}
+\equiv
+\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{t \in \Delta}
+\end{mathpar}
+
+3.\ Transitivity. Suppose that
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{t \in \Delta}
+\equiv
+\inferrule{y_1 \in \Omega_1, \dots, y_n \in \Omega_n}{s \in \Omega}
+\end{mathpar}
+and
+\begin{mathpar}
+\inferrule{y_1 \in \Omega_1, \dots, y_n \in \Omega_n}{s \in \Omega}
+\equiv
+\inferrule{z_1 \in \Lambda_1, \dots, z_n \in \Lambda_n}{r \in \Lambda}
+\end{mathpar}
+%
+Then $\tuple{x_1 \in \Delta_1, \dots, x_n \in \Delta_n} \equiv \tuple{y_1 \in \Omega_1, \dots, y_n \in \Omega_n}$ and
+\begin{mathpar}
+\inferrule{y_1 \in \Omega_1, \dots, y_n \in \Omega_n}{s = r[y_1|z_1, \dots, y_n|z_n] \in \Omega}
+\end{mathpar}
+is a derived rule of $\thU$ thus by the previous lemma,
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{s[x_1|y_1, \dots, x_n|y_n] = r[x_1|z_1, \dots, x_n|z_n] \in \Omega[x_1|y_1, \dots, x_n|y_n]}
+\end{mathpar}
+is a derived rule of $\thU$.
+%
+Since we also have that
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{t = s[x_1|y_1, \dots, x_n|y_n] \in \Delta}
+\end{mathpar}
+is a derived rule of $\thU$ we can conclude that so too is
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{t = r[x_1|z_1, \dots, x_n|z_n] \in \Delta}
+\end{mathpar}
+%
+Thus
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{t \in \Delta}
+\equiv
+\inferrule{z_1 \in \Lambda_1, \dots, z_n \in \Lambda_n}{r \in \Lambda}
+\end{mathpar}
+\end{proof}
+
+% source p
+We define an equivalence relation $\equiv$ on realisations of $\thU$ as follows.
+%
+If $\tuple{t_1, \dots, t_m}$ is a realisation of $\tuple{y_1 \in \Omega_1, \dots, y_m \in \Omega_m}$ wrt $\tuple{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}$ and if $\tuple{t'_1, \dots, t'_m}$ is a realisation of $\tuple{y'_1 \in \Omega'_1, \dots, y'_m \in \Omega'_m}$ wrt $\tuple{x'_1 \in \Delta'_1, \dots, x'_n \in \Delta'_n}$ then $\tuple{t_1, \dots, t_m} \equiv \tuple{t'_1, \dots, t'_m}$ iff $\tuple{y_1 \in \Omega_1, \dots, y_m \in \Omega_m} \equiv \tuple{y'_1 \in \Omega'_1, \dots, y'_m \in \Omega'_m}$ and for each $j, 1 \le j \le m$,
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{t_j \in \Omega_j[t_1|y_1, \dots, t_{j-1}|y_{j-1}]}
+\equiv
+\inferrule{x'_1 \in \Delta'_1, \dots, x'_n \in \Delta'_n}{t'_j \in \Omega'_j[t'_1|y'_1, \dots, t'_{j-1}|y'_{j-1}]}
+\end{mathpar}
+
+\begin{lemma}
+If $\tuple{t_1, \dots, t_m}$ is a realisation of $\tuple{y_1 \in \Omega_1, \dots, y_m \in \Omega_m}$ wrt $\tuple{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}$ and if $\tuple{t'_1, \dots, t'_m}$ is a realisation of $\tuple{y'_1 \in \Omega'_1, \dots, y'_m \in \Omega'_m}$ wrt $\tuple{x'_1 \in \Delta'_1, \dots, x'_n \in \Delta'_n}$ and if $\tuple{t_1, \dots, t_m} \equiv \tuple{t'_1, \dots, t'_m}$ then
+\begin{enumerate}[(i)]
+\item if
+\begin{mathpar}
+\inferrule{y_1 \in \Omega_1, \dots, y_m \in \Omega_m}{\Omega \isatype}
+\and
+\inferrule{y'_1 \in \Omega'_1, \dots, y'_m \in \Omega'_m}{\Omega' \isatype}
+\end{mathpar}
+are derived rules of $\thU$ s.t.\ $\tuple{y_1 \in \Omega_1, \dots, y_m \in \Omega_m, y \in \Omega} \equiv \tuple{y'_1 \in \Omega'_1, \dots, y'_m \in \Omega'_m, y' \in \Omega'}$ then $\tuple{x_1 \in \Delta_1, \dots, x_n \in \Delta_n, y \in \Omega[t_1|y_1, \dots, t_m|y_m]} \equiv \tuple{x'_1 \in \Delta'_1, \dots, x'_n \in \Delta'_n, y' \in \Omega'[t'_1|y'_1, \dots, t'_m|y'_m]}$.
+
+\item If
+\begin{mathpar}
+\inferrule{y_1 \in \Omega_1, \dots, y_m \in \Omega_m}{s \in \Omega}
+\and
+\inferrule{y'_1 \in \Omega'_1, \dots, y'_m \in \Omega'_m}{s' \in \Omega'}
+\end{mathpar}
+are derived rules of $\thU$ s.t.\
+\begin{mathpar}
+\inferrule{y_1 \in \Omega_1, \dots, y_m \in \Omega_m}{s = s'[y_1|y'_1, \dots, y_m|y'_m] \in \Omega}
+\end{mathpar}
+is a derived rule of $\thU$ then
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{s[t_1|y_1, \dots, t_m|y_m] = s'[t'_1|y'_1, \dots, t'_m|y'_m][x_1|x'_1, \dots, x_n|x'_n] \in \Omega[t_1|y_1, \dots, t_m|y_m]}
+\end{mathpar}
+is a derived rule of $\thU$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Since $\tuple{t_1, \dots, t_m} \equiv \tuple{t'_1, \dots, t'_m}$, for each $j, 1 \le j \le m$,
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{t_j \in \Omega_j[t_1|y_1, \dots, t_{j-1}|y_{j-1}]}
+\equiv
+\inferrule{x'_1 \in \Delta'_1, \dots, x'_n \in \Delta'_n}{t'_j \in \Omega'_j[t'_1|y'_1, \dots, t'_{j-1}|y'_{j-1}]}
+\end{mathpar}
+%
+That is for each $j, 1 \le j \le m$,
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{t_j = t'_j[x_1|x'_1, \dots, x_n|x'_n] \in \Omega_j[t_1|y_1, \dots, t_{j-1}|y_{j-1}]}
+\end{mathpar}
+is a derived rule of $\thU$.
+%
+Now (i) follows immediately by use of principle of derivation SI1.
+%
+(ii) follows from SI2, using the fact that $s'[y_1|y'_1, \dots, y_m|y'_m][t_1[x_1|x'_1, \dots, x_n|x'_n]|y_1, \dots, t_m[x_1|x'_1, \dots, x_n|x'_n]|y_m] = s'[t'_1|y'_1, \dots, t'_m|y'_m][x_1|x'_1, \dots, x_n|x'_n]$.
+\end{proof}
+
+\begin{lemma}
+\begin{enumerate}[(i)]
+\item If $\tuple{t_1, \dots, t_m}$ is a realisation of $\tuple{y_1 \in \Omega_1, \dots, y_m \in \Omega_m}$ wrt $\tuple{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}$ and if $\tuple{x_1 \in \Delta_1, \dots, x_n \in \Delta_n} \equiv \tuple{x'_1 \in \Delta'_1, \dots, x'_n \in \Delta'_n}$ and $\tuple{y_1 \in \Omega_1, \dots, y_m \in \Omega_m} \equiv \tuple{y'_1 \in \Omega'_1, \dots, y'_m \in \Omega'_m}$ then there exists a realisation $\tuple{t'_1, \dots, t'_m}$ of $\tuple{y'_1 \in \Omega'_1, \dots, y'_m \in \Omega'_m}$ wrt $\tuple{x'_1 \in \Delta'_1, \dots, x'_n \in \Delta'_n}$ such that $\tuple{t_1, \dots, t_m} \equiv \tuple{t'_1, \dots, t'_m}$.
+
+\item If $\tuple{x_1 \in \Delta_1, \dots, x_n \in \Delta_n, x \in \Delta}$ is a context of $\thU$ and $\tuple{x_1 \in \Delta_1, \dots, x_n \in \Delta_n} \equiv \tuple{x'_1 \in \Delta'_1, \dots, x'_n \in \Delta'_n}$ then there exists $\Delta'$ s.t.\ $\tuple{x'_1 \in \Delta'_1, \dots, x'_n \in \Delta'_n, x' \in \Delta'}$ is a context and $\tuple{x_1 \in \Delta_1, \dots, x_n \in \Delta_n, x \in \Delta} \equiv \tuple{x'_1 \in \Delta'_1, \dots, x'_n \in \Delta'_n, x' \in \Delta'}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+For (i) take $t'_j = t_j[x'_1|x_1, \dots, x'_n|x_n]$ and then use the previous lemma.
+%
+Similarly in (ii) take $\Delta' = \Delta[x'_1|x_1, \dots, x'_n|x_n]$ and use the previous lemma.
+\end{proof}
+
+% source p
+The following lemma follows directly from the SI2 principle of derivation.
+
+\begin{lemma}
+If $\tuple{t_1, \dots, t_{m+1}}$ is a realisation of $\tuple{y_1 \in \Omega_1, \dots, y_{m+1} \in \Omega_{m+1}}$ wrt $\tuple{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}$, if $\tuple{s_1, \dots, s_m}$ is a realisation of $\tuple{y_1 \in \Omega_1, \dots, y_m \in \Omega_m}$ wrt $\tuple{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}$ and if $\tuple{s_1, \dots, s_m} \equiv \tuple{t_1, \dots, t_m}$ then $\tuple{s_1, \dots, s_m, t_{m+1}}$ is a realisation of $\tuple{y_1 \in \Omega_1, \dots, y_{m+1} \in \Omega_{m+1}}$ wrt $\tuple{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}$ and $\tuple{s_1, \dots, s_m, t_{m+1}} \equiv \tuple{t_1, \dots, t_{m+1}}$.
+\end{lemma}
 
 % source p1.69
 \section{The category $\catGAT$} \label{sec:source-1-14}
 
-\lipsum[13]
+% source p
+We can define an equivalence relation $\equiv$ on the set of interpretations of a theory $\thU$ in a theory $\thU'$.
+%
+If $I$ and $J$ are two such interpretations then define $I \equiv J$ iff for all introductory rules $R$ of $\thU$, $\hat{I}(R) \equiv \hat{J}(R)$ in $\thU'$.
+
+\begin{lemma}
+If $I$ and $J$ are interpretations of $\thU$ in $\thU'$ and $I \equiv J$ then for all derived T and $\in$-rules $R$ of $\thU$, $\hat{I}(R) \equiv \hat{J}(R)$.
+\end{lemma}
+
+\begin{proof}
+By induction on derivations in $\thU$.
+%
+We check that principles T1, CF1, CF2(a) and (b) preserve the property.
+
+\underline{T1.} Suppose that
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{t \in \Delta}
+\and
+\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{\Delta = \Delta'}
+\end{mathpar}
+are derived rules of $\thU$ and that $\hat{I}\left(\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{t \in \Delta}\right) \equiv \hat{J}\left(\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{t \in \Delta}\right)$.
+%
+Then $x_1 \in \dot{I}(\Delta_1), \dots, x_n \in \dot{I}(\Delta_n) : \dot{I}(t) = \dot{J}(t) \in \dot{I}(\Delta)$ is a derived rule of $\thU'$ and since $I$ is an interpretation, so is $x_1 \in \dot{I}(\Delta_1), \dots, x_n \in \dot{I}(\Delta_n) : \dot{I}(\Delta) = \dot{I}(\Delta')$.
+%
+Thus $x_1 \in \dot{I}(\Delta_1), \dots, x_n \in \dot{I}(\Delta_n) : \dot{I}(t) = \dot{J}(t) \in \dot{I}(\Delta')$ is a derived rule of $\thU'$.
+%
+And as $\tuple{x_1 \in \dot{I}(\Delta_1), \dots, x_n \in \dot{I}(\Delta_n)} \equiv \tuple{x_1 \in \dot{J}(\Delta_1), \dots, x_n \in \dot{J}(\Delta_n)}$ is the case so $\hat{I}\left(\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{t \in \Delta'}\right) \equiv \hat{J}\left(\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{t \in \Delta'}\right)$.
+
+\underline{CF1.} Suppose
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{\Delta_{n+1} \isatype}
+\end{mathpar}
+is a derived rule of $\thU$ and that $\hat{I}\left(\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{\Delta_{n+1} \isatype}\right) \equiv \hat{J}\left(\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{\Delta_{n+1} \isatype}\right)$.
+%
+Then $\tuple{x_1 \in \dot{I}(\Delta_1), \dots, x_{n+1} \in \dot{I}(\Delta_{n+1})} \equiv \tuple{x_1 \in \dot{J}(\Delta_1), \dots, x_{n+1} \in \dot{J}(\Delta_{n+1})}$ and $x_1 \in \dot{I}(\Delta_1), \dots, x_{n+1} \in \dot{I}(\Delta_{n+1}) : x_i = x_i \in \dot{I}(\Delta_i)$ is a derived rule of $\thU'$, hence $\hat{I}\left(\inferrule{x_1 \in \Delta_1, \dots, x_{n+1} \in \Delta_{n+1}}{x_i \in \Delta_i}\right) \equiv \hat{J}\left(\inferrule{x_1 \in \Delta_1, \dots, x_{n+1} \in \Delta_{n+1}}{x_i \in \Delta_i}\right)$.
+
+\underline{CF2(b).} (Principle CF2(a) will be similar).
+%
+Suppose that $f$ is an operator symbol of $\thU$ introduced by
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{f(x_1, \dots, x_n) \in \Delta}
+\end{mathpar}
+and suppose that for each $i, 1 \le i \le n$,
+\begin{mathpar}
+\inferrule{y_1 \in \Omega_1, \dots, y_m \in \Omega_m}{t_i \in \Delta_i[t_1|x_1, \dots, t_{i-1}|x_{i-1}]}
+\end{mathpar}
+is a derived rule of $\thU$.
+%
+Suppose that for each $i, 1 \le i \le n$, $\hat{I}\left(\inferrule{y_1 \in \Omega_1, \dots, y_m \in \Omega_m}{t_i \in \Delta_i[t_1|x_1, \dots, t_{i-1}|x_{i-1}]}\right) \equiv \hat{J}\left(\inferrule{y_1 \in \Omega_1, \dots, y_m \in \Omega_m}{t_i \in \Delta_i[t_1|x_1, \dots, t_{i-1}|x_{i-1}]}\right)$.
+%
+Using lemma~1 of \S\ref{sec:source-1-10} we see that for each $i, 1 \le i \le n$,
+\begin{mathpar}
+\inferrule{y_1 \in \dot{I}(\Omega_1), \dots, y_m \in \dot{I}(\Omega_m)}{\dot{I}(t_i) \in \dot{I}(\Delta_i)[\dot{I}(t_1)|x_1, \dots, \dot{I}(t_{i-1})|x_{i-1}]}
+\equiv
+\inferrule{y_1 \in \dot{J}(\Omega_1), \dots, y_m \in \dot{J}(\Omega_m)}{\dot{J}(t_i) \in \dot{J}(\Delta_i)[\dot{J}(t_1)|x_1, \dots, \dot{J}(t_{i-1})|x_{i-1}]}
+\end{mathpar}
+%
+Also, since $I \equiv J$,
+\begin{mathpar}
+\inferrule{x_1 \in \dot{I}(\Delta_1), \dots, x_n \in \dot{I}(\Delta_n)}{\dot{I}(f(x_1, \dots, x_n)) \in \dot{I}(\Delta)}
+\equiv
+\inferrule{x_1 \in \dot{J}(\Delta_1), \dots, x_n \in \dot{J}(\Delta_n)}{\dot{J}(f(x_1, \dots, x_n)) \in \dot{J}(\Delta)}
+\end{mathpar}
+%
+In particular $\tuple{\dot{I}(t_1), \dots, \dot{I}(t_n)}$ is a realisation of $\tuple{x_1 \in \dot{I}(\Delta_1), \dots, x_n \in \dot{I}(\Delta_n)}$ wrt $\tuple{y_1 \in \dot{I}(\Omega_1), \dots, y_m \in \dot{I}(\Omega_m)}$, $\tuple{\dot{J}(t_1), \dots, \dot{J}(t_n)}$ is a realisation of $\tuple{x_1 \in \dot{J}(\Delta_1), \dots, x_n \in \dot{J}(\Delta_n)}$ wrt $\tuple{y_1 \in \dot{J}(\Omega_1), \dots, y_m \in \dot{J}(\Omega_m)}$ and $\tuple{\dot{I}(t_1), \dots, \dot{I}(t_n)} \equiv \tuple{\dot{J}(t_1), \dots, \dot{J}(t_n)}$.
+%
+Thus by lemma~3(i) of \S\ref{sec:source-1-12}, $\dot{I}(f(x_1, \dots, x_n))[\dot{I}(t_1)|x_1, \dots, \dot{I}(t_n)|x_n] = \dot{J}(f(x_1, \dots, x_n))[\dot{J}(t_1)|x_1, \dots, \dot{J}(t_n)|x_n] \in \dot{I}(\Delta)[\dot{J}(t_1)|x_1, \dots, \dot{J}(t_n)|x_n]$ is derived rule of $\thU'$.
+%
+Using lemma~1 of \S\ref{sec:source-1-10}, this rule is just
+\begin{mathpar}
+\inferrule{y_1 \in \dot{I}(\Omega_1), \dots, y_m \in \dot{I}(\Omega_m)}{\dot{I}(f(t_1, \dots, t_m)) = \dot{J}(f(t_1, \dots, t_m)) \in \dot{I}(\Delta)[\dot{I}(t_1)|x_1, \dots, \dot{I}(t_n)|x_n]}
+\end{mathpar}
+%
+Thus
+\begin{mathpar}
+\hat{I}\left(\inferrule{y_1 \in \Omega_1, \dots, y_m \in \Omega_m}{f(t_1, \dots, t_n) \in \Delta[t_1|x_1, \dots, t_n|x_n]}\right)
+\equiv
+\hat{J}\left(\inferrule{y_1 \in \Omega_1, \dots, y_m \in \Omega_m}{f(t_1, \dots, t_n) \in \Delta[t_1|x_1, \dots, t_n|x_n]}\right)
+\end{mathpar}
+\end{proof}
+
+\begin{corollary}
+If $I$ and $J$ are interpretations of $\thU$ in $\thU'$ then $I \equiv J$ iff for all derived $\in$-rules $R$ of $\thU$, $\hat{I}(R) \equiv \hat{J}(R)$.
+\end{corollary}
+
+\begin{proof}
+Use the fact that
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{\Delta \isatype}
+\end{mathpar}
+is a derived rule of $\thU$ iff
+\begin{mathpar}
+\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n, x \in \Delta}{x \in \Delta}
+\end{mathpar}
+is a derived rule of $\thU$.
+%
+From $\hat{I}\left(\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n, x \in \Delta}{x \in \Delta}\right) \equiv \hat{J}\left(\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n, x \in \Delta}{x \in \Delta}\right)$ we can deduce that $\hat{I}\left(\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{\Delta \isatype}\right) \equiv \hat{J}\left(\inferrule{x_1 \in \Delta_1, \dots, x_n \in \Delta_n}{\Delta \isatype}\right)$.
+\end{proof}
+
+\begin{corollary}
+If $I$ and $J$ are interpretations of $\thU$ in $\thU'$ and $I'$ and $J'$ are interpretations of $\thU'$ in $\thU''$ then $I \equiv J$ and $I' \equiv J'$ implies $I' \circ I \equiv J' \circ J$.
+\end{corollary}
+
+% source p
+We denote the category of generalised algebraic theories and equivalence classes of interpretations by $\catGAT$.
+%
+Composition is defined by $[I'] \circ [I] = [I' \circ I]$.
+%
+Well defined by the previous corollary.
 
 %%% Local Variables:
 %%% mode: latex

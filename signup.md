@@ -30,17 +30,17 @@ Suggestion: to start with, leave space for people to work in contiguous blocks. 
 - 1.9 ROUGH [nathan]
 - 1.10 ROUGH [nathan]
 - 1.11 ROUGH [nathan]
-- 1.12
-- 1.13
-- 1.14
+- 1.12 OCR 
+- 1.13 OCR 
+- 1.14 OCR 
 - 2.1 ROUGH [JL]
 - 2.2 ROUGH [JL]
 - 2.3 IN PROGRESS [JL]
-- 2.4
-- 2.5
-- 3.0
-- 3.1
-- 3.2
-- 3.3
-- 3.4
-- 3.5
+- 2.4 OCR
+- 2.5 OCR 
+- 3.0 OCR 
+- 3.1 OCR 
+- 3.2 OCR 
+- 3.3 OCR 
+- 3.4 OCR 
+- 3.5 OCR 

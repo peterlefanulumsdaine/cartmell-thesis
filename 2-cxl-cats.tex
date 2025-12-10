@@ -337,18 +337,789 @@ The category of contextual categories and contextual functors is denoted \(\catC
 % source p2.12
 \section{Notation and basic lemmas} \label{sec:source-2-3}
 
-\lipsum[16]
+% source p
+In subsequent sections we will frequently need the following notation.
+
+\begin{definition}
+If \(\mathbb{C}\) is a contextual category then
+\begin{enumerate}
+    \item If \(A, B \in |\mathbb{C}|\) and \(A' \triangleleft A\) and \(f: A \to B\) then \(p(f) = f \circ p(A)\). So defined, if \(g: B \to C\) in \(\mathbb{C}\), \(p(g \circ f) = p(g) \circ p(f)\).
+    \item If \(A, B \in |\mathbb{C}|\) and \(f: A \to B\) in \(\mathbb{C}\) then \(p(B, A) = p(B) \circ p(p(B)) \circ \cdots \circ p^{\ell(B) - \ell(A) - 1}(B)\), so that \(p(B, A): B \to A\) and \(\ell(A) \le \ell(B)\).
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}
+If \(f: A' \to A\) in the contextual category \(\mathbb{C}\) and if \(A \triangleleft B_1 \triangleleft \cdots \triangleleft B_n\) in \(\mathbb{C}\) then \(f^*(B_n) = f^* B_1^* \cdots B_{n-1}^* B_n\) and if \(A \triangleleft B\) in \(\mathbb{C}\) and \(x: B \to B'\) in \(\mathbb{C}_A\) then \(f^* x = q(f, B_1) \cdots q(f^* B_1 \cdots B_{n-1}, B_n)^* x\).
+\end{lemma}
+
+\begin{proof}
+The proof is by induction on \(n\). The case \(n=1\) is trivial. The inductive step follows from axiom (II) for contextual categories.
+\end{proof}
+
+For convenience we abbreviate \(q(f, B_1) \cdots q(f^* B_1 \cdots B_{n-1}, B_n)\) to \(q(f, B_n)\).
+
+\begin{definition}
+If \(A \in |\mathbb{C}|\) then let \(\mathbb{C}_A\) be the full subcategory of \(\mathbb{C}\) of objects \(B\) such that \(A \le B\).
+\end{definition}
+
+\begin{lemma}
+If \(A \in |\mathbb{C}|\) then \(\mathbb{C}_A\) is a contextual category.
+\end{lemma}
+
+\begin{proof}
+(i) Certainly \(A\) is terminal in \(\mathbb{C}_A\) and if \(B_1, B_2 \in |\mathbb{C}_A|\) and \(B_1 \triangleleft B_2\) in \(\mathbb{C}\) then \(B_1 \triangleleft B_2\) in \(\mathbb{C}_A\). Thus \(\mathbb{C}_A\) is a contextual category whose tree of objects is just the set of objects above \(A\) in the tree of objects of \(\mathbb{C}\).
+(ii) This follows immediately from Lemma 1 above.
+\end{proof}
+
+\begin{definition}
+If \(f: A \to A'\) in \(\mathbb{C}\) then let \(\mathbb{C}_f: \mathbb{C}_{A'} \to \mathbb{C}_A\) be the functor defined by \(\mathbb{C}_f(x) = f^* x\), for all objects and morphisms \(x\) of \(\mathbb{C}_{A'}\).
+\end{definition}
+
+\begin{lemma}\mbox{}
+\begin{enumerate}
+    \item[(a)] \(\mathbb{C}_f: \mathbb{C}_{A'} \to \mathbb{C}_A\) is a contextual functor.
+    \item[(b)] If \(f: A \to A'\) and \(g: A' \to A''\) in \(\mathbb{C}\) then \(\mathbb{C}_f \circ \mathbb{C}_g = \mathbb{C}_{g \circ f}\).
+\end{enumerate}
+\end{lemma}
+
+Axiom (I) of the theory of contextual categories ensures that if \(A\) is an object of the contextual category \(\mathbb{C}\) then \(\mathbb{C}_{id_A} = id_{\mathbb{C}_A}\). Axiom (II) ensures that whenever \(f: A \to A'\) in \(\mathbb{C}\) and \(f': A' \to A''\) in \(\mathbb{C}\) then \(\mathbb{C}_{f'} \circ \mathbb{C}_f = \mathbb{C}_{f'f}\). Thus \(\mathbb{C}_{-} : \mathbb{C}^{op} \to \catCon\) is a functor.
+
+\begin{definition}
+If \(F: \mathbb{C} \to \mathbb{C}'\) is a contextual functor then if \(A\) is an object of \(\mathbb{C}\) let \(F_A: \mathbb{C}_A \to \mathbb{C}'_{F(A)}\) be the restriction of \(F\) to \(\mathbb{C}_A\). \(F_A\) is, in fact, a contextual functor.
+\end{definition}
+
+It is amusing to note that whenever \(F: \mathbb{C} \to \mathbb{C}'\) is a contextual functor then \(F_-: \mathbb{C}_- \to \mathbb{C}'_{F(-)}\) is a natural transformation. Thus whenever \(F: \mathbb{C} \to \mathbb{C}'\) is a contextual functor then we have the following diagram in the 2-category of categories.
+\begin{center}
+\begin{tikzcd}
+\mathbb{C}^{op} \arrow[r, "\mathbb{C}_-"] \arrow[d, "F"] & \catCon \\
+\mathbb{C}'^{op} \arrow[ur, "\mathbb{C}'_-"']
+\end{tikzcd}
+\end{center}
+
+The remainder of this section is ground work for the proof of the next section of the equivalence between theories and contextual categories. We begin by giving two definitions. With reference to the first of these two definitions we must apologise for the notation for we are not asking that the morphism `f' be thought of in any way as a quotation of \(f\), the notation is merely convenient.
+
+\begin{definition}
+If \(A, B \in |\mathbb{C}|\) and \(f: A \to B\) then \('\!f\!'\) is the unique morphism from \(A\) to \((f \circ p(B))^*B\) such that \('\!f\!' \circ p((f \circ p(B))^*B) = id_A\) and \('\!f\!' \circ q(f \circ p(B), B) = f\).
+\end{definition}
+
+\begin{center}
+\begin{tikzcd}
+& (f \circ p(B))^*B \arrow[r, "q(f \circ p(B){,} B)"] \arrow[d, "p((f \circ p(B))^*B)"] & B \arrow[d, "p(B)"] \\
+A \arrow[ur, dashed, "{'f'}"] \arrow[r, "id_A"'] & A \arrow[r, "f \circ p(B)"] & A
+\end{tikzcd}
+\end{center}
+
+\begin{definition}
+If \(A \triangleleft B\) in \(\mathbb{C}\) then \(Arr_{\mathbb{C}}(B) = \{ f: A \to B \suchthat f \circ p(B) = id_A \}\).
+\end{definition}
+
+Note that for all \(A, B \in |\mathbb{C}|\), for all \(f: A \to B\), \('\!f\!' \in Arr_{\mathbb{C}}((f \circ p(B))^*B)\).
+
+\begin{lemma}
+If \(U\) is a generalised algebraic theory and if \(1 \triangleleft A_1 \cdots \triangleleft A_n\), \(1 \triangleleft B_1 \cdots \triangleleft B_m\) in \(\mathbb{C}(U)\) are given by \(A_n = [\tuple{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}]\) and \(B_m = [\tuple{y_1 \in \Omega_1, \ldots, y_m \in \Omega_m}]\) then
+\begin{enumerate}
+    \item If \(f: A_n \to B_m\) is given by \(f = [\tuple{t_1, \ldots, t_m}]\) then \((f \circ p(B_m))^*B_m = [\tuple{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n, z \in \Omega_m[t_1|y_1, \ldots, t_{m-1}|y_{m-1}]}]\) and \('\!f\!' = [\tuple{x_1, \ldots, x_n, t_m}]\).
+    \item If \(A_n \triangleleft A\) in \(\mathbb{C}(U)\) and \(A = [\tuple{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n, x \in \Delta}]\) then for any morphism \(g\) of \(\mathbb{C}(U)\), \(g \in Arr_{\mathbb{C}(U)}(A)\) iff \(g\) is of the form \([\tuple{x_1, \ldots, x_n, t}]\) for some \(t\) such that
+    \[ \inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{t \in \Delta} \]
+    is a derived rule of \(U\).
+    \item For any \(i\), \(1 \le i \le n\), \(p(A_n, A_i) = [\tuple{x_1, \ldots, x_i}]\).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) and (ii) follow directly from the definition of \(\mathbb{C}(U)\).
+(iii) The proof is by induction. Certainly \(p(A_n, A_n) = [\tuple{x_1, \ldots, x_n}]\) by definition of \(\mathbb{C}(U)\). If we assume that the result holds for \(i+1\), that is if we assume that in \(\mathbb{C}(U)\), \(p(A_n, A_{i+1}) = [\tuple{x_1, \ldots, x_{i+1}}]\), then the result follows for \(i\), since \(p(A_n, A_i) = p(A_n, A_{i+1}) \circ p(A_{i+1}, A_i) = [\tuple{x_1, \ldots, x_{i+1}}] \circ [\tuple{x_1, \ldots, x_i}] = [\tuple{x_1, \ldots, x_i}]\).
+Hence the result holds for all \(i\), \(1 \le i \le n\).
+\end{proof}
+
+\begin{lemma}\mbox{}
+\begin{enumerate}
+    \item[(i)] If
+    \begin{center}
+    \begin{tikzcd}
+    A \arrow[r, "f_2"] \arrow[dr, "f_1"'] & B_2 \arrow[d] \\
+    & B_1
+    \end{tikzcd}
+    \end{center}
+    is a commutative diagram in \(\mathbb{C}\) then for all \(x: X \to X'\) in \(\mathbb{C}_{B_2}\), \(f_2^*x = '\!f_2\!'^{*} f_1^*x\).
+
+    \item[(ii)] If \(A \in |\mathbb{C}|\) and \(1 \triangleleft B_1 \cdots \triangleleft B_m\) in \(\mathbb{C}\) and for each \(j\), \(1 \le j \le m\), \(g_j: A \to B_j\) such that each triangle in the diagram commutes,
+    \begin{center}
+    \begin{tikzcd}
+    & B_m \arrow[d] \\
+    A \arrow[ur, "g_m"] \arrow[r, "g_{m-1}"] \arrow[dr, "g_1"'] & B_{m-1} \\
+    & \vdots \arrow[d] \\
+    & B_1
+    \end{tikzcd}
+    \end{center}
+    then for all \(x: X \to X'\) in \(\mathbb{C}_{B_m}\), \('\!g_m\!'^{*} \cdots '\!g_1\!'^{*} p(A,1)^*x = g_m^*x\).
+
+    \item[(iii)] If \(A \in |\mathbb{C}|\) and \(1 \triangleleft B_1 \cdots \triangleleft B_m\) in \(\mathbb{C}\) and for each \(j\), \(1 \le j \le m\), \(\alpha_j \in Arr_{\mathbb{C}}(\alpha_{j-1}^* \cdots \alpha_1^* p(A,1)^* B_j)\) then there exists a unique sequence of morphisms \(g_1, \ldots, g_m\) of \(\mathbb{C}\) such that for each \(j\), \(1 \le j \le m\), \(g_j: A \to B_j\) such that the diagram
+    \begin{center}
+    \begin{tikzcd}
+    & B_m \arrow[d] \\
+    A \arrow[ur, "g_m"] \arrow[r, "g_{m-1}"] \arrow[dr, "g_1"'] & B_{m-1} \\
+    & \vdots \arrow[d] \\
+    & B_1
+    \end{tikzcd}
+    \end{center}
+    commutes and such that for all \(j\), \(1 \le j \le m\), \('\!g_j\!' = \alpha_j\).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) \(f_2^*x = ('\!f_2\!'^{*} q(f_1, B_2))^*x\), since \(f_2 = '\!f_2\!' \circ q(f_1, B_2)\).
+\(= '\!f_2\!'^{*} (q(f_1, B_2)^*x)\), by axiom (II).
+\(= '\!f_2\!'^{*} f_1^*x\), by lemma 1.
+
+(ii) The proof is by induction on \(m\).
+If \(m=1\) then we have
+\begin{center}
+\begin{tikzcd}
+& B_1 \arrow[d] \\
+A \arrow[ur, "g_1"] \arrow[r, "{p(A{,}1)}"'] & 1
+\end{tikzcd}
+\end{center}
+in \(\mathbb{C}\), thus by part (i) \(g_1^*x = '\!g_1\!'^{*} p(A,1)^*x\).
+If \(m > 1\), if we assume that for all \(j\), \(1 \le j < m\), \(g_j^*x = '\!g_j\!'^{*} \cdots '\!g_1\!'^{*} p(A,1)^*x\), for all \(x\) in \(\mathbb{C}_{B_j}\). Then since
+\begin{center}
+\begin{tikzcd}
+& B_m \arrow[d] \\
+A \arrow[ur, "g_m"] \arrow[r, "g_{m-1}"] & B_{m-1}
+\end{tikzcd}
+\end{center}
+in \(\mathbb{C}\) thus by part (i) \(g_m^*x = '\!g_m\!'^{*} (g_{m-1}^*x) = '\!g_m\!'^{*}{} '\!g_{m-1}\!'^{*} \cdots '\!g_1\!'^{*} p(A,1)^*x\), by inductive hypothesis.
+
+(iii) The proof is by induction on \(m\).
+If \(m=1\) then since \('\!g_1\!'\) is required to be \(\alpha_1\), so we must choose \(g_1\) such that \(g_1 = \alpha_1 \circ q(p(A,1), B_1)\).
+If \(m>1\), and if we assume that \(g_1, \ldots, g_{m-1}\) are such that \(g_j \circ p(B_j) = g_{j-1}\), for all \(j\), \(1 < j \le m-1\) and such that \('\!g_j\!' = \alpha_j\), for each \(j, 1 \le j < m\). Then by part (ii) \(\alpha_m: A \to g_{m-1}^*B_m\). So we can and must choose \(g_m = \alpha_m \circ q(g_{m-1}, B_m)\).
+\end{proof}
+
+\begin{lemma}\mbox{}
+\begin{enumerate}
+    \item[(i)] If \(A \xrightarrow{f} B \xrightarrow{g} C\) in \(\mathbb{C}\) then \('\!(f \circ g)\!' = f'\!'\!g\!'\).
+    \item[(ii)] If \(A \in |\mathbb{C}|\) and \(1 \triangleleft B_1 \cdots \triangleleft B_m\) in \(\mathbb{C}\) and for each \(j\), \(1 \le j \le m\), \(\beta_j \in Arr_{\mathbb{C}}(\beta_{j-1}^* \cdots \beta_1^* p(A,1)^* B_j)\) then for each \(j\), \(1 \le j \le m\), \(\beta_m^* \cdots \beta_1^* p(A,1)^* {}'\!p(B_m, B_j)\!' = \beta_j\).
+    \item[(iii)] If \(A \in |\mathbb{C}|\), \(1 \triangleleft B_1 \cdots \triangleleft B_m\) and \(1 \triangleleft C_1 \cdots \triangleleft C_p\) in \(\mathbb{C}\), if for all \(j\), \(1 \le j \le m\), \(\beta_j \in Arr_{\mathbb{C}}(\beta_{j-1}^* \cdots \beta_1^* p(A,1)^* B_j)\) and for all \(k\), \(1 \le k \le p\), \(\gamma_k \in Arr_{\mathbb{C}}(\gamma_{k-1}^* \cdots \gamma_1^* p(B_m, 1)^* C_k)\), then for all \(x: X \to X'\) in \(\mathbb{C}\),
+    \[(\beta_m^* \cdots \beta_1^* p(A,1)^* \gamma_p)^* \cdots (\beta_m^* \cdots \beta_1^* p(A,1)^* \gamma_1)^* (\beta_m^* \cdots \beta_1^* p(A,1)^* p(B_m, 1))^* x\]
+    \[= \beta_m^* \cdots \beta_1^* p(A,1)^* \gamma_p^* \cdots \gamma_1^* p(B_m, 1)^* x.\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) \('\!(f \circ g)\!'\) is the unique morphism from \(A\) to \((f \circ g \circ p(C))^*C\) such that \('\!(f \circ g)\!' \circ p((f \circ g \circ p(C))^*C) = id_A\) and \('\!(f \circ g)\!' \circ q(f \circ g \circ p(C), C) = f \circ g\). It thus suffices to show that \(f'\!'\!g\!'\) is such a morphism.
+
+By definition of \('\!g\!'\), \('\!g\!': B \to (g \circ p(C))^*C\) such that \('\!g\!' \circ p((g \circ p(C))^*C) = id_B\) and \('\!g\!' \circ q(g \circ p(C), C) = g\). Thus \(f'\!'\!g\!' : A \to f^*((g \circ p(C))^*C)\), that is to say, \(f'\!'\!g\!' : A \to (f \circ g \circ p(C))^*C\). Also since \('\!g\!' \circ p((g \circ p(C))^*C) = id_B\), \(f'\!'\!g\!' \circ f^*p((g \circ p(C))^*C) = id_A\). But \(f^*p((g \circ p(C))^*C) = p(f^*((g \circ p(C))^*C)) = p((f \circ g \circ p(C))^*C)\), hence \(f'\!'\!g\!' \circ p((f \circ g \circ p(C))^*C) = id_A\). Which is one property of \('\!(f \circ g)\!'\).
+
+As for the other, from \('\!g\!' \circ q(g \circ p(C), C) = g\) deduce that \(f^* {}'\!g\!' \circ q(g \circ p(C), C) = f \circ g\). But \(f^* {}'\!g\!' = f'\!'\!g\!' \circ q(f, (g \circ p(C))^*C)\) and \(q(f, (g \circ p(C))^*C) \circ q(g \circ p(C), C) = q(f \circ g \circ p(C), C)\), hence we have \(f'\!'\!g\!' \circ q(f \circ g \circ p(C), C) = f \circ g\). As required. From the uniqueness of \('\!(f \circ g)\!'\) we conclude that \(f'\!'\!g\!' = '\!(f \circ g)\!'\).
+
+(ii) By lemma 3(iii), there corresponds to \(\beta_1, \ldots, \beta_m\) a sequence of morphisms \(g_1, \ldots, g_m\) such that
+\begin{center}
+\begin{tikzcd}
+& B_m \arrow[d] \\
+A \arrow[ur, "g_m"] \arrow[r, "g_{m-1}"] \arrow[dr, "g_1"'] & B_{m-1} \\
+& \vdots \arrow[d] \\
+& B_1
+\end{tikzcd}
+\end{center}
+commutes and such that \('\!g_j\!' = \beta_j\).
+
+By lemma 3(ii) \(\beta_m^* \cdots \beta_1^* p(A,1)^* {}'\!p(B_m, B_j)\!' = g_m^* {}'\!p(B_m, B_j)\!'\). By part (i) of this lemma \(g_m^* {}'\!p(B_m, B_j)\!' = '\!g_m \circ p(B_m, B_j)\!' = \beta_j\) as required.
+
+(iii) Again we use lemma 3(iii). Corresponding to \((\beta_j)_{1 \le j \le m}\) we have \((g_j)_{1 \le j \le m}\) such that \('\!g_j\!' = \beta_j\). Corresponding to \((\gamma_k)_{1 \le k \le p}\) we have \((h_k)_{1 \le k \le p}\) such that \('\!h_k\!' = \gamma_k\).
+\[(\beta_m^* \cdots \beta_1^* p(A,1)^* \gamma_p)^* \cdots (\beta_m^* \cdots \beta_1^* p(A,1)^* \gamma_1)^* (\beta_m^* \cdots \beta_1^* p(A,1)^* p(B_m, 1))^* x\]
+\[= (g_m^* \gamma_p)^* \cdots (g_m^* \gamma_1)^* p(A,1)^* x, \text{ by lemma 3(ii).}\]
+\[= '\!g_m \circ h_p\!'^{*} \cdots '\!g_m \circ h_1\!'^{*} p(A,1)^* x, \text{ by this lemma part (i).}\]
+\[= g_m^* h_p^* x, \text{ by lemma 3(ii).}\]
+\[= g_m^* h_p^* x, \text{ by axiom (II).}\]
+\[= '\!g_m\!'^{*} \cdots '\!g_1\!'^{*} p(A,1)^* {}'\!h_p\!'^{*} \cdots '\!h_1\!'^{*} p(B_m, 1)^* x, \text{ by lemma 3(ii).}\]
+\[= \beta_m^* \cdots \beta_1^* p(A,1)^* \gamma_p^* \cdots \gamma_1^* p(B_m, 1)^* x. \text{ As required.}\]
+\end{proof}
+
+\begin{lemma}
+If \(f: A \to A'\) and \(A' \triangleleft B\) in \(\mathbb{C}\) then \('\!q(f,B)\!' = id_{f^*B}\).
+\end{lemma}
+
+\begin{proof}
+By definition of \('\!id_{f^*B}\!'\), \('\!id_{f^*B}\!' \circ q(p(f^*B), f^*B) = id_{f^*B}\).
+Hence \('\!id_{f^*B}\!' \circ q(p(f^*B), f^*B) \circ q(f,B) = q(f,B)\), that is to say
+\('\!id_{f^*B}\!' \circ q(p(f^*B) \circ f, B) = q(f,B)\), that is
+\('\!id_{f^*B}\!' \circ q(q(f,B) \circ p(B), B) = q(f,B)\), that is
+\('\!q(f,B)\!'\).
+\end{proof}
 
 % source p2.24
 \section{Contextual categories = generalised algebraic theories} \label{sec:source-2-4}
 
-\lipsum[17]
+% source p
+In this section we establish the equivalence between the category \(\catCon\) of contextual categories and the category \(\catGAT\) of generalised algebraic theories. We split the section into subsections as follows:
+\begin{enumerate}
+    \item define a functor \(\mathbb{C} : \catGAT \to \catCon\),
+    \item define a functor \(U : \catCon \to \catGAT\),
+    \item prove that \(U \circ \mathbb{C} \cong id_{\catGAT}\),
+    \item prove that \(\mathbb{C} \circ U \cong id_{\catCon}\).
+\end{enumerate}
+
+\subsection{Definition of \texorpdfstring{\(\mathbb{C} : \catGAT \to \catCon\)}{C : GAT → Con}}
+
+\(\mathbb{C}\) has been defined on objects in \S 2.2, if \(U\) is a theory then \(\mathbb{C}(U)\) is a contextual category.
+
+If \(U\) and \(U'\) are theories and \([I] : U \to U'\) in \(\catGAT\) then define \(\mathbb{C}([I]) : \mathbb{C}(U) \to \mathbb{C}(U')\) by
+\begin{center}
+\begin{tikzcd}
+{[\tuple{x_1 \in \Delta_1{,} \ldots{,} x_n \in \Delta_n}]} \arrow[d, "{[\tuple{t_1{,} \ldots{,} t_m}]}"] \arrow[r, "\mathbb{C}({[}I{]})"] & {[\tuple{x_1 \in \dot{I}(\Delta_1){,} \ldots{,} x_n \in \dot{I}(\Delta_n)}]} \arrow[d, "{[\tuple{\dot{I}(t_1){,} \ldots{,} \dot{I}(t_m)}]}"] \\
+{[\tuple{y_1 \in \Omega_1{,} \ldots{,} y_m \in \Omega_m}]} \arrow[r] & {[\tuple{y_1 \in \dot{I}(\Omega_1){,} \ldots{,} y_m \in \dot{I}(\Omega_m)}]}
+\end{tikzcd}
+\end{center}
+
+Then \(\mathbb{C}\) is well defined on morphisms because by lemma 1 of \S 1.13 if \(I\) and \(J\) are interpretations of \(U\) in \(U'\) and if \(I \equiv J\) then for all derived T and \(\in\)-rules \(R\) of \(U\), \(\hat{I}(R) \equiv \hat{J}(R)\).
+
+To see that \(\mathbb{C}([I])\) is well defined and takes objects and morphisms of \(\mathbb{C}(U)\) to objects respectively morphisms of \(\mathbb{C}(U')\) we require the following:
+
+\begin{lemma}
+If \(U\) and \(U'\) are generalised algebraic theories and if \(I\) is an interpretation of \(U\) in \(U'\) then
+\begin{enumerate}
+    \item[(i)] If \(\tuple{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}\) is a \(U\)-context then \(\tuple{x_1 \in \dot{I}(\Delta_1), \ldots, x_n \in \dot{I}(\Delta_n)}\) is a \(U'\)-context.
+    \item[(ii)] If \(\tuple{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}\) and \(\tuple{x'_1 \in \Delta'_1, \ldots, x'_n \in \Delta'_n}\) are \(U\)-contexts and \(\tuple{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n} \equiv \tuple{x'_1 \in \Delta'_1, \ldots, x'_n \in \Delta'_n}\) then \(\tuple{x_1 \in \dot{I}(\Delta_1), \ldots, x_n \in \dot{I}(\Delta_n)} \equiv \tuple{x'_1 \in \dot{I}(\Delta'_1), \ldots, x'_n \in \dot{I}(\Delta'_n)}\).
+    \item[(iii)] If \(\tuple{t_1, \ldots, t_m}\) is a \(U\)-realisation of the context \(\tuple{y_1 \in \Omega_1, \ldots, y_m \in \Omega_m}\) wrt the context \(\tuple{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}\) then \(\tuple{\dot{I}(t_1), \ldots, \dot{I}(t_m)}\) is a \(U'\)-realisation of \(\tuple{y_1 \in \dot{I}(\Omega_1), \ldots, y_m \in \dot{I}(\Omega_m)}\) wrt \(\tuple{x_1 \in \dot{I}(\Delta_1), \ldots, x_n \in \dot{I}(\Delta_n)}\).
+    \item[(iv)] If \(\tuple{t_1, \ldots, t_m}\) is a \(U\)-realisation of \(\tuple{y_1 \in \Omega_1, \ldots, y_m \in \Omega_m}\) wrt \(\tuple{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}\) and if \(\tuple{t'_1, \ldots, t'_m}\) is a \(U\)-realisation of \(\tuple{y'_1 \in \Omega'_1, \ldots, y'_m \in \Omega'_m}\) wrt \(\tuple{x'_1 \in \Delta'_1, \ldots, x'_n \in \Delta'_n}\) and if \(\tuple{t_1, \ldots, t_m} \equiv \tuple{t'_1, \ldots, t'_m}\) then \(\tuple{\dot{I}(t_1), \ldots, \dot{I}(t_m)} \equiv \tuple{\dot{I}(t'_1), \ldots, \dot{I}(t'_m)}\).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) Follows immediately from lemma 2 of \S 1.11.
+
+(ii) For each \(i\), \(1 \le i \le n\), \(\inferrule{x_1 \in \Delta_1, \ldots, x_{i-1} \in \Delta_{i-1}}{\Delta_i = \Delta'_i[x_1|x'_1, \ldots, x_{i-1}|x'_{i-1}]}\) is a derived rule of \(U\), hence by lemma 2 of \S 1.11,
+\(\inferrule{x_1 \in \dot{I}(\Delta_1), \ldots, x_{i-1} \in \dot{I}(\Delta_{i-1})}{\dot{I}(\Delta_i) = \dot{I}(\Delta'_i[x_1|x'_1, \ldots, x_{i-1}|x'_{i-1}])}\) is a derived rule of \(U'\). But by lemma 1 of \S 1.11, \(\dot{I}(\Delta'_i[x_1|x'_1, \ldots, x_{i-1}|x'_{i-1}]) \equiv \dot{I}(\Delta'_i)[x_1|x'_1, \ldots, x_{i-1}|x'_{i-1}]\). Thus for each \(i\), \(1 \le i \le n\),
+\(\inferrule{x_1 \in \dot{I}(\Delta_1), \ldots, x_{i-1} \in \dot{I}(\Delta_{i-1})}{\dot{I}(\Delta_i) = \dot{I}(\Delta'_i)[x_1|x'_1, \ldots, x_{i-1}|x'_{i-1}]}\) is a derived rule of \(U'\). That is \(\tuple{x_1 \in \dot{I}(\Delta_1), \ldots, x_n \in \dot{I}(\Delta_n)} \equiv \tuple{x'_1 \in \dot{I}(\Delta'_1), \ldots, x'_n \in \dot{I}(\Delta'_n)}\).
+
+(iii) For each \(j\), \(1 \le j \le m\), \(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{t_j \in \Omega_j[t_1|y_1, \ldots, t_{j-1}|y_{j-1}]}\) is a derived rule of \(U\), thus by lemmas 1 and 2 of \S 1.11,
+\(\inferrule{x_1 \in \dot{I}(\Delta_1), \ldots, x_n \in \dot{I}(\Delta_n)}{\dot{I}(t_j) \in \dot{I}(\Omega_j)[\dot{I}(t_1)|y_1, \ldots, \dot{I}(t_{j-1})|y_{j-1}]}\) is a derived rule of \(U'\).
+Thus \(\tuple{\dot{I}(t_1), \ldots, \dot{I}(t_m)}\) is a realisation of \(\tuple{y_1 \in \dot{I}(\Omega_1), \ldots, y_m \in \dot{I}(\Omega_m)}\) wrt \(\tuple{x_1 \in \dot{I}(\Delta_1), \ldots, x_n \in \dot{I}(\Delta_n)}\).
+
+(iv) For each \(j\), \(1 \le j \le m\), \(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{t_j = t'_j[x_1|x'_1, \ldots, x_n|x'_n] \in \Omega_j[t_1|y_1, \ldots, t_{j-1}|y_{j-1}]}\) is a derived rule of \(U\), thus by lemmas 1 and 2 of \S 1.11,
+\(\inferrule{x_1 \in \dot{I}(\Delta_1), \ldots, x_n \in \dot{I}(\Delta_n)}{\dot{I}(t_j) = \dot{I}(t'_j)[x_1|x'_1, \ldots, x_n|x'_n] \in \dot{I}(\Omega_j)[\dot{I}(t_1)|y_1, \ldots, \dot{I}(t_{j-1})|y_{j-1}]}\) is a derived rule of \(U'\). That is \(\tuple{\dot{I}(t_1), \ldots, \dot{I}(t_m)} \equiv \tuple{\dot{I}(t'_1), \ldots, \dot{I}(t'_m)}\).
+\end{proof}
+
+So \(\mathbb{C}([I])\) is well defined. It remains to show that \(\mathbb{C}([I])\) is a contextual functor:
+
+\begin{lemma}\mbox{}
+\begin{enumerate}
+    \item[(i)] If \(A \in |\mathbb{C}(U)|\) then \(\mathbb{C}([I])(id_A) = id_{\mathbb{C}([I])(A)}\).
+    \item[(ii)] If \(A \xrightarrow{f} B \xrightarrow{g} C\) in \(\mathbb{C}(U)\) then \(\mathbb{C}([I])(f \circ g) = \mathbb{C}([I])(f) \circ \mathbb{C}([I])(g)\).
+    \item[(iii)] If \(A \in |\mathbb{C}|\) and \(1 \triangleleft A\) then \(\mathbb{C}([I])(p(A)) = p(\mathbb{C}([I])(A))\).
+    \item[(iv)] If
+    \begin{center}
+    \begin{tikzcd}
+    & B \arrow[d] \\
+    A \arrow[r, "f"] & A'
+    \end{tikzcd}
+    \end{center}
+    in \(\mathbb{C}(U)\) then \(\mathbb{C}([I])(f^*B) = \mathbb{C}([I])(f)^* \mathbb{C}([I])(B)\) and \(\mathbb{C}([I])(q(f,B)) = q(\mathbb{C}([I])(f), \mathbb{C}([I])(B))\).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) and (iii) are both remarkably trivial.
+
+(ii) Suppose that \(A = [\tuple{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}]\), \(B = [\tuple{y_1 \in \Omega_1, \ldots, y_m \in \Omega_m}]\) and \(C = [\tuple{z_1 \in \Lambda_1, \ldots, z_p \in \Lambda_p}]\), \(f = [\tuple{t_1, \ldots, t_m}]\) and \(g = [\tuple{s_1, \ldots, s_p}]\), where \(\tuple{t_1, \ldots, t_m}\) is a realisation of \(\tuple{y_1 \in \Omega_1, \ldots, y_m \in \Omega_m}\) wrt \(\tuple{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}\) and \(\tuple{s_1, \ldots, s_p}\) is a realisation of \(\tuple{z_1 \in \Lambda_1, \ldots, z_p \in \Lambda_p}\) wrt \(\tuple{y_1 \in \Omega_1, \ldots, y_m \in \Omega_m}\). If we use the definition of \(\mathbb{C}([I])\), the definition of composition in \(\mathbb{C}(U)\) and \(\mathbb{C}(U')\), and lemma 1 of \S 1.11 then:
+\begin{align*}
+\mathbb{C}([I])(f \circ g) &= \mathbb{C}([I])([\tuple{s_1[t_1|y_1, \ldots, t_m|y_m], \ldots, s_p[t_1|y_1, \ldots, t_m|y_m]}])\\
+&= [\tuple{\dot{I}(s_1[t_1|y_1, \ldots, t_m|y_m]), \ldots, \dot{I}(s_p[t_1|y_1, \ldots, t_m|y_m])}]\\
+&= [\tuple{\dot{I}(s_1)[\dot{I}(t_1)|y_1, \ldots, \dot{I}(t_m)|y_m], \ldots, \dot{I}(s_p)[\dot{I}(t_1)|y_1, \ldots, \dot{I}(t_m)|y_m]}]\\
+&= [\tuple{\dot{I}(t_1), \ldots, \dot{I}(t_m)}] \circ [\tuple{\dot{I}(s_1), \ldots, \dot{I}(s_p)}] = \mathbb{C}([I])(f) \circ \mathbb{C}([I])(g).
+\end{align*}
+
+(iv) Suppose that \(A = [\tuple{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}]\), \(B = [\tuple{y_1 \in \Omega_1, \ldots, y_m \in \Omega_m, y \in \Omega}]\) and \(f = [\tuple{t_1, \ldots, t_m}]\), where \(\tuple{t_1, \ldots, t_m}\) is a realisation of \(\tuple{y_1 \in \Omega_1, \ldots, y_m \in \Omega_m}\) wrt \(\tuple{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}\).
+\begin{align*}
+\mathbb{C}([I])(f^*B) &= \mathbb{C}([I])([\tuple{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n, y \in \Omega[t_1|y_1, \ldots, t_m|y_m]}])\\
+&= [\tuple{x_1 \in \dot{I}(\Delta_1), \ldots, x_n \in \dot{I}(\Delta_n), y \in \dot{I}(\Omega)[\dot{I}(t_1)|y_1, \ldots, \dot{I}(t_m)|y_m]}]\\
+&= [\tuple{\dot{I}(t_1), \ldots, \dot{I}(t_m)}]^* [\tuple{y_1 \in \dot{I}(\Omega_1), \ldots, y_m \in \dot{I}(\Omega_m), y \in \dot{I}(\Omega)}]\\
+&= \mathbb{C}([I])(f)^* \mathbb{C}([I])(B).
+\end{align*}
+\[\mathbb{C}([I])(q(f,B)) = \mathbb{C}([I])([\tuple{t_1, \ldots, t_m, y}]) = [\tuple{\dot{I}(t_1), \ldots, \dot{I}(t_m), y}] = q(\mathbb{C}([I])(f), \mathbb{C}([I])(B)).\]
+\end{proof}
+
+Supposing that \(I\) is an interpretation of \(U\) in \(U'\) and that \(I'\) is an interpretation of \(U'\) in \(U''\), then by lemma 3 of \S 1.11 for any expression \(e\) of \(U\), \(\dot{(I' \circ I)}(e) = \dot{I'}(\dot{I}(e))\). Thus it follows that in this section \(\mathbb{C}([I']) \circ \mathbb{C}([I]) = \mathbb{C}([I' \circ I]) = \mathbb{C}([I'] \circ [I])\). So for sure \(\mathbb{C} : \catGAT \to \catCon\) is a functor.
+
+\subsection{The definition of \texorpdfstring{\(U : \catCon \to \catGAT\)}{U : Con → GAT}}
+
+It is convenient to say that an object \(A\) of a contextual category \(\mathbb{C}\) is trivial just in case \(A\) is the least element \(1\) of \(\mathbb{C}\). Similarly we say that a morphism of \(\mathbb{C}\) is trivial just in case its codomain is the trivial object.
+
+We begin by describing the functor \(U : \catCon \to \catGAT\) on objects of \(\catCon\). If \(\mathbb{C}\) is a contextual category then \(U(\mathbb{C})\) is the generalised algebraic theory described as follows: \(U(\mathbb{C})\) has a sort symbol \(\overline{A}\) for every non-trivial object \(A\) of \(\mathbb{C}\). \(U(\mathbb{C})\) has an operator symbol \(\overline{f}\) for every non-trivial morphism \(f\) of \(\mathbb{C}\). If \(1 \triangleleft A_1 \cdots \triangleleft A_n \triangleleft A\) in \(\mathbb{C}\) then the introductory rule for \(\overline{A}\) in \(U(\mathbb{C})\) is
+\[ \inferrule{x_1 \in \overline{A_1}, \ldots, x_n \in \overline{A_n}(x_1, \ldots, x_{n-1})}{\overline{A}(x_1, \ldots, x_n) \isatype} \]
+If \(1 \triangleleft A_1 \cdots \triangleleft A_n\) in \(\mathbb{C}\) and \(f: A_n \to B\) where \(1 < B\) then the introductory rule for \(\overline{f}\) in \(U(\mathbb{C})\) is
+\[ \inferrule{x_1 \in \overline{A_1}, \ldots, x_n \in \overline{A_n}(x_1, \ldots, x_{n-1})}{\overline{f}(x_1, \ldots, x_n) \in \overline{(f \circ p(B))^*B}(x_1, \ldots, x_n)} \]
+
+The axioms of \(U(\mathbb{C})\) arise from three different situations, \(U(\mathbb{C})\) has just the following axioms:
+
+(i) For \(n \ge 0\), \(m \ge 1\) and \(l \ge 0\), if \(1 \triangleleft A_1 \cdots \triangleleft A_n\), \(1 \triangleleft B_1 \cdots \triangleleft B_m\) and \(1 \triangleleft C_1 \cdots \triangleleft C_l\) in \(\mathbb{C}\) and if \(f: A_n \to B_m\) and \(g: B_m \to C_l\) in \(\mathbb{C}\) then \(U(\mathbb{C})\) has the axiom
+\[ \inferrule{x_1 \in \overline{A_1}, \ldots, x_n \in \overline{A_n}(x_1, \ldots, x_{n-1})}{\overline{f \circ g}(x_1, \ldots, x_n) = \overline{g}(\overline{f \circ p(B_m, B_1)}(x_1, \ldots, x_n), \ldots, \overline{f}(x_1, \ldots, x_n)) \in \overline{(f \circ g \circ p(C_l))^*C_l}(x_1, \ldots, x_n)} \]
+
+(ii) For \(n \ge 0\), if \(1 \triangleleft A_1 \cdots \triangleleft A_n\) in \(\mathbb{C}\) then for each \(i\), \(1 \le i \le n\), \(U(\mathbb{C})\) has the axiom
+\[ \inferrule{x_1 \in \overline{A_1}, \ldots, x_n \in \overline{A_n}(x_1, \ldots, x_{n-1})}{\overline{p(A_n, A_i)}(x_1, \ldots, x_n) = x_i \in \overline{A_i}(x_1, \ldots, x_{i-1})} \]
+
+(iii) For \(n \ge 0\), \(m \ge 1\), if \(1 \triangleleft A_1 \cdots \triangleleft A_n\) and \(1 \triangleleft B_1 \cdots \triangleleft B_m \triangleleft B\) in \(\mathbb{C}\) and if \(f: A_n \to B_m\) then \(U(\mathbb{C})\) has the axioms
+\[ \inferrule{x_1 \in \overline{A_1}, \ldots, x_n \in \overline{A_n}(x_1, \ldots, x_{n-1})}{\overline{f^*B}(x_1, \ldots, x_n) = \overline{B}(\overline{f \circ p(B_m, B_1)}(x_1, \ldots, x_n), \ldots, \overline{f}(x_1, \ldots, x_n))} \]
+and
+\[ \inferrule{x_1 \in \overline{A_1}, \ldots, x_n \in \overline{A_n}(x_1, \ldots, x_{n-1}), y \in \overline{f^*B}(x_1, \ldots, x_n)}{\overline{q(f,B)}(x_1, \ldots, x_n, y) = y \in \overline{f^*B}(x_1, \ldots, x_n)} \]
+This completes the definition of \(U(\mathbb{C})\).
+
+As for the action of the functor \(U\) on morphisms, if \(F: \mathbb{C} \to \mathbb{C}'\) is a contextual functor then define a preinterpretation \(U(F)\) of \(U(\mathbb{C})\) in \(U(\mathbb{C}')\) as follows: If \(1 \triangleleft A_1 \cdots \triangleleft A_n \triangleleft A\) in \(\mathbb{C}\) then define \(U(F)(\overline{A}) = \overline{F(A)}(v_1, \ldots, v_n)\), if \(1 \triangleleft A_1 \cdots \triangleleft A_n\) in \(\mathbb{C}\) and \(f: A_n \to B\) then define \(U(F)(\overline{f}) = \overline{F(f)}(v_1, \ldots, v_n)\). \(v_1, v_2, \ldots\) is supposed to be the standard enumeration of the set \(V\) of variables, see \S 1.11.
+
+\begin{lemma}
+\(U(F)\) is an interpretation of \(U(\mathbb{C})\) in \(U(\mathbb{C}')\).
+\end{lemma}
+
+\begin{proof}
+We have to check that for every introductory rule or axiom \(R\) of \(U(\mathbb{C})\), the rule \(\widehat{U(F)}(R)\) is a derived rule of \(U(\mathbb{C}')\). But it happens that in each case \(\widehat{U(F)}(R)\) is actually an introductory rule or an axiom of \(U(\mathbb{C}')\) and thus a derived rule. Thus there is little work to be done.
+
+For example, if \(1 \triangleleft A_1 \cdots \triangleleft A_n \triangleleft A\) in \(\mathbb{C}\), so that \(U(\mathbb{C})\) has the introductory rule \(\inferrule{x_1 \in \overline{A_1}, \ldots, x_n \in \overline{A_n}(x_1, \ldots, x_{n-1})}{\overline{A}(x_1, \ldots, x_n) \isatype}\) then
+\begin{align*}
+&\widehat{I(F)}\left(\inferrule{x_1 \in \overline{A_1}, \ldots, x_n \in \overline{A_n}(x_1, \ldots, x_{n-1})}{\overline{A}(x_1, \ldots, x_n) \isatype}\right) \\
+&= \inferrule{x_1 \in \dot{U(F)}(\overline{A_1}), \ldots, x_n \in \dot{U(F)}(\overline{A_n}(x_1, \ldots, x_{n-1}))}{\dot{U(F)}(\overline{A}(x_1, \ldots, x_n)) \isatype} \\
+&= \inferrule{x_1 \in U(F)(\overline{A_1}), \ldots, x_n \in U(F)(\overline{A_n})[x_1|v_1, \ldots, x_{n-1}|v_{n-1}]}{U(F)(\overline{A})[x_1|v_1, \ldots, x_n|v_n] \isatype} \\
+&= \inferrule{x_1 \in \overline{F(A_1)}, \ldots, x_n \in \overline{F(A_n)}(x_1, \ldots, x_{n-1})}{\overline{F(A)}(x_1, \ldots, x_n) \isatype}
+\end{align*}
+which is of course the introductory rule for \(\overline{F(A)}\) in \(U(\mathbb{C}')\).
+\end{proof}
+
+If \(F: \mathbb{C} \to \mathbb{C}'\) and \(F': \mathbb{C}' \to \mathbb{C}''\) in \(\catCon\) then \(U(F' \circ F) = U(F') \circ U(F)\). This is because for any symbol \(\overline{L}\) of \(U(\mathbb{C})\) and for appropriate \(n\),
+\(U(F' \circ F)(\overline{L}) = \overline{F'(F(L))}(v_1, \ldots, v_n) = \dot{U(F')}(\overline{F(L)}(v_1, \ldots, v_n)) = \dot{U(F')}(U(F)(\overline{L})) = (U(F') \circ U(F))(\overline{L})\). Thus we have defined a functor from the category \(\catCon\) to the category of generalised algebraic theories and interpretations. By taking the value of \(U\) at \(F\) to be \([U(F)]\) we get a functor \(U : \catCon \to \catGAT\).
+
+
+\subsection{The proof that \texorpdfstring{\(U \circ \mathbb{C} \cong id_{\catGAT}\)}{U ∘ C ≅ id\_GAT}}
+
+For every generalised algebraic theory \(U\) we define an interpretation \(\phi_U\) of \(U\) in \(U(\mathbb{C}(U))\). We show that \([\phi_-]\) (i.e.\ \(\lambda U \in |\catGAT| . [\phi_U]\)) is a natural transformation \([\phi_-] : id_{\catGAT} \to U \circ \mathbb{C}\). For every theory \(U\) we define an interpretation \(\psi_U\) of \(U(\mathbb{C}(U))\) in \(U\) and show that \([\phi_U] \circ [\psi_U] = id_{U(\mathbb{C}(U))}\) and that \([\psi_U] \circ [\phi_U] = id_U\).
+
+If \(U\) is a theory then the preinterpretation \(\phi_U\) of \(U\) in \(U(\mathbb{C}(U))\) is defined as follows: If \(A\) is a sort symbol of \(U\) introduced by the rule \(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{A(x_1, \ldots, x_n) \isatype}\) then define
+\[ \phi_U(A) = \overline{[\tuple{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n, x \in A(x_1, \ldots, x_n)}]}(v_1, \ldots, v_n). \]
+If \(f\) is an operator symbol of \(U\) introduced by the rule \(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{f(x_1, \ldots, x_n) \in \Delta}\) then define
+\[ \phi_U(f) = \overline{[\tuple{x_1, \ldots, x_n, f(x_1, \ldots, x_n)}]}(v_1, \ldots, v_n). \]
+
+When it is unlikely to lead to misunderstanding then we drop the subscript \(U\) from \(\phi_U\). We wish to show that for any theory \(U\), the preinterpretation \(\phi\) of \(U\) in \(U(\mathbb{C}(U))\) is actually an interpretation. This requires a long string of lemmas.
+
+\begin{lemma}
+If \(U\) is a theory then (i) for every derived T-rule \(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{\Delta \isatype}\) of \(U\) the rule
+\[ \inferrule{x_1 \in \overline{A_1}, \ldots, x_n \in \overline{A_n}(x_1, \ldots, x_{n-1})}{\overline{A}(x_1, \ldots, x_n) = \hat{\phi}(\Delta)} \]
+is a derived rule of \(U(\mathbb{C}(U))\), where \(A_i = [\tuple{x_1 \in \Delta_1, \ldots, x_i \in \Delta_i}]\) and \(A = [\tuple{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n, x \in \Delta}]\).
+(ii) For every derived \(\in\)-rule \(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{t \in \Delta}\) of \(U\) the rule
+\[ \inferrule{x_1 \in \overline{A_1}, \ldots, x_n \in \overline{A_n}(x_1, \ldots, x_{n-1})}{\overline{[\tuple{x_1, \ldots, x_n, t}]}(x_1, \ldots, x_n) = \hat{\phi}(t) \in \overline{A}(x_1, \ldots, x_n)} \]
+is a derived rule of \(U(\mathbb{C}(U))\).
+\end{lemma}
+
+\begin{proof}
+The proof is by induction on derivations in \(U\). We wish to show that all the derived T and \(\in\)-rules of \(U\) have a certain property so we just show that any rule that is derived from rules that have the property must itself have the property. We must check the principles of derivation T1, CF1 and CF2.
+
+\underline{T1.} Suppose that we derive the rule \(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{t \in \Delta'}\) from the rules \(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{t \in \Delta}\) and \(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{\Delta = \Delta'}\), and suppose also that \(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{t \in \Delta}\) has the property, which is to say suppose that
+\[ \inferrule{x_1 \in \overline{A_1}, \ldots, x_n \in \overline{A_n}(x_1, \ldots, x_{n-1})}{\overline{[\tuple{x_1, \ldots, x_n, t}]}(x_1, \ldots, x_n) = \hat{\phi}(t) \in \overline{A}(x_1, \ldots, x_n)} \]
+is a derived rule of \(U(\mathbb{C}(U))\). We wish to show that \(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{t \in \Delta'}\) has the property i.e.\ that
+\[ \inferrule{x_1 \in \overline{A_1}, \ldots, x_n \in \overline{A_n}(x_1, \ldots, x_{n-1})}{\overline{[\tuple{x_1, \ldots, x_n, t}]}(x_1, \ldots, x_n) = \hat{\phi}(t) \in \overline{A'}(x_1, \ldots, x_n)} \]
+is a derived rule of \(U(\mathbb{C}(U))\), where \(A' = [\tuple{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n, x \in \Delta'}]\). But of course it is, because \(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{\Delta = \Delta'}\) is a derived rule implies \(A=A'\).
+
+\underline{CF1.} Suppose that \(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{\Delta_{n+1} \isatype}\) is a derived rule of \(U\) such that
+\[ \inferrule{x_1 \in \overline{A_1}, \ldots, x_n \in \overline{A_n}(x_1, \ldots, x_{n-1})}{\overline{A_{n+1}}(x_1, \ldots, x_n) = \hat{\phi}(\Delta_{n+1})} \]
+is a derived rule of \(U(\mathbb{C}(U))\). We must show that for each \(i\), \(1 \le i \le n+1\), the rule
+\[ \inferrule{x_1 \in \overline{A_1}, \ldots, x_{n+1} \in \overline{A_{n+1}}(x_1, \ldots, x_n)}{\overline{[\tuple{x_1, \ldots, x_{n+1}, x_i}]}(x_1, \ldots, x_{n+1}) = x_i \in \overline{C_i}(x_1, \ldots, x_{n+1})} \]
+is a derived rule of \(U(\mathbb{C}(U))\), where \(C_i = [\tuple{x_1 \in \Delta_1, \ldots, x_{n+1} \in \Delta_{n+1}, y \in \Delta_i}]\).
+
+This follows because \(\tuple{x_1 \in \Delta_1, \ldots, x_{n+1} \in \Delta_{n+1}}\) and \(\tuple{x_1 \in \Delta_1, \ldots, x_i \in \Delta_i}\) are contexts of \(U\) and \(\tuple{x_1, \ldots, x_i}\) is a realisation of \(\tuple{x_1 \in \Delta_1, \ldots, x_i \in \Delta_i}\) wrt \(\tuple{x_1 \in \Delta_1, \ldots, x_{n+1} \in \Delta_{n+1}}\), thus by corollary 4 the rule
+\[ \inferrule{x_1 \in \overline{A_1}, \ldots, x_{n+1} \in \overline{A_{n+1}}(x_1, \ldots, x_n)}{\overline{[\tuple{x_1, \ldots, x_i}]}(x_1, \ldots, x_{n+1}) = [\tuple{x_1, \ldots, x_{n+1}, x_i}](x_1, \ldots, x_{n+1}) \in \overline{C_i}(x_1, \ldots, x_{n+1})} \]
+is a derived rule of \(U(\mathbb{C}(U))\); and because, since \(p(A_{n+1}, A_i)\) in \(\mathbb{C}(U)\) is just \([\tuple{x_1, \ldots, x_i}]\) (lemma 2 of \S 2.3), \(U(\mathbb{C}(U))\) has the axiom
+\[ \inferrule{x_1 \in \overline{A_1}, \ldots, x_{n+1} \in \overline{A_{n+1}}(x_1, \ldots, x_n)}{\overline{[\tuple{x_1, \ldots, x_i}]}(x_1, \ldots, x_n) = x_i \in \overline{A_i}(x_1, \ldots, x_n)} \]
+
+\underline{CF2(a).} Suppose that \(B\) is a sort symbol of \(U\) introduced by
+\[ \inferrule{y_1 \in \Omega_1, \ldots, y_m \in \Omega_m}{B(y_1, \ldots, y_m) \isatype} \]
+Suppose that for each \(j\), \(1 \le j \le m\), the rule \(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{t_j \in \Omega_j[t_1|y_1, \ldots, t_{j-1}|y_{j-1}]}\) is a derived rule of \(U\) with the property, i.e.\ such that the rule
+\[ \inferrule{x_1 \in \overline{A_1}, \ldots, x_n \in \overline{A_n}(x_1, \ldots, x_{n-1})}{\overline{[\tuple{x_1, \ldots, x_n, t_j}]}(x_1, \ldots, x_n) = \hat{\phi}(t_j) \in \overline{Q_j}(x_1, \ldots, x_n)} \]
+is a derived rule of \(U(\mathbb{C}(U))\) where \(Q_j = [\tuple{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n, y_j \in \Omega_j[t_1|y_1, \ldots, t_{j-1}|y_{j-1}]}]\). We wish to show the rule
+\[ \inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{B(t_1, \ldots, t_m) \isatype} \]
+has the property, i.e.\ that the rule
+\[ \inferrule{x_1 \in \overline{A_1}, \ldots, x_n \in \overline{A_n}(x_1, \ldots, x_{n-1})}{\overline{C}(x_1, \ldots, x_n) = \hat{\phi}(B(t_1, \ldots, t_m))} \]
+is a derived rule of \(U(\mathbb{C}(U))\), where \(C = [\tuple{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n, z \in B(t_1, \ldots, t_m)}]\).
+Let \(L = [\tuple{y_1 \in \Omega_1, \ldots, y_m \in \Omega_m, y \in B(y_1, \ldots, y_m)}]\).
+By corollary 6(i), \(\inferrule{x_1 \in \overline{A_1}, \ldots, x_n \in \overline{A_n}(x_1, \ldots, x_{n-1})}{\overline{C}(x_1, \ldots, x_n) = \overline{L}(\overline{g_1}(x_1, \ldots, x_n), \ldots, \overline{g_m}(x_1, \ldots, x_n))}\) is a derived rule of \(U(\mathbb{C}(U))\) for each \(j\), \(1 \le j \le m\), where \(B_j = [\tuple{y_1 \in \Omega_1, \ldots, y_j \in \Omega_j}]\) and \(g_j = [\tuple{x_1, \ldots, x_n, t_j}]\).
+Hence for each \(j\), \(1 \le j \le m\), the rule
+\[ \inferrule{x_1 \in \overline{A_1}, \ldots, x_n \in \overline{A_n}(x_1, \ldots, x_{n-1})}{\overline{g_j}(x_1, \ldots, x_n) = \hat{\phi}(t_j) \in \overline{B_j}(\overline{g_1}(x_1, \ldots, x_n), \ldots, \overline{g_{j-1}}(x_1, \ldots, x_n))} \]
+is a derived rule of \(U(\mathbb{C}(U))\), and from the introductory rule for \(\overline{L}\) in \(U(\mathbb{C}(U))\), which is
+\[ \inferrule{y_1 \in \overline{B_1}, \ldots, y_m \in \overline{B_m}(y_1, \ldots, y_{m-1})}{\overline{L}(y_1, \ldots, y_m) \isatype} \]
+we get
+\[ \inferrule{x_1 \in \overline{A_1}, \ldots, x_n \in \overline{A_n}(x_1, \ldots, x_{n-1})}{\overline{L}(\overline{g_1}(x_1, \ldots, x_n), \ldots, \overline{g_m}(x_1, \ldots, x_n)) = \overline{L}(\hat{\phi}(t_1), \ldots, \hat{\phi}(t_m))} \]
+as a derived rule of \(U(\mathbb{C}(U))\). But again by 6(i), the rule
+\[ \inferrule{x_1 \in \overline{A_1}, \ldots, x_n \in \overline{A_n}(x_1, \ldots, x_{n-1})}{\overline{L}(\overline{g_1}(x_1, \ldots, x_n), \ldots, \overline{g_m}(x_1, \ldots, x_n)) = \overline{C}(x_1, \ldots, x_n)} \]
+is a derived rule of \(U(\mathbb{C}(U))\). Thus the rule
+\[ \inferrule{x_1 \in \overline{A_1}, \ldots, x_n \in \overline{A_n}(x_1, \ldots, x_{n-1})}{\overline{C}(x_1, \ldots, x_n) = \overline{L}(\hat{\phi}(t_1), \ldots, \hat{\phi}(t_m))} \]
+is a derived rule of \(U(\mathbb{C}(U))\), which is just what's wanted since \(\hat{\phi}(B(t_1, \ldots, t_m)) = \overline{L}(\hat{\phi}(t_1), \ldots, \hat{\phi}(t_m))\).
+
+\underline{CF2(b).} Very similar to CF2(a), uses corollary 6(i) and (ii).
+\end{proof}
+
+\begin{corollary}
+For every theory \(U\), \(\phi_U\) is an interpretation of \(U\) in \(U(\mathbb{C}(U))\).
+\end{corollary}
+
+\begin{proof}
+It suffices to show that for any derived rule \(R\) of \(U\), \(\hat{\phi}(R)\) is a derived rule of \(U(\mathbb{C}(U))\). We check for each of the four forms separately.
+
+1.\ The T-rules. If \(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{\Delta_{n+1} \isatype}\) is a derived rule of \(U\) then by definition \(\hat{\phi}\left(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{\Delta_{n+1} \isatype}\right) = \inferrule{x_1 \in \hat{\phi}(\Delta_1), \ldots, x_n \in \hat{\phi}(\Delta_n)}{\hat{\phi}(\Delta_{n+1}) \isatype}\).
+By lemma 7, for each \(i\), \(1 \le i \le n+1\), the rule
+\[ \inferrule{x_1 \in \overline{A_1}, \ldots, x_{i-1} \in \overline{A_{i-1}}(x_1, \ldots, x_{i-1})}{\overline{A_i}(x_1, \ldots, x_{i-1}) = \hat{\phi}(\Delta_i)} \]
+is a derived rule of \(U(\mathbb{C}(U))\). Hence for each \(i\), \(1 \le i \le n+1\), the rule
+\[ \inferrule{x_1 \in \hat{\phi}(\Delta_1), \ldots, x_{i-1} \in \hat{\phi}(\Delta_{i-1})}{\overline{A_i}(x_1, \ldots, x_{i-1}) = \hat{\phi}(\Delta_i)} \]
+is a derived rule of \(U(\mathbb{C}(U))\) (argue by induction). In particular
+\[ \inferrule{x_1 \in \hat{\phi}(\Delta_1), \ldots, x_n \in \hat{\phi}(\Delta_n)}{\overline{A_{n+1}}(x_1, \ldots, x_n) = \hat{\phi}(\Delta_{n+1})} \]
+is a derived rule of \(U(\mathbb{C}(U))\). Thus because of wellformedness of derived rules (see \S 1.7) we must have \(\inferrule{x_1 \in \hat{\phi}(\Delta_1), \ldots, x_n \in \hat{\phi}(\Delta_n)}{\hat{\phi}(\Delta_{n+1}) \isatype}\) as a derived rule of \(U(\mathbb{C}(U))\).
+
+2.\ The \(\in\)-rules. Suppose that \(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{t \in \Delta}\) is a derived rule of \(U\). By wellformedness and by part 1.\ above,
+\[ \inferrule{x_1 \in \hat{\phi}(\Delta_1), \ldots, x_n \in \hat{\phi}(\Delta_n)}{\hat{\phi}(\Delta) = \overline{A}(x_1, \ldots, x_n)} \quad \text{and} \quad \inferrule{x_1 \in \hat{\phi}(\Delta_1), \ldots, x_{i-1} \in \hat{\phi}(\Delta_{i-1})}{\hat{\phi}(\Delta_i) = \overline{A_i}(x_1, \ldots, x_{i-1})} \]
+\(1 \le i \le n\), are derived rules of \(U(\mathbb{C}(U))\).
+By lemma 7, \(\inferrule{x_1 \in \overline{A_1}, \ldots, x_n \in \overline{A_n}(x_1, \ldots, x_{n-1})}{\overline{[\tuple{x_1, \ldots, x_n, t}]}(x_1, \ldots, x_n) = \hat{\phi}(t) \in \overline{A}(x_1, \ldots, x_n)}\) is a derived rule of \(U(\mathbb{C}(U))\). Thus so is
+\[ \inferrule{x_1 \in \hat{\phi}(\Delta_1), \ldots, x_n \in \hat{\phi}(\Delta_n)}{\overline{[\tuple{x_1, \ldots, x_n, t}]}(x_1, \ldots, x_n) = \hat{\phi}(t) \in \hat{\phi}(\Delta)} \]
+a derived rule of \(U(\mathbb{C}(U))\).
+Hence by wellformedness the rule \(\inferrule{x_1 \in \hat{\phi}(\Delta_1), \ldots, x_n \in \hat{\phi}(\Delta_n)}{\hat{\phi}(t) \in \hat{\phi}(\Delta)}\) is a derived rule of \(U(\mathbb{C}(U))\).
+
+3.\ The T\(=\)rules. If \(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{\Delta = \Delta'}\) is a derived rule of \(U\) then \(\inferrule{x_1 \in \hat{\phi}(\Delta_1), \ldots, x_n \in \hat{\phi}(\Delta_n)}{\hat{\phi}(\Delta) = \hat{\phi}(\Delta')}\) is a derived rule of \(U(\mathbb{C}(U))\) because by lemma 7 and 1.\ above, the rules \(\inferrule{x_1 \in \hat{\phi}(\Delta_1), \ldots, x_n \in \hat{\phi}(\Delta_n)}{\overline{A}(x_1, \ldots, x_n) = \hat{\phi}(\Delta)}\) and \(\inferrule{x_1 \in \hat{\phi}(\Delta_1), \ldots, x_n \in \hat{\phi}(\Delta_n)}{\overline{A'}(x_1, \ldots, x_n) = \hat{\phi}(\Delta')}\) are derived rules of \(U(\mathbb{C}(U))\), where of course \(A = [\tuple{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n, x \in \Delta}] = [\tuple{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n, x' \in \Delta'}] = A'\).
+
+4.\ Similarly if \(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{t = t' \in \Delta}\) is a derived rule of \(U\) then
+\[ \inferrule{x_1 \in \hat{\phi}(\Delta_1), \ldots, x_n \in \hat{\phi}(\Delta_n)}{\hat{\phi}(t) = \hat{\phi}(t') \in \hat{\phi}(\Delta)} \]
+is a derived rule of \(U(\mathbb{C}(U))\).
+\end{proof}
+
+\emph{Recap:} We are attempting to show that the functor \(id_{\catGAT} : \catGAT \to \catGAT\) is isomorphic to the functor \(U \circ \mathbb{C} : \catGAT \to \catGAT\).
+So far we have defined an interpretation \(\phi_U\) of \(U\) in \(U(\mathbb{C}(U))\) for every theory \(U\). Thus for every \(U \in |\catGAT|\), \([\phi_U] : U \to U(\mathbb{C}(U))\) is a morphism of \(\catGAT\). It remains to show that for every \(U \in |\catGAT|\), \(\phi_U\) is an isomorphism and that \([\phi_-]\) is a natural transformation, \([\phi_-] : id_{\catGAT} \to U \circ \mathbb{C}\). It is understood that we write \([\phi_-]\) for what otherwise might be written as \(\lambda U \in |\catGAT| . [\phi_U]\).
+
+\begin{lemma}
+\([\phi_-]\) is a natural transformation, \([\phi_-] : id_{\catGAT} \to U \circ \mathbb{C}\).
+\end{lemma}
+
+\begin{proof}
+We must show that whenever \(U\) and \(U'\) are theories and \(I\) is an interpretation of \(U\) in \(U'\) then the diagram
+\begin{center}
+\begin{tikzcd}
+U \arrow[r, "{[\phi_U]}"] \arrow[d, "{[I]}"] & U(\mathbb{C}(U)) \arrow[d, "{\mathbb{C}(U([I]))}"] \\
+U' \arrow[r, "{[\phi_{U'}]}"] & U(\mathbb{C}(U'))
+\end{tikzcd}
+\end{center}
+commutes in \(\catGAT\).
+
+Suppose that we have such an \(I\). By corollary 2 of \S 1.14 it suffices to show that for any derived \(\in\)-rule \(R\) of \(U\),
+\[ \widehat{U(\mathbb{C}([I]))}(\widehat{\phi_U}(R)) \equiv \widehat{\phi_{U'}}(\widehat{I}(R)). \]
+
+Suppose then that \(x_1 \in \Delta_1, \ldots, x_n \in \Delta_n : t \in \Delta\) is a derived rule of \(U\). By lemma 7,
+\[ \hat{\phi}_U\left(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{t \in \Delta}\right) \equiv \inferrule{x_1 \in \overline{A_1}, \ldots, x_n \in \overline{A_n}(x_1, \ldots, x_{n-1})}{\overline{f}(x_1, \ldots, x_n) \in \overline{A}(x_1, \ldots, x_n)} \]
+where \(A_i = [\tuple{x_1 \in \Delta_1, \ldots, x_i \in \Delta_i}]\), \(A = [\tuple{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n, x \in \Delta}]\) and \(f = [\tuple{x_1, \ldots, x_n, t}]\). Thus by definition of the functor \(U\),
+\[ \widehat{U(\mathbb{C}([I]))}\left(\hat{\phi}_U\left(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{t \in \Delta}\right)\right) \equiv \]
+\[ \inferrule{x_1 \in \overline{\mathbb{C}([I])(A_1)}, \ldots, x_n \in \overline{\mathbb{C}([I])(A_n)}(x_1, \ldots, x_{n-1})}{\overline{\mathbb{C}([I])(f)}(x_1, \ldots, x_n) \in \overline{\mathbb{C}([I])(A)}(x_1, \ldots, x_n)} \]
+
+On the other hand, \(\hat{I}\left(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{t \in \Delta}\right) = \inferrule{x_1 \in \dot{I}(\Delta_1), \ldots, x_n \in \dot{I}(\Delta_n)}{\dot{I}(t) \in \dot{I}(\Delta)}\)
+Thus by lemma 7, \(\hat{\phi}_{U'}\left(\hat{I}\left(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{t \in \Delta}\right)\right) \equiv\)
+\[ \inferrule{x_1 \in \overline{B_1}, \ldots, x_n \in \overline{B_n}(x_1, \ldots, x_{n-1})}{\overline{g}(x_1, \ldots, x_n) \in \overline{B}(x_1, \ldots, x_n)} \]
+where \(B_i = [\tuple{x_1 \in \dot{I}(\Delta_1), \ldots, x_i \in \dot{I}(\Delta_i)}]\), \(B = [\tuple{x_1 \in \dot{I}(\Delta_1), \ldots, x_n \in \dot{I}(\Delta_n), x \in \dot{I}(\Delta)}]\) and \(g = [\tuple{x_1, \ldots, x_n, \dot{I}(t)}]\). But by definition of \(\mathbb{C}([I])\), \(\mathbb{C}([I])(A_i) = B_i\), \(\mathbb{C}([I])(A) = B\) and \(\mathbb{C}([I])(f) = g\).
+Hence \(\widehat{U(\mathbb{C}([I]))}(\widehat{\phi_U}(R)) \equiv \widehat{\phi_{U'}}(\widehat{I}(R))\), as required.
+\end{proof}
+
+It remains to show that for any generalised algebraic theory \(U\), the morphism \([\phi_U]\) of the category \(\catGAT\) is an isomorphism. It suffices to define an interpretation \(\psi_U\) of \(U(\mathbb{C}(U))\) in \(U\) and to show that \(\psi_U \circ \phi_U = id_U\) and \(\phi_U \circ \psi_U = id_{U(\mathbb{C}(U))}\).
+
+Let \(U\) be a theory. We define a preinterpretation \(\psi_U\) of \(U(\mathbb{C}(U))\) in \(U\). The preinterpretation \(\psi_U\) is defined on sort symbols \(\overline{A}\) of \(U\) by choosing an element \(\tuple{v_1 \in \Delta_1, \ldots, v_n \in \Delta_n, v_{n+1} \in \Delta}\) of the equivalence class \(A\) and by defining \(\psi_U(\overline{A}) = \Delta\). To simplify matters we can make the choices in such a way that if \(1 \triangleleft A_1 \cdots \triangleleft A_n \triangleleft A\) in \(\mathbb{C}(U)\) and if \(\tuple{v_1 \in \Delta_1, \ldots, v_n \in \Delta_n}\) is chosen to represent \(A_n\) then a context of the form \(\tuple{v_1 \in \Delta_1, \ldots, v_n \in \Delta_n, v_{n+1} \in \Delta}\) is chosen to represent \(A\). This is always possible by virtue of corollary 2(b) of \S 2.2.
+
+If \(f: A_n \to B\) in \(\mathbb{C}(U)\) and \(B\) is non-trivial then \(\psi_U(\overline{f})\) is defined by choosing an element \(\tuple{t_1, \ldots, t_m, t}\) of the equivalence class \(f\) and by defining \(\psi_U(\overline{f}) = t\). However we choose the representation \(\tuple{t_1, \ldots, t_m, t}\) of \(f\) in such a way that if \(\tuple{v_1 \in \Delta_1, \ldots, v_n \in \Delta_n}\) represents \(A_n\) and if \(\tuple{v_1 \in \Omega_1, \ldots, v_m \in \Omega_m, v_{m+1} \in \Omega}\) represents \(B\) then \(\tuple{t_1, \ldots, t_m, t}\) is a realisation of \(\tuple{v_1 \in \Omega_1, \ldots, v_m \in \Omega_m, v_{m+1} \in \Omega}\) wrt \(\tuple{v_1 \in \Delta_1, \ldots, v_n \in \Delta_n}\). This is possible by lemma 4(i) of \S 1.13.
+Moreover to simplify matters the choices are made in such a way that if \(f: A_n \to B\) and if \(f \circ p(B)\) (assuming it is non-trivial) is represented by \(\tuple{t_1, \ldots, t_m}\) then \(f\) is represented by \(\tuple{t_1, \ldots, t_m, t}\), for some \(t\). This is possible by lemma 5 of \S 1.13.
+
+\begin{lemma}
+\(\psi_U\) is an interpretation of \(U(\mathbb{C}(U))\) in \(U\).
+\end{lemma}
+
+\begin{proof}
+We must check that all the introductory rules and axioms of \(U(\mathbb{C}(U))\) are mapped by \(\psi_U\) to derived rules of \(U\). We just check two cases the other cases are just as simple to check.
+
+1.\ Suppose \(\overline{A}\) is a sort symbol of \(U(\mathbb{C}(U))\). Say \(1 \triangleleft A_1 \cdots \triangleleft A_n \triangleleft A\) in \(\mathbb{C}(U)\), so that \(\overline{A}\) has the introductory rule \(\inferrule{x_1 \in \overline{A_1}, \ldots, x_n \in \overline{A_n}(x_1, \ldots, x_{n-1})}{\overline{A}(x_1, \ldots, x_n) \isatype}\).
+Suppose that \(A\) has been represented by \(\tuple{v_1 \in \Delta_1, \ldots, v_n \in \Delta_n, v_{n+1} \in \Delta}\), then
+\[ \hat{\psi}_U\left(\inferrule{x_1 \in \overline{A_1}, \ldots, x_n \in \overline{A_n}(x_1, \ldots, x_{n-1})}{\overline{A}(x_1, \ldots, x_n) \isatype}\right) = \]
+\[ \inferrule{x_1 \in \Delta_1, x_2 \in \Delta_2[x_1|v_1], \ldots, x_n \in \Delta_n[x_1|v_1, \ldots, x_{n-1}|v_{n-1}]}{\Delta[x_1|v_1, \ldots, x_n|v_n] \isatype} \]
+and this rule is a derived rule of \(U\) by the change of variable lemma of \S 1.7 because the rule \(\inferrule{v_1 \in \Delta_1, \ldots, v_n \in \Delta_n}{\Delta \isatype}\) is a derived rule of \(U\).
+
+2.\ If \(1 \triangleleft A_1 \cdots \triangleleft A_n\), \(1 \triangleleft B_1 \cdots \triangleleft B_m \triangleleft B\) and \(f: A_n \to B_m\) in \(\mathbb{C}(U)\) so that \(U(\mathbb{C}(U))\) has the axiom \(R\), where \(R=\)
+\[ \inferrule{x_1 \in \overline{A_1}, \ldots, x_n \in \overline{A_n}(x_1, \ldots, x_{n-1})}{\overline{f^*B}(x_1, \ldots, x_n) = \overline{B}(\overline{f \circ p(B_m, B_1)}(x_1, \ldots, x_n), \ldots, \overline{f \circ p(B_m, B_{m-1})}(x_1, \ldots, x_n), \overline{f}(x_1, \ldots, x_n))} \]
+
+Suppose that \(A_n\) has been represented by \(\tuple{v_1 \in \Delta_1, \ldots, v_n \in \Delta_n}\), \(B\) has been represented by \(\tuple{v_1 \in \Omega_1, \ldots, v_m \in \Omega_m, v_{m+1} \in \Omega}\), \(f^*B\) has been represented by \(\tuple{v_1 \in \Delta_1, \ldots, v_n \in \Delta_n, v_{n+1} \in \Delta}\) and \(f\) has been represented by \(\tuple{t_1, \ldots, t_m}\). Then \(\hat{\psi}(R) =\)
+\[ \inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n[x_1|v_1, \ldots, x_{n-1}|v_{n-1}]}{\Delta[x_1|v_1, \ldots, x_n|v_n] = \Omega[t_1[x_1|v_1, \ldots, x_n|v_n]|v_1, \ldots, t_m[x_1|v_1, \ldots, x_n|v_n]|v_m]} \]
+which is a derived rule of \(U\) by the change of variable lemma since \(\inferrule{v_1 \in \Delta_1, \ldots, v_n \in \Delta_n}{\Delta = \Omega[t_1|v_1, \ldots, t_m|v_m]}\) is a derived rule of \(U\) because \([\tuple{v_1 \in \Delta_1, \ldots, v_n \in \Delta_n, v_{n+1} \in \Delta}] = f^*B = [\tuple{v_1 \in \Delta_1, \ldots, v_n \in \Delta_n, v_{n+1} \in \Omega[t_1|v_1, \ldots, t_m|v_m]}]\).
+\end{proof}
+
+\begin{lemma}
+\(\psi_U \circ \phi_U \equiv id_U\).
+\end{lemma}
+
+\begin{proof}
+Use corollary 2 of \S 1.14. Suppose that \(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{t \in \Delta}\) is a derived rule of \(U\). Let \(A_i = [\tuple{x_1 \in \Delta_1, \ldots, x_i \in \Delta_i}]\) and let \(A = [\tuple{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n, x \in \Delta}]\). By lemma 7 of this section,
+\[ \hat{\phi}_U\left(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{t \in \Delta}\right) \equiv \inferrule{x_1 \in \overline{A_1}, \ldots, x_n \in \overline{A_n}(x_1, \ldots, x_{n-1})}{\overline{[\tuple{x_1, \ldots, x_n, t}]}(x_1, \ldots, x_n) \in \overline{A}(x_1, \ldots, x_n)} \]
+Therefore
+\[ \widehat{\psi_U}(\widehat{\phi_U}\left(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{t \in \Delta}\right)) \equiv \widehat{\psi_U}\left(\inferrule{x_1 \in \overline{A_1}, \ldots, x_n \in \overline{A_n}(x_1, \ldots, x_{n-1})}{\overline{[\tuple{x_1, \ldots, x_n, t}]}(x_1, \ldots, x_n) \in \overline{A}(x_1, \ldots, x_n)}\right) \]
+and it follows from the definition of \(\psi_U\) that this rule is equivalent to
+\(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{t \in \Delta}\).
+\end{proof}
+
+\begin{lemma}
+\(\phi_U \circ \psi_U \equiv id_{U(\mathbb{C}(U))}\).
+\end{lemma}
+
+\begin{proof}
+Suppose that \(1 \triangleleft A_1 \cdots A_n \triangleleft A\) in \(\mathbb{C}(U)\), so that \(\overline{A}\) is a sort symbol of \(U(\mathbb{C}(U))\) introduced by the rule
+\[ \inferrule{v_1 \in \overline{A_1}, \ldots, v_n \in \overline{A_n}(v_1, \ldots, v_{n-1})}{\overline{A}(v_1, \ldots, v_n) \isatype} \]
+If \(A\) has been represented by \(\tuple{v_1 \in \Delta_1, \ldots, v_n \in \Delta_n, v_{n+1} \in \Delta}\) then
+\[ \hat{\phi}_U\left(\hat{\psi}_U\left(\inferrule{v_1 \in \overline{A_1}, \ldots, v_n \in \overline{A_n}(v_1, \ldots, v_{n-1})}{\overline{A}(v_1, \ldots, v_n) \isatype}\right)\right) = \hat{\phi}_U\left(\inferrule{v_1 \in \Delta_1, \ldots, v_n \in \Delta_n}{\Delta \isatype}\right) \equiv \]
+\[ \inferrule{v_1 \in \overline{A_1}, \ldots, v_n \in \overline{A_n}(v_1, \ldots, v_{n-1})}{\overline{A}(v_1, \ldots, v_n) \isatype}, \text{ by lemma 7.} \]
+
+If also \(1 \triangleleft B_1 \cdots \triangleleft B_m \triangleleft B\) in \(\mathbb{C}(U)\) and \(f: A_n \to B_m\) in \(\mathbb{C}(U)\). If \(B_m\) has been represented by \(\tuple{v_1 \in \Omega_1, \ldots, v_m \in \Omega_m}\), if \(f\) has been represented by \(\tuple{t_1, \ldots, t_m}\) and if \((f \circ p(B_m))^*B\) has been represented by \(\tuple{v_1 \in \Delta_1, \ldots, v_n \in \Delta_n, v_{n+1} \in \Omega}\) then
+\[ \hat{\phi}_U\left(\hat{\psi}_U\left(\inferrule{v_1 \in \overline{A_1}, \ldots, v_n \in \overline{A_n}(v_1, \ldots, v_{n-1})}{\overline{f}(v_1, \ldots, v_n) \in \overline{(f \circ p(B_m))^*B}(v_1, \ldots, v_n)}\right)\right) = \hat{\phi}_U\left(\inferrule{v_1 \in \Delta_1, \ldots, v_n \in \Delta_n}{t_m \in \Omega}\right) \]
+\[ \equiv \inferrule{v_1 \in \overline{A_1}, \ldots, v_n \in \overline{A_n}(v_1, \ldots, v_{n-1})}{\overline{[\tuple{v_1, \ldots, v_n, t_m}]}(v_1, \ldots, v_n) \in \overline{(f \circ p(B_m))^*B}(v_1, \ldots, v_n)} \]
+by lemma 7 of this section,
+\[ \equiv \inferrule{v_1 \in \overline{A_1}, \ldots, v_n \in \overline{A_n}(v_1, \ldots, v_{n-1})}{\overline{[\tuple{t_1, \ldots, t_m}]}(v_1, \ldots, v_n) \in \overline{(f \circ p(B_m))^*B}(v_1, \ldots, v_n)} \]
+by corollary 4 of this section.
+
+This completes the proof that \(\phi_U \circ \psi_U\) and \(id_{U(\mathbb{C}(U))}\) agree up to equivalence on the introductory rules of \(U(\mathbb{C}(U))\).
+\end{proof}
+
+\subsection{The proof that \texorpdfstring{\(\mathbb{C} \circ U \cong id_{\catCon}\)}{C ∘ U ≅ id\_Con}}
+
+We define a natural transformation \(\eta: id_{\catCon} \to \mathbb{C} \circ U\). That is we define for each contextual category \(\mathbb{C}\), a contextual functor \(\eta_{\mathbb{C}} : \mathbb{C} \to \mathbb{C}(U(\mathbb{C}))\), such that if \(F: \mathbb{C} \to \mathbb{C}'\) is a contextual functor then the diagram
+\begin{center}
+\begin{tikzcd}
+\mathbb{C} \arrow[r, "\eta_{\mathbb{C}}"] \arrow[d, "F"] & \mathbb{C}(U(\mathbb{C})) \arrow[d, "\mathbb{C}(U(F))"] \\
+\mathbb{C}' \arrow[r, "\eta_{\mathbb{C}'}"] & \mathbb{C}(U(\mathbb{C}'))
+\end{tikzcd}
+\end{center}
+commutes in \(\catCon\). Eventually we show that \(\eta\) is an isomorphism, that is that for each contextual category \(\mathbb{C}\), \(\eta_{\mathbb{C}}\) is an isomorphism.
+
+If \(\mathbb{C}\) is a contextual category then \(\eta_{\mathbb{C}}\) is defined on the trivial objects and on the trivial morphisms of \(\mathbb{C}\) in the trivial manner, that is by \(\eta_{\mathbb{C}}(1) = 1\) and \(\eta_{\mathbb{C}}(p(A,1)) = p(\eta_{\mathbb{C}}(A), 1)\). \(\eta_{\mathbb{C}}\) is defined on the non-trivial objects and morphisms of \(\mathbb{C}\) as follows:
+
+If \(1 \triangleleft A_1 \cdots \triangleleft A_n \triangleleft A\) in \(\mathbb{C}\) then \(\eta_{\mathbb{C}}(A) = [\tuple{v_1 \in \overline{A_1}, \ldots, v_n \in \overline{A_n}(v_1, \ldots, v_{n-1}), v_{n+1} \in \overline{A}(v_1, \ldots, v_n)}]\).
+
+If \(1 \triangleleft A_1 \cdots \triangleleft A_n\) and \(1 \triangleleft B_1 \cdots \triangleleft B_m\) and \(f: A_n \to B_m\) in \(\mathbb{C}\) then \(\eta_{\mathbb{C}}(f) = [\tuple{\overline{f \circ p(B_m, B_1)}(v_1, \ldots, v_n), \ldots, \overline{f}(v_1, \ldots, v_n)}]\).
+
+\begin{lemma}
+If \(\mathbb{C}\) is a contextual category then \(\eta_{\mathbb{C}} : \mathbb{C} \to \mathbb{C}(U(\mathbb{C}))\) is a contextual functor.
+\end{lemma}
+
+\begin{lemma}
+If \(F: \mathbb{C} \to \mathbb{C}'\) in \(\catCon\) then the diagram
+\begin{center}
+\begin{tikzcd}
+\mathbb{C} \arrow[r, "\eta_{\mathbb{C}}"] \arrow[d, "F"] & \mathbb{C}(U(\mathbb{C})) \arrow[d, "\mathbb{C}(U(F))"] \\
+\mathbb{C}' \arrow[r, "\eta_{\mathbb{C}'}"] & \mathbb{C}(U(\mathbb{C}'))
+\end{tikzcd}
+\end{center}
+commutes.
+\end{lemma}
+
+So we have a natural transformation \(\eta : id_{\catCon} \to \mathbb{C} \circ U\). We wish to show that for each \(\mathbb{C}\), \(\eta_{\mathbb{C}}\) is an isomorphism in \(\catCon\). Unfortunately this turns out to be rather tricky. We have to define a contextual functor \(\xi_{\mathbb{C}} : \mathbb{C}(U(\mathbb{C})) \to \mathbb{C}\) and show that \(\xi_{\mathbb{C}} \circ \eta_{\mathbb{C}} = id_{\mathbb{C}}\) and \(\eta_{\mathbb{C}} \circ \xi_{\mathbb{C}} = id_{\mathbb{C}(U(\mathbb{C}))}\). The procedure that we adopt in defining \(\xi_{\mathbb{C}}\) is to define a function \(J\) from derived T and \(\in\)-rules of \(U(\mathbb{C})\) to objects respectively morphisms of \(\mathbb{C}\). We show that \(J\) induces an equivalence preserving map from contexts and realisations of \(U(\mathbb{C})\) to objects respectively morphisms of \(\mathbb{C}\). Thus we get a map from objects and morphisms of \(\mathbb{C}(U(\mathbb{C}))\) to objects respectively morphisms of \(\mathbb{C}\), we show that this map is a left and right inverse to \(\eta_{\mathbb{C}}\).
+
+Initially \(J\) is defined just as a partial function from the derived T and \(\in\)-rules of \(U(\mathbb{C})\) to the objects respectively morphisms of \(\mathbb{C}\), though eventually we show that \(J\) is total.
+
+Consider the forms that the derived T and \(\in\)-rules of \(U(\mathbb{C})\) can take. By the derivation lemma of \S 1.7 every derived T-rule of \(U(\mathbb{C})\) is of the form
+\[ \inferrule{x_1 \in \Delta_1, \ldots, x_m \in \Delta_m}{\overline{A}(t_1, \ldots, t_n) \isatype} \]
+for some object \(A\) of \(\mathbb{C}\) such that \(1 \triangleleft A_1 \cdots \triangleleft A_n \triangleleft A\) in \(\mathbb{C}\) and such that for each \(i\), \(1 \le i \le n\),
+\[ \inferrule{x_1 \in \Delta_1, \ldots, x_m \in \Delta_m}{t_i \in \overline{A_i}(t_1, \ldots, t_{i-1})} \]
+is a derived rule of \(U(\mathbb{C})\). By the same lemma any derived \(\in\)-rule of \(U(\mathbb{C})\) is either of the form
+\[ \inferrule{x_1 \in \Delta_1, \ldots, x_m \in \Delta_m}{x_j \in \Lambda} \]
+or else is of the form
+\[ \inferrule{x_1 \in \Delta_1, \ldots, x_m \in \Delta_m}{\overline{f}(t_1, \ldots, t_n) \in \Delta} \]
+for some morphism \(f: A_n \to B\) where \(1 \triangleleft A_1 \cdots \triangleleft A_n\) in \(\mathbb{C}\), such that for each \(i\), \(1 \le i \le n\), the rule
+\[ \inferrule{x_1 \in \Delta_1, \ldots, x_m \in \Delta_m}{t_i \in \overline{A_i}(t_1, \ldots, t_{i-1})} \]
+is a derived rule of \(U(\mathbb{C})\) and such that
+\[ \inferrule{x_1 \in \Delta_1, \ldots, x_m \in \Delta_m}{\overline{B}(t_1, \ldots, t_n) = \Delta} \]
+is a derived rule of \(U(\mathbb{C})\).
+
+Bearing this in mind the function \(J\) from derived T and \(\in\)-rules of \(U(\mathbb{C})\) to the objects and morphisms of \(\mathbb{C}\) is defined inductively as follows:
+
+\[ J\left( \inferrule{x_1 \in \Delta_1, \ldots, x_m \in \Delta_m}{\overline{A}(t_1, \ldots, t_n) \isatype} \right) = J(R_{t_n})^* \cdots J(R_{t_1})^* p(J(R_{\Delta_m}), 1)^* A \]
+
+\[ J\left( \inferrule{x_1 \in \Delta_1, \ldots, x_m \in \Delta_m}{\overline{f}(t_1, \ldots, t_n) \in \Delta} \right) = J(R_{t_n})^* \cdots J(R_{t_1})^* p(J(R_{\Delta_m}), 1)^* \text{`}f\text{'} \]
+
+\[ J\left( \inferrule{x_1 \in \Delta_1, \ldots, x_m \in \Delta_m}{x_j \in \Lambda} \right) = \text{`}p(J(R_{\Delta_m}), J(R_{\Delta_j}))\text{'}. \]
+
+Where for each \(i\), \(1 \le i \le n\), \(R_{t_i}\) is the derived rule
+\[ \inferrule{x_1 \in \Delta_1, \ldots, x_m \in \Delta_m}{t_i \in \overline{A_i}(t_1, \ldots, t_{i-1})} \]
+and where for each \(j\), \(1 \le j \le m\), \(R_{\Delta_j}\) is the derived rule
+\[ \inferrule{x_1 \in \Delta_1, \ldots, x_{j-1} \in \Delta_{j-1}}{\Delta_j \isatype}. \]
+
+If \(R\) is a derived T-rule of \(U(\mathbb{C})\) and if \(J(R)\) is defined then \(J(R)\) is an object of \(\mathbb{C}\). If \(R\) is a derived \(\in\)-rule of \(U(\mathbb{C})\) and if \(J(R)\) is defined then \(J(R)\) is a morphism of \(\mathbb{C}\).
+
+We wish to show that \(J(R)\) is defined for all derived T and \(\in\)-rules \(R\) of \(U(\mathbb{C})\). This is going to require a proof by induction on derivations in \(U(\mathbb{C})\). It turns out that the inductive hypothesis that we must use is rather complicated. This is because as we proceed to prove that \(J\) is defined on the derived rules \(R\) of \(U(\mathbb{C})\) we must keep an eye on the behaviour of \(J\) on substitution instances of \(R\), otherwise the induction does not go through. If we call the inductive hypothesis \(H\) then \(H\) is a possible property of derived rules of \(U(\mathbb{C})\). That is for any derived rule \(R\) of \(U\) either \(H(R)\) is or is not the case. Of course we aim to show that \(H(R)\) is always the case.
+
+\(H\) is defined inductively. The definition of \(H(R)\) depends on which kind of rule \(R\) is, thus there are four cases to consider:
+
+\textbf{Case 1.\ T-rules.} If \(R_{\Delta}\) is a derived T-rule of \(U(\mathbb{C})\) of the form \(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{\Delta \isatype}\) then \(H(R_{\Delta})\) is equivalent to 1(a) and 1(b) and 1(c), which are as follows:
+
+1(a).\ If \(n \ge 1\), that is if the premise of \(R_{\Delta}\) is not the empty premise, then \(H(R_{\Delta_n})\), where \(R_{\Delta_n}\) is the rule \(\inferrule{x_1 \in \Delta_1, \ldots, x_{n-1} \in \Delta_{n-1}}{\Delta_n \isatype}\).
+
+1(b).\ \(J(R_{\Delta})\) is defined and if \(n \ge 1\) then \(J(R_{\Delta_n}) \triangleleft J(R_{\Delta})\) in \(\mathbb{C}\). If \(n=0\) then \(1 \triangleleft J(R_{\Delta})\) in \(\mathbb{C}\).
+
+1(c).\ \(J\left( \inferrule{y_1 \in \Omega_1, \ldots, y_m \in \Omega_m}{\Delta[t_1|x_1, \ldots, t_n|x_n] \isatype} \right)\) is defined and is equal to \(J(R_{t_n})^* \cdots J(R_{t_1})^* p(J(R_{\Omega_m}), 1)^* J(R_{\Delta})\), whenever \(\tuple{y_1 \in \Omega_1, \ldots, y_m \in \Omega_m}\) is a context of \(U(\mathbb{C})\) and whenever \(\tuple{t_1, \ldots, t_n}\) is a realisation of \(\tuple{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}\) wrt \(\tuple{y_1 \in \Omega_1, \ldots, y_m \in \Omega_m}\) with the property that for each \(i\), \(1 \le i \le n\),
+\(J\left( \inferrule{y_1 \in \Omega_1, \ldots, y_m \in \Omega_m}{\Delta_i[t_1|x_1, \ldots, t_{i-1}|x_{i-1}] \isatype} \right)\)
+is defined and \(J(R_{t_i})\) is defined and
+\(J(R_{t_i}) \in \mathrm{Arr}_{\mathbb{C}}\left( J\left( \inferrule{y_1 \in \Omega_1, \ldots, y_m \in \Omega_m}{\Delta_i[t_1|x_1, \ldots, t_{i-1}|x_{i-1}] \isatype} \right) \right)\).
+
+\textbf{Case 2.\ \(\in\)-rules.} If \(R_t\) is a derived \(\in\)-rule of \(U(\mathbb{C})\) of the form \(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{t \in \Delta}\) then \(H(R_t)\) is equivalent to 2(a) and 2(b) and 2(c) which are as follows:
+
+2(a).\ \(H(R_{\Delta})\).
+
+2(b).\ \(J(R_t)\) is defined and \(J(R_t) \in \mathrm{Arr}_{\mathbb{C}}(J(R_{\Delta}))\).
+
+2(c).\ \(J\left( \inferrule{y_1 \in \Omega_1, \ldots, y_m \in \Omega_m}{t[t_1|x_1, \ldots, t_n|x_n] \in \Delta[t_1|x_1, \ldots, t_n|x_n]} \right)\) is defined and is equal to \(J(R_{t_n})^* \cdots J(R_{t_1})^* p(J(R_{\Omega_m}), 1)^* J(R_t)\), whenever the same conditions as in 1(c) hold.
+
+\textbf{Case 3.\ T\(=\)rules.} If \(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{\Delta = \Delta'}\) is a derived rule of \(U(\mathbb{C})\) then \(H\left( \inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{\Delta = \Delta'} \right)\) is equivalent to \(H(R_{\Delta})\) and \(H(R_{\Delta'})\) and \(J(R_{\Delta}) = J(R_{\Delta'})\).
+
+\textbf{Case 4.\ \(\in=\)rules.} If \(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{t = t' \in \Delta}\) is a derived rule of \(U(\mathbb{C})\) then \(H\left( \inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{t = t' \in \Delta} \right)\) is equivalent to \(H(R_t)\) and \(H(R_{t'})\) and \(J(R_t) = J(R_{t'})\).
+
+This completes the definition of the inductive hypothesis \(H\). We still need two lemmas before we can proceed with the induction.
+
+\begin{lemma}
+If \(R\) is a derived rule of \(U(\mathbb{C})\) of the form \(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{\textup{Conclusion}}\) such that \(H(R)\), if \(\tuple{t_1, \ldots, t_n}\) is a realisation of \(\tuple{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}\) wrt \(\tuple{y_1 \in \Omega_1, \ldots, y_m \in \Omega_m}\) such that for each \(i\), \(1 \le i \le n\), \(H(R_{t_i})\) then also
+\[ H\left( \inferrule{y_1 \in \Omega_1, \ldots, y_m \in \Omega_m}{\textup{Conclusion}[t_1|x_1, \ldots, t_n|x_n]} \right). \]
+\end{lemma}
+
+\begin{lemma}
+\textup{(i)}\ For every \(n \ge 1\), if \(1 \triangleleft A_1 \cdots \triangleleft A_n\) in \(\mathbb{C}\) then \textup{(a)}
+\[ J\left( \inferrule{x_1 \in \overline{A_1}, \ldots, x_{n-1} \in \overline{A_{n-1}}(x_1, \ldots, x_{n-2})}{\overline{A_n}(x_1, \ldots, x_{n-1}) \isatype} \right) \]
+is defined and is equal to \(A_n\). \textup{(b)} For any \(i\), \(1 \le i \le n\),
+\[ J\left( \inferrule{x_1 \in \overline{A_1}, \ldots, x_n \in \overline{A_n}(x_1, \ldots, x_{n-1})}{x_i \in \overline{A_i}(x_1, \ldots, x_{i-1})} \right) \]
+is defined and is equal to \(\text{`}p(A_n, A_i)\text{'}\).
+
+\textup{(ii)}\ For every \(n \ge 1\), if \(1 \triangleleft A_1 \cdots \triangleleft A_n\) in \(\mathbb{C}\) and if \(f: A_n \to B\) is a non-trivial morphism of \(\mathbb{C}\) then
+\[ J\left( \inferrule{x_1 \in \overline{A_1}, \ldots, x_n \in \overline{A_n}(x_1, \ldots, x_{n-1})}{\overline{f}(x_1, \ldots, x_n) \in \overline{(f \circ p(B))^*B}(x_1, \ldots, x_n)} \right) \]
+is defined and is equal to \(\text{`}f\text{'}\).
+\end{lemma}
+
+\begin{corollary}
+\textup{(i)} For every sort symbol \(\overline{A}\) of \(U(\mathbb{C})\), if \(1 \triangleleft A_1 \cdots \triangleleft A_n \triangleleft A\) in \(\mathbb{C}\) then
+\[ H\left( \inferrule{x_1 \in \overline{A_1}, \ldots, x_n \in \overline{A_n}(x_1, \ldots, x_{n-1})}{\overline{A}(x_1, \ldots, x_n) \isatype} \right) \]
+
+\textup{(ii)} For every operator symbol \(\overline{f}\) of \(U(\mathbb{C})\), if \(1 \triangleleft A_1 \cdots \triangleleft A_n\) in \(\mathbb{C}\) and \(f: A_n \to B\) in \(\mathbb{C}\) then
+\[ H\left( \inferrule{x_1 \in \overline{A_1}, \ldots, x_n \in \overline{A_n}(x_1, \ldots, x_{n-1})}{\overline{f}(x_1, \ldots, x_n) \in \overline{(f \circ p(B))^*B}(x_1, \ldots, x_n)} \right) \]
+\end{corollary}
+
+\begin{lemma}
+For every derived rule \(R\) of \(U(\mathbb{C})\), \(H(R)\).
+\end{lemma}
+
+\begin{proof}
+By induction on the derivations in \(U(\mathbb{C})\). We must check that every principle of derivation preserves the property \(H\).
+The principles LI1--7 preserve property \(H\). This can be seen at a glance. We go on to the other principles.
+
+\underline{T1.} Let \(R_t\) be a derived rule of \(U(\mathbb{C})\) of the form \(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{t \in \Delta}\) and let \(R\) be a derived rule of \(U(\mathbb{C})\) of the form \(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{\Delta = \Delta'}\). Let \(R'_t\) be the rule \(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{t \in \Delta'}\). We must show that \(H(R_t)\) and \(H(R)\) implies that \(H(R'_t)\).
+
+\(J\left( \inferrule{P}{t \in \Delta} \right)\) is always defined independently of \(\Delta\) so since \(J(R_t)\) is defined and belongs to \(\mathrm{Arr}_{\mathbb{C}}(J(R_{\Delta}))\) it follows that \(J(R'_t)\) is defined and belongs to \(\mathrm{Arr}_{\mathbb{C}}(J(R_{\Delta}))\). Since \(H(R)\) it follows that \(J(R_{\Delta}) = J(R_{\Delta'})\), hence \(J(R'_t)\) is defined and belongs to \(\mathrm{Arr}_{\mathbb{C}}(J(R_{\Delta'}))\). That is 2(b) holds of \(R'_t\). 2(a) holds of \(R'_t\) because \(H(R)\) implies \(H(R_{\Delta'})\). 2(c) holds of \(R'_t\) because 2(c) holds of \(R_t\) and because \(J\left( \inferrule{P}{t \in \Delta} \right)\) is defined independently of \(\Delta\).
+
+\underline{CF1.} Suppose that \(H\) holds of the derived rule \(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{\Delta_{n+1} \isatype}\) of \(U(\mathbb{C})\). We wish to show that for all \(i\), \(1 \le i \le n+1\),
+\[ H\left( \inferrule{x_1 \in \Delta_1, \ldots, x_{n+1} \in \Delta_{n+1}}{x_i \in \Delta_i} \right). \]
+The proof is by induction on \(i\).
+
+\underline{CF2(a).} Suppose that \(\overline{A}\) is a sort symbol of \(U(\mathbb{C})\) introduced by the rule \(\inferrule{x_1 \in \overline{A_1}, \ldots, x_n \in \overline{A_n}(x_1, \ldots, x_{n-1})}{\overline{A}(x_1, \ldots, x_n) \isatype}\). Suppose that for each \(i\), \(1 \le i \le n\), \(\inferrule{y_1 \in \Omega_1, \ldots, y_m \in \Omega_m}{t_i \in \overline{A_i}(t_1, \ldots, t_{i-1})}\) is a derived rule of \(U(\mathbb{C})\) of which \(H\) holds.
+We must show that \(H\left( \inferrule{y_1 \in \Omega_1, \ldots, y_m \in \Omega_m}{\overline{A}(t_1, \ldots, t_n) \isatype} \right)\).
+This is an immediate consequence of lemma 11 and corollary 13.
+
+\underline{CF2(b).} Similar to CF2(a).
+
+The remaining principles (SI1, SI2, A1, A2) are checked by going through all axioms of \(U(\mathbb{C})\) and verifying that \(J\) behaves correctly.
+\end{proof}
+
+We can collect together the information about \(J\) that we really want in the following:
+
+\begin{corollary}
+\textup{(i)} If \(\tuple{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}\) is a context of \(U(\mathbb{C})\) then \(1 \triangleleft J(R_{\Delta_1}) \cdots \triangleleft J(R_{\Delta_n})\) in \(\mathbb{C}\).
+
+\textup{(ii)} If \(\tuple{t_1, \ldots, t_m}\) is a realisation of \(\tuple{y_1 \in \Omega_1, \ldots, y_m \in \Omega_m}\) wrt \(\tuple{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}\) in \(U(\mathbb{C})\) then for each \(j\), \(1 \le j \le m\), \(J(R_{t_j}) \in \mathrm{Arr}_{\mathbb{C}}(J(R_{t_{j-1}})^* \cdots J(R_{t_1})^* p(J(R_{\Delta_n}), 1)^* J(R_{\Omega_j}))\).
+
+\textup{(iii)} If \(\tuple{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n} \equiv \tuple{x'_1 \in \Delta'_1, \ldots, x'_n \in \Delta'_n}\) then \(J(R_{\Delta_n}) = J(R_{\Delta'_n})\).
+
+\textup{(iv)} If \(\tuple{t_1, \ldots, t_m} \equiv \tuple{t'_1, \ldots, t'_m}\) then for each \(j\), \(1 \le j \le m\), \(J(R_{t_j}) = J(R_{t'_j})\).
+\end{corollary}
+
+By corollary 14(ii) and by lemma 3(iii) of \S 2.3, whenever \(\tuple{t_1, \ldots, t_m}\) is a realisation of \(\tuple{y_1 \in \Omega_1, \ldots, y_m \in \Omega_m}\) wrt \(\tuple{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}\) in \(U(\mathbb{C})\) then there exists a unique \(m\)-tuple \(\tuple{\gamma_1, \ldots, \gamma_m}\) of morphisms of \(\mathbb{C}\) such that for each \(j\), \(1 \le j \le m\), \(\gamma_j : J(R_{\Delta_n}) \to J(R_{\Omega_j})\) and \(\text{`}\gamma_j\text{'} = J(R_{t_j})\), and such that for each \(j\), \(1 \le j < m\), \(\gamma_{j+1} \circ p(J(R_{\Omega_{j+1}}), J(R_{\Omega_j})) = \gamma_j\). This last condition implies that the \(m\)-tuple \(\tuple{\gamma_1, \ldots, \gamma_m}\) is determined by \(\gamma_m : J(R_{\Delta_n}) \to J(R_{\Omega_m})\). So the statement can be reworded: for each such realisation there exists a unique \(\gamma : J(R_{\Delta_n}) \to J(R_{\Omega_m})\) such that for each \(j\), \(1 \le j \le m\), \(\text{`}\gamma \circ p(J(R_{\Omega_m}), J(R_{\Omega_j}))\text{'} = J(R_{t_j})\). Thus we can define a function \(\xi\) from objects and morphisms of \(\mathbb{C}(U(\mathbb{C}))\) to objects and morphisms of \(\mathbb{C}\) by
+\begin{center}
+\begin{tikzcd}
+{[\tuple{x_1 \in \Delta_1{,} \ldots{,} x_n \in \Delta_n}]} \arrow[d, "{[\tuple{t_1{,} \ldots{,} t_m}]}"] \arrow[r, "\xi"] & J(R_{\Delta_n}) \arrow[d, "\gamma"] \\
+{[\tuple{y_1 \in \Omega_1{,} \ldots{,} y_m \in \Omega_m}]} \arrow[r] & J(R_{\Omega_m})
+\end{tikzcd}
+\end{center}
+where \(\gamma\) is the unique map such that for all \(j\), \(1 \le j \le m\), \(\text{`}\gamma \circ p(J(R_{\Omega_m}), J(R_{\Omega_j}))\text{'} = J(R_{t_j})\).
+
+Then \(\xi\) is well defined by corollary 14(iii) and (iv).
+
+We show that \(\xi\) is an inverse to \(\eta_{\mathbb{C}} : \mathbb{C} \to \mathbb{C}(U(\mathbb{C}))\). We need one last lemma.
+
+\begin{lemma}
+If \(\inferrule{x_1 \in \Delta_1, \ldots, x_{n-1} \in \Delta_{n-1}}{\Delta_n \isatype}\) is a derived rule of \(U(\mathbb{C})\) then for all \(i\), \(1 \le i \le n\), \(\inferrule{x_1 \in \Delta_1, \ldots, x_{i-1} \in \Delta_{i-1}}{\Delta_i = \overline{J(R_{\Delta_i})}(x_1, \ldots, x_{i-1})}\) is a derived rule of \(U(\mathbb{C})\).
+
+If \(\inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{t \in \Delta}\) is a derived rule of \(U(\mathbb{C})\) then
+\[ \inferrule{x_1 \in \Delta_1, \ldots, x_n \in \Delta_n}{t = \overline{J(R_t)}(x_1, \ldots, x_n)} \]
+is a derived rule of \(U(\mathbb{C})\).
+\end{lemma}
+
+\begin{corollary}
+\textup{(i)} \(\xi_{\mathbb{C}} \circ \eta_{\mathbb{C}} = id_{\mathbb{C}}\). \textup{(ii)} \(\eta_{\mathbb{C}} \circ \xi_{\mathbb{C}} = id_{\mathbb{C}(U(\mathbb{C}))}\).
+\end{corollary}
+
+\begin{proof}
+(i) Follows directly from lemma 12. (ii) Follows from lemma 15 and corollary 3.
+\end{proof}
+
+It now follows from quite general considerations that \(\xi_{\mathbb{C}} : \mathbb{C}(U(\mathbb{C})) \to \mathbb{C}\) is a contextual functor. For example \(\xi\) preserves composition because \(\xi(f \circ g) = \xi(\eta_{\mathbb{C}}(\xi(f)) \circ \eta_{\mathbb{C}}(\xi(g))) = \xi(\eta_{\mathbb{C}}(\xi(f) \circ \xi(g))) = \xi(f) \circ \xi(g)\).
+
+So that completes the proof that \(\eta_{\mathbb{C}} : \mathbb{C} \to \mathbb{C}(U(\mathbb{C}))\) is an isomorphism for every contextual category \(\mathbb{C}\). So completing the proof that the category \(\catCon\) is equivalent to the category \(\catGAT\).
 
 % source p2.77
 \section{Functorial semantics, universal algebra} \label{sec:source-2-5}
-\comment{This section title is more capitalised in source; why?}
 
-\lipsum[18]
+\subsection{Functorial semantics}
+
+An algebraic semantics is an equivalence between a category of theories and a category of structures. We referred to several such in \S 2.1. In all cases so far considered there is a further equivalence. In all cases the usual definition of model of a theory can be replaced by a new definition which uses only the notion of structure. Lawvere has used the term functorial semantics in describing this kind of semantics. Functorial semantics depends on an equivalence between the category of models of a theory \(U\) and the category of structure preserving morphisms from the structure \(\mathbb{C}(U)\) corresponding to \(U\) to a special canonical structure (the world structure?). For example the canonical structure is taken to be the category with products \(\underline{\mathbf{Set}}\) in the case of algebraic theories (Lawvere [11]). Or in the case of classical propositional theories the canonical structure is taken to be the Boolean Algebra \(\{0,1\}\).
+
+The present situation is as well behaved as any if the canonical structure is taken to be the contextual category \(\underline{\mathbf{Fam}}\).
+
+If \(U\) is a generalised algebraic theory then the category of models of \(U\) is equivalent to the category which has contextual functors \(\mathbb{C}(U)\) to \(\underline{\mathbf{Fam}}\) as objects and natural transformations as morphisms. Thus we can assert
+\[ U\text{-alg} \cong \text{ConFunc}(\mathbb{C}(U), \underline{\mathbf{Fam}}). \]
+
+It has turned out that the inductive construction of \(\mathbb{C}(U)\) from \(U\) has enabled us to replace the usual inductive definition of model of \(U\) by the definition ``a model of \(U\) is a contextual functor \(M: \mathbb{C}(U) \to \underline{\mathbf{Fam}}\)''.
+
+Every interpretation \(I: U \to U'\) induces a contextual functor \(\mathbb{C}(I): \mathbb{C}(U) \to \mathbb{C}(U')\). Composition with \(\mathbb{C}(I)\) is a functor from \(\text{ConFunc}(\mathbb{C}(U'), \underline{\mathbf{Fam}})\) to \(\text{ConFunc}(\mathbb{C}(U), \underline{\mathbf{Fam}})\). It is the functor \(I\text{-alg}: U'\text{-alg} \to U\text{-alg}\). Those functors between categories of models which are induced in this way are called generalised algebraic functors. We can show that all such functors have left adjoints. But anyhow this is equivalent to a known generalisation of Lawvere [11]'s theorem all algebraic functors have left adjoint.
+
+\subsection{Universal algebra}
+
+We have been able to prove a generalisation of Birkhoff's theorem. Previously this theorem has been proved for many sorted algebraic theories see Birkhoff and Lipson [3]. Birkhoff's theorem classifies those subcategories of a category \(U\text{-alg}\) that arise as the category of models of an equational extension of \(U\). The result that we describe characterises subcategories \(U'\text{-alg}\) of \(U\text{-alg}\) in cases where \(U\) is any generalised algebraic theory and \(U'\) is any \(\in\)-equational extension of \(U\).
+
+By an \(\in\)-equational extension \(U'\) of \(U\) we mean an extension by axioms all of which are \(\in =\)-rules. Thus \(U'\) is not permitted to have any T=axioms which are not already in \(U\).
+
+If we state the result then we can explain the terms afterwards.
+
+\begin{theorem}
+If \(U\) is a generalised algebraic theory and if \(\Gamma\) is a subcategory of \(U\text{-alg}\) then equivalent are:
+
+\begin{enumerate}[label=\roman*.]
+\item \(\Gamma\) is the subcategory determined by some \(\in\)-equational extension \(U'\) of \(U\).
+
+\item \(\Gamma\) is a full subcategory of \(U\) closed under products, homomorphic images and subalgebras and having the property that if \(M\) is a \(U\)-algebra and if all the finitely generated subalgebras of \(M\) belong to \(\Gamma\) then \(M\) belongs to \(\Gamma\).
+\end{enumerate}
+\end{theorem}
+
+The \(U\)-algebra \(M'\) is said to be a \underline{homomorphic image} of the \(U\)-algebra \(M\) iff there exists a homomorphism \(f: M \to M'\) having the property that for all \(1 \triangleleft A_1 \triangleleft \dots \triangleleft A_n\) in \(\mathbb{C}(U)\), for all \(a'_1 \in M'(A_1)\), for all \(a'_2 \in M'(A_2)(a'_1), \dots,\) for all \(a'_n \in M'(A_n)(a'_1, \dots, a'_{n-1})\), there exists \(a_1, \dots, a_n\) such that \(a_1 \in M(A_1), \dots, a_n \in M(A_n)(a_1, \dots, a_{n-1})\) and such that \(f(a_1) = a'_1, \dots, f(a_n) = a'_n\).
+
+A \(U\)-algebra \(M\) is to be a \underline{finitely generated} \(U\)-algebra iff it is the homomorphic image of some finitely generated free algebra.
+
+Consider for a moment. Every theory \(U\) has a minimal model denoted \(K_U\) and built out of closed terms. Alternatively this minimal model is described just in terms of the structure \(\mathbb{C}(U)\). For example if \(1 \triangleleft A\) in \(\mathbb{C}(U)\) then \(K_U(A) = \Hom(1,A)\), otherwise if \(1 \triangleleft A_1 \dots \triangleleft A_n \triangleleft A\) in \(\mathbb{C}(U)\) then if \(a_1 \in K_U(A_1), \dots,\) if \(a_n \in K_U(A_n)(a_1, \dots, a_{n-1})\) then \(K_U(A)(a_1, \dots, a_n) = \{ a \in \Hom_{\mathbb{C}(U)}(1,A) \mid a \circ p(A) = a_n \}\).
+
+Now, the free \(U\)-algebras are the algebras \(I\text{-alg}(K_{U'})\) for \(I: U \to U'\) an extension of \(U\) by constants alone. The finitely generated free \(U\)-algebras are these algebras where \(U'\) in an extension by just finitely many constants.
+
+For example, take \(U\) to be the theory of categories. Take \(U'\) to be the theory of categories +
+
+\textbf{Symbol} \quad \textbf{Introductory Rule}
+\begin{itemize}
+    \item \(a_1\): \quad \(a_1 \in Ob\)
+    \item \(a_2\): \quad \(a_2 \in Ob\)
+    \item \(b\): \quad \(b \in Hom(a_1, a_2)\).
+\end{itemize}
+
+In this case \(I\text{-alg}(K_{U'})\) is the category \(\cdot \xrightarrow{} \cdot\). It is the free category with one morphism. It is a finitely generated free category.
 
 %%% Local Variables:
 %%% mode: latex

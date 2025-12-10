@@ -1,31 +1,1103 @@
 % source p3.1
 
-\lipsum[19]
+We say what it is for a contextual category to have disjoint unions and a singleton object (comparable with a category with finite products and terminal object). The category of these structures is denoted \(\underline{\Sigma\text{-}\mathbf{Con}}\).
+
+We then introduce a new notion of structure---the notion of a category with attributes. The category of these structures is denoted \(\underline{\mathbf{Attcat}}\). We show that the category \(\underline{\Sigma\text{-}\mathbf{Con}}\) and the category \(\underline{\mathbf{Attcat}}\) are equivalent categories.
+
+In \S 1.5 we alluded to a contextual category of categories, category indexed families of categories and so on. The well known fibration construction induces a structure of disjoint unions on this contextual category. We use the \(\underline{\mathbf{Attcat}}\), \(\underline{\Sigma\text{-}\mathbf{Con}}\) equivalence to give a fairly brief description of this structure. This is in \S 3.3.
+
+\S 3.4 contains the definition of M-L structure intended as the model theory of a strengthened M-L type theory.
+
+Also in \S 3.4 an equivalent notion of structure, based on the \(\underline{\mathbf{Attcat}}\), \(\underline{\Sigma\text{-}\mathbf{Con}}\) equivalence, is put forward. Then in \S 3.5 we can briefly describe a new model of M-L type theory, we refer to it as the limit space model.
 
 % source p3.2
 \section{Disjoint unions and singleton object} \label{sec:source-3-1}
 
-\lipsum[20]
+A \underline{contextual category with disjoint unions} \(\tuple{\mathbb{C}, \Sigma, \alpha}\) consists of a contextual category \(\mathbb{C}\) and for every \(Q \triangleleft A \triangleleft B\) in \(\mathbb{C}\), an object \(\Sigma B\) of \(\mathbb{C}\) and a morphism \(\alpha(B)\) of \(\mathbb{C}\) such that \(Q \triangleleft \Sigma B\) in \(\mathbb{C}\), such that \(\alpha(B)\) is an isomorphism in \(\mathbb{C}\), \(\alpha(B): B \to \Sigma B\) such that the diagram
+\begin{center}
+\begin{tikzcd}
+& B \arrow[d, "\alpha(B)"] \arrow[dl, "p(B)"'] \\
+A \arrow[r, "p(A)"'] & \Sigma B \arrow[d, "p(\Sigma B)"] \\
+& Q
+\end{tikzcd}
+\end{center}
+commutes,
+
+subject to the condition: If \(f: Q \to Q'\) in \(\mathbb{C}\) and if \(Q' \triangleleft A \triangleleft B\) then \(f^* \Sigma B = \Sigma f^* B\) and \(f^*(\alpha(B)) = \alpha(f^*B)\).
+
+The category of contextual categories with disjoint unions has as morphisms \(F: \tuple{\mathbb{C}, \Sigma, \alpha} \to \tuple{\mathbb{C}', \Sigma', \alpha'}\) those contextual functors \(F: \mathbb{C} \to \mathbb{C}'\) such that for all \(Q \triangleleft A \triangleleft B\) in \(\mathbb{C}\), \(F(\Sigma B) = \Sigma' F(B)\) and \(F(\alpha(B)) = \alpha'(F(B))\).
+
+It follows that if \(\tuple{\mathbb{C}, \Sigma, \alpha}\) is a contextual category with disjoint unions and if \(f: A \to A'\) in \(\mathbb{C}\) then \(\mathbb{C}_f: \tuple{\mathbb{C}_{A'}, \Sigma, \alpha} \to \tuple{\mathbb{C}_A, \Sigma, \alpha}\) is a morphism of contextual categories with disjoint unions.
+
+Actual disjoint unions of families of sets induce the structure of contextual category with disjoint unions on the contextual category \(\underline{\mathbf{Fam}}\) of sets, families of sets and so on. This is as follows.
+
+If \(1 \triangleleft Q_1 \dots \triangleleft Q_n \triangleleft A \triangleleft B\) in \(\underline{\mathbf{Fam}}\) then define \(\Sigma B\), such that \(Q_n \triangleleft \Sigma B\) in \(\underline{\mathbf{Fam}}\), by defining \(\Sigma B(r_1, \dots, r_n) = \{ \tuple{a,b} \mid a \in A(r_1, \dots, r_n) \text{ and } b \in B(r_1, \dots, r_n, a) \}\) whenever \(r_1 \in Q_1, \dots, r_n \in Q_n(r_1, \dots, r_{n-1})\). Define \(\alpha(B) : B \to \Sigma B\) in \(\underline{\mathbf{Fam}}\) by defining \(\alpha(B) = \tuple{f_1, \dots, f_n, g}\) where \(f_i, 1 \le i \le n\) is defined by \(f_i(r_1, \dots, r_n, a, b) = r_i\) whenever \(r_1 \in Q_1, \dots, r_n \in Q_n(r_1, \dots, r_{n-1}), a \in A(r_1, \dots, r_n)\) and \(b \in B(r_1, \dots, r_n, a)\), and where \(g\) is defined by \(g(r_1, \dots, r_n, a, b) = \tuple{a, b}\).
+
+It is easy to see that \(\alpha(B)\) has inverse \(\alpha^{-1}(B)\) given by \(\tuple{L_1, \dots, L_n, k_1, k_2}\) where \(L_i, 1 \le i \le n\), is the operator given by \(L_i(r_1, \dots, r_n, c) = r_i\) whenever \(r_1 \in Q_1, \dots, r_n \in Q_n(r_1, \dots, r_{n-1})\) and \(c \in \Sigma B(r_1, \dots, r_n)\), and where \(k_1\) and \(k_2\) are given by \(k_i(r_1, \dots, r_n, c) =\) the \(i\)th component of the ordered pair \(c\). The conditions \(f^* \Sigma B = \Sigma f^* B\) and \(f^*(\alpha(B)) = \alpha(f^*B)\) are automatically satisfied. Even without these conditions it is clear that the definition characterises disjoint unions in \(\underline{\mathbf{Fam}}\) up to isomorphism.
+
+\begin{lemma}
+If \(\tuple{\mathbb{C}, \Sigma, \alpha}\) is a contextual category with disjoint unions then \(\mathrm{Base}(\mathbb{C})\) is a category with products of pairs (and hence has finite products).
+\end{lemma}
+
+\begin{proof}
+Suppose that \(A\) and \(A'\) are objects of \(\mathrm{Base}(\mathbb{C})\). That is to say suppose \(1 \triangleleft A\) and \(1 \triangleleft A'\) in \(\mathbb{C}\).
+
+In any category, pulling back over the terminal object yields a product diagram. Since
+\begin{center}
+\begin{tikzcd}
+p(A)^*A' \arrow[r, "q(p(A){,} A')"] \arrow[d, "p(A)^*A'"] & A' \arrow[d, "p(A')"] \\
+A \arrow[r, "p(A)"] & 1
+\end{tikzcd}
+\end{center}
+is a pullback diagram in \(\mathbb{C}\),
+\begin{center}
+\begin{tikzcd}
+& p(A)^*A' \arrow[dl, "p(p(A)^*A')"'] \arrow[dr, "q(p(A){,} A')"] & \\
+A & & A'
+\end{tikzcd}
+\end{center}
+is a product diagram in \(\mathbb{C}\).
+
+Since \(\alpha(p(A)^*A') : p(A)^*A' \to \Sigma p(A)^*A'\) is an isomorphism
+\begin{center}
+\begin{tikzcd}
+& \Sigma p(A)^*A' \arrow[dl, "p(p(A)^*A') \circ \alpha^{-1}(p(A)^*A')"'] \arrow[dr, "q(p(A){,} A') \circ \alpha^{-1}(p(A)^*A')"] & \\
+A & & A'
+\end{tikzcd}
+\end{center}
+is a product diagram in \(\mathbb{C}\). \(1 \triangleleft \Sigma p(A)^*A'\) in \(\mathbb{C}\) and so this diagram is a product diagram in \(\mathrm{Base}(\mathbb{C})\).
+\end{proof}
+
+If this proof is interpreted in \(\mathbb{C} = \underline{\mathbf{Fam}}\) then we have \(\mathrm{Base}(\mathbb{C}) = \underline{\mathbf{Set}}\), the category of sets and functions. If \(A\) and \(A'\) are sets then \(p(A)^*A'\) is the constant \(A\)-indexed family with value \(A'\). Thus \(A \times A'\) in \(\underline{\mathbf{Set}}\) is given by \(\Sigma p(A)^*A'\) in \(\underline{\mathbf{Fam}}\) which in turn is just \(\{ \tuple{a, a'} \mid a \in A \text{ and } a' \in A' \}\). All is as it should be.
+
+A \underline{singleton object} of the contextual category \(\mathbb{C}\) is defined to be an object of \(\mathrm{Base}(\mathbb{C})\) that is terminal in \(\mathbb{C}\). Equivalently it is an object of \(\mathrm{Base}(\mathbb{C})\) that is isomorphic in \(\mathbb{C}\) to the terminal object \(1\). The singleton object, if there is one, will usually be denoted \(\{ \cdot \}\). The unique morphism \(1 \to \{ \cdot \}\) in \(\mathbb{C}\) will be denoted \(e\). Thus a contextual category with singleton object \(\tuple{\mathbb{C}, \{ \cdot \}, e}\) consists of a contextual category \(\mathbb{C}\), an object \(\{ \cdot \}\) of \(\mathbb{C}\) such that \(1 \triangleleft \{ \cdot \}\) in \(\mathbb{C}\) and a morphism \(e : 1 \to \{ \cdot \}\) such that \(p(\{ \cdot \}) \circ e = id_{\{ \cdot \}}\). The morphisms between contextual categories with singleton objects are taken to be those contextual functors which preserve the singleton object.
+
+It is not difficult to see that if \(U\) is a generalised algebraic theory then the contextual category \(\mathbb{C}(U)\) has a singleton object iff there exists expressions \(t\) and \(\Delta\) of \(U\) such that \(x \in \Delta : t = x \in \Delta\) is a derived rule of \(U\).
+
+\begin{lemma}
+If \(\mathbb{C}\) is a contextual category with singleton object \(\{ \cdot \}\) and if \(F: \mathbb{C} \to \mathbb{D}\) is a contextual functor then \(F(\{ \cdot \})\) is a singleton object of \(\mathbb{D}\).
+\end{lemma}
+
+\begin{proof}
+\(F\) is a functor, hence \(F\) preserves isomorphisms. Thus \(1 \triangleleft F(\{ \cdot \})\) and \(F(\{ \cdot \}) \cong 1\) in \(\mathbb{D}\).
+\end{proof}
+
+\begin{lemma}
+If \(\tuple{\mathbb{C}, \{ \cdot \}}\) is a contextual category with singleton object and if \(A\) is an object of \(\mathbb{C}\) then \(\tuple{\mathbb{C}_A, p(A,1)^* \{ \cdot \}}\) is a contextual category with singleton object. If \(f: A \to A'\) in \(\mathbb{C}\) then \(\mathbb{C}_f : \tuple{\mathbb{C}_{A'}, p(A',1)^* \{ \cdot \}} \to \tuple{\mathbb{C}_A, p(A,1)^* \{ \cdot \}}\) is a morphism of contextual categories with singleton objects.
+\end{lemma}
+
+\begin{proof}
+If \(A\) is an object of \(\mathbb{C}\) then \(p(A,1) : A \to 1\) in \(\mathbb{C}\). Hence \(p(A,1)^* : \mathbb{C}_1 \to \mathbb{C}_A\). Thus by lemma 2 \(\tuple{\mathbb{C}_A, p(A,1)^* \{ \cdot \}}\) is a contextual category with singleton object. Now if \(f: A \to A'\) in \(\mathbb{C}\) then \(\mathbb{C}_f : \mathbb{C}_{A'} \to \mathbb{C}_A\) and \(\mathbb{C}_f(p(A',1)^* \{ \cdot \}) = f^* p(A',1)^* \{ \cdot \} = (p(A',1) \circ f)^* \{ \cdot \} = p(A,1)^* \{ \cdot \}\). Thus \(\mathbb{C}_f : \mathbb{C}_{A'} \to \mathbb{C}_A\) and preserves the singleton object.
+\end{proof}
+
+The category of contextual categories with disjoint unions and singleton objects is denoted \(\underline{\Sigma\text{-}\mathbf{Con}}\).
+
+The point is that in a contextual category with disjoint unions and singleton object there is a lot of repetition of structure. For example if in such a structure \(Q \triangleleft A \triangleleft B\) then \(\mathbb{C}_{\alpha(B)}\) is an isomorphism of \(\mathbb{C}_B\) with \(\mathbb{C}_{\Sigma B}\). Thus the structure of \(\mathbb{C}\) above \(B\) is isomorphic to the structure of \(\mathbb{C}\) above \(\Sigma B\) and because \(\Sigma B\) is at a lower level than \(B\) it turns out that the whole structure of \(\mathbb{C}\) is coded up as structure at a very low level. This leads to the notion of a category with attributes. We must first introduce some new notation.
+
+For the remainder of this section we suppose \(\tuple{\mathbb{C}, \Sigma, \alpha, \{ \cdot \}}\) to be a contextual category with disjoint unions and singleton object.
+
+\begin{lemma}
+If \(f: A \to A'\) in \(\mathrm{Base}(\mathbb{C})\) and if \(A' \triangleleft B \triangleleft D\) in \(\mathbb{C}\) then the diagram
+\begin{center}
+\begin{tikzcd}
+f^*D \arrow[r, "q(f{,}D)"] \arrow[d, "\alpha(f^*D)"'] & D \arrow[d, "\alpha(D)"] \\
+f^* \Sigma D \arrow[r, "q(f{,} \Sigma D)"] & \Sigma D
+\end{tikzcd}
+\end{center}
+commutes.
+\end{lemma}
+
+\begin{proof}
+Since \(f: A \to A'\) and \(A' \triangleleft B \triangleleft D\) we have by definition that \(f^* \Sigma D = \Sigma f^* D\) and \(f^*(\alpha(D)) = \alpha(f^*D)\). But \(f^*(\alpha(D))\) is defined to be the unique map: \(f^*D \to f^* \Sigma D\) such that the diagrams
+\begin{center}
+\begin{minipage}{0.4\textwidth}
+\begin{tikzcd}
+f^*D \arrow[r, "q(f{,}D)"] \arrow[d] & D \arrow[d, "p(D)"] \\
+f^*B \arrow[r, "q(f{,}B)"] & B
+\end{tikzcd}
+\end{minipage}
+and
+\begin{minipage}{0.4\textwidth}
+\begin{tikzcd}
+f^*D \arrow[r, "q(f{,}D)"] \arrow[d, "f^*(\alpha(D))"'] & D \arrow[d, "\alpha(D)"] \\
+f^* \Sigma D \arrow[r, "q(f{,} \Sigma D)"] & \Sigma D
+\end{tikzcd}
+\end{minipage}
+\end{center}
+commute. Thus the statement of the lemma is a restatement of the condition \(f^*(\alpha(D)) = \alpha(f^*D)\).
+\end{proof}
+
+If \(1 \triangleleft A \triangleleft B\) in \(\underline{\mathbf{Fam}}\) then we let \(\rho(B) : \Sigma B \to A\) be the 1st projection function from \(\{ \tuple{a,b} \mid a \in A, b \in B(a) \}\) to \(A\). More generally if \(Q \triangleleft A \triangleleft B\) in \(\mathbb{C}\) then define \(\rho(B) : \Sigma B \to A\) to be \(\alpha^{-1}(B) \circ p(B)\).
+\begin{center}
+\begin{tikzcd}
+& B \arrow[dl, "\alpha(B)"'] \arrow[d, "p(B)"] \\
+\Sigma B \arrow[r, "\rho(B)"] & A
+\end{tikzcd}
+\end{center}
+
+Now suppose \(f: A \to A'\) in \(\mathrm{Base}(\mathbb{C})\) and \(A' \triangleleft B\) in \(\mathbb{C}\), define \(\xi(f,B) : \Sigma f^*B \to \Sigma B\) to be the morphism \(\alpha^{-1}(f^*B) \circ q(f,B) \circ \alpha(B)\).
+
+\begin{lemma}
+If \(f: A \to A'\) in \(\mathrm{Base}(\mathbb{C})\) and if \(A' \triangleleft B\) in \(\mathbb{C}\) then
+\begin{center}
+\begin{tikzcd}
+\Sigma f^*B \arrow[r, "\xi(f{,}B)"] \arrow[d, "\rho(f^*B)"] & \Sigma B \arrow[d, "\rho(B)"] \\
+A \arrow[r, "f"] & A'
+\end{tikzcd}
+\end{center}
+is a pullback diagram in \(\mathrm{Base}(\mathbb{C})\).
+\end{lemma}
+
+\begin{proof}
+Just because
+\begin{center}
+\begin{tikzcd}
+f^*B \arrow[r, "q(f{,}B)"] \arrow[d, "p(f^*B)"] & B \arrow[d, "p(B)"] \\
+A \arrow[r, "f"] & A'
+\end{tikzcd}
+\end{center}
+is a pullback diagram in \(\mathbb{C}\) and \(\alpha(f^*B)\) and \(\alpha(B)\) are isomorphisms.
+\end{proof}
+
+Note that these pullback diagrams fit together in the sense that if \(A \xrightarrow{f} A' \xrightarrow{f'} A''\) in \(\mathbb{C}\) then \(f^*f'^*B = (ff')^*B\) and \(\xi(f, f'^*B) \circ \xi(f', B) = \xi(ff', B)\). We are at this moment collapsing the structure of \(\mathbb{C}\) into \(\mathrm{Base}(\mathbb{C})\).
+
+We now introduce the \(\#, \gamma\) notation. We have to think of this as a reflection at a low level of \(\mathbb{C}\), structure at higher levels.
+
+\begin{lemma}
+If \(f: A \to A'\) is an isomorphism in \(\mathbb{C}\) and if \(A' \triangleleft B\) then \(q(f,B) : f^*B \to B\) is an isomorphism with inverse \(q(f^{-1}, f^*B) : B \to f^*B\) in \(\mathbb{C}\).
+\end{lemma}
+
+\begin{proof}
+\(q(f^{-1}, f^*B): B \to f^*B\) in \(\mathbb{C}\) because \(f^{-1*} f^*B = B\).
+\(q(f^{-1}, f^*B) \circ q(f,B) = q(f^{-1} \circ f, B) = q(id_{A'}, B) = id_B\).
+\(q(f,B) \circ q(f^{-1}, f^*B) = q(f \circ f^{-1}, f^*B) = q(ff^{-1}, f^*B) = q(id_A, f^*B) = id_{f^*B}\).
+\end{proof}
+
+In future if \(1 \triangleleft A \triangleleft B\) in \(\mathbb{C}\) and \(\Sigma B \triangleleft C\) then the object \(\Sigma \alpha(B)^*C\) will be denoted \(\# C\). Thus \(A \triangleleft \# C\) in \(\mathbb{C}\). By lemma 6 \(\alpha(B)^*C \cong C\). The composite isomorphism \(C \xrightarrow{\alpha(B)} \alpha(B)^*C \xrightarrow{\alpha(\alpha(B)^*C)} \Sigma \alpha(B)^*C\) will be denoted \(\sigma(C)\). Thus \(\sigma(C) = q(\alpha(B)^{-1}, \alpha(B)^*C) \circ \alpha(\alpha(B)^*C)\).
+Finally we define \(\gamma(C) : \Sigma C \to \Sigma \# C\) to be the isomorphism \(\alpha^{-1}(C) \circ \sigma(C) \circ \alpha(\# C)\).
+
+\begin{center}
+\begin{tikzcd}
+C \arrow[r, "{q(\alpha(B)^{-1}{,}\alpha(B)^*C)}"] \arrow[d, "\alpha^{-1}(C)"'] \arrow[drr, "\sigma(C)", bend left] & \alpha(B)^*C \arrow[r, "\alpha(\alpha(B)^*C)"] & \Sigma \alpha(B)^*C = \# C \arrow[d, "\alpha(\# C)"] \\
+\Sigma C \arrow[rr, "\gamma(C)"] & & \Sigma \# C
+\end{tikzcd}
+\end{center}
+
+\begin{lemma}
+If \(1 \triangleleft A \triangleleft B\) and \(\Sigma B \triangleleft C\) in \(\mathbb{C}\) then the diagram
+\begin{center}
+\begin{tikzcd}
+\Sigma C \arrow[r, "\gamma(C)"] \arrow[d, "\rho(C)"] & \Sigma \# C \arrow[d, "\rho(\# C)"] \\
+\Sigma B \arrow[d, "\rho(B)"] & \Sigma \alpha(B)^*C \arrow[dl] \\
+A &
+\end{tikzcd}
+\end{center}
+commutes in \(\mathrm{Base}(\mathbb{C})\).
+\end{lemma}
+
+\begin{proof}
+Use the definition of \(\rho\) and \(\gamma\) plus the commutativity of the diagrams
+\begin{center}
+\begin{minipage}{0.45\textwidth}
+\begin{tikzcd}
+C \arrow[r, "{q(\alpha^{-1}(B){,} \alpha(B)^*C)}"] \arrow[d, "p(C)"] & \alpha(B)^*C \arrow[d] \\
+\Sigma B \arrow[r, "\alpha^{-1}(B)"] & B
+\end{tikzcd}
+\end{minipage}
+and
+\begin{minipage}{0.45\textwidth}
+\begin{tikzcd}
+\alpha(B)^*C \arrow[r, "\alpha(\alpha(B)^*C)"] \arrow[d] & \Sigma \alpha(B)^*C = \# C \\
+B \arrow[d, "p(B)"] & \\
+A &
+\end{tikzcd}
+\end{minipage}
+\end{center}
+(The first diagram commutes because it is a pullback diagram, the second by definition of disjoint unions).
+\end{proof}
+
+\begin{lemma}
+If \(f: A \to A'\) in \(\mathrm{Base}(\mathbb{C})\) and if \(A' \triangleleft B\), \(\Sigma B \triangleleft C\) in \(\mathbb{C}\) then \(\#(\xi(f,B)^*C) = f^* \# C\) and the diagram
+\begin{center}
+\begin{tikzcd}
+\Sigma \xi(f{,}B)^*C \arrow[r, "\xi(\xi(f{,}B){,} C)"] \arrow[d, "\gamma(\xi(f{,}B)^*C)"] & \Sigma C \arrow[d, "\gamma(C)"] \\
+\Sigma f^* \# C \arrow[r, "\xi(f{,} \# C)"] & \Sigma \# C
+\end{tikzcd}
+\end{center}
+commutes.
+\end{lemma}
+
+\begin{proof}
+The situation:
+\begin{center}
+\begin{tikzcd}
+\xi(f{,}B)^*C \arrow[d, "\alpha(f^*B)"] & f^*B \arrow[d, "\alpha(f^*B)"] \arrow[r, "q(f{,}B)"] & B \arrow[d, "\alpha(B)"] & C \arrow[d, "\alpha(B)"] \\
+\Sigma f^* B & A \arrow[r, "f"] & A' & \Sigma B
+\end{tikzcd}
+\end{center}
+
+The identity \(\#(\xi(f,B)^*C) = f^*B\) holds as follows:
+\(\#(\xi(f,B)^*C) = \Sigma(\alpha(f^*B)^* \xi(f,B)^* C)\) by def.\ of \(\#\).
+\(= \Sigma(\alpha(f^*B)^* (\alpha^{-1}(f^*B) \circ q(f,B) \circ \alpha(B))^* C)\) by def.\ of \(\xi\).
+\(= \Sigma(q(f,B)^* \alpha(B)^* C)\)
+\(= \Sigma(f^* \alpha(B)^* C)\) * notation -- see lemma 1 of 2.3. Since \(A' \triangleleft B \triangleleft \alpha(B)^*\) and \(f: A \to A'\) in \(\mathbb{C}\).
+\(= f^* \Sigma(\alpha(B)^* C)\)
+\(= f^* \# C\) by def.\ of \(\#\).
+
+Now if we take the diagram that we wish to show commutes and use the definitions of \(\gamma\) and \(\xi\) we see that we wish to show that the outer rectangle of the diagram
+\begin{center}
+\begin{tikzcd}
+\Sigma \xi(f{,}B)^*C \arrow[r, "\alpha^{-1}(\xi(f{,}B)^*C)"] \arrow[ddr] & \xi(f{,}B)^*C \arrow[r, "q(\xi(f{,}B){,} C)"] & C \arrow[r, "\alpha(C)"] \arrow[d, "\sigma(C)"] & \Sigma C \arrow[dd, "\alpha^{-1}"] \\
+& & \# C \arrow[d, "\alpha"] & \\
+& \# \xi(f{,}B)^*C \arrow[r] & f^* \# C \arrow[r, "q(f{,} \# C)"] & \Sigma \# C
+\end{tikzcd}
+\end{center}
+commutes.
+
+Thus it suffices to show that the diagram
+\begin{center}
+\begin{tikzcd}
+\xi(f{,}B)^*C \arrow[r, "q(\xi(f{,}B){,} C)"] \arrow[d, "\sigma(\xi(f{,}B)^*C)"] & C \arrow[d, "\sigma(C)"] \\
+f^* \# C = \#(\xi(f{,}B)^*C) \arrow[r, "q(f{,} \# C)"] & \# C
+\end{tikzcd}
+\end{center}
+commutes.
+
+Now \(\sigma(C)\) is defined to be \(q(\alpha^{-1}(B), \alpha(B)^*C) \circ \alpha(\alpha(B)^*C)\)
+and \(\sigma(\xi(f,B)^*C) = q(\alpha^{-1}(f^*B), \alpha(f^*B)^* \xi(f,B)^*C) \circ \alpha(\alpha(f^*B)^* \xi(f,B)^*C) = q(\alpha^{-1}(f^*B), f^* \alpha(B)^* C) \circ \alpha(f^* \alpha(B)^* C)\), by definition of \(\xi\). Thus we wish to show that the outer rectangle of the diagram
+\begin{center}
+\begin{tikzcd}
+\xi(f{,}B)^*C \arrow[r, "q(\xi(f{,}B){,} C)"] \arrow[d] & C \arrow[d] \\
+f^* \alpha(B)^* C \arrow[r, "q(f{,} \alpha(B)^*C)"] \arrow[d] & \alpha(B)^* C \arrow[d] \\
+f^* \# C \arrow[r, "q(f{,} \# C)"] & \# C
+\end{tikzcd}
+\end{center}
+commutes.
+
+Well the lower rectangle commutes by lemma 4 of this section. To show that the upper rectangle commutes we replace the extended \(^*, q\) notation (i.e.\ use lemma 1 of \S 2.3), use the fact that pullbacks fit together and use the definition of \(\xi\). This is as follows
+\(q(\alpha^{-1}(f^*B), f^* \alpha(B)^* C) \circ q(f, \alpha(B)^* C) =\)
+\(q(\alpha^{-1}(f^*B), q(f, B)^* \alpha(B)^* C) \circ q(q(f,B), \alpha(B)^* C) =\)
+\(q(\alpha^{-1}(f^*B) \circ q(f,B), \alpha(B)^* C) = q(\xi(f,B) \circ \alpha^{-1}(B), \alpha(B)^* C) =\)
+\(q(\xi(f,B), \alpha^{-1}(B)^* \alpha(B)^* C) \circ q(\alpha^{-1}(B), \alpha(B)^* C) =\)
+\(q(\xi(f,B), C) \circ q(\alpha^{-1}(B), \alpha(B)^* C)\), as required.
+\end{proof}
+
+If \(A \in |\mathrm{Base}(\mathbb{C})|\) then \(p(\{ \cdot \})^* A \cong A\) because \(p(\{ \cdot \}) : \{ \cdot \} \to 1\) is an isomorphism. Hence \(\Sigma p(\{ \cdot \})^* A \cong A\). We denote \(p(\{ \cdot \})^* A\) by \(L(A)\) and the isomorphism of \(\Sigma L(A)\) with \(A\) by \(\Theta(A)\). Thus \(\Theta(A) : \Sigma L(A) \to A\) is defined by \(\Theta(A) = \alpha^{-1}(p(\{ \cdot \})^* A) \circ q(p(\{ \cdot \}), A)\).
+
+\begin{lemma}
+If \(1 \triangleleft A \triangleleft B\) in \(\mathbb{C}\) then \(L(\Sigma B) = \#(\Theta(A)^* B)\) and the diagram
+\begin{center}
+\begin{tikzcd}
+\Sigma B \arrow[d, "\Theta(\Sigma B)"] & \Sigma L(\Sigma B) \arrow[l, "\xi(\Theta(A){,} B)"'] \arrow[d, "\gamma(\Theta(A)^* B)"] \\
+\Sigma L \Sigma B & \Sigma \# \Theta(A)^* B \arrow[l, "\Theta(\Sigma B)"]
+\end{tikzcd}
+\end{center}
+commutes.
+\end{lemma}
+
+\begin{proof}
+\(\#((\alpha^{-1}(p(\{ \cdot \})^* A) \circ q(p(\{ \cdot \}), A))^* B = \Sigma q(p(\{ \cdot \}), A)^* B\) by definition of \(\#\), \(= \Sigma p(\{ \cdot \})^* B\), by replacing extended \(^*, q\) notation, \(= p(\{ \cdot \})^* \Sigma B\). That is \(\# \Theta(A)^* B = L(\Sigma B)\).
+
+As for the commuting triangle, if we cancel out the \(\rho\)'s and \(\alpha^{-1}\)'s, after substituting in for \(\Theta, \gamma\) and \(\xi\), then we see that we want to show that the diagram
+\begin{center}
+\begin{tikzcd}
+q(p(\{ \cdot \}), \Sigma B) \arrow[d] & \Sigma B \arrow[l] \arrow[d] \\
+p(\{ \cdot \})^* \Sigma B \arrow[r, equal] & \# \Theta(A)^* B
+\end{tikzcd}
+\end{center}
+commutes. Now \(q(\Theta(A), B) \circ \alpha(B) = q(\alpha^{-1}(p(\{ \cdot \})^* A) \circ q(p(\{ \cdot \}), A), B) \circ \alpha(B)\)
+\(q(\alpha^{-1}(p(\{ \cdot \})^* A), p(\{ \cdot \})^* B) \circ q(p(\{ \cdot \}), B) \circ \alpha(B)\). Whereas
+\(\sigma(\Theta(A)^* B) = q(\alpha^{-1}(p(\{ \cdot \})^* A), p(\{ \cdot \})^* B) \circ \alpha(p(\{ \cdot \})^* B)\). Thus we must just show that the diagram
+\begin{center}
+\begin{tikzcd}
+p(\{ \cdot \})^* B \arrow[r, "q(p(\{ \cdot \}){,} B)"] \arrow[d, "\alpha(p(\{ \cdot \})^* B)"] & B \arrow[d, "\alpha(B)"] \\
+\Sigma p(\{ \cdot \})^* B \arrow[r, "q(p(\{ \cdot \}){,} \Sigma B)"] & \Sigma B
+\end{tikzcd}
+\end{center}
+commutes. But this commutes by lemma 4.
+\end{proof}
 
 % source p3.14
 \section{Categories with attributes} \label{sec:source-3-2}
 
-\lipsum[21]
+A \underline{category with attributes} \(\tuple{\mathbb{C}, Att, 1_{\mathbb{C}}, \Sigma, p, \cdot, \Sop, \#, \gamma, L, \Theta}\) consists of
+
+\begin{enumerate}
+    \item A category \(\mathbb{C}\) with terminal object \(1_{\mathbb{C}}\). Said to be the \underline{base category}.
+    
+    \item For every object \(A\) of \(\mathbb{C}\), a set \(Att(A)\). The set of attributes of type \(A\).
+    
+    \item For every object \(A\) of \(\mathbb{C}\), for every \(B \in Att(A)\), an object \(\Sigma B\) of \(\mathbb{C}\) and a morphism \(p(B) : \Sigma B \to A\) in \(\mathbb{C}\).
+    
+    \item For every morphism \(f : A \to A'\) in \(\mathbb{C}\), for every \(B \in Att(A')\), an attribute \(f^*B \in Att(A)\) and a morphism \(\Sop(f,B) : \Sigma f^*B \to \Sigma B\) in \(\mathbb{C}\) such that the diagram
+    \begin{center}
+    \begin{tikzcd}
+        \Sigma f^*B \arrow[r, "{\Sop(f,B)}"] \arrow[d, "p(f^*B)"'] & \Sigma B \arrow[d, "p(B)"] \\
+        A \arrow[r, "f"] & A'
+    \end{tikzcd}
+    \end{center}
+    is a pullback diagram in \(\mathbb{C}\).
+    
+    \item For every object \(A\) of \(\mathbb{C}\), for every \(B \in Att(A)\), for every \(C \in Att(\Sigma B)\), an attribute \(\# C \in Att(A)\) and an isomorphism \(\gamma(C) : \Sigma C \to \Sigma \# C\) in \(\mathbb{C}\) such that the diagram
+    \begin{center}
+    \begin{tikzcd}
+        \Sigma C \arrow[rr, "\gamma(C)"] \arrow[dr, "p(C)"'] & & \Sigma \# C \arrow[dl, "p(\# C)"] \\
+        & \Sigma B \arrow[d, "p(B)"] & \\
+        & A &
+    \end{tikzcd}
+    \end{center}
+    commutes.
+    
+    \item For every object \(A\) of \(\mathbb{C}\), an attribute \(L(A) \in Att(1_{\mathbb{C}})\) and an isomorphism \(\Theta(A) : \Sigma L(A) \to A\) in \(\mathbb{C}\). Such that \(L\) as a function \(L : |\mathbb{C}| \to Att(1_{\mathbb{C}})\) is an isomorphism of sets.
+\end{enumerate}
+
+Subject to the conditions:
+
+\begin{enumerate}
+    \item[I.] If \(A\) is an object of \(\mathbb{C}\) and if \(B \in Att(A)\) then \(id_A^* B = B\) and \(\Sop(id_A, B) = id_{\Sigma B}\).
+    
+    \item[II.] If \(A \xrightarrow{f} A' \xrightarrow{f'} A''\) in \(\mathbb{C}\) and if \(B \in Att(A'')\) then \(f^* f'^* B = (ff')^* B\) and \(\Sop(f, f'^*B) \circ \Sop(f', B) = \Sop(ff', B)\).
+    
+    \item[III.] If \(f : A \to A'\) in \(\mathbb{C}\) and if \(B \in Att(A')\) and \(C \in Att(\Sigma B)\) then \(\#(\Sop(f,B)^*C) = f^* \# C\) and the diagram
+    \begin{center}
+    \begin{tikzcd}
+        \Sigma \Sop(f,B)^*C \arrow[r, "{\Sop(\Sop(f{,}B){,} C)}"] \arrow[d, "{\gamma(\Sop(f{,}B)^*C)}"'] & \Sigma C \arrow[d, "\gamma(C)"] \\
+        \Sigma f^* \# C \arrow[r, "{\Sop(f{,} \# C)}"] & \Sigma \# C
+    \end{tikzcd}
+    \end{center}
+    commutes.
+    
+    \item[IV.] If \(A\) is an object of \(\mathbb{C}\) and if \(B \in Att(A)\) then \(L \Sigma B = \# \Theta(A)^* B\) and the diagram
+    \begin{center}
+    \begin{tikzcd}
+        \Sigma B \arrow[d, "\Theta(\Sigma B)"] & \Sigma L(\Sigma B) \arrow[l, "{\Sop(\Theta(A){,} B)}"'] \arrow[d, "{\gamma(\Theta(A)^* B)}"] \\
+        \Sigma L \Sigma B & \Sigma \# \Theta(A)^* B \arrow[l, "\Theta(\Sigma B)"]
+    \end{tikzcd}
+    \end{center}
+    commutes.
+\end{enumerate}
+
+The category of categories with attributes is denoted \(\underline{\mathbf{Attcat}}\). A morphism \(F : \tuple{\mathbb{C}, Att, \dots} \to \tuple{\mathbb{C}', Att', \dots}\) consists of a functor \(F : \mathbb{C} \to \mathbb{C}'\) preserving the terminal object and for each object \(A\) of \(\mathbb{C}\) a function, also called \(F\), \(F : Att(A) \to Att'(F(A))\) such that \(F\), as a whole, preserves all the structure \(\Sigma, p, {}^*, \Sop, \#, \gamma, L\) and \(\Theta\).
+
+In this section we prove that the category \(\underline{\mathbf{Attcat}}\) is equivalent to the category \(\underline{\Sigma\text{-}\mathbf{Con}}\) of contextual categories with disjoint unions and singleton object. Part of this work has been done in \S 3.1 where we did, in effect, prove that every \(\mathbb{D} \in |\underline{\Sigma\text{-}\mathbf{Con}}|\) induces a category with attributes now to be called \(\Phi(\mathbb{D})\). \(\Phi(\mathbb{D})\) has as base category the category \(\mathrm{Base}(\mathbb{D})\). If \(A \in \mathrm{Base}(\mathbb{D})\) then \(Att_{\Phi(\mathbb{D})}(A)\) is taken to be \(\{ B \in |\mathbb{D}| \mid A \triangleleft B \text{ in } \mathbb{D} \}\). \(\Sigma, p, {}^*, \Sop, \#, L\) and \(\Theta\) are then defined in \(\Phi(\mathbb{D})\) as defined in \S 3.1. Lemmas of that section then ensure that \(\Phi(\mathbb{D})\) so defined is a category with attributes.
+
+Since any morphism \(F : \mathbb{D} \to \mathbb{D}'\) in \(\underline{\Sigma\text{-}\mathbf{Con}}\) completely preserves the disjoint union and singleton object structure as well as contextual structure and since \(\Phi(\mathbb{D})\) and \(\Phi(\mathbb{D}')\) are defined entirely in terms of this structure it follows that such an \(F\) induces a morphism \(\Phi(F) : \Phi(\mathbb{D}) \to \Phi(\mathbb{D}')\) in \(\underline{\mathbf{Attcat}}\). The functoriality of \(\Phi : \underline{\Sigma\text{-}\mathbf{Con}} \to \underline{\mathbf{Attcat}}\) is immediate. We wish to show that \(\Phi\) is an equivalence of categories. This involves the definition of a functor \(\Psi : \underline{\mathbf{Attcat}} \to \underline{\Sigma\text{-}\mathbf{Con}}\).
+Then we show that for all \(\mathbb{D} \in |\underline{\Sigma\text{-}\mathbf{Con}}|\), \(\Psi(\Phi(\mathbb{D}))\) is, upto isomorphism of structures, the structure \(\mathbb{D}\) recovered from \(\Phi(\mathbb{D})\).
+
+If \(\mathbb{E}\) is a category with attributes write \(\mathrm{Base}(\mathbb{E})\) for the base category of \(\mathbb{E}\) and write \(Att_{\mathbb{E}}(A)\) for attributes of \(A\) when \(A \in |\mathrm{Base}(\mathbb{E})|\).
+
+\textbf{Construction.} If \(\mathbb{E}\) is a category with attributes then define a contextual category \(\Psi(\mathbb{E})\) as follows:
+
+\textbf{Step 1.} The objects of \(\Psi(\mathbb{E})\) will be defined in such a way that each object is an ordered pair \(\tuple{n, A}\) where \(n\) is a natural number and \(A\) is an attribute in \(\mathbb{E}\).
+
+The tree of objects of \(\Psi(\mathbb{E})\) is defined inductively. The least element of the tree is taken to be the ordered pair \(\tuple{0, L(1_{\mathbb{E}})}\), where \(1_{\mathbb{E}}\) is the terminal object of \(\mathrm{Base}(\mathbb{E})\). Then if \(\tuple{n, A}\) is an object of \(\Psi(\mathbb{E})\) define the set of objects of \(\Psi(\mathbb{E})\) succeeding \(\tuple{n, A}\) to be the set \(\{ \tuple{n+1, B} \mid B \in Att_{\mathbb{E}}(\Sigma A) \}\).
+
+Thus an arbitrary path up through \(\Psi(\mathbb{E})\) is a path of the form \(\tuple{0, L(1_{\mathbb{E}})} \triangleleft \tuple{1, A_1} \dots \triangleleft \tuple{n, A_n}\) where \(A_1 \in Att_{\mathbb{E}}(\Sigma L(1_{\mathbb{E}}))\) and for each \(i, 2 \le i \le n\), \(A_i \in Att_{\mathbb{E}}(\Sigma A_{i-1})\).
+
+\textbf{Step 2.} The morphisms of \(\Psi(\mathbb{E})\). Define \(\Hom_{\Psi(\mathbb{E})}(\tuple{n, A}, \tuple{m, A'}) = \{ \tuple{n, m, f} \mid f : \Sigma A \to \Sigma A' \text{ in Base}(\mathbb{E}) \}\). Define \(\tuple{n, m, f} \circ \tuple{m, l, g} = \tuple{n, l, fg}\).
+
+\textbf{Step 3.} Projections. If \(\tuple{n, A} \triangleleft \tuple{n+1, B}\) in \(\Psi(\mathbb{E})\) then \(B \in Att_{\mathbb{E}}(\Sigma A)\) so we can define \(p(\tuple{n+1, B}) = \tuple{n+1, n, p(B)}\).
+
+\textbf{Step 4.} Pullbacks. If \(\tuple{n, m, f} : \tuple{n, A} \to \tuple{m, A'}\) in \(\Psi(\mathbb{E})\) and if \(\tuple{m, A'} \triangleleft \tuple{m+1, B}\) then \(B \in Att_{\mathbb{E}}(\Sigma A')\) and \(f : \Sigma A \to \Sigma A'\) in \(\mathbb{E}\) so define \(\tuple{n, m, f}^* \tuple{m+1, B} = \tuple{n+1, f^*B}\) and define \(q(\tuple{n, m, f}, \tuple{m+1, B}) = \tuple{n+1, m+1, \Sop(f,B)}\). We must check that
+\begin{center}
+\begin{tikzcd}
+\tuple{n+1, f^*B} \arrow[r, "{\tuple{n+1{,} m+1{,} \Sop(f{,}B)}}"] \arrow[d] & \tuple{m+1, B} \arrow[d] \\
+\tuple{n, A} \arrow[r, "{\tuple{n{,} m{,} f}}"] & \tuple{m, A'}
+\end{tikzcd}
+\end{center}
+is a pullback diagram in \(\Psi(\mathbb{E})\). This is easily checked using the fact that
+\begin{center}
+\begin{tikzcd}
+\Sigma f^*B \arrow[r, "{\Sop(f,B)}"] \arrow[d, "p(f^*B)"'] & \Sigma B \arrow[d, "p(B)"] \\
+\Sigma A \arrow[r, "f"] & \Sigma A'
+\end{tikzcd}
+\end{center}
+is a pullback diagram in \(\mathrm{Base}(\mathbb{E})\).
+
+Similarly the pullbacks in \(\Psi(\mathbb{E})\) fit together because the corresponding pullbacks in \(\mathrm{Base}(\mathbb{E})\) fit together.
+
+\textbf{Step 4.} \(\Sigma\) and \(\alpha\). Suppose that \(\tuple{n, A} \triangleleft \tuple{n+1, B} \triangleleft \tuple{n+2, C}\) in \(\Psi(\mathbb{E})\). Then \(C \in Att_{\mathbb{E}}(\Sigma B)\) and \(B \in Att_{\mathbb{E}}(\Sigma A)\) hence \(\# C \in Att_{\mathbb{E}}(\Sigma A)\) and \(\gamma(C) : \Sigma C \to \Sigma \# C\) in \(\mathrm{Base}(\mathbb{E})\). Thus we can define \(\Sigma \tuple{n+2, C} = \tuple{n+1, \# C}\) and \(\alpha(\tuple{n+2, C}) = \tuple{n+2, n+1, \gamma(C)}\). Then \(\alpha(\tuple{n+2, C})\) is an isomorphism because \(\gamma(C)\) is an isomorphism.
+
+The diagram
+\begin{center}
+\begin{tikzcd}
+\tuple{n+1, C} \arrow[r, "{\alpha(\tuple{n+2{,} C})}"] \arrow[dr] & \Sigma \tuple{n+2, C} \arrow[d] \\
+& \tuple{n, A}
+\end{tikzcd}
+\end{center}
+commutes in \(\Psi(\mathbb{E})\) because the diagram
+\begin{center}
+\begin{tikzcd}
+\Sigma C \arrow[r, "\gamma(C)"] \arrow[d, "p(C)"'] & \Sigma \# C \arrow[d, "p(\# C)"] \\
+\Sigma B \arrow[d, "p(B)"'] & \Sigma A \\
+\Sigma A &
+\end{tikzcd}
+\end{center}
+commutes in \(\mathrm{Base}(\mathbb{E})\).
+
+Finally we must show that if \(\tuple{n, m, f} : \tuple{n, A} \to \tuple{m, A'}\) in \(\mathbb{C}\) and if \(\tuple{m, A'} \triangleleft \tuple{m+1, B} \triangleleft \tuple{m+2, C}\) then \(\tuple{n, m, f}^* \Sigma \tuple{m+2, C} = \Sigma \tuple{n, m, f}^* \tuple{m+2, C}\) and \(\tuple{n, m, f}^* \alpha(\tuple{m+2, C}) = \alpha(\tuple{n, m, f}^* \tuple{m+2, C})\).
+
+The first identity holds as follows:
+\(\tuple{n, m, f}^* \Sigma \tuple{m+2, C} = \tuple{n, m, f}^* \tuple{m+1, \# C} = \tuple{n+1, f^* \# C}\).
+Now by condition III of the definition of Attcat, \(f^* \# C = \# \Sop(f,B)^* C\).
+Hence \(\tuple{n+1, f^* \# C} = \tuple{n+1, \# \Sop(f,B)^* C} = \Sigma \tuple{n+2, \Sop(f,B)^* C} = \Sigma \tuple{n+1, m+1, \Sop(f,B)}^* \tuple{m+2, C} = \Sigma q(\tuple{n, m, f}, \tuple{m+1, B})^* \tuple{m+2, C} = \Sigma \tuple{n, m, f}^* \tuple{m+2, C}\) in the extended \({}^*\) notation.
+
+By lemma 4 of \S 3.1 the second identity is equivalent to the commutativity of
+\begin{center}
+\begin{tikzcd}
+\tuple{n, m, f}^* \tuple{m+2, C} \arrow[r, "q"] \arrow[d, "\alpha"] & \tuple{m+2, C} \arrow[d, "\alpha"] \\
+\tuple{n, m, f}^* \Sigma \tuple{m+2, C} \arrow[r, "q"] & \Sigma \tuple{m+2, C}
+\end{tikzcd}
+\end{center}
+If in this diagram the extended \({}^*, q\) notation is replaced, thus \(q(\tuple{n, m, f}, \tuple{m+2, C}) = q(q(\tuple{n, m, f}, \tuple{m+1, B}), \tuple{m+2, C})\) and \(\tuple{n, m, f}^* \tuple{m+2, C} = q(\tuple{n, m, f}, \tuple{m+1, B})^* \tuple{m+2, C}\). If \({}^*, q, \Sigma\) and \(\alpha\) are evaluated then the diagram required to commute is
+\begin{center}
+\begin{tikzcd}
+\tuple{n+2, \Sop(f,B)^* C} \arrow[r, "{\tuple{n+2{,} m+2{,} \Sop(\Sop(f{,}B){,} C)}}"] \arrow[d, "{\tuple{n+2{,} n+1{,} \gamma(\Sop(f{,}B)^* C)}}"] & \tuple{m+2, C} \arrow[d, "{\tuple{m+2{,} m+1{,} \gamma(C)}}"] \\
+\tuple{n+1, \# \Sop(f,B)^* C} \arrow[r, "{\tuple{n+1{,} m+1{,} \Sop(f{,} \# C)}}"] & \tuple{m+1, \# C}
+\end{tikzcd}
+\end{center}
+The commutativity of this diagram follows from the commutativity of the corresponding diagram in \(\mathrm{Base}(\mathbb{E})\) which commutes by condition III of the definition of Attcat.
+
+\textbf{Step 5.} Singleton object. Recall that in \(\mathbb{E}\) we have \(L(1_{\mathbb{E}}) \in Att_{\mathbb{E}}(1_{\mathbb{E}})\) and an isomorphism \(\Theta(1_{\mathbb{E}}) : \Sigma L(1_{\mathbb{E}}) \to 1_{\mathbb{E}}\) in \(\mathrm{Base}(\mathbb{E})\). It follows that \(\Theta(1_{\mathbb{E}})^* L(1_{\mathbb{E}}) \in Att_{\mathbb{E}}(\Sigma L(1_{\mathbb{E}}))\) and thus that \(\tuple{0, L(1_{\mathbb{E}})} \triangleleft \tuple{1, \Theta(1_{\mathbb{E}})^* L(1_{\mathbb{E}})}\) in \(\Psi(\mathbb{E})\). Also since \(\Theta(1_{\mathbb{E}})\) is an isomorphism in \(\mathrm{Base}(\mathbb{E})\) it follows that \(\Sigma \Theta(1_{\mathbb{E}})^* L(1_{\mathbb{E}})\) is isomorphic to \(\Sigma L(1_{\mathbb{E}})\). Thus \(\Sigma \Theta(1_{\mathbb{E}})^* L(1_{\mathbb{E}}) \cong \Sigma L(1_{\mathbb{E}}) \cong 1_{\mathbb{E}}\). Thus \(\Sigma \Theta(1_{\mathbb{E}})^* L(1_{\mathbb{E}})\) is a terminal object of \(\mathrm{Base}(\mathbb{E})\).
+
+It now follows that \(\tuple{1, \Theta(1_{\mathbb{E}})^* L(1_{\mathbb{E}})}\) is a terminal object of \(\Psi(\mathbb{E})\). We can define the singleton object \(\{ \cdot \}\) of \(\Psi(\mathbb{E})\) to be \(\tuple{1, \Theta(1_{\mathbb{E}})^* L(1_{\mathbb{E}})}\).
+
+This completes the description of the contextual category with disjoint unions and singleton object induced by a category with attributes \(\mathbb{E}\). Because the morphisms of the categories \(\underline{\mathbf{Attcat}}\) and \(\underline{\Sigma\text{-}\mathbf{Con}}\) are in both cases just the structure preserving functions it follows that the above construction is just the object part of a functor \(\Psi : \underline{\mathbf{Attcat}} \to \underline{\Sigma\text{-}\mathbf{Con}}\).
+
+\begin{lemma}
+If \(\mathbb{D}\) is a contextual category with disjoint unions and singleton object then \(\Psi(\Phi(\mathbb{D})) \cong \mathbb{D}\).
+\end{lemma}
+
+\begin{proof}
+Let \(S = \{ B \in |\mathbb{D}| \mid \text{there is a } D \text{ such that } 1 \triangleleft D \triangleleft B \text{ in } \mathbb{D} \}\). Now define a function \(K : |\mathbb{D}| \to S\) and simultaneously define a morphism \(\beta(A) : K(A) \to A\) in \(\mathbb{D}\), for each object \(A\) of \(\mathbb{D}\).
+
+\(K(A)\) and \(\beta(A)\) are defined by induction on the height of \(A\) in \(\mathbb{D}\).
+Define \(K(1) = p(\{ \cdot \})^* \{ \cdot \}\) and define \(\beta(1) = p(K(1), 1)\).
+
+If \(1 \triangleleft A_1 \dots \triangleleft A_n \triangleleft A_{n+1}\) in \(\mathbb{D}\) for some \(n \ge 0\) and if \(K(A_n)\) and \(\beta(A_n)\) have already been defined then define \(K(A_{n+1}) = \alpha^{-1}(K(A_n))^* \beta(A_n)^* A_{n+1}\) and define \(\beta(A_{n+1}) = q(\alpha^{-1}(K(A_n)) \circ \beta(A_n), A_{n+1})\).
+Thus \(\Sigma K(A_n) \triangleleft K(A_{n+1})\) and \(\beta(A_{n+1}) : K(A_{n+1}) \to A_{n+1}\) in \(\mathbb{D}\).
+
+It is easy to prove by induction that for each \(n\), \(\beta(A_n)\) is an isomorphism (using lemma 6 of \S 3.1, \(\beta^{-1}(A_{n+1}) = q(\beta^{-1}(A_n) \circ \alpha(K(A_n)), K(A_{n+1}))\)).
+
+Now define a functor \(M : \mathbb{D} \to \mathrm{Base}(\mathbb{D})\) by
+\[
+M(f : A \to A') = \alpha^{-1}(K A') \circ \beta(A')^{-1} \circ f \circ \beta(A) \circ \alpha(K A).
+\]
+
+Finally define a would be contextual functor \(\mathbb{F} : \mathbb{D} \to \Psi(\Phi(\mathbb{D}))\) as follows:
+
+If \(1 \triangleleft A_1 \dots \triangleleft A_n\) in \(\mathbb{D}\) then \(\mathbb{F}(A_n) = \tuple{n, K(A_n)}\).
+If \(1 \triangleleft A_1 \dots \triangleleft A_n\) and \(1 \triangleleft B_1 \dots \triangleleft B_m\) in \(\mathbb{D}\) and if \(f : A_n \to B_m\) in \(\mathbb{D}\) then \(\mathbb{F}(f) = \tuple{n, m, M(f)}\).
+
+The result follows when we show that \(\mathbb{F}\) is a contextual functor, preserves disjoint unions and singleton object and is 1-1 and onto from objects and morphisms of \(\mathbb{D}\) to objects and morphisms of \(\Psi(\Phi(\mathbb{D}))\). We content ourselves with checking the bit about disjoint unions. If anything the other stuff is a bit easier to check.
+
+We show that whenever \(1 \triangleleft Q_1 \dots \triangleleft Q_n \triangleleft A \triangleleft B \triangleleft C\) in \(\mathbb{D}\) then \(\mathbb{F}(\Sigma C) = \Sigma \mathbb{F}(C)\) and \(\mathbb{F}(\alpha(C)) = \alpha(\mathbb{F}(C))\).
+\(\mathbb{F}(C) = \tuple{n+2, K(C)}\) hence by definition of \(\Psi\), \(\Sigma \mathbb{F}(C) = \tuple{n+1, \# K(C)}\) where \(\# K(C)\) is calculated in \(\Phi(\mathbb{D})\).
+But by definition of \(\Phi(\mathbb{D})\), \(\# K(C)\) is calculated in \(\mathbb{D}\), as in \S 3.1, and is given by \(\# K(C) = \Sigma(\alpha(K(B))^* K(C))\). Thus to show that \(\mathbb{F}(\Sigma C) = \Sigma \mathbb{F}(C)\) we must show just \(\Sigma \alpha(K(B))^* K(C) = K(\Sigma C)\). This is as follows:
+
+\(\Sigma \alpha(K(B))^* K(C) = \Sigma \alpha(K(B))^* (\alpha^{-1}(K(B)) \circ \beta(B))^* C\) by def.\ of \(K\)
+\(= \Sigma \beta(B)^* C\)
+\(= \Sigma q(\alpha^{-1}(K(A)) \circ \beta(A), B)^* C\) by def.\ of \(\beta\)
+\(= \Sigma (\alpha^{-1}(K(A)) \circ \beta(A))^* C\) replacing extended \({}^*\) notation
+\(= (\alpha^{-1}(K(A)) \circ \beta(A))^* \Sigma C\) Since \(\alpha^{-1}(K(A)) : \Sigma K A \to A\) and \(A \triangleleft \Sigma C\).
+\(= K(\Sigma C)\) by def.\ of \(K\).
+
+It remains to show that \(\mathbb{F}(\alpha(C)) = \alpha(\mathbb{F}(C))\). Well \(\mathbb{F}(\alpha(C))\) is just \(\tuple{n+2, n+1, M(\alpha(C))}\) and \(\alpha(\mathbb{F}(C)) = \alpha(\tuple{n+2, K(C)}) = \tuple{n+2, n+1, \gamma(K(C))}\) where \(\gamma(K(C))\) is calculated in \(\mathbb{D}\) as
+\(\alpha^{-1}(K(C)) \circ \sigma(K(C)) \circ \alpha(\# K(C))\). Thus we must just show that in \(\mathbb{D}\), \(M(\alpha(C)) = \alpha^{-1}(K(C)) \circ \sigma(K(C)) \circ \alpha(\# K(C))\).
+
+Well we have \(\alpha^{-1}(K(C)) \circ \sigma(K(C)) \circ \alpha(\# K(C)) = \alpha^{-1}(K(C)) \circ q(\alpha^{-1}(K(B)), \alpha(K(B))^* K(C)) \circ \alpha(\alpha(K(B))^* K(C)) \circ \alpha(\# K(C))\), (by definition of \(\sigma\)), \(= \alpha^{-1}(K(C)) \circ q(\alpha^{-1}(K(B)), \beta(B)^* C) \circ \alpha(\beta(B)^* C) \circ \alpha(K(\Sigma C))\), since as above \(\alpha(K(B))^* K(C) = \beta(B)^* C\) and \(\# K(C) = K(\Sigma C)\).
+
+And \(M(\alpha(C)) = \alpha^{-1}(K(\Sigma C)) \circ \beta(\Sigma C)^{-1} \circ \alpha(C) \circ \beta(C)^{-1} \circ (\Sigma C) \circ \alpha(K(\Sigma C))\) so we must check that \(\beta(C) \circ \alpha(C) \circ \beta^{-1}(\Sigma C) = q(\alpha^{-1}(K(B)), \beta(B)^* C) \circ \alpha(\beta(B)^* C)\). This is as follows:
+
+\(\beta(C) \circ \alpha(C) \circ \beta^{-1}(\Sigma C) = \beta(C) \circ \alpha(C) \circ q(\beta^{-1}(A) \circ \alpha(K(A)), (\alpha^{-1}(K(A)) \circ \beta(A))^* \Sigma C)\), by definition of \(\beta^{-1}\), \(= \beta(C) \circ \alpha((\beta^{-1}(A) \circ \alpha(K(A)))^* C) \circ q(\beta^{-1}(A) \circ \alpha(K(A)), (\alpha^{-1}(K(A)) \circ \beta(A))^* C) \circ \alpha((\alpha^{-1}(K(A)) \circ \beta(A))^* C)\), by lemma 4 of \S 3.1, \(= \beta(C) \circ q(\beta^{-1}(A) \circ \alpha(K(A)), \beta(B)^* C) \circ \alpha(q(\alpha^{-1}(K(A)) \circ \beta(A), B)^* C) = \beta(C) \circ q(q(\beta^{-1}(A) \circ \alpha(K(A)), K(B)), \beta(B)^* C) = \beta(C) \circ q(\beta^{-1}(B) \circ \alpha(K(B)), \beta(B)^* C) \circ \alpha(\beta(B)^* C) = q(\alpha^{-1}(K(B)) \circ \beta(B), C) \circ q(\beta^{-1}(B) \circ \alpha(K(B)), \beta(B)^* C) \circ \alpha(\beta(B)^* C) = q(\alpha^{-1}(K(B)), \beta(B)^* C) \circ \alpha(\beta(B)^* C)\) as required.
+\end{proof}
+
+\begin{lemma}
+If \(\mathbb{G} : \mathbb{D} \to \mathbb{D}'\) is a morphism in \(\underline{\Sigma\text{-}\mathbf{Con}}\) then the diagram
+\begin{center}
+\begin{tikzcd}
+\mathbb{D} \arrow[r, "\mathbb{F}_{\mathbb{D}}"] \arrow[d, "\mathbb{G}"] & \Psi(\Phi(\mathbb{D})) \arrow[d, "\Psi(\Phi(\mathbb{G}))"] \\
+\mathbb{D}' \arrow[r, "\mathbb{F}_{\mathbb{D}'}"] & \Psi(\Phi(\mathbb{D}'))
+\end{tikzcd}
+\end{center}
+commutes in \(\underline{\Sigma\text{-}\mathbf{Con}}\).
+\end{lemma}
+
+\begin{proof}
+Reduces to showing that if \(A \in |\mathbb{D}|\) then \(\mathbb{G}(K(A)) = K(\mathbb{G}(A))\) and that if \(f: A \to A'\) in \(\mathbb{D}\) then \(M(\mathbb{G}(f)) = M(\mathbb{G}(f))\). But \(\mathbb{G}\) preserves the structure that \(K\) and \(M\) are defined in terms of.
+\end{proof}
+
+This completes the demonstration that \(\Phi \circ \Psi \cong id_{\underline{\Sigma\text{-}\mathbf{Con}}}\).
+
+For the remainder of this section we aim at proving that \(\Psi \circ \Phi \cong id_{\underline{\mathbf{Attcat}}}\) and thus that \(\underline{\Sigma\text{-}\mathbf{Con}}\) and \(\underline{\mathbf{Attcat}}\) are equivalent categories. Throughout we suppose that \(\mathbb{E}\) is a category with attributes. Eventually we show that \(\Phi(\Psi(\mathbb{E})) \cong \mathbb{E}\).
+
+If \(A \in |\mathrm{Base}(\mathbb{E})|\) then \(\Theta(1_{\mathbb{E}})^* L(A) \in \mathrm{Att}_{\mathbb{E}}(\Sigma L(1_{\mathbb{E}}))\) and \(\Sop(\Theta(1_{\mathbb{E}}), L(A)) \circ \Theta(A) : \Sigma \Theta(1_{\mathbb{E}})^* L(A) \to A\) is an isomorphism. We define \(J(A) = \Theta(1_{\mathbb{E}})^* L(A)\) and \(\Pi(A) = \Sop(\Theta(1_{\mathbb{E}}), L(A)) \circ \Theta(A)\) then for each \(A \in |\mathrm{Base}(\mathbb{E})|\), \(J(A) \in \mathrm{Att}_{\mathbb{E}}(\Sigma L(1_{\mathbb{E}}))\) and \(\Pi(A) : \Sigma J(A) \to A\) is an isomorphism in \(\mathrm{Base}(\mathbb{E})\). We can then define a functor \(M : \mathrm{Base}(\mathbb{E}) \to \mathrm{Base}(\mathbb{E})\) by
+\begin{center}
+\begin{tikzcd}
+A \arrow[d] \arrow[r, "M"] & \Sigma J A \arrow[d] \\
+A' & \Sigma J A'
+\end{tikzcd}
+\end{center}
+\(M(A) \xrightarrow{f} M(A') = \Pi(A)^{-1} \circ f \circ \Pi(A')\).
+
+We shall eventually define an isomorphism \(\mathcal{J} : \mathbb{E} \to \Phi(\Psi(\mathbb{E}))\) in terms of \(M\) and \(\Pi\) but we will come back to that later. Lemmas 3--8 just function to show that \(\mathcal{J}\) once defined, is a morphism.
+
+\begin{lemma}
+If \(A\) is an object of \(\mathrm{Base}(\mathbb{E})\) and if \(B \in \mathrm{Att}_{\mathbb{E}}(A)\) then
+\(\#(\Sop(\Theta(1_{\mathbb{E}}), L(A))^* \Theta(A)^* B) = \Theta(1_{\mathbb{E}})^* \#(\Theta(A)^* B)\) and
+\(\gamma(\Pi(A)^* B) \circ \Pi(\Sigma B) = \Sop(\Sop(\Theta(1_{\mathbb{E}}), L(A)), \Theta(A)^* B) \circ \gamma(\Theta(A)^* B)\) in \(\mathrm{Base}(\mathbb{E})\).
+\end{lemma}
+
+\begin{proof}
+This is just condition III of the definition of Attcat where \(A \to A'\), \(B\) and \(C\) are taken to be \(\Sigma L(1_{\mathbb{E}}) \to 1_{\mathbb{E}}\), \(L(A)\) and \(\Theta(A)^* B\).
+\end{proof}
+
+\begin{lemma}
+If \(A\) is an object of \(\mathrm{Base}(\mathbb{E})\) and if \(B \in \mathrm{Att}_{\mathbb{E}}(A)\) then
+\(\gamma(\Pi(A)^* B) \circ \Pi(\Sigma B) = \Sop(\Pi(A), B)\).
+\end{lemma}
+
+\begin{proof}
+\(\gamma(\Pi(A)^* B) \circ \Pi(\Sigma B) = \gamma(\Pi(A)^* B) \circ \Sop(\Theta(1_{\mathbb{E}}), L \Sigma B) \circ \Theta(\Sigma B)\) by def of \(\Pi\)
+\(= \Sop(\Sop(\Theta(1_{\mathbb{E}}), L(A)), \Theta(A)^* B) \circ \gamma(\Theta(A)^* B) \circ \Theta(\Sigma B)\) by lemma 3.
+\(= \Sop(\Sop(\Theta(1_{\mathbb{E}}), L(A)), \Theta(A)^* B) \circ \Sop(\Theta(A), B)\) by condition IV of def of Attcat.
+\(= \Sop(\Sop(\Theta(1_{\mathbb{E}}), L(A)) \circ \Theta(A), B)\)
+\(= \Sop(\Pi(A), B)\) by def of \(\Pi\).
+\end{proof}
+
+\begin{lemma}
+If \(A\) is an object of \(\mathrm{Base}(\mathbb{E})\) and if \(B \in \mathrm{Att}_{\mathbb{E}}(A)\) then
+\(J(\Sigma B) = \#(\Pi(A)^* B)\)
+and \(\Pi(\Sigma B) \circ p(B) \circ \Pi^{-1}(A) = \gamma^{-1}(\Pi(A)^* B) \circ p(\Pi(A)^* B)\).
+\end{lemma}
+
+\begin{proof}
+\(J(\Sigma B) = \Theta(1_{\mathbb{E}})^* L(\Sigma B)\) by def of \(J\)
+\(= \Theta(1_{\mathbb{E}})^* \# \Theta(A)^* B\) by condition IV
+\(= \# (\Sop(\Theta(1_{\mathbb{E}}), L(A))^* \Theta(A)^* B)\) by lemma 3
+\(= \# (\Pi(A)^* B)\) by definition.
+
+Which is the first identity. As for the second:
+\(\Pi(\Sigma B) \circ p(B) \circ \Pi^{-1}(A) = \gamma^{-1}(\Pi(A)^* B) \circ \Sop(\Pi(A), B) \circ p(B) \circ \Pi^{-1}(A)\) by lemma 4.
+\(= \gamma^{-1}(\Pi(A)^* B) \circ p(\Pi(A)^* B) \circ \Pi(A) \circ \Pi^{-1}(A)\) because of commutativity of the pullback diagram for \(\Sop\) along \(\Pi(A)\).
+\(= \gamma^{-1}(\Pi(A)^* B) \circ p(\Pi(A)^* B)\) as required.
+\end{proof}
+
+\begin{lemma}
+If \(f: A \to A'\) in \(\mathrm{Base}(\mathbb{E})\) and \(B \in \mathrm{Att}_{\mathbb{E}}(A')\) then
+\(\Pi(\Sigma f^* B) \circ \Sop(f,B) \circ \Pi^{-1}(\Sigma B) = \gamma^{-1}(\Pi(A)^* f^* B) \circ \Sop(\Pi(A) \circ f \circ \Pi^{-1}(A'), \Pi(A')^* B) \circ \gamma(\Pi(A')^* B)\).
+\end{lemma}
+
+\begin{lemma}
+If \(A\) is an object of \(\mathrm{Base}(\mathbb{E})\) and if \(B \in \mathrm{Att}_{\mathbb{E}}(A)\) and \(C \in \mathrm{Att}_{\mathbb{E}}(\Sigma B)\) then \(\Pi(A)^* \# C = \# \gamma(\Pi(A)^* B)^* \Pi(\Sigma B)^* C\).
+\end{lemma}
+
+\begin{lemma}
+If \(A\) is an object of \(\mathrm{Base}(\mathbb{E})\) then
+\(\Pi(\Sigma L A) \circ \Theta(A) \circ \Pi^{-1}(A) = \gamma^{-1}(p(\Theta(1_{\mathbb{E}})^* L(1_{\mathbb{E}}))^* L(A)) \circ \Sop(p(\Theta(1_{\mathbb{E}})^* L(1_{\mathbb{E}})), \Theta(1_{\mathbb{E}})^* L(A))\).
+\end{lemma}
+
+\begin{lemma}
+If \(\mathbb{E}\) is a category with attributes then
+\begin{enumerate}[label=\roman*.]
+    \item If \(\tuple{1, 1, f} : \tuple{1, A} \to \tuple{1, A'}\) and \(\tuple{1, A'} \triangleleft \tuple{2, B}\) in \(\Psi(\mathbb{E})\) then \(\Sop(\tuple{1, 1, f}, \tuple{2, B}) = \tuple{1, 1, \gamma^{-1}(f^* B) \circ \Sop(f, B) \circ \gamma(B)}\).
+    \item If \(1 \triangleleft \tuple{1, A} \triangleleft \tuple{2, B}\) and \(\Sigma \tuple{2, B} \triangleleft \tuple{2, C}\) in \(\Psi(\mathbb{E})\) then \(\# \tuple{2, C} = \tuple{2, \# \gamma(B)^* C}\).
+    \item If \(1 \triangleleft \tuple{1, A}\) in \(\Psi(\mathbb{E})\) then \(L(\tuple{1, A}) = \tuple{2, p(\Theta^{-1}(1_{\mathbb{E}})^* L(1_{\mathbb{E}}))^* A}\).
+\end{enumerate}
+\end{lemma}
+
+Given the definition of \(\Phi\) we can now give a complete description of \(\Phi(\Psi(\mathbb{E}))\):
+
+\(|\mathrm{Base}(\Phi(\Psi(\mathbb{E})))| = \{ \tuple{1, A} \mid A \in \mathrm{Att}_{\mathbb{E}}(\Sigma L(1_{\mathbb{E}})) \}\)
+
+\(\mathrm{Hom}_{\Phi(\Psi(\mathbb{E}))}(\tuple{1, A}, \tuple{1, A'}) = \{ \tuple{1, 1, f} \mid f: \Sigma A \to \Sigma A' \text{ in Base}(\mathbb{E}) \}\)
+
+\(\mathrm{Att}_{\Phi(\Psi(\mathbb{E}))}(\tuple{1, A}) = \{ \tuple{2, B} \mid B \in \mathrm{Att}_{\mathbb{E}}(\Sigma A) \}\)
+
+Define \(\mathcal{J} : \mathbb{E} \to \Phi(\Psi(\mathbb{E}))\) by:
+\begin{enumerate}[label=\roman*.]
+\item If \(A\) is an object of \(\mathrm{Base}(\mathbb{E})\) then \(\mathcal{J}(A) = \tuple{1, \Theta(1_{\mathbb{E}})^* L(A)}\).
+\item If \(f: A \to A'\) in \(\mathrm{Base}(\mathbb{E})\) then \(\mathcal{J}(f) = \tuple{1, 1, \Pi(A) \circ f \circ \Pi^{-1}(A')}\).
+\item If \(B \in \mathrm{Att}_{\mathbb{E}}(A)\) then \(\mathcal{J}(B) = \tuple{2, \Pi(A)^* B}\).
+\end{enumerate}
+
+\(\mathcal{J}\) is easily seen to be 1-1 and onto from objects, morphisms and attributes of \(\mathbb{E}\) to objects, morphisms, respectively attributes of \(\Phi(\Psi(\mathbb{E}))\). \(\mathcal{J}\) preserves \(\Sigma\) and \(p\) by virtue of lemma 5. \({}^*\) is easily seen to be preserved. \(\Sop\) is preserved by \(\mathcal{J}\), use lemma 6. \(\#\) and \(\gamma\) are preserved, use lemma 7.
+Terminal object easily seen to be preserved. \(L\) preserved because \(1_{\mathbb{E}}\) terminal implies \((\Theta(1_{\mathbb{E}})^* L(1_{\mathbb{E}})) \circ \Theta(1_{\mathbb{E}}) = \Pi(1_{\mathbb{E}})\). \(\Theta\) preserved use lemma 8.
+
+Finally, the collection of isomorphisms \(\{ \mathcal{J}_{\mathbb{E}} \mid \mathbb{E} \in |\underline{\mathbf{Attcat}}| \}\) cannot help but be natural in \(\mathbb{E}\). Thus we have a natural isomorphism \(\Phi \circ \Psi \cong id_{\underline{\mathbf{Attcat}}}\), completing the proof that \(\underline{\Sigma\text{-}\mathbf{Con}} \cong \underline{\mathbf{Attcat}}\).
 
 % source p3.32
-\section{Categories and fibratons} \label{sec:source-3-3}
+\section{Categories and fibrations} \label{sec:source-3-3}
 
-\lipsum[22]
+In \S 1.5 we alluded to the contextual category of categories, category indexed families of categories, category indexed families of category indexed families of categories and so on. In fact this contextual category has disjoint unions and singleton object.
+
+By far the easiest way of describing the structure is by describing the corresponding category with attributes which is to be called \(\underline{\mathbf{Fib}}\). The significance of this structure is twofold. In the first place the most attractive notion of a category indexed family of categories does lead to a contextual category and thus generalised algebraic theories can be interpreted in this manner.
+
+Furthermore this notion is not reducible to any morphism with codomain notion and so there is no parallel interpretation of essentially algebraic theories.
+
+This was discussed in \S 1.5. On the other hand disjoint unions in this structure are calculated by taking fibrations. Thus we have a new way of looking at the fibration construction. This compares with the interpretation of Gray [7].
+
+The category with attributes \(\underline{\mathbf{Fib}}\) of categories indexing categories is described as follows:
+
+\begin{enumerate}
+    \item \(\mathrm{Base}(\underline{\mathbf{Fib}}) = \underline{\mathbf{Cat}}\), the category of all (small) categories.
+    \item If \(A\) is a category then an attribute of type \(A\) is an \(A\)-indexed family of categories, i.e.\ is a functor \(B : A \to \underline{\mathbf{Cat}}\).
+    \item If \(B \in Att_{\underline{\mathbf{Fib}}}(A)\), i.e.\ if \(B : A \to \underline{\mathbf{Cat}}\) is a functor, then \(\Sigma B\) is the category defined as follows:
+    \[ |\Sigma B| = \{ \tuple{a,b} \mid a \in |A| \text{ and } b \in |B(a)| \}. \]
+    \[ \Hom_{\Sigma B}(\tuple{a,b}, \tuple{a',b'}) = \{ \tuple{f,g} \mid f : a \to a' \text{ in } A \text{ and } g : B(f)(b) \to b' \text{ in } B(a') \}. \]
+    If \(\tuple{a,b} \in |\Sigma B|\) then \(id_{\tuple{a,b}} = \tuple{id_a, id_b}\).
+    If \(\tuple{a,b} \xrightarrow{\tuple{f,g}} \tuple{a',b'} \xrightarrow{\tuple{f',g'}} \tuple{a'',b''}\) in \(\Sigma B\) then \(\tuple{f,g} \circ \tuple{f',g'} = \tuple{f \circ f', B(f')(g) \circ g'}\).
+    
+    \(p(B) : \Sigma B \to A\) is defined to be the 1st projection functor.
+
+    \item If \(F : A \to A'\) in \(\underline{\mathbf{Cat}}\) and if \(B \in Att_{\underline{\mathbf{Fib}}}(A')\) then \(F^*B \in Att_{\underline{\mathbf{Fib}}}(A)\) is defined to be the functor \(B \circ F : A \to \underline{\mathbf{Cat}}\). \(\Sop(F,B) : \Sigma F^*B \to \Sigma B\) is defined to be the functor ``Apply \(F\) to the 1st component leave other component unchanged''. For example, if \(\tuple{a,b} \in |\Sigma F^*B|\) then \(a \in |A|\) and \(b \in |B(F(a))|\), hence \(\tuple{F(a), b} \in |\Sigma B|\). Similarly on morphisms of \(\Sigma F^*B\).
+
+    \item If \(B : A \to \underline{\mathbf{Cat}}\) and \(C : \Sigma B \to \underline{\mathbf{Cat}}\) then define \(\# C : A \to \underline{\mathbf{Cat}}\) as follows:
+    If \(a \in |A|\) then \(\# C(a)\) is the category such that
+    \[ |\# C(a)| = \{ \tuple{b,c} \mid b \in |B(a)| \text{ and } c \in |C(\tuple{a,b})| \} \]
+    \[ \Hom_{\# C(a)}(\tuple{b,c}, \tuple{b',c'}) = \{ \tuple{g,h} \mid g : b \to b' \text{ in } B(a) \text{ and } h : C(\tuple{a,g})(c) \to c' \text{ in } C(\tuple{a,b'}) \}. \]
+    
+    If \(f : a \to a'\) in \(A\) then \(\# C(f)\) is the functor \(\# C(a) \to \# C(a')\) given by
+    \begin{center}
+    \begin{tikzcd}
+    \tuple{b,c} \arrow[d, "{\tuple{g{,}h}}"'] \arrow[r, "\# C(f)"] & \tuple{B(f)(b), C(\tuple{f, id_{B(f)(b)}})(c)} \arrow[d, "{\tuple{B(f)(g){,} C(\tuple{f{,} id_{B(f)(b')}})(h)}}"] \\
+    \tuple{b',c'} \arrow[r] & \tuple{B(f)(b'), C(\tuple{f, id_{B(f)(b')}})(c')}
+    \end{tikzcd}
+    \end{center}
+    
+    Check that \(\Sigma C\) and \(\Sigma \# C\) are isomorphic. In fact the isomorphism \(\gamma(C) : \Sigma C \to \Sigma \# C\) is given by
+    \[ \tuple{\tuple{a,b}, c} \mapsto \tuple{a, \tuple{b,c}} \]
+    \[ \tuple{\tuple{f,g}, h} \mapsto \tuple{f, \tuple{g,h}} \]
+
+    \item Choose \(1_{\underline{\mathbf{Fib}}}\) to be any terminal object of \(\underline{\mathbf{Cat}}\). If \(A\) is a category then \(L(A) \in Att_{\underline{\mathbf{Fib}}}(1)\) is taken to be the functor : \(1 \to \underline{\mathbf{Cat}}\) whose value at the unique object of \(1\) is \(A\). Then \(\Sigma L(A) = 1 \times A\).
+    Define \(\Theta(A) : 1 \times A \to A\) to be the projection functor.
+\end{enumerate}
+
+That completes the description of \(\underline{\mathbf{Fib}}\). Checking that \(\underline{\mathbf{Fib}}\) is a category with attributes is very straightforward and rather tedious.
 
 % source p3.35
 \section{Martin-L\"of type theory} \label{sec:source-3-4}
 
-\lipsum[23]
+Martin-L\"of type theory is a generalisation of the typed \(\lambda\)-calculus. It is more general in that in the syntax there are variable types---the structure of substitution is of the general form. The algebraic semantics of Martin-L\"of type theory is thus provided by a extension of the theory of contextual categories. This extension we call the theory of weak M-L structures. Every weak M-L structure is a model of Martin-L\"of type theory. In fact the definition of weak M-L structure is a set theoretic definition of the notion `model of Martin-L\"of type theory'. It is the most general possible such definition.
+
+We need to explain that Martin-L\"of type theory generalises a weak version of the typed \(\lambda\)-calculus. The \(\eta\)-rule of \(\lambda\)-calculus, \(s = \lambda x . Ap(x,s)\), corresponding to the uniqueness of the term \(\lambda x.t\) subject to the condition \(Ap(x, \lambda x.t) = t\), is not assumed. Neither is the rule \(pr(p_1(z), p_2(z)) = z\) assumed where \(pr\) is the pairing function and \(p_1\) and \(p_2\) are the projections. On the other hand cartesian closed categories correspond to a strong version of the typed \(\lambda\)-calculus which includes these two rules. The effect of all this is that whereas cartesian closedness is definable in terms of universal arrows, weak M-L structure is defined in terms of weak universal arrows (the definition of weak universal arrow is like the definition of universal arrow except that the uniqueness condition is dropped). If we strengthen the definition of weak M-L structure by replacing weak universality by universality, then we can drop the adjective weak and call the structures strong M-L structures. The strong M-L structures provide us with the algebraic semantics of a strengthened version of M-L type theory, stronger just by the inclusion of a rule expressing the uniqueness of \(\lambda x.t\) subject to the condition \(Ap(x, \lambda x.t) = t\) and similar uniqueness conditions, one for each logical scheme.
+
+In the following definition of strong M-L structure we use the same notation as Martin-L\"of uses except in the case of notation for the type with precisely one element---Martin-L\"of uses the notation \(N_1\) for this type but we use the notation \(\{ \cdot \}\). Our use of \(\Sigma\) and \(\{ \cdot \}\) notation in this section will be consistent with our use of the same notation for disjoint unions and singleton object in previous sections.
+
+A \underline{strong M-L structure} \(\tuple{\mathbb{C}, \Sigma, pr, \Pi, Ap, Id, r, +, i, j, \{ \cdot \}, e, N, o, S}\) consists of a contextual category \(\mathbb{C}\) and the following additional structure:
+
+\begin{enumerate}
+    \item[i.] Whenever \(Q \triangleleft A \triangleleft B\) in \(\mathbb{C}\), an object \(\Sigma B\) of \(\mathbb{C}\) and a morphism \(pr(B)\) of \(\mathbb{C}\) such that \(Q \triangleleft \Sigma B\) in \(\mathbb{C}\) and \(pr(B) : B \to \Sigma B\) such that the diagram
+    \begin{center}
+    \begin{tikzcd}
+        & B \arrow[d, "pr(B)"] \arrow[dl] \\
+        A \arrow[r] & \Sigma B \arrow[d] \\
+        & Q
+    \end{tikzcd}
+    \end{center}
+    commutes and such that \(\Sigma B\) and \(pr(B)\) have the following property: for every object \(C\) of \(\mathbb{C}\) such that \(\Sigma B \le C\), for every morphism \(h : B \to C\) such that the diagram
+    \begin{center}
+    \begin{tikzcd}
+        B \arrow[r, "h"] \arrow[d, "pr(B)"'] & C \arrow[d] \\
+        \Sigma B \arrow[r] & \Sigma B
+    \end{tikzcd}
+    \end{center}
+    commutes, there exists a unique morphism \(g \in Arr_{\mathbb{C}}(C)\) such that the diagram
+    \begin{center}
+    \begin{tikzcd}
+        B \arrow[r, "h"] \arrow[d, "pr(B)"'] & C \\
+        \Sigma B \arrow[ur, "g"'] &
+    \end{tikzcd}
+    \end{center}
+    commutes.
+
+    \item[ii.] Whenever \(Q \triangleleft A \triangleleft B\) in \(\mathbb{C}\), an object \(\Pi B\) of \(\mathbb{C}\) such that \(Q \triangleleft \Pi B\) in \(\mathbb{C}\) and a morphism \(Ap(B) : p(A)^* \Pi B \to B\) in \(\mathbb{C}\) such that the diagram
+    \begin{center}
+    \begin{tikzcd}
+        p(A)^* \Pi B \arrow[r, "Ap(B)"] \arrow[d] & B \arrow[d] \\
+        p(A)^* A & A
+    \end{tikzcd}
+    \end{center}
+    commutes and such that \(\Pi B\) and \(Ap(B)\) have the following property: for every morphism \(h \in Arr_{\mathbb{C}}(B)\), there exists a unique morphism \(f \in Arr_{\mathbb{C}}(\Pi B)\) such that the diagram
+    \begin{center}
+    \begin{tikzcd}
+        p(A)^* \Pi B \arrow[r, "Ap(B)"] & B \\
+        p(A)^* f \arrow[u] & A \arrow[u, "h"']
+    \end{tikzcd}
+    \end{center}
+    commutes. In future the unique morphism corresponding to \(h: A \to B\) will be denoted \(\lambda h\). Thus \(\lambda h \in Arr_{\mathbb{C}}(\Pi B)\) when \(h: A \to B\).
+
+    \item[iii.] Whenever \(Q \triangleleft A\) in \(\mathbb{C}\), an object \(Id(A)\) of \(\mathbb{C}\) such that \(p(A)^* A \triangleleft Id(A)\) and a morphism \(r(A) : A \to Id(A)\) in \(\mathbb{C}\) such that the diagram
+    \begin{center}
+    \begin{tikzcd}
+        & Id(A) \arrow[d] \\
+        A \arrow[ur, "r(A)"] & p(A)^* A \\
+        A \arrow[u, equal] \arrow[ur, "\delta(A)"'] &
+    \end{tikzcd}
+    \end{center}
+    commutes and having the property as stated in the full definition.
+
+    \item[iv.] Whenever \(Q \triangleleft A\) and \(Q \triangleleft B\) in \(\mathbb{C}\), an object \(A+B\) of \(\mathbb{C}\) such that \(Q \triangleleft A+B\) and morphisms \(i_{A,B} : A \to A+B\) and \(j_{A,B} : B \to A+B\) with the coproduct property.
+
+    \item[v.] An object \(\{ \cdot \}\) of \(\mathbb{C}\) such that \(1 \triangleleft \{ \cdot \}\) and a morphism \(e : 1 \to \{ \cdot \}\) in \(\mathbb{C}\) with the singleton property.
+
+    \item[vi.] An object \(N\) of \(\mathbb{C}\) such that \(1 \triangleleft N\) and morphisms \(o: 1 \to N\) and \(S: N \to N\) in \(\mathbb{C}\) with the natural number object property.
+\end{enumerate}
+
+Subject to the following conditions: If \(f: Q \to Q'\) in \(\mathbb{C}\), where \(1 \triangleleft Q\) and \(1 \triangleleft Q'\) in \(\mathbb{C}\), then
+\begin{itemize}
+    \item if \(Q' \triangleleft A \triangleleft B\) then \(f^* \Sigma B = \Sigma f^* B\) and \(f^* pr(B) = pr(f^* B)\),
+    \item if \(Q' \triangleleft A \triangleleft B\) then \(f^* \Pi B = \Pi f^* B\) and \(f^* Ap(B) = Ap(f^* B)\),
+    \item if \(Q' \triangleleft A\) then \(f^* Id(A) = Id(f^* A)\) and \(f^* r(A) = r(f^* A)\),
+    \item if \(Q' \triangleleft A\) and \(Q' \triangleleft B\) then \(f^*(A+B) = f^*A + f^*B\), \(f^* i_{A,B} = i_{f^*A, f^*B}\) and \(f^* j_{A,B} = j_{f^*A, f^*B}\).
+\end{itemize}
+
+Clauses i.\ \ldots\ vi.\ in the definition of strong M-L structure correspond to the schemes for \(\Sigma, \Pi, Id, +, N_1\) and \(N\) in Martin-L\"of type theory. If the word unique is dropped from any of these clauses then what remains is an exact rewriting of the corresponding Martin-L\"of scheme within the language of contextual categories.
+
+The final condition says that \(f^*\) always preserves \(\Sigma, pr, Ap\) etc. Thus it says that the contextual functor \(\mathbb{C}_f : \mathbb{C}_{Q'} \to \mathbb{C}_Q\) is a structure preserving morphism whenever \(f: Q \to Q'\) in \(\mathbb{C}\). It is, then, the `substitution is a homomorphism between algebras of terms' condition. This is an implicit property of syntactical substitution which must always be stated explicitly in any algebraic semantics.
+
+Not surprisingly the contextual category \(\underline{\mathbf{Fam}}\) of sets, families of sets and so on is in a natural way a strong M-L structure. \(\Sigma\) is calculated by taking actual disjoint unions of families of sets, \(\Pi\) calculated by taking cartesian products of families of sets. \(Id(A)\), when \(A\) is a set, is the characteristic family of the identity predicate on \(A\). \(+\) is interpreted by coproducts and \(N\) is taken to be the set of natural numbers.
+
+The definition of strong M-L structure can be simplified considerably. In the first place those parts of the definition that are about \(\Sigma, pr, \{ \cdot \}\) and \(e\) are equivalent to \(\tuple{\mathbb{C}, \Sigma, pr, \{ \cdot \}, e}\) being a contextual category with disjoint unions and singleton object. This leads to simplifications of the other clauses. Clause ii.\ can be used to simplify clause vi. It turns out, then, that the definition that we have given is equivalent to the following definition.
+
+A \textbf{strong M-L structure} \(\tuple{\mathbb{C}, \Sigma, pr, \Pi, Ap, Id, r, +, i, j, \{ \cdot \}, e, N, o, S}\) consists of a contextual category with disjoint unions and singleton object \(\tuple{\mathbb{C}, \Sigma, pr, \{ \cdot \}, e}\) and the following additional structure.
+
+\begin{enumerate}
+    \item[ii'.] For all \(1 \triangleleft Q \triangleleft A \triangleleft B\) in \(\mathbb{C}\), an object \(\Pi B\) of \(\mathbb{C}\) such that \(Q \triangleleft \Pi B\) and a morphism \(Ap(B) : p(A)^* \Pi B \to B\) such that the diagram
+    \begin{center}
+    \begin{tikzcd}
+        p(A)^* \Pi B \arrow[r, "Ap(B)"] \arrow[d] & B \arrow[d] \\
+        p(A)^* A & A
+    \end{tikzcd}
+    \end{center}
+    commutes and having the property: for all \(h \in \mathrm{Arr}_{\mathbb{C}}(B)\), there exists a unique \(g \in \mathrm{Arr}_{\mathbb{C}}(\Pi B)\) such that the diagram
+    \begin{center}
+    \begin{tikzcd}
+        p(A)^* \Pi B \arrow[r, "Ap(B)"] & B \\
+        p(A)^* g \arrow[u] & A \arrow[u, "h"']
+    \end{tikzcd}
+    \end{center}
+    commutes.
+
+    \item[iii'.] For all \(1 \triangleleft Q \triangleleft A\) in \(\mathbb{C}\), an object \(Id(A)\) of \(\mathbb{C}\) such that \(p(A)^* A \triangleleft Id(A)\) and a morphism \(r(A) : A \to Id(A)\) in \(\mathbb{C}\) such that the diagram
+    \begin{center}
+    \begin{tikzcd}
+        & Id(A) \arrow[d] \\
+        r(A) \arrow[ur] & p(A)^* A \\
+        A \arrow[ur, "\delta(A)"'] &
+    \end{tikzcd}
+    \end{center}
+    commutes and having the property: for every object \(C\) of \(\mathbb{C}\) such that \(p(A)^* A \triangleleft C\), for every morphism \(h: A \to C\) such that the diagram
+    \begin{center}
+    \begin{tikzcd}
+        & C \arrow[d] \\
+        h \arrow[ur] & Id(A) \\
+        A \arrow[ur, "r(A)"'] &
+    \end{tikzcd}
+    \end{center}
+    commutes, there exists a unique \(g: Id(A) \to C\) such that
+    \begin{center}
+    \begin{tikzcd}
+        Id(A) \arrow[r, "g"] \arrow[d] & C \arrow[d] \\
+        p(A)^* A & p(A)^* A
+    \end{tikzcd}
+    \end{center}
+    and
+    \begin{center}
+    \begin{tikzcd}
+        & C \\
+        h \arrow[ur] & g \arrow[u] \\
+        A \arrow[ur, "r(A)"'] & Id(A) \arrow[u]
+    \end{tikzcd}
+    \end{center}
+    commute.
+
+    \item[iv'.] For all \(1 \triangleleft Q \triangleleft A\) and \(1 \triangleleft Q \triangleleft B\) in \(\mathbb{C}\), an object \(A+B\) of \(\mathbb{C}\) such that \(Q \triangleleft A+B\) and morphisms \(i_{A,B}\) and \(j_{A,B}\) such that the diagram
+    \(A \xrightarrow{i_{A,B}} A+B \xleftarrow{j_{A,B}} B\) is a coproduct diagram in \(\mathrm{Base}(\mathbb{C}_Q)\).
+
+    \item[vi'.] An object \(N\) of \(\mathbb{C}\) such that \(1 \triangleleft N\) and morphisms \(o: 1 \to N\), \(S: N \to N\) such that \(\tuple{N, o, S}\) is a natural number object in \(\mathrm{AugBase}(\mathbb{C})\). (\(\tuple{N, o, S}\) is a natural number object in the category \(\mathcal{G}\) with terminal object \(1\) iff \(o: 1 \to N\) and \(S: N \to N\) and for all objects \(A\) of \(\mathcal{G}\), for all morphisms \(a: 1 \to A\) and \(b: N \to N\), there exists a unique morphism \(f: N \to A\) such that
+    \begin{center}
+    \begin{tikzcd}
+        N \arrow[r, "f"] & A \\
+        o \arrow[u] & a \arrow[u] \\
+        1 \arrow[u] & 1 \arrow[u]
+    \end{tikzcd}
+    \quad
+    \begin{tikzcd}
+        A \arrow[r, "b"] & A \\
+        N \arrow[u, "f"] \arrow[r, "S"] & N \arrow[u, "f"']
+    \end{tikzcd}
+    \end{center}
+    commute.)
+\end{enumerate}
+
+Subject to the condition: If \(f: Q \to Q'\) in \(\mathbb{C}\), where \(1 \triangleleft Q\) and \(1 \triangleleft Q'\) in \(\mathbb{C}\), then
+\begin{itemize}
+    \item if \(Q' \triangleleft A \triangleleft B\) then \(f^* \Pi B = \Pi f^* B\) and \(f^* Ap(B) = Ap(f^* B)\),
+    \item if \(Q' \triangleleft A\) then \(f^* Id(A) = Id(f^* A)\) and \(f^* r(A) = r(f^* A)\),
+    \item if \(Q' \triangleleft A\) and \(Q' \triangleleft B\) then \(f^*(A+B) = f^*A + f^*B\), \(f^* i_{A,B} = i_{f^*A, f^*B}\) and \(f^* j_{A,B} = j_{f^*A, f^*B}\).
+\end{itemize}
+
+Finally, the definition of strong M-L structure can be rewritten in terms of categories with attributes:
+
+An \textbf{M-L Hyperdoctrine} \(\tuple{\mathbb{E}, \Sigma, \Pi, Id, r, +, i, j, N, o, S}\) consists of a category with attributes \(\mathbb{E}\) with the following additional structure:
+
+\begin{enumerate}
+    \item[i.] For every object \(A\) of \(\mathrm{Base}(\mathbb{E})\), for every \(B \in \mathrm{Att}_{\mathbb{E}}(A)\), for every \(C \in \mathrm{Att}_{\mathbb{E}}(\Sigma B)\), an attribute \(\Pi C \in \mathrm{Att}_{\mathbb{E}}(A)\) and a morphism \(\tau(C) : \Sigma p(B)^* \Pi C \to \Sigma C\) in \(\mathrm{Base}(\mathbb{E})\) such that the diagram
+    \begin{center}
+    \begin{tikzcd}
+        \Sigma p(B)^* \Pi C \arrow[r, "\tau(C)"] \arrow[dr, "p(p(B)^* \Pi C)"'] & \Sigma C \arrow[d, "p(C)"] \\
+        & \Sigma B
+    \end{tikzcd}
+    \end{center}
+    commutes and having the property that for all morphisms \(f: \Sigma B \to \Sigma C\) in \(\mathrm{Base}(\mathbb{E})\) such that \(p(C) \circ f = id_{\Sigma B}\), there exists a unique \(g: A \to \Sigma \Pi C\) in \(\mathrm{Base}(\mathbb{E})\) such that \(p(\Pi C) \circ g = id_A\) and such that the diagram
+    \begin{center}
+    \begin{tikzcd}
+        \Sigma p(B)^* \Pi C \arrow[r, "\tau(C)"] & \Sigma C \\
+        p(B)^* \Sigma C \arrow[u] & \Sigma B \arrow[u, "f"']
+    \end{tikzcd}
+    \end{center}
+    commutes. (Where \(p(B)^* g\) is defined to be the unique morphism \(h: \Sigma B \to \Sigma p(B)^* \Pi C\) such that \(p(p(B)^* \Pi C) \circ h = id_{\Sigma B}\) and \(p(\Pi C) \circ \Sop(p(B), \Pi C) \circ h = p(B) \circ g\).)
+
+    \item[ii.] For all objects \(A\) of \(\mathrm{Base}(\mathbb{E})\), for all \(B \in \mathrm{Att}_{\mathbb{E}}(A)\), an attribute \(Id B \in \mathrm{Att}_{\mathbb{E}}(\Sigma p(B)^* B)\) and a morphism \(r(B): \Sigma B \to \Sigma Id B\) in \(\mathrm{Base}(\mathbb{E})\) such that the diagram
+    \begin{center}
+    \begin{tikzcd}
+        \Sigma B \arrow[r, "r(B)"] \arrow[dr, "\Delta(B)"'] & \Sigma Id B \arrow[d, "p(Id B)"] \\
+        & \Sigma p(B)^* B
+    \end{tikzcd}
+    \end{center}
+    commutes (where \(\Delta(B)\) is the unique morphism such that \(\Delta(B) \circ p(p(B)^* B) = id\) and \(\Delta(B) \circ \Sop(p(B), B) = id\)) and having the property that for all attributes \(C \in \mathrm{Att}_{\mathbb{E}}(\Sigma p(B)^* B)\) and for all morphisms \(h: \Sigma B \to \Sigma C\) such that the diagram
+    \begin{center}
+    \begin{tikzcd}
+        \Sigma B \arrow[r, "h"] \arrow[dr, "\Delta(B)"'] & \Sigma C \arrow[d, "p(C)"] \\
+        & \Sigma p(B)^* B
+    \end{tikzcd}
+    \end{center}
+    commutes, there exists a unique morphism \(g: \Sigma Id B \to \Sigma C\) such that the diagrams
+    \begin{center}
+    \begin{minipage}{0.4\textwidth}
+    \begin{tikzcd}
+        \Sigma Id B \arrow[dr, "p(Id B)"] \arrow[r, "g"] & \Sigma C \arrow[d, "p(C)"] \\
+        & \Sigma p(B)^* B
+    \end{tikzcd}
+    \end{minipage}
+    \quad and \quad
+    \begin{minipage}{0.4\textwidth}
+    \begin{tikzcd}
+        \Sigma B \arrow[r, "r(B)"] \arrow[dr, "h"'] & \Sigma Id B \arrow[d, "g"] \\
+        & \Sigma C
+    \end{tikzcd}
+    \end{minipage}
+    \end{center}
+    commute.
+
+    \item[iii.] For all objects \(A\) of \(\mathrm{Base}(\mathbb{E})\), for all \(B_1, B_2 \in \mathrm{Att}(A)\), an object \(B_1+B_2 \in \mathrm{Att}(A)\) and morphisms \(i_{B_1, B_2} : \Sigma B_1 \to \Sigma(B_1+B_2)\) and \(j_{B_1, B_2} : \Sigma B_2 \to \Sigma(B_1+B_2)\) such that the diagrams
+    \begin{center}
+    \begin{minipage}{0.4\textwidth}
+    \begin{tikzcd}
+        \Sigma B_1 \arrow[r, "i"] \arrow[dr, "p(B_1)"'] & \Sigma(B_1+B_2) \arrow[d, "p(B_1+B_2)"] \\
+        & A
+    \end{tikzcd}
+    \end{minipage}
+    \begin{minipage}{0.4\textwidth}
+    \begin{tikzcd}
+        \Sigma B_2 \arrow[r, "j"] \arrow[dr, "p(B_2)"'] & \Sigma(B_1+B_2) \arrow[d, "p(B_1+B_2)"] \\
+        & A
+    \end{tikzcd}
+    \end{minipage}
+    \end{center}
+    commute and having the property that for all \(C \in \mathrm{Att}_{\mathbb{E}}(A)\), for all pairs of morphisms \(h_1: \Sigma B_1 \to \Sigma C\) and \(h_2: \Sigma B_2 \to \Sigma C\) such that the diagrams
+    \begin{center}
+    \begin{minipage}{0.4\textwidth}
+    \begin{tikzcd}
+        \Sigma B_1 \arrow[r, "h_1"] \arrow[dr, "p(B_1)"'] & \Sigma C \arrow[d, "p(C)"] \\
+        & A
+    \end{tikzcd}
+    \end{minipage}
+    \quad and \quad
+    \begin{minipage}{0.4\textwidth}
+    \begin{tikzcd}
+        \Sigma B_2 \arrow[r, "h_2"] \arrow[dr, "p(B_2)"'] & \Sigma C \arrow[d, "p(C)"] \\
+        & A
+    \end{tikzcd}
+    \end{minipage}
+    \end{center}
+    commute, there exists a unique morphism \(g: \Sigma(B_1+B_2) \to \Sigma C\) such that
+    \begin{center}
+    \begin{tikzcd}
+        \Sigma(B_1+B_2) \arrow[r, "g"] \arrow[dr, "p(B_1+B_2)"'] & \Sigma C \arrow[d, "p(C)"] \\
+        & A
+    \end{tikzcd}
+    \end{center}
+    commutes and such that in the diagram
+    \begin{center}
+    \begin{tikzcd}
+        \Sigma B_1 \arrow[r, "i"] \arrow[dr, "h_1"'] & \Sigma(B_1+B_2) \arrow[d, "g"] & \Sigma B_2 \arrow[l, "j"'] \arrow[dl, "h_2"] \\
+        & \Sigma C &
+    \end{tikzcd}
+    \end{center}
+    both triangles commute.
+
+    \item[iv.] An object \(N\) of \(\mathrm{Base}(\mathbb{E})\), morphisms \(o: 1 \to N\) and \(S: N \to N\) such that \(\tuple{N, o, S}\) is a natural number object in \(\mathrm{Base}(\mathbb{E})\).
+\end{enumerate}
+
+Subject to the conditions: If \(f: A \to A'\) in \(\mathrm{Base}(\mathbb{E})\), if \(B \in \mathrm{Att}_{\mathbb{E}}(A')\) and \(C \in \mathrm{Att}_{\mathbb{E}}(\Sigma B)\) then \(f^* \Pi C = \Pi \Sop(f,B)^* C\) and the diagram
+\begin{center}
+\begin{tikzcd}
+\Sigma p(f^*B)^* \Pi f^* \# C \arrow[r, "{\Sop(\Sop(f{,}B){,} p(B)^* \Pi C)}"] \arrow[d, "{\tau(\Sop(f{,}B)^* C)}"'] & \Sigma p(B)^* \Pi C \arrow[d, "\tau(C)"] \\
+\Sigma \Sop(f,B)^* C \arrow[r, "{\Sop(\Sop(f{,}B){,} C)}"] & \Sigma C
+\end{tikzcd}
+\end{center}
+commutes.
+
+\begin{enumerate}
+    \item[vi.] If \(f: A \to A'\) in \(\mathrm{Base}(\mathbb{E})\) and if \(B \in \mathrm{Att}_{\mathbb{E}}(A')\) then \(\Sop(\Sop(f,B), p(B)^* B)^* Id B = Id f^* B\) and the diagram
+    \begin{center}
+    \begin{tikzcd}
+        \Sigma Id f^* B \arrow[r, "{\Sop(\Sop(\Sop(f{,}B){,} p(B)^* B){,} Id B)}"] & \Sigma Id B \\
+        \Sigma f^* B \arrow[u, "r(f^*B)"] \arrow[r, "{\Sop(f{,}B)}"] & \Sigma B \arrow[u, "r(B)"]
+    \end{tikzcd}
+    \end{center}
+    commutes.
+
+    \item[vii.] If \(f: A \to A'\) in \(\mathrm{Base}(\mathbb{E})\) and \(B_1, B_2 \in \mathrm{Att}_{\mathbb{E}}(A')\) then \(f^*(B_1+B_2) = f^*B_1 + f^*B_2\) and the diagrams
+    \begin{center}
+    \begin{minipage}{0.4\textwidth}
+    \begin{tikzcd}
+        \Sigma f^* B_1 \arrow[r, "{\Sop(f{,}B_1)}"] \arrow[d, "{i_{f^*B_1{,} f^*B_2}}"'] & \Sigma B_1 \arrow[d, "{i_{B_1{,} B_2}}"] \\
+        \Sigma f^*(B_1+B_2) \arrow[r, "{\Sop(f{,} B_1+B_2)}"] & \Sigma(B_1+B_2)
+    \end{tikzcd}
+    \end{minipage}
+    \quad and \quad
+    \begin{minipage}{0.4\textwidth}
+    \begin{tikzcd}
+        \Sigma f^* B_2 \arrow[r, "{\Sop(f{,}B_2)}"] \arrow[d, "{j_{f^*B_1{,} f^*B_2}}"'] & \Sigma B_2 \arrow[d, "{j_{B_1{,} B_2}}"] \\
+        \Sigma f^*(B_1+B_2) \arrow[r, "{\Sop(f{,} B_1+B_2)}"] & \Sigma(B_1+B_2)
+    \end{tikzcd}
+    \end{minipage}
+    \end{center}
+    commute.
+\end{enumerate}
+
+We are claiming, then, that the category of M-L structures and the category of M-L hyperdoctrines are equivalent. The proof of this result is an extension of the proof that \(\underline{\Sigma\text{-}\mathbf{Con}}\) and \(\underline{\mathbf{Attcat}}\) are equivalent categories.
 
 % source p3.15
 \section{Limit spaces---a model of M-L type theory} \label{sec:source-3-5}
 
-\lipsum[24]
+We wish to describe a model of Martin-L\"of type theory in which types are interpreted as limit spaces and in which families of types indexed by a type are, roughly speaking, interpreted as `morphisms with codomain' in the category of limit spaces. The model is described as an M-L hyperdoctrine with base category the category of limit spaces. If we first describe the M-L hyperdoctrine of sets and families of sets then the M-L hyperdoctrine of limit spaces can be described without much trouble.
+
+But first, two very useful and trivial lemmas:
+
+\begin{lemma}
+If \(\mathbb{E}\) is a category with attributes, if \(A\) is an object of \(\mathrm{Base}(\mathbb{E})\), if \(B \in Att_{\mathbb{E}}(A)\), if \(D \in Att_{\mathbb{E}}(\Sigma p(B)^* B)\) and if \(r: \Sigma B \to \Sigma D\) is an isomorphism in \(\mathrm{Base}(\mathbb{E})\) such that the diagram
+\begin{center}
+\begin{tikzcd}
+\Sigma B \arrow[r, "r"] \arrow[dr, "\Delta(B)"'] & \Sigma D \arrow[d, "p(D)"] \\
+& \Sigma p(B)^* B
+\end{tikzcd}
+\end{center}
+commutes then \(\tuple{D, r}\) satisfies clause ii.\ of the definition of M-L hyperdoctrine. That is clause ii.\ is satisfied if \(Id(B)\) is taken to \(D\) and if \(r(B)\) is taken to be \(r\).
+\end{lemma}
+
+\begin{lemma}
+If \(\mathbb{E}\) is a category with attributes, if \(A\) is an object of \(\mathbb{E}\), if \(B_1, B_2 \in Att_{\mathbb{E}}(A)\), if \(C \in Att_{\mathbb{E}}(A)\) and if \(i: \Sigma B_1 \to \Sigma C\), \(j: \Sigma B_2 \to \Sigma C\) in \(\mathrm{Base}(\mathbb{E})\) such that the diagrams
+\begin{center}
+\begin{minipage}{0.4\textwidth}
+\begin{tikzcd}
+\Sigma B_1 \arrow[r, "i"] \arrow[dr, "p(B_1)"'] & \Sigma C \arrow[d, "p(C)"] \\
+& A
+\end{tikzcd}
+\end{minipage}
+\quad and \quad
+\begin{minipage}{0.4\textwidth}
+\begin{tikzcd}
+\Sigma B_2 \arrow[r, "j"] \arrow[dr, "p(B_2)"'] & \Sigma C \arrow[d, "p(C)"] \\
+& A
+\end{tikzcd}
+\end{minipage}
+\end{center}
+commute and if \(\Sigma B_1 \xrightarrow{i} \Sigma C \xleftarrow{j} \Sigma B_2\) is a coproduct diagram in \(\mathrm{Base}(\mathbb{E})\) then \(\tuple{C, i, j}\) satisfy clause iii.\ of the definition of M-L hyperdoctrine.
+\end{lemma}
+
+The M-L hyperdoctrine \(\underline{\mathbf{Fam}}\) of sets and families of sets is as follows:
+
+\begin{enumerate}
+    \item \(\mathrm{Base}(\underline{\mathbf{Fam}}) = \underline{\mathbf{Set}}\).
+    \item If \(A \in |\mathrm{Base}(\underline{\mathbf{Fam}})|\), i.e.\ if \(A\) is a set, then \(Att_{\underline{\mathbf{Fam}}}(A) = \{ A\text{-indexed families of sets} \}\).
+    \item If \(A \in |\mathrm{Base}(\underline{\mathbf{Fam}})|\) and if \(B \in Att(A)\) then \(\Sigma B = \bigcup_{a \in A} B(a) = \{ \tuple{a,b} \mid a \in A \text{ and } b \in B(a) \}\).
+    \item If \(f: A \to A'\) in \(\mathrm{Base}(\underline{\mathbf{Fam}})\) and if \(B \in Att(A')\) then \(f^*B = \lambda a \in A . B(f(a))\). \(\Sop(f,B) : \Sigma f^*B \to \Sigma B\) is given by \(\Sop(f,B)(\tuple{a,b}) = \tuple{f(a), b}\).
+    \item If \(A \in |\mathrm{Base}(\underline{\mathbf{Fam}})|\), if \(B \in Att(A)\), if \(C \in Att(\Sigma B)\) then \(\# C \in Att(A)\) is given by \(\# C(a) = \{ \tuple{b,c} \mid b \in B(a) \text{ and } c \in C(\tuple{a,b}) \}\). \(\gamma(C) : \Sigma \# C \to \Sigma C\) is given by \(\gamma(C)(\tuple{a, \tuple{b,c}}) = \tuple{\tuple{a,b}, c}\).
+    \item If \(A \in |\mathrm{Base}(\underline{\mathbf{Fam}})|\) then \(L(A) = \lambda x \in \{ \cdot \} . A\). Then \(\Theta(A) : \Sigma L A \to A\) is given by \(\Theta(A)(\tuple{\cdot, a}) = a\).
+    \item If \(A \in |\mathrm{Base}(\underline{\mathbf{Fam}})|\), if \(B \in Att(A)\), if \(C \in Att(\Sigma B)\) then define \(\Pi C \in Att(A)\) by
+    \[ \Pi C(a) = \prod_{x \in B(a)} C(\tuple{a,x}). \]
+    Define \(Ap(C) : \Sigma p(B)^* \Pi C \to \Sigma C\) by defining
+    \[ Ap(C)(\tuple{\tuple{a,b}, g}) = \tuple{\tuple{a,b}, Ap(b,g)}. \]
+    \item If \(A \in |\mathrm{Base}(\underline{\mathbf{Fam}})|\) and if \(B \in Att(A)\) then define \(Id(B)\), \(r(B)\) by
+    \(Id(B)(\tuple{\tuple{a,b}, b'}) = \{ \cdot \}\) if \(b=b'\), \(= \emptyset\) otherwise.
+    \(r(B)(\tuple{a,b}) = \tuple{\tuple{\tuple{a,b}, b}, \cdot}\).
+    \item If \(A \in |\mathrm{Base}(\underline{\mathbf{Fam}})|\), if \(B_1, B_2 \in Att(A)\) then define \(B_1+B_2\) by \((B_1+B_2)(a) = B_1(a) + B_2(a)\). Then \(\Sigma(B_1+B_2) = \Sigma B_1 + \Sigma B_2\). Define \(i_{B_1, B_2}\) and \(j_{B_1, B_2}\) accordingly.
+    \item As is well known the set of natural numbers is a natural number object in the category \(\underline{\mathbf{Set}}\).
+\end{enumerate}
+
+Completing the description of \(\underline{\mathbf{Fam}}\) as an M-L hyperdoctrine.
+
+\subsection{Limit spaces}
+
+The set of all filters on a set \(A\) ordered by inclusion is a lattice. The meets in this lattice are given by intersection of filters. If \(\Phi\) and \(\Psi\) are filters on \(A\) then \(\Phi \vee \Psi = \{ u \cap v \mid u \in \Phi \text{ and } v \in \Psi \}\).
+
+If \(A\) is a set then the ordered set of all filters on \(A\) will be denoted \(\mathcal{F}(A)\).
+
+If \(f: A \to A'\) is a function then define \(\mathcal{F}(f) : \mathcal{F}(A) \to \mathcal{F}(A')\) by \(\mathcal{F}(f)(\Phi) = \{ w \subseteq A' \mid \exists u \in \Phi \text{ s.t.\ } w \supseteq f(u) \}\). Then \(\mathcal{F}(f)\) is an order preserving map and it is easy to see that \(\mathcal{F}\) is functorial: \(\mathcal{F}(f \circ f') = \mathcal{F}(f) \circ \mathcal{F}(f')\) and \(\mathcal{F}(id_A) = id_{\mathcal{F}(A)}\). \(\mathcal{F}\) can be considered to be a functor from \(\underline{\mathbf{Set}}\) to the category of ordered sets.
+
+A \underline{limit space} \(\tuple{A, C}\) consists of a set \(A\) and for each \(a \in A\), a set \(C(a) \subseteq \mathcal{F}(A)\), said to be the set of filters converging to \(a\), and subject to the conditions:
+
+\begin{enumerate}[label=\roman*.]
+\item If \(a \in A\) then \(\tuple{a} \in C(a)\), where \(\tuple{a}\) is the principle filter generated by \(a\).
+
+\item If \(a \in A\) and \(\Phi, \Psi \in C(a)\) then \(\Phi \cap \Psi \in C(a)\).
+
+\item If \(a \in A\) and \(\Phi \in C(a)\) and if \(\Phi \subseteq \Psi\) in \(\mathcal{F}(A)\) then \(\Psi \in C(a)\).
+\end{enumerate}
+
+We usually say that \(\Phi \text{ conv } a\) in preference to \(\Phi \in C(a)\).
+
+A morphism of limit spaces \(f: \tuple{A, C} \to \tuple{A', C'}\) is a function \(f: A \to A'\) such that whenever \(\Phi \text{ conv } a\) in \(\tuple{A, C}\) then \(\mathcal{F}(f)(\Phi) \text{ conv } f(a)\) in \(\tuple{A', C'}\).
+
+The category of limit spaces will be denoted \(\underline{\mathbf{Limsp}}\).
+
+We shall make use of the fact that for every \(f: A \to A'\) in \(\underline{\mathbf{Set}}\), the morphism \(\mathcal{F}(f) : \mathcal{F}(A) \to \mathcal{F}(A')\) has a left adjoint. We define an order preserving morphism \(\check{\mathcal{F}}(f) : \mathcal{F}(A') \to \mathcal{F}(A)\) by \(\check{\mathcal{F}}(f)(\Phi) = \{ u \subseteq A \mid \exists w' \in \Phi \text{ s.t.\ } u \supseteq f^{-1}(w') \}\).
+That \(\check{\mathcal{F}}(f) \text{ adj } \mathcal{F}(f)\) is expressed by Lemma 3: If \(\Theta \in \mathcal{F}(A)\) and if \(\Phi \in \mathcal{F}(A')\) and if \(f: A \to A'\) then \(\check{\mathcal{F}}(f)(\Phi) \subseteq \Theta\) iff \(\Phi \subseteq \mathcal{F}(f)(\Theta)\).
+
+\begin{corollary}
+(a) \(\check{\mathcal{F}} : \underline{\mathbf{Set}}^{op} \to\) the category of ordered sets, is a functor.
+(b) For each \(f: A \to A'\), \(\check{\mathcal{F}}(f) : \mathcal{F}(A') \to \mathcal{F}(A)\) preserves meets.
+\end{corollary}
+
+The base category of the M-L hyperdoctrine of limit spaces is taken to be the category \(\underline{\mathbf{Limsp}}\). Then if \(\mathcal{A} \in |\underline{\mathbf{Limsp}}|\) and if \(\mathcal{A}\) has underlying set \(A\) then define \(Att(\mathcal{A}) = \{ \tuple{B, C} \mid B \text{ is an } A\text{-indexed family of sets and } C \text{ is such that } \tuple{\Sigma B, C} \text{ is a limit space such that } p(B) : \tuple{\Sigma B, C} \to \mathcal{A} \text{ is continuous} \}\).
+
+If \(\mathcal{B} \in Att(\mathcal{A})\) then define \(\Sigma \mathcal{B} = \tuple{\Sigma B, C}\), where \(B\) is the underlying family of sets associated with \(\mathcal{B}\). Define \(p(\mathcal{B}) = p(B)\). Thus every \(\mathcal{B} \in Att(\mathcal{A})\) is determined by an \(A\)-indexed family of sets \(B\) and a limit space \(\Sigma \mathcal{B}\) which has underlying set \(\Sigma B\) and which is such that \(p(B) : \Sigma \mathcal{B} \to \mathcal{A}\) is continuous.
+
+\textbf{Pullbacks.} If \(f: \mathcal{A} \to \mathcal{A}'\) and if \(\mathcal{B} \in Att(\mathcal{A}')\) then the underlying family of sets of \(f^* \mathcal{B}\) is taken to be \(f^*B\). Then \(\Sigma f^* \mathcal{B}\) is taken to be the unique limit space with underlying set \(\Sigma f^* B\) such that
+\begin{center}
+\begin{tikzcd}
+\Sigma f^* \mathcal{B} \arrow[r, "{\Sop(f{,}B)}"] \arrow[d, "p(f^* \mathcal{B})"'] & \Sigma \mathcal{B} \arrow[d, "p(\mathcal{B})"] \\
+\mathcal{A} \arrow[r, "f"] & \mathcal{A}'
+\end{tikzcd}
+\end{center}
+is a pullback diagram in \(\underline{\mathbf{Limsp}}\).
+
+Convergence in \(\Sigma f^* \mathcal{B}\) is given by \(\Theta \text{ conv } x\) iff \(\mathcal{F}(p(f^*B))(\Theta) \text{ conv } p(f^*B)(x)\) and \(\mathcal{F}(\Sop(f,B))(\Theta) \text{ conv } \Sop(f,B)(x)\). That the diagram is a pullback diagram follows immediately from the fact that the underlying diagram in \(\underline{\mathbf{Set}}\) is a pullback diagram. Uniqueness of this convergence relation subject to the diagram being a pullback diagram is the case because if \(X\) is a new limit space with underlying set \(\Sigma f^* B\) and such that the diagram is a pullback, then there exists an isomorphism \(g: \Sigma f^* \mathcal{B} \to X\) such that \(g \circ p(f^* \mathcal{B}) = p(f^* \mathcal{B})\) and \(g \circ \Sop(f,B) = \Sop(f,B)\). But then since the corresponding diagrams in \(\underline{\mathbf{Set}}\) are pullback diagrams so \(g = id_{\Sigma f^*B}\). So \(id_{\Sigma f^*B}\) is a morphism of limit spaces both ways, hence \(\Phi \text{ conv } x\) in \(\Sigma f^* \mathcal{B}\) iff \(\Phi \text{ conv } x\) in \(X\). Thus \(\Sigma f^* \mathcal{B}\) is unique.
+
+That pullbacks fit together follows from the fact that they fit together at the level of underlying sets and from the uniqueness of the pullbacks once underlying sets are decided.
+
+\textbf{\(\#\) and \(\gamma\).} If \(\mathcal{A} \in |\underline{\mathbf{Limsp}}|\), if \(\mathcal{B} \in Att(\mathcal{A})\) and if \(\mathcal{C} \in Att(\Sigma \mathcal{B})\) then the underlying family of \(\# \mathcal{C}\) is taken to be \(\# C\). The limit space \(\Sigma \# \mathcal{C}\) is then uniquely determined by the requirement that \(\gamma(C) : \Sigma \mathcal{C} \to \Sigma \# \mathcal{C}\) be an isomorphism of limit spaces.
+
+\textbf{\(L\) and \(\Theta\).} \(\underline{\mathbf{Limsp}}\) has a terminal object \(1\). If \(\mathcal{A} \in |\underline{\mathbf{Limsp}}|\) then \(L(\mathcal{A})\) is taken to have underlying family of sets \(L(A)\) and \(\Sigma L(\mathcal{A})\) is then determined by the requirement that \(\Theta(A) : \Sigma L(\mathcal{A}) \to \mathcal{A}\) be an isomorphism of limit spaces.
+
+\textbf{\(Id\), \(+\) and \(N\)} are all trivial to define. For \(Id\) and \(+\) lemmas 1 and 2 of this section can be used.
+
+\textbf{\(\Pi\) and \(Ap\).} The slightly non-trivial bit. If \(\mathcal{A} \in |\underline{\mathbf{Limsp}}|\), if \(\mathcal{B} \in Att(\mathcal{A})\) and if \(\mathcal{C} \in Att(\Sigma \mathcal{B})\) then define \(\Pi \mathcal{C}(a) = \{ f \in \prod_{x \in B(a)} C(\tuple{a,x}) \mid \text{the corresponding } f: a^* \mathcal{B} \to \Sop(a, \mathcal{B})^* \mathcal{C} \text{ is continuous} \}\).
+\(Ap\) is taken to be application. \(\Sigma \Pi \mathcal{C}\) is topologised by \(\Phi \text{ conv } y\) in \(\Sigma \Pi \mathcal{C}\) iff \(\mathcal{F}(p(\Pi \mathcal{C}))(\Phi) \text{ conv } p(\Pi \mathcal{C})(y)\) and \(\forall x \in \Sop(p(\mathcal{B}), \Pi \mathcal{C})^{-1}(\{ y \})\), \(\forall \Psi \in \mathcal{F}(\Sigma \mathcal{B})\) s.t.\ \(\Psi \text{ conv } p(\mathcal{B})^* \Pi \mathcal{C}(x)\), \(\mathcal{F}(Ap)(\check{\mathcal{F}}(\Sop(p(\mathcal{B}), \Pi \mathcal{C}))(\Phi) \vee \Psi)(\rho(p(\mathcal{B})^* \Pi \mathcal{C}))(\Psi) \text{ conv } Ap(x)\).
 
 %%% Local Variables:
 %%% mode: latex
