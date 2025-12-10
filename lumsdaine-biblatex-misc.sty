@@ -1,0 +1,297 @@
+
+% This file provides several miscellaneous minor enhancements for biblatex:
+%
+% - [always] conditional url: don’t print the url if it’s redundant with the doi or eprint
+% - [only on option “concisebib”] concise citation style, useful for slides
+% - [always] typeset parentheses journal issue number in parens, “25 (2)” instead of default “25.2”
+% - command \concisecite for short human-readable citations
+
+% TODO: planned extra additions:
+% - add penalty to mildly discourage linebreak after “url:”, “doi:”, etc
+% - allow linebreaks in doi
+% - take eprinttype to be arxiv if not otherwise specified; or (better) autodetect; or at least give error message?
+% - add author annotation functionality
+% - ensure “note” is correctly sentence-cased + puntuated?
+% - move date sooner; in particular, to precede “note” for unpublished items.
+
+% TODO: improve option handling using keyvals, package kvoptions https://tex.stackexchange.com/questions/61487/ — make all items optiona, just with different defaults
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{lumsdaine-biblatex-misc}[2025-05-06 Peter LeFanu Lumsdaine’s miscellaneous biblatex tweaks]
+
+\RequirePackage{biblatex}
+
+\newif\iflum@concisebib \lum@concisebibfalse
+
+\newif\iflum@numberparens \lum@numberparenstrue
+
+\DeclareOption{concisebib}{\lum@concisebibtrue}
+
+\DeclareOption*{\PackageWarning{lumsdaine-biblatex-tweaks}{Unknown ‘\CurrentOption’}}
+
+\ProcessOptions
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% CONDITIONAL URL
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Ensures that if the url of a bib-item is the same as its eprint or doi,
+% then only one of these is printed in the bibliography;
+% see https://tex.stackexchange.com/questions/5660/redundancy-in-bib-file-conditionally-suppress-url-if-same-as-doi
+%
+% The url for any reference can also be manually excluded by issuing \entrydropurl{melville:moby-dick} anywhere in the tex file.
+
+% Internal logic:
+% If an entry’s specified url is auto-generated from the doi/eprint, and that will be printed,
+% then we can don’t need to print the url separately, nor the urldate
+% (since doi/eprint links are “archival-quality” — same reason biblatex doesn’t expect “eprintdate”, “doidate”).
+% TODO: perhaps reconsider this: should we assume that if urldate provided, then it’s desired?
+%
+% If the doi is generated from the eprint, then we still print both (readers may want either),
+% but we provide a test for this anyhow.
+
+% Note: aims to catch several standard doi-urls (variants like http/https),
+% but not too open-ended, to avoid false positives for e.g. journal urls including doi as internal identifier
+
+\RequirePackage{xstring}
+
+\protected\long\def\iffieldcontainsstr#1#2{%
+  \blx@imc@iffieldundef{#1}
+    {\@secondoftwo}
+    {\expandafter\expandafter\expandafter\IfSubStr
+     \expandafter\expandafter\expandafter{%
+       \csname abx@field@#1\endcsname}{#2}}}
+
+\DeclareBibliographyCategory{dropurl}
+\newcommand{\entrydropurl}[1]{\addtocategory{dropurl}{#1}}
+
+\protected\long\def\ifDOIsubsumesURL{%
+  \iftoggle{bbx:doi}
+    {\iffieldundef{doi}%
+      {\@secondoftwo}%
+      {\edef\doiurlcore{\detokenize{doi.org/}\thefield{doi}}%
+       \iffieldcontainsstr{url}{\doiurlcore}%
+         {\@firstoftwo}%
+         {\@secondoftwo}%
+      }%
+    }%
+    {\@secondoftwo}%
+  }
+
+% note: similar logic to \ifDOIsubsumesURL
+% note: assumes eprinttype=arxiv.  TODO: generalise?
+\protected\long\def\ifeprintsubsumesURL{%
+  \iftoggle{bbx:eprint}
+    {\iffieldundef{eprint}%
+      {\@secondoftwo}%
+      {\edef\eprinturlcore{\detokenize{arxiv.org/}}%
+       \iffieldcontainsstr{url}{\eprinturlcore}%
+         {\iffieldcontainsstr{url}{\thefield{eprint}}%
+           {\@firstoftwo}%
+           {\@secondoftwo}%
+         }%
+         {\@secondoftwo}%
+      }%
+    }%
+    {\@secondoftwo}%     
+  }
+
+\protected\long\def\ifeprintsubsumesDOI{%
+  \iftoggle{bbx:eprint}
+    {\iffieldundef{eprint}%
+      {\@secondoftwo}%
+      {\iffieldcontainsstr{doi}{\thefield{eprint}}%
+         {\@firstoftwo}%
+         {\@secondoftwo}%
+      }%
+    }%
+    {\@secondoftwo}%     
+  }
+
+\renewbibmacro*{doi+eprint+url}{%
+  \iftoggle{bbx:doi}
+    {\printfield{doi}}
+    {}
+  \newunit\newblock
+  \iftoggle{bbx:eprint}
+    {\usebibmacro{eprint}}
+    {}
+  \newunit\newblock
+  \iftoggle{bbx:url}
+   {\ifeprintsubsumesURL
+    {}
+    {\ifDOIsubsumesURL
+      {}
+      {\usebibmacro{url+urldate}}
+    }
+  }
+  {}
+}
+
+\renewbibmacro*{url+urldate}{%
+  \ifcategory{dropurl}
+    {}
+    {\printfield{url}%
+     \iffieldundef{urlyear}
+       {}
+       {\setunit*{\addspace}%
+        \printurldate}}
+    }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% CONCISE BIBLIOGRAPHY STYLE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\iflum@concisebib
+
+\DeclareBibliographyDriver{article}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/translator+others}%
+  \setunit{\printdelim{nametitledelim}}\newblock
+  \usebibmacro{title}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}
+    {}%
+  \usebibmacro{finentry}}
+
+\DeclareBibliographyDriver{book}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/editor+others/translator+others}%
+  \setunit{\printdelim{nametitledelim}}\newblock
+  \usebibmacro{maintitle+title}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}
+    {}%
+  \usebibmacro{finentry}}
+
+\DeclareBibliographyDriver{incollection}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/translator+others}%
+  \setunit{\printdelim{nametitledelim}}\newblock
+  \usebibmacro{title}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}
+    {}%
+  \usebibmacro{finentry}}
+
+  \DeclareBibliographyDriver{inproceedings}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author/translator+others}%
+  \setunit{\printdelim{nametitledelim}}\newblock
+  \usebibmacro{title}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}
+    {}%
+  \usebibmacro{finentry}}
+
+\DeclareBibliographyDriver{thesis}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author}%
+  \setunit{\printdelim{nametitledelim}}\newblock
+  \usebibmacro{title}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \printfield{type}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}
+    {}%
+  \usebibmacro{finentry}}
+
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% CONCISE FULL CITATIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% “concise full citation” commands:
+% aim is to be more detailed/self-contained than a \cite command in most citation styles, but shorter than a \fullcite in most bibstyles
+%
+% typical output: Authors Year, title.
+%
+% TODO: make this a bit more principled with the concise bibstyle provided above?
+
+\newbibmacro{concisecitecontent}
+  {\printtext{%
+    \printnames[family]{labelname}%
+    \setunit{\addspace}}%
+  \printtext{%
+    \printdate%
+    \setunit{\addcomma\space}}
+  \printtext{%
+    \printfield{title}}}
+
+\DeclareCiteCommand{\parenconcisecite}
+  [\mkbibparens]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{concisecitecontent}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\concisecite}
+  {\usebibmacro{prenote}}
+  {\usebibmacro{concisecitecontent}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PARENTHESES FOR ISSUE NUMBER
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% based on answer by user “lockstep” at TeX-LaTeX Stack Exchange, https://tex.stackexchange.com/a/81573/1635
+
+\iflum@numberparens
+
+\DeclareFieldFormat[article]{number}{\mkbibparens{#1}}
+
+\renewbibmacro*{volume+number+eid}{%
+  \printfield{volume}%
+%  \setunit*{\addnbthinspace}% NEW (optional) nonbreakingspace
+  \printfield{number}%
+  \setunit{\addcomma\space}%
+  \printfield{eid}}
+
+\fi
