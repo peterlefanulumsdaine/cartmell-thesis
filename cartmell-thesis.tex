@@ -1,7 +1,14 @@
 \documentclass[12pt]{amsbook}
 
+%% Font/output handling
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+
+%% General math packages
 \usepackage{amsmath}
 \usepackage{stmaryrd}
+\usepackage{mathpartir}
+\usepackage{tikz-cd}
 
 %% Bibliography
 \usepackage[style=numeric]{biblatex}
@@ -11,20 +18,17 @@
 \usepackage{geometry}
 \geometry{b5paper, hmargin=2.5cm, vmargin=3cm} % B5, 12pt, traditional book/journal textblock, comfortable margins
 
+%% General style packages
 \usepackage{xcolor}
 \definecolor{darkgreen}{rgb}{0,0.45,0}
 \definecolor{darkred}{rgb}{0.75,0,0}
 \definecolor{darkblue}{rgb}{0,0,0.6}
 \usepackage[colorlinks,citecolor=darkgreen,linkcolor=darkred,urlcolor=darkblue]{hyperref}
-
-\usepackage{microtype}
-\usepackage{lipsum}
-\usepackage{mathpartir}
-\usepackage{tikz-cd}
 \usepackage[shortlabels,inline]{enumitem}
-
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage{lipsum}
+
 
 \input{cartmell-style}
 \input{cartmell-macros}
