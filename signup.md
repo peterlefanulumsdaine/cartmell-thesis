@@ -1,9 +1,9 @@
-cartmell-thesis signup sheet
+Status overview, contribution sign-up, and to-do list 
 ====
 
-Sign up in this document to contribute to the project.
+# Status overview
 
-Specifically: some expected statuses are
+The list below gives a section-by-section overview of the draft status.  Some expected statuses are
 - *none*
 - *OCR* (first draft automatically populated from OCR, not yet human-edited)
 - *BOOKED [name]* (*name* is intending to work on section)
@@ -44,3 +44,27 @@ Suggestion: to start with, leave space for people to work in contiguous blocks. 
 - 3.3 OCR 
 - 3.4 OCR 
 - 3.5 OCR 
+
+# Todo list
+
+## Infrastructure/organisation improvement
+
+- reduce font size in margin notes
+- add macro for inline transcription notes
+- improve/rationalise layout on title/dedication pages, and consider moving transcription statement to main title page
+- fix theorem numbering to follow C’s practice: most un-numbered, numbered items following e.g. “Lemma 1, Lemma 2, Corollary 3” within each chapter
+- add zref-clever for better internal links, and set up to match C’s style
+
+## Content tasks
+
+(besides the implicit ones of going through content to get each section to “DONE” status above)
+
+- finish adding bib info for all items
+- (once all bib info added) check bib info for style consistency
+
+## Consistency sweeps
+
+These should *not* be removed, as they may need re-checking periodically for new content
+
+- overful hboxes
+- spellchecking
