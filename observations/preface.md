@@ -1,0 +1,2 @@
+- Somewhat poor english in the preface (?)
+- Fix the references

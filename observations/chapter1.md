@@ -1,0 +1,3 @@
+- "Chapter Two" could be a reference
+- I strongly support writing rules in \[ \]
+- How do we implement "Symbol Axiom"? maybe with tables or figures
